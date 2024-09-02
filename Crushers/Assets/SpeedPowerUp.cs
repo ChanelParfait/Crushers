@@ -7,21 +7,19 @@ using UnityEngine.UIElements;
 
 public class SpeedPowerUp : MonoBehaviour
 {
-    private BoxCollider bC;
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        bC = this.GetComponent<BoxCollider>();
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
+       
         if (other.gameObject.CompareTag("Player"))
         {
             //other.getPickUp(Speed);
             
-            //other.setMovementSpeed(?);
+            other.transform.root.GetComponent<Rigidbody>().AddForce(other.transform.forward * 10000f, ForceMode.Impulse);
             
-            //Destroy(this);
+            
+            //Debug.Log(other.transform.root.GetComponent<Rigidbody>().velocity);
+            Destroy(this.gameObject);
         }
     }
+    
 }
