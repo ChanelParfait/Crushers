@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5.11, z: -11.23}
+  m_FollowOffset: {x: 0, y: 4.04, z: -9.47}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -749,7 +749,7 @@ Transform:
   m_GameObject: {fileID: 471056747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.209946, y: 6.1132097, z: 65.25411}
+  m_LocalPosition: {x: 19.222382, y: 5.0432096, z: 66.693756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -798,12 +798,12 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.5
     m_SpeedMode: 1
     m_MaxSpeed: 2
     m_AccelTime: 0.3
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse ScrollWheel
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: 0
@@ -1210,7 +1210,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 65
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1236,8 +1236,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615172143}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20202397, y: 0.29482898, z: -0.06392478, w: 0.93175954}
-  m_LocalPosition: {x: 18.209963, y: 6.1132097, z: 65.2541}
+  m_LocalRotation: {x: 0.163913, y: 0.2971888, z: -0.05186588, w: 0.93921316}
+  m_LocalPosition: {x: 19.222382, y: 5.0432096, z: 66.693756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5.11, z: -11.23}
+  m_FollowOffset: {x: 0, y: 4.04, z: -9.47}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2257,7 +2257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5.11, z: -11.23}
+  m_FollowOffset: {x: 0, y: 4.04, z: -9.47}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2596,8 +2596,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209864944}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20202392, y: 0.2948299, z: -0.06392498, w: 0.93175924}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.19092378, y: 0.2955699, z: -0.060412705, w: 0.9340969}
+  m_LocalPosition: {x: 0.0000019073486, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2858,8 +2858,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718661632}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17507592, y: 0.29655042, z: -0.055398025, w: 0.93719655}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.16391298, y: 0.2971888, z: -0.05186586, w: 0.93921316}
+  m_LocalPosition: {x: 0.0000019073486, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2936,8 +2936,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746222718}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15849786, y: 0.29748246, z: -0.05015235, w: 0.9401422}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.14730103, y: 0.29805836, z: -0.046609458, w: 0.94196135}
+  m_LocalPosition: {x: 0.0000019073486, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3679,6 +3679,11 @@ PrefabInstance:
       propertyPath: carSpeedText
       value: 
       objectReference: {fileID: 807645910}
+    - target: {fileID: 828559772023116797, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 828559772023116797, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_CenterOfMass.y
