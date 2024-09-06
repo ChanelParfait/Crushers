@@ -37,34 +37,21 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        //context.action.canceled
+        //Debug.Log("Move Forward");
 
-        Debug.Log("Forward Value as Button: " + context.ReadValueAsButton());
-
-
-        //Debug.Log("Reverse: " + (controls.Player.Reverse.ReadValue<float>() > 0f));
-
-            if(carController)  
-            { 
-                if(context.action.IsInProgress()){
-                    carController.GoForward();
-                } else {
-                    carController.StopForward();
-                }
+        if(carController)  
+        { 
+            carController.isMovingForward = context.ReadValueAsButton();
         }
         
     }
 
     public void OnReverse(CallbackContext context)
     {
-        Debug.Log("Reverse: " + context.ReadValueAsButton());
+        //Debug.Log("Reversing");
         if(carController)
         {
-            if(context.action.IsInProgress()){
-                carController.GoReverse();
-            } else {
-                carController.StopReverse();
-            }
+            carController.isReversing = context.ReadValueAsButton();
         }
     }
 
@@ -72,8 +59,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Vector2 turn = context.ReadValue<Vector2>();
 
-        //Debug.Log("X Turn: " + turn.x);
-        //Debug.Log("Y Turn: " + turn.y);
         if(carController){
             if(turn.x < 0){
                 carController.TurnLeft();
@@ -82,7 +67,7 @@ public class PlayerInputHandler : MonoBehaviour
                 carController.TurnRight();
             }   
             else if(turn.x == 0){
-                carController.StopTurning();
+                carController.isTurning = false;
             }
         }
         
@@ -90,13 +75,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnBrake(CallbackContext context)
     {
-        Debug.Log("Brake: " + context.ReadValueAsButton());
 
         if(carController){
-            if(context.action.IsInProgress()){
-                carController.Handbrake();
-            }
-            else{
+            carController.isBraking =  context.ReadValueAsButton();
+            if(!context.action.IsInProgress()){
+                Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
         }
