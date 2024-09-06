@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleBig Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 491089315427266306, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Vehicle
+      objectReference: {fileID: 0}
     - target: {fileID: 980486805381477816, guid: 0cc28e35a00417b4ab0d8936b057f21d,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -61,7 +61,12 @@ PrefabInstance:
     - target: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
         type: 3}
       propertyPath: m_Name
-      value: SVehicle02 Variant
+      value: VehicleSmall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      propertyPath: m_TagString
+      value: Vehicle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

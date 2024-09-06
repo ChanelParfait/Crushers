@@ -7,16 +7,20 @@ public class CarStats : MonoBehaviour
     [Header("----------Stats-----------")]
     [SerializeField]public float score;
     [SerializeField]private float damage;
+    [SerializeField]private float speed;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public float getSpeed(){
+        return speed;
     }
 
    
