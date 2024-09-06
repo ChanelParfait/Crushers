@@ -47,7 +47,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Forward"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""aeb5b0e8-d2be-4737-a791-98147bb5ead2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
