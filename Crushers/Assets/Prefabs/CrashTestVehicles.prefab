@@ -1073,6 +1073,7 @@ GameObject:
   - component: {fileID: 2268543401871098206}
   - component: {fileID: 7253218267929628864}
   - component: {fileID: 2778591650338844764}
+  - component: {fileID: 3677950508095372262}
   m_Layer: 0
   m_Name: CrashTestVehicle
   m_TagString: Untagged
@@ -1201,6 +1202,21 @@ MonoBehaviour:
   flipThreshold: -1
   flipCollider: {fileID: 3337172785170572914}
   isFlipped: 0
+  carstats: {fileID: 3677950508095372262}
+--- !u!114 &3677950508095372262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819747100932049581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d8b3b31df0abd42a4eaba70eadad1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  damage: 0
 --- !u!1 &9061401780267744869
 GameObject:
   m_ObjectHideFlags: 0
