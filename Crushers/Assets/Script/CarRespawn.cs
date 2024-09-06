@@ -5,25 +5,57 @@ using UnityEngine;
 public class CarRespawn : MonoBehaviour
 {
     public float threshold;
+    [SerializeField]public float flipThreshold = -1f;
 
     //Starting X,Y,Z positions 
-    private float startX;
-    private float startY;
-    private float startZ;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    [SerializeField] private Collider flipCollider;
+
+    [SerializeField] private bool isFlipped;
+    
 
     void Start(){
-        startX = transform.position.x;
-        startY = transform.position.y;
-        startZ = transform.position.z;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        isFlipped = false;
+        
     }
+    
     
     void FixedUpdate()
     {
-        if(transform.position.y < threshold){
-            transform.position = new Vector3(startX, startY, startZ);     
+        if(transform.position.y < threshold || (IsUpsideDown() && isFlipped)){
+            transform.position = startPosition;
+            transform.rotation = startRotation;
             Debug.Log("Respawning");
+            isFlipped = false;
+            
         }
 
+        
+
            
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other != flipCollider)
+        {
+            isFlipped = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+       if(collision.collider != flipCollider)
+        {
+            isFlipped = true;
+        }
+    }
+
+    bool IsUpsideDown()
+    {
+        return Vector3.Dot(transform.up, Vector3.up) < flipThreshold;
+        
     }
 }
