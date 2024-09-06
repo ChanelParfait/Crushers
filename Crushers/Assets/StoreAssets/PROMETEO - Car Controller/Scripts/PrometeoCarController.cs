@@ -13,7 +13,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PrometeoCarController : MonoBehaviour
 {
@@ -327,17 +329,15 @@ public class PrometeoCarController : MonoBehaviour
         }
 
       }else{
-
+        /*
+        // device input registered here
         if(Input.GetKey(KeyCode.W)){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
           GoForward();
         }
         if(Input.GetKey(KeyCode.S)){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
           GoReverse();
         }
+        // turning needs to take a vector 2 value
 
         if(Input.GetKey(KeyCode.A)){
           TurnLeft();
@@ -362,7 +362,7 @@ public class PrometeoCarController : MonoBehaviour
         }
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f){
           ResetSteeringAngle();
-        }
+        } */
 
       }
 
@@ -498,6 +498,12 @@ public class PrometeoCarController : MonoBehaviour
 
     // This method apply positive torque to the wheels in order to go forward.
     public void GoForward(){
+      if(deceleratingCar){
+        CancelInvoke("DecelerateCar");
+        deceleratingCar = false;
+      }
+      
+
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
@@ -542,6 +548,11 @@ public class PrometeoCarController : MonoBehaviour
 
     // This method apply negative torque to the wheels in order to go backwards.
     public void GoReverse(){
+        if(deceleratingCar){
+          CancelInvoke("DecelerateCar");
+          deceleratingCar = false;
+        }
+          
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
