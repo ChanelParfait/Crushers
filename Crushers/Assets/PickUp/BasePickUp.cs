@@ -5,21 +5,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SpeedPowerUp : MonoBehaviour
+public class BasePickUp : MonoBehaviour
 {
+    [SerializeField] private PickupType SelectedPU;
     private void OnTriggerEnter(Collider other)
     {
-       
+        Debug.Log("TESt");
         if (other.gameObject.CompareTag("Player"))
         {
-            //other.getPickUp(Speed);
-            
-            other.transform.root.GetComponent<Rigidbody>().AddForce(other.transform.forward * 10000f, ForceMode.Impulse);
-            
-            
-            //Debug.Log(other.transform.root.GetComponent<Rigidbody>().velocity);
+            other.gameObject.transform.root.GetComponent<PickUpManager>().SetPickup(SelectedPU);
             Destroy(this.gameObject);
         }
+        
+        
     }
+    
     
 }

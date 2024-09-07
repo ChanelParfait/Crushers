@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleBig Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 491089315427266306, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 980486805381477816, guid: 0cc28e35a00417b4ab0d8936b057f21d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -62,6 +67,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505633973447376809, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168790004117007991, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5854400236757845729, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973427968937362113, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967663386413193468, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
