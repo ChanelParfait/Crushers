@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1672707187288357685, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991454146789505141, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7127446255551650974, guid: 557ac444e91197043ad6eca89b574d79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,13 +68,93 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7402056694490506003, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
         type: 3}
       propertyPath: m_Name
-      value: SVehicle02 Variant
+      value: VehicleSmall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477867284899842160, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5253668099655598841}
+    - targetCorrespondingSourceObject: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6629934895916487029}
+    - targetCorrespondingSourceObject: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8518304847811417541}
   m_SourcePrefab: {fileID: 100100000, guid: 557ac444e91197043ad6eca89b574d79, type: 3}
+--- !u!1 &3581989697517034347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7611670749235398180, guid: 557ac444e91197043ad6eca89b574d79,
+    type: 3}
+  m_PrefabInstance: {fileID: 6347786914270338383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5253668099655598841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581989697517034347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48293e3ea489d5b4ba9859de3f5bb263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carStats: {fileID: 0}
+  bumperCollider: {fileID: 0}
+  LastCollidedPlayer: {fileID: 0}
+--- !u!114 &-6629934895916487029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581989697517034347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d8b3b31df0abd42a4eaba70eadad1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  damage: 0
+  speed: 0
+--- !u!114 &-8518304847811417541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581989697517034347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d2c43c5cfbf8c4bb0b40a7adff301d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0
+  flipThreshold: -1
+  flipCollider: {fileID: 0}
+  isFlipped: 0
+  carStats: {fileID: 0}

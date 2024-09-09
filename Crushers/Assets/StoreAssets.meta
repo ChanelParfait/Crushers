@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Crushers/Assets/New Folder.meta
+guid: ce0c73e30a2a1e64cacb6cb5f1494bed
+========
 guid: 1226ba02d37f5c041bed56ee2852617e
+>>>>>>>> origin/dev:Crushers/Assets/StoreAssets.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
