@@ -156,7 +156,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 60056556807159280}
-  - {fileID: 4812408227766989053}
   - {fileID: 1085550987732210523}
   - {fileID: 3792456943340462607}
   - {fileID: 6896905383266866863}
@@ -702,59 +701,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5071851153730978670
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4812408227766989053}
-  - component: {fileID: 7110039969813168550}
-  m_Layer: 0
-  m_Name: FlipCheckCollider
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4812408227766989053
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5071851153730978670}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2076987966805777968}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7110039969813168550
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5071851153730978670}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2296389, y: 0.55710834, z: 2.3735168}
-  m_Center: {x: -0.0076781274, y: 1.685709, z: -0.39147034}
 --- !u!1 &5263048468532752437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1348,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 88d16f6c-97be-495d-9e21-b52c28b9d3a9
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0022e1ab-903f-40e3-8dd1-5d5a93b9e9b8
+    m_ActionName: Player/UseItem[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1490,6 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   damage: 0
+  speed: 0
 --- !u!114 &1807791585810362269
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5534755760395032969}
   m_Layer: 0
   m_Name: CrashTestVehicles
-  m_TagString: Vehicle
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1138,6 +1138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fefceefe666bb4682b272ec8c5bdd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMovingForward: 0
+  isReversing: 0
+  isBraking: 0
+  isTurning: 0
   maxSpeed: 150
   maxReverseSpeed: 50
   accelerationMultiplier: 10
@@ -1202,7 +1206,7 @@ MonoBehaviour:
   flipThreshold: -1
   flipCollider: {fileID: 3337172785170572914}
   isFlipped: 0
-  carstats: {fileID: 3677950508095372262}
+  carStats: {fileID: 0}
 --- !u!114 &3677950508095372262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,6 +1221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   damage: 0
+  speed: 0
 --- !u!1 &9061401780267744869
 GameObject:
   m_ObjectHideFlags: 0

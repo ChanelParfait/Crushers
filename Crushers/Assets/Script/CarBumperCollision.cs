@@ -28,7 +28,7 @@ public class CarBumperCollision : MonoBehaviour
        if(collision.collider != bumperCollider)
         {
             Debug.Log("Collision");
-            if(collision.gameObject.CompareTag("Vehicle")){
+            if(collision.gameObject.CompareTag("Player")){
                 
 
                 //crash into a player

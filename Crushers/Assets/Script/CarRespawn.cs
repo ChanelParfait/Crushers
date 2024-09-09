@@ -19,7 +19,7 @@ public class CarRespawn : MonoBehaviour
     [SerializeField] private bool isFlipped;
 
     //reference to the stats of each car
-    public CarStats carstats;
+    public CarStats carStats;
     
 
     void Start(){
@@ -27,8 +27,8 @@ public class CarRespawn : MonoBehaviour
         startPosition = transform.position;
         startRotation = transform.rotation;
         isFlipped = false;
-        carstats = GetComponent<CarStats>();
-        Debug.Log(carstats.getScore());
+        carStats = GetComponent<CarStats>();
+        Debug.Log(carStats.getScore());
     }
     
     
@@ -41,19 +41,16 @@ public class CarRespawn : MonoBehaviour
             transform.rotation = startRotation;
 
 
-            carstats.decreaseDamage(carstats.getDamage());
-            carstats.decreaseScore(1);
-
-
-
+            carStats.decreaseDamage(carStats.getDamage());
+            carStats.decreaseScore(1);
 
             Debug.Log("Respawning");
-            Debug.Log("Your score is: " + carstats.getScore());
-            Debug.Log("Your damage is: " + carstats.getDamage());
+            Debug.Log("Your score is: " + carStats.getScore());
+            Debug.Log("Your damage is: " + carStats.getDamage());
             isFlipped = false;
             
         }
-
+    
         
 
            
