@@ -22,6 +22,8 @@ public class PlayerManager : MonoBehaviour
         players.Add(player);
 
         player.transform.position = startingPoints[players.Count - 1].position;
+        player.transform.rotation = startingPoints[players.Count - 1].rotation;
+
 
         int layerToAdd = (int)Mathf.Log(playerLayers[players.Count-1].value, 2);
         var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
