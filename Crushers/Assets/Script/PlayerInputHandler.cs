@@ -61,7 +61,8 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Vector2 turn = context.ReadValue<Vector2>();
 
-        if(carController){
+        if(carController)
+        {
             if(turn.x < 0){
                 carController.TurnLeft();
             }
