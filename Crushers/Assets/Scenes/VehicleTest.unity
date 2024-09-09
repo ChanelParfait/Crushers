@@ -1068,6 +1068,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fefceefe666bb4682b272ec8c5bdd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMovingForward: 0
+  isReversing: 0
+  isBraking: 0
+  isTurning: 0
   maxSpeed: 150
   maxReverseSpeed: 50
   accelerationMultiplier: 10
@@ -1213,7 +1217,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 10
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3695,7 +3699,8 @@ PrefabInstance:
       value: VehicleStandard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5876734474438611328, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
