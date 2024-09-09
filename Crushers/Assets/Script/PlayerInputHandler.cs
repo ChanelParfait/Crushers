@@ -8,6 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerControls controls; 
     private PrometeoCarController carController; 
+    private PickUpManager pickUpManager;
 
 
     private void Awake(){
@@ -27,6 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         
         carController = GetComponent<PrometeoCarController>();
+        pickUpManager = GetComponent<PickUpManager>();
     }
 
     // Update is called once per frame
@@ -82,6 +84,16 @@ public class PlayerInputHandler : MonoBehaviour
                 Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
+        }
+
+        
+    }
+
+    public void OnUseItem(CallbackContext context)
+    {
+
+        if(pickUpManager){
+            pickUpManager.useItem = context.ReadValueAsButton();
         }
 
         

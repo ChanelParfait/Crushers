@@ -47,7 +47,9 @@ public class Rocket : MonoBehaviour
             {
                 if (hitcollider.transform.root.gameObject.GetComponent<PickUpManager>().State != Shield.IsOn)
                 {
-                    hitcollider.transform.root.GetComponent<Rigidbody>().AddForce(hitcollider.transform.root.up  * 100000f, ForceMode.Force);
+                    //hitcollider.transform.root.GetComponent<Rigidbody>().AddForce(hitcollider.transform.root.up  * 100000f, ForceMode.Force);
+                    hitcollider.transform.root.GetComponent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
+
                 }
                 
             }

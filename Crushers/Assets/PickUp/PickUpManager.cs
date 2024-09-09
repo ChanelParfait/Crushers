@@ -12,6 +12,8 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] public Shield State;
 
     [SerializeField] private float ShieldTimer;
+
+    public bool useItem = false; 
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
@@ -19,7 +21,7 @@ public class PickUpManager : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (useItem)
         {
             switch (Pickup)
             {
