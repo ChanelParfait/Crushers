@@ -13,10 +13,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PrometeoCarController : MonoBehaviour
 {
+
+    public bool isMovingForward;
+    public bool isReversing;
+    public bool isBraking;
+    public bool isTurning;
+
+  
 
     //CAR SETUP
 
@@ -327,7 +336,8 @@ public class PrometeoCarController : MonoBehaviour
         }
 
       }else{
-
+        
+                /* 
         if(Input.GetKey(KeyCode.W)){
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
@@ -363,6 +373,45 @@ public class PrometeoCarController : MonoBehaviour
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f){
           ResetSteeringAngle();
         }
+
+        */
+
+        
+        if(isMovingForward){
+          CancelInvoke("DecelerateCar");
+          deceleratingCar = false;
+          GoForward();
+        }
+        if(isReversing){
+          CancelInvoke("DecelerateCar");
+          deceleratingCar = false;
+          GoReverse();
+        }
+
+        if(isBraking){
+          CancelInvoke("DecelerateCar");
+          deceleratingCar = false;
+          Handbrake();
+        }
+        /*
+        if(Input.GetKeyUp(KeyCode.Space)){
+          RecoverTraction();
+        }*/
+
+        if((!isReversing && !isMovingForward)){
+          ThrottleOff();
+        }
+        if((!isReversing && !isMovingForward) && !isBraking && !deceleratingCar){
+          InvokeRepeating("DecelerateCar", 0f, 0.1f);
+          deceleratingCar = true;
+        }
+
+        if(!isTurning && steeringAxis != 0f){
+          ResetSteeringAngle();
+        }
+
+        
+
 
       }
 
@@ -425,6 +474,8 @@ public class PrometeoCarController : MonoBehaviour
 
     //The following method turns the front car wheels to the left. The speed of this movement will depend on the steeringSpeed variable.
     public void TurnLeft(){
+      isTurning = true;
+
       steeringAxis = steeringAxis - (Time.deltaTime * 10f * steeringSpeed);
       if(steeringAxis < -1f){
         steeringAxis = -1f;
@@ -436,6 +487,8 @@ public class PrometeoCarController : MonoBehaviour
 
     //The following method turns the front car wheels to the right. The speed of this movement will depend on the steeringSpeed variable.
     public void TurnRight(){
+      isTurning = true;
+
       steeringAxis = steeringAxis + (Time.deltaTime * 10f * steeringSpeed);
       if(steeringAxis > 1f){
         steeringAxis = 1f;
@@ -445,9 +498,14 @@ public class PrometeoCarController : MonoBehaviour
       frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, steeringSpeed);
     }
 
+   /* public void StopTurning(){
+      isTurning = false;
+    }*/
+
     //The following method takes the front car wheels to their default position (rotation = 0). The speed of this movement will depend
     // on the steeringSpeed variable.
     public void ResetSteeringAngle(){
+      //Debug.Log("Reset Steering");
       if(steeringAxis < 0f){
         steeringAxis = steeringAxis + (Time.deltaTime * 10f * steeringSpeed);
       }else if(steeringAxis > 0f){
@@ -498,6 +556,11 @@ public class PrometeoCarController : MonoBehaviour
 
     // This method apply positive torque to the wheels in order to go forward.
     public void GoForward(){
+      /*CancelInvoke("DecelerateCar");
+      deceleratingCar = false;
+
+      isMovingForward = true; */
+
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
@@ -540,8 +603,17 @@ public class PrometeoCarController : MonoBehaviour
       }
     }
 
+    /*public void StopForward(){
+      isMovingForward = false;
+    }*/
+
     // This method apply negative torque to the wheels in order to go backwards.
     public void GoReverse(){
+        /*CancelInvoke("DecelerateCar");
+        deceleratingCar = false;
+        
+        isReversing = true;*/
+
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
@@ -584,6 +656,10 @@ public class PrometeoCarController : MonoBehaviour
       }
     }
 
+    /*public void StopReverse(){
+      isReversing = false;
+    }*/
+
     //The following function set the motor torque to 0 (in case the user is not pressing either W or S).
     public void ThrottleOff(){
       frontLeftCollider.motorTorque = 0;
@@ -596,6 +672,7 @@ public class PrometeoCarController : MonoBehaviour
     // 1 is the slowest and 10 is the fastest deceleration. This method is called by the function InvokeRepeating,
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
     public void DecelerateCar(){
+      Debug.Log("Decelerating");
       if(Mathf.Abs(localVelocityX) > 2.5f){
         isDrifting = true;
         DriftCarPS();
@@ -683,6 +760,10 @@ public class PrometeoCarController : MonoBehaviour
       DriftCarPS();
 
     }
+
+    /*public void StopBrake(){
+      isBraking = false;
+    }*/
 
     // This function is used to emit both the particle systems of the tires' smoke and the trail renderers of the tire skids
     // depending on the value of the bool variables 'isDrifting' and 'isTractionLocked'.
