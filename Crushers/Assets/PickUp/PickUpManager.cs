@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class PickUpManager : MonoBehaviour
 {
-    [SerializeField] private PickupType Pickup;
+    [SerializeField] private GameObject shieldGO; 
     [SerializeField] private GameObject Rocket;
 
+    [SerializeField] private PickupType Pickup;
 
     [SerializeField] public Shield State;
 
-    [SerializeField] private float ShieldTimer;
+    [SerializeField] private float ShieldTimer = 10;
+
+    private GameObject shield; 
+    public bool useItem = false; 
+    
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
@@ -19,7 +24,7 @@ public class PickUpManager : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (useItem)
         {
             switch (Pickup)
             {
@@ -48,6 +53,13 @@ public class PickUpManager : MonoBehaviour
     {
         State = Shield.IsOn;
         Pickup = PickupType.None;
+        
+        // spawn in a shield object
+        if(!shield){
+            shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
+        }
+        
+
         StartCoroutine(UndoShield(ShieldTimer));
     }
 
@@ -61,6 +73,8 @@ public class PickUpManager : MonoBehaviour
     {
         yield return new WaitForSeconds(Delay);
         State = Shield.IsOff;
+        Destroy(shield);
+        shield = null;
     }
 
   
