@@ -9,11 +9,15 @@ public class Trap_Spikes : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Find CarStats in Parent objects
-            var carStats = other.GetComponentInParent<CarStats>();
+            if (other.transform.root.GetComponent<PickUpManager>().State == Shield.IsOff)
+            {
+                // Find CarStats in Parent objects
+                var carStats = other.GetComponentInParent<CarStats>();
             
-            // with how the car is designed + this code check, this deals 3x DMG
-            carStats.increaseDamage(25);
+                // with how the car is designed + this code check, this deals 3x DMG
+                carStats.increaseDamage(25);
+            }
+            
         }
     }
 }
