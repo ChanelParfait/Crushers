@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CarStats : MonoBehaviour
@@ -8,6 +9,11 @@ public class CarStats : MonoBehaviour
     [SerializeField]public float score;
     [SerializeField]private float damage;
     [SerializeField]private float speed;
+
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+    [SerializeField] private TextMeshProUGUI damageText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +23,8 @@ public class CarStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        displayDamage();
+        displayScore();
         
     }
     public float getSpeed(){
@@ -43,5 +51,21 @@ public class CarStats : MonoBehaviour
     }
     public float getScore(){
         return score;
+    }
+
+    public void displayScore()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score.ToString("");  
+        }
+    }
+
+    public void displayDamage()
+    {
+        if (damageText != null)
+        {
+            damageText.text = "Damage: " + damage.ToString(""); 
+        }
     }
 }
