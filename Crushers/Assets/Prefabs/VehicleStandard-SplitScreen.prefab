@@ -1337,7 +1337,7 @@ PrefabInstance:
     - target: {fileID: 828559772023116797, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_CenterOfMass.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1506561942402502631, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edfb81ada70f8542a0499ce96beddb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forceMagnitude: 2000
 --- !u!114 &8753860888840011835 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6084408817758277143, guid: 05744578e8ef73841af5a41a5fc606d3,
