@@ -237,8 +237,8 @@ Transform:
   m_GameObject: {fileID: 1541358245421718106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.77, z: 0}
-  m_LocalScale: {x: 2.0749, y: 1, z: 4.5056}
+  m_LocalPosition: {x: 0, y: 2.531, z: -0.299}
+  m_LocalScale: {x: 0.6634493, y: 0.17775, z: 0.6654771}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2076987966805777968}
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   brakeForce: 600
   decelerationMultiplier: 8
   handbrakeDriftMultiplier: 4
-  bodyMassCenter: {x: 0, y: 0, z: 0}
+  bodyMassCenter: {x: 0, y: 2, z: 0}
   frontLeftMesh: {fileID: 1990901242162720777}
   frontLeftCollider: {fileID: 3554988893762316569}
   frontRightMesh: {fileID: 4788973135344169438}
@@ -1422,10 +1422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 0
-  flipThreshold: 0.7
   flipCollider: {fileID: 7606835715646217555}
-  isFlipped: 0
-  carstats: {fileID: 1506561942402502631}
+  carStats: {fileID: 0}
 --- !u!114 &1506561942402502631
 MonoBehaviour:
   m_ObjectHideFlags: 0
