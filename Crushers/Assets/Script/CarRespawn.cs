@@ -68,7 +68,7 @@ public class CarRespawn : MonoBehaviour
     {
         if(other != flipCollider)
         {
-            if(other.gameObject.tag == "Ground"){
+            if(other.gameObject.tag == "Ground" || other.gameObject.name == "RespawnCollider"){
                 Respawn();
             }
         }

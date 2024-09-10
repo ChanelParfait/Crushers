@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -34,8 +35,15 @@ public class PlayerInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnReloadLevel(CallbackContext context)
+    {
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
+
 
     public void OnForward(CallbackContext context)
     {
