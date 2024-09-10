@@ -15,7 +15,7 @@ public class Trap_Spikes : MonoBehaviour
                 var carStats = other.GetComponentInParent<CarStats>();
             
                 // with how the car is designed + this code check, this deals 3x DMG
-                carStats.increaseDamage(25);
+                carStats.increaseDamage(-25);
             }
             
         }
