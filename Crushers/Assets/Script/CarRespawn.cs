@@ -51,8 +51,12 @@ public class CarRespawn : MonoBehaviour
         //still want to be able to flip even if not in contact with ground
         if(transform.position.y < threshold){
             
-            Respawn();
             
+            
+        }
+        if (carStats.getDamage() < threshold)
+        {
+            Respawn();
         }
     
         
