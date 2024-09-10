@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 37044717}
   m_Layer: 0
   m_Name: UpperLevel
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11752,7 +11752,7 @@ GameObject:
   - component: {fileID: 620331799}
   m_Layer: 0
   m_Name: Cone
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15842,7 +15842,7 @@ GameObject:
   - component: {fileID: 1460438150}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17452,7 +17452,7 @@ GameObject:
   - component: {fileID: 1472137062}
   m_Layer: 0
   m_Name: Arena
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17634,7 +17634,7 @@ GameObject:
   - component: {fileID: 1549622114}
   m_Layer: 0
   m_Name: SizeDummy (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43097,7 +43097,7 @@ GameObject:
   - component: {fileID: 1815808930}
   m_Layer: 0
   m_Name: Ramps
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43895,7 +43895,7 @@ GameObject:
   - component: {fileID: 2080318558}
   m_Layer: 0
   m_Name: Terrain_Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -46348,7 +46348,7 @@ GameObject:
   - component: {fileID: 2144246139}
   m_Layer: 0
   m_Name: SizeDummy
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
