@@ -642,7 +642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3949339079402066022}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07774596, y: -0.6614701, z: 0.06924185, w: 0.7427102}
+  m_LocalRotation: {x: 0.07774595, y: -0.6614701, z: 0.06924185, w: 0.7427102}
   m_LocalPosition: {x: 9.933279, y: 2.83, z: -1.1532593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1564,9 +1564,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
+      propertyPath: car
+      value: 
+      objectReference: {fileID: 11400000, guid: b922879b45b102045b152a340d196bb5,
+        type: 2}
+    - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
       propertyPath: maxSpeed
       value: 190
       objectReference: {fileID: 0}
+    - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: carObject
+      value: 
+      objectReference: {fileID: 11400000, guid: b922879b45b102045b152a340d196bb5,
+        type: 2}
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: carSpeedText
