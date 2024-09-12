@@ -1712,6 +1712,8 @@ MonoBehaviour:
   score: 0
   damage: 0
   speed: 0
+  scoreText: {fileID: 0}
+  damageText: {fileID: 0}
 --- !u!1 &1718661632
 GameObject:
   m_ObjectHideFlags: 3
