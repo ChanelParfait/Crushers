@@ -132,7 +132,7 @@ Material:
     - _Cutoff: 0.5
     - _Debug_Mask: 0
     - _DefaultOutlineOpacity: 1
-    - _DefaultShrink: 0.1
+    - _DefaultShrink: 0.05
     - _DetailNormalMapScale: 1
     - _DirectionChange: 0
     - _DstBlend: 0
