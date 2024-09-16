@@ -24,18 +24,12 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
-        if (other.gameObject.CompareTag("Player"))
-        {
             if (other.gameObject != FiredBy)
             {
                 Debug.Log(other.gameObject);
                 ExplosionDamage(this.transform.position, 5f);
                 Destroy(this.gameObject);
             }
-           
-        }
-        
     }
 
     private void ExplosionDamage(Vector3 postion, float radius)
