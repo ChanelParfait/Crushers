@@ -24,6 +24,7 @@ MonoBehaviour:
   handbrakeDriftMultiplier: 5
   bodyMassCenter: {x: 0, y: 0, z: 0}
   bodyMass: 300
+  forceMagnitude: 1200
   useSounds: 0
   carEngineSound: {fileID: 0}
   tireScreechSound: {fileID: 0}

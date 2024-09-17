@@ -28,6 +28,8 @@ public class Car : ScriptableObject
 
     [SerializeField] private int bodyMass;
 
+    [SerializeField] private float forceMagnitude =  50f;
+
     [Header("Sounds")]
     [SerializeField] private bool useSounds = false;
     [SerializeField] private AudioSource carEngineSound;
@@ -86,6 +88,9 @@ public class Car : ScriptableObject
     public int GetBodyMass()
     {
         return bodyMass;
+    }
+    public float GetForceMagnitude() {
+        return forceMagnitude;
     }
 
     public bool GetUseSounds()

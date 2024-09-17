@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -96,8 +97,8 @@ public class PrometeoCarController : MonoBehaviour
 
     //CAR DATA
 
-      [HideInInspector]
-      public float carSpeed; // Used to store the speed of the car.
+      [SerializeField]
+      private float carSpeed; // Used to store the speed of the car.
       [HideInInspector]
       public bool isDrifting; // Used to know whether the car is drifting or not.
       [HideInInspector]
@@ -816,4 +817,13 @@ public class PrometeoCarController : MonoBehaviour
       }
     }
 
+    public float CalculateHitForce() {
+
+      return carSpeed * car.GetForceMagnitude() * Time.deltaTime;
+
+    }
+
+    public float GetCarSpeed() {
+        return carSpeed;
+    }
 }

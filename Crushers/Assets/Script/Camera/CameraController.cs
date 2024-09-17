@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
         transform.position = cameraLocations[locationIndicator].position * (1 - smoothingTime) + transform.position * smoothingTime;
         transform.LookAt(cameraLocations[1].transform);
 
-        smoothingTime = (carController.carSpeed >= 50f) ? Mathf.Abs((carController.carSpeed) / 50) - 0.85f : 0.45f;
+        smoothingTime = (carController.GetCarSpeed() >= 50f) ? Mathf.Abs((carController.GetCarSpeed()) / 50) - 0.85f : 0.45f;
     }
 
     public void RotateCamera() {
