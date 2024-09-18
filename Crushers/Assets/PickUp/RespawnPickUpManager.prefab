@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listofPickupTypes:
-  - {fileID: 404739242719888156, guid: ae5452c227c0a144ba2cb8581c5f80d8, type: 3}
+  - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
   - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
   ListofPickUpLocations: []
