@@ -27,7 +27,7 @@ public class Rocket : MonoBehaviour
             if (other.gameObject != FiredBy)
             {
                 Debug.Log(other.gameObject);
-                ExplosionDamage(this.transform.position, 5f);
+                ExplosionDamage(this.transform.position, 10f);
                 Destroy(this.gameObject);
             }
     }
