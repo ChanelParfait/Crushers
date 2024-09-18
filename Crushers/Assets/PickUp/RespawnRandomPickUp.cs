@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomPickUp : MonoBehaviour
+public class RespawnRandomPickUp : MonoBehaviour
 {
     public float Timer;
 
