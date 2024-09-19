@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-
+    private List<PlayerConfiguration> playerConfigs; 
     private List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField] private List<Transform> startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
 
 
     public void AddPlayer(PlayerInput player){
+        /*
         players.Add(player);
 
         player.transform.position = startingPoints[players.Count - 1].position;
@@ -36,7 +37,24 @@ public class PlayerManager : MonoBehaviour
         player.GetComponentInChildren<Camera>().cullingMask = bitmask;
         // set the action in the custom cinemachine input handler
         player.GetComponentInChildren<CameraInputHandler>().horizontal = player.actions.FindAction("Look");
+        */
     }
 
    
+}
+
+public class PlayerConfiguration
+{
+    public PlayerInput Input { get; set; }
+    public int playerIndex {get; set;}
+
+    // can store configuration values here 
+    public bool isReady { get; set; }
+    public Material playerMaterial {get; set;}
+    
+    public PlayerConfiguration(PlayerInput pi){
+        playerIndex = pi.playerIndex;
+        Input = pi;
+    }
+
 }
