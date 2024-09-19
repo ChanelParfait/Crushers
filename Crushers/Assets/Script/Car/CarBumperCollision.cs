@@ -25,8 +25,9 @@ public class CarBumperCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       if(collision.collider != bumperCollider)
-        {
+        //check at least 1 contact point, check the first contact point, 
+        //check collider reference, check collider triggered contact is the bumperCollider 
+       if(collision.contacts.Length > 0 && collision.contacts[0].thisCollider == bumperCollider){
             Debug.Log("Collision");
             if(collision.gameObject.CompareTag("Player")){
                 
@@ -42,6 +43,7 @@ public class CarBumperCollision : MonoBehaviour
                     collidedPlayerStats.increaseDamage(10);
                     Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
                 }
+                StartCoroutine(ClearLastCollidedPlayerAfterDelay(5f));
             }
 
 
@@ -51,5 +53,13 @@ public class CarBumperCollision : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator ClearLastCollidedPlayerAfterDelay(float delay){
+        yield return new WaitForSeconds(delay);
+        LastCollidedPlayer = null;
+        Debug.Log("Cleared last collided player");
+    }
+
+
 }
     

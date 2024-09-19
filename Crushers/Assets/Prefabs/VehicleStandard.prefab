@@ -88,6 +88,26 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 1085550987732210523, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.85002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085550987732210523, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4081
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085550987732210523, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00027618
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085550987732210523, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.53682
+      objectReference: {fileID: 0}
     - target: {fileID: 1210878329686162239, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Lens.FieldOfView
