@@ -9,6 +9,8 @@ public class CarStats : MonoBehaviour
     [SerializeField]public float score;
     [SerializeField]private float damage;
     [SerializeField]private float speed;
+    [SerializeField] private GameObject lastCollidedPlayer;
+    [SerializeField] private float lastCollisionTime;
 
     [SerializeField] private TextMeshProUGUI scoreText;
 
@@ -17,7 +19,7 @@ public class CarStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        lastCollisionTime = -1f;
     }
 
     // Update is called once per frame
@@ -29,6 +31,17 @@ public class CarStats : MonoBehaviour
     }
     public float getSpeed(){
         return speed;
+    }
+
+    public GameObject getLastCollided(){
+        return lastCollidedPlayer;
+    }
+    public void setLastCollided(GameObject lastCollided){
+        lastCollidedPlayer = lastCollided;
+        lastCollisionTime = Time.time;
+    }
+    public float getLastCollisionTime(){
+        return lastCollisionTime;
     }
 
    

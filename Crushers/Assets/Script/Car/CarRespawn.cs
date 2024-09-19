@@ -19,7 +19,7 @@ public class CarRespawn : MonoBehaviour
 
     //reference to the stats of each car
     public CarStats carStats;
-    
+    private float flipProtectionTime = 5f;
 
     void Start(){
         //save position and rotation for respawn
@@ -38,7 +38,21 @@ public class CarRespawn : MonoBehaviour
 
 
             carStats.decreaseDamage(carStats.getDamage());
-            carStats.decreaseScore(1);
+
+            if(Time.time - carStats.getLastCollisionTime() > flipProtectionTime){
+                carStats.decreaseScore(1);
+                
+            }
+            else{
+                GameObject lastCollidedPlayer = carStats.getLastCollided();
+                if(lastCollidedPlayer == null) return;
+                CarStats otherCarStats = lastCollidedPlayer.GetComponent<CarStats>();
+                if(otherCarStats == null) return;
+
+                otherCarStats.increaseScore(1);
+                Debug.Log("Awarded 1 points to " + lastCollidedPlayer.name);
+            }
+            
 
             Debug.Log("Respawning");
             Debug.Log("Your score is: " + carStats.getScore());
