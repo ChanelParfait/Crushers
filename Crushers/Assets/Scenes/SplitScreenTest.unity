@@ -472,7 +472,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 880322130}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: AddPlayer
+        m_MethodName: HandlePlayerJoin
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

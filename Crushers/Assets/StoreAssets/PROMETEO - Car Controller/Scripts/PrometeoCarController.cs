@@ -22,7 +22,7 @@ public class PrometeoCarController : MonoBehaviour
 {
     [SerializeField] private Car car;
 
-    public bool isMovingForward;
+    private bool isMovingForward;
     public bool isReversing;
     public bool isBraking;
     public bool isTurning;
@@ -238,6 +238,10 @@ public class PrometeoCarController : MonoBehaviour
 
     }
 
+    public void setMoving(bool b){
+      isMovingForward = b; 
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -346,6 +350,8 @@ public class PrometeoCarController : MonoBehaviour
         if(isMovingForward){
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
+
+          Debug.Log("Go Forward!!!!!!");
           GoForward();
         }
         if(isReversing){

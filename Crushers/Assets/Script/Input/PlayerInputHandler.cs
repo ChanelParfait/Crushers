@@ -7,35 +7,49 @@ using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerControls controls; 
-    private PrometeoCarController carController; 
-    private PickUpManager pickUpManager;
-
+   // private PlayerControls controls; 
+    [SerializeField] private PrometeoCarController carController; 
+    [SerializeField] private PickUpManager pickUpManager;
+    private bool ahh = false; 
 
     private void Awake(){
         // initialise controls 
-        controls = new PlayerControls();
+        //controls = new PlayerControls();
     }
     private void OnEnable(){
-        controls.Enable();
+        //controls.Enable();
     } 
 
     private void OnDisable(){
-        controls.Disable();
+        //controls.Disable();
     } 
 
     // Start is called before the first frame update
     void Start()
     {
         
-        carController = GetComponent<PrometeoCarController>();
-        pickUpManager = GetComponent<PickUpManager>();
+        //carController = GetComponent<PrometeoCarController>();
+        //pickUpManager = GetComponent<PickUpManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("kill me: " + ahh);
 
+        //carController. = ahh;
+    }
+
+    public void SetCarController(PrometeoCarController cc){
+
+        carController = cc; 
+        
+        Debug.Log("Car: " + carController.gameObject.name);
+
+    }
+
+    public void SetPickupManager(PickUpManager pm){
+        pickUpManager = pm; 
     }
 
     public void OnReloadLevel(CallbackContext context)
@@ -47,11 +61,18 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        //Debug.Log("Move Forward");
 
+        //WTFFFF
+        // try invoking C# events instead to fix issue
+        Debug.Log("aHHHHHHH");
+            ahh = true;
+        
         if(carController)  
         { 
-            carController.isMovingForward = context.ReadValueAsButton();
+            //Debug.Log("Move Forward");
+            //carController.isMovingForward = context.ReadValueAsButton();
+
+            //Debug.Log("Move Forward: " + carController.isMovingForward);
         }
         
     }

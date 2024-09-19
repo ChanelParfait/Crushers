@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 public class SetupMenuController : MonoBehaviour
 {
 private int playerIndex;
+public static UnityAction<int, GameObject> vehicleSelected; 
+public static UnityAction<int> playerReady; 
+
 
      [SerializeField] private TextMeshProUGUI titleTxt; 
      [SerializeField] private GameObject readyPnl; 
@@ -37,20 +41,27 @@ private int playerIndex;
         Debug.Log("Click: " + st);
     }
 
-    public void SetColour(Material colour){
+    public void SetVehicle(GameObject vehicle){
 
         if(!inputEnabled){ return; }
 
-        //PlayerManager.Instance.SetPlayerColour(playerIndex, colour);
         readyPnl.SetActive(true);
         menuPnl.SetActive(false);
         readyBtn.Select();
+
+        if(vehicleSelected != null){
+            vehicleSelected.Invoke(playerIndex, vehicle); 
+        }
+        
     }
 
     public void ReadyPlayer(){
         if(!inputEnabled){ return; }
-
-        //PlayerManager.Instance.ReadyPlayer(playerIndex);
         readyBtn.gameObject.SetActive(false);
+
+        if(playerReady != null){
+            playerReady.Invoke(playerIndex); 
+        }
+
     }
 }
