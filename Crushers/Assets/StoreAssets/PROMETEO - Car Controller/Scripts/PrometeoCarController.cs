@@ -22,7 +22,7 @@ public class PrometeoCarController : MonoBehaviour
 {
     [SerializeField] private Car car;
 
-    private bool isMovingForward;
+    public bool isMovingForward;
     public bool isReversing;
     public bool isBraking;
     public bool isTurning;

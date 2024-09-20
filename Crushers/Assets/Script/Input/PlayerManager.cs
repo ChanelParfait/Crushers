@@ -14,17 +14,18 @@ public class PlayerManager : MonoBehaviour
     private List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField] private List<Transform> startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
-    private PlayerInputManager playerInputManager; 
+    //private PlayerInputManager playerInputManager; 
     
     private void Awake()
     {
-        playerInputManager = GetComponent<PlayerInputManager>();
+        //playerInputManager = GetComponent<PlayerInputManager>();
         playerConfigs = new List<PlayerConfiguration>();
         playerControls = new PlayerControls();
     }
-
-    void OnEnable()
+   
+   void OnEnable()
     {
+        playerControls.UI.Enable();
         SetupMenuController.vehicleSelected += SetPlayerVehicle; 
         SetupMenuController.playerReady += ReadyPlayer; 
 
@@ -32,6 +33,8 @@ public class PlayerManager : MonoBehaviour
 
     void OnDisable()
     {
+        playerControls.UI.Disable();
+
         SetupMenuController.vehicleSelected -= SetPlayerVehicle; 
         SetupMenuController.playerReady -= ReadyPlayer; 
 
@@ -84,6 +87,9 @@ public class PlayerManager : MonoBehaviour
     private void StartLevel(){
         Debug.Log("Level Start");
 
+
+        playerControls.UI.Disable();
+        playerControls.Player.Enable();
 
 
         foreach(PlayerConfiguration playerConfig in playerConfigs){

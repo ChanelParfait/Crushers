@@ -5,23 +5,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour, PlayerControls.IPlayerActions
 {
-   // private PlayerControls controls; 
+    private PlayerControls controls; 
     [SerializeField] private PrometeoCarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
-    private bool ahh = false; 
+
 
     private void Awake(){
         // initialise controls 
-        //controls = new PlayerControls();
+        controls = new PlayerControls();
     }
     private void OnEnable(){
-        //controls.Enable();
+        controls.Enable();
+        controls.Player.SetCallbacks(this);
+        //ontrols.UI.SetCallbacks(this);
     } 
 
     private void OnDisable(){
-        //controls.Disable();
+        controls.Disable();
     } 
 
     // Start is called before the first frame update
@@ -35,13 +37,13 @@ public class PlayerInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("kill me: " + ahh);
+        
 
-        //carController. = ahh;
     }
 
     public void SetCarController(PrometeoCarController cc){
-
+        controls.UI.Disable();
+        controls.Player.Enable();
         carController = cc; 
         
         Debug.Log("Car: " + carController.gameObject.name);
@@ -65,12 +67,12 @@ public class PlayerInputHandler : MonoBehaviour
         //WTFFFF
         // try invoking C# events instead to fix issue
         Debug.Log("aHHHHHHH");
-            ahh = true;
+            
         
         if(carController)  
         { 
-            //Debug.Log("Move Forward");
-            //carController.isMovingForward = context.ReadValueAsButton();
+            Debug.Log("Move Forward");
+            carController.isMovingForward = context.ReadValueAsButton();
 
             //Debug.Log("Move Forward: " + carController.isMovingForward);
         }
@@ -126,6 +128,11 @@ public class PlayerInputHandler : MonoBehaviour
             pickUpManager.useItem = context.ReadValueAsButton();
         }
 
+        
+    }
+
+    public void OnLook(InputAction.CallbackContext ctx)
+    {
         
     }
 
