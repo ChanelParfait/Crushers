@@ -1,37 +1,75 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
-public class PlayerInputHandler : MonoBehaviour, PlayerControls.IPlayerActions
+
+public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerControls controls; 
+    //[SerializeField] private PlayerControls controls; 
+    private InputActionAsset controls; 
+    private InputActionMap player; 
+
     [SerializeField] private PrometeoCarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
+    [SerializeField] private CameraInputHandler freelookCam; 
+    [SerializeField] private int playerIndex;
+
+
+
+
 
 
     private void Awake(){
         // initialise controls 
-        controls = new PlayerControls();
+        controls = GetComponent<PlayerInput>().actions;
+        player = controls.FindActionMap("Player");
+        player.Enable();
+
     }
     private void OnEnable(){
-        controls.Enable();
-        controls.Player.SetCallbacks(this);
-        //ontrols.UI.SetCallbacks(this);
-    } 
+        // enable player controls and set callbacks to refer to this object
+        // ensure prefab is set to Invoke C# Events
+        //controls.SetCallbacks(this);
+
+
+        //player.FindAction("Forward").started += OnForward;
+        //player.FindAction("Forward").canceled += OnStopForward;
+        
+        //player.FindAction("Look").started += OnLook;
+
+        //Debug.Log("Action:  " + player.FindAction("Forward"));
+        //Debug.Log("Is Pressed:  " + player.FindAction("Forward").IsPressed());
+
+
+
+    }
+
+    private void OnStopForward(CallbackContext context)
+    {
+        if(carController)  
+        { 
+            carController.isMovingForward = false;
+        }
+    
+    }
 
     private void OnDisable(){
-        controls.Disable();
+        //controls.Player.Disable();
+        
     } 
 
     // Start is called before the first frame update
     void Start()
     {
         
-        //carController = GetComponent<PrometeoCarController>();
-        //pickUpManager = GetComponent<PickUpManager>();
+        carController = GetComponent<PrometeoCarController>();
+        pickUpManager = GetComponent<PickUpManager>();
+        freelookCam = GetComponentInChildren<CameraInputHandler>();
     }
 
     // Update is called once per frame
@@ -41,42 +79,55 @@ public class PlayerInputHandler : MonoBehaviour, PlayerControls.IPlayerActions
 
     }
 
-    public void SetCarController(PrometeoCarController cc){
-        controls.UI.Disable();
-        controls.Player.Enable();
-        carController = cc; 
-        
-        Debug.Log("Car: " + carController.gameObject.name);
+    public void SetPlayerIndex(int index){
+        playerIndex = index; 
+    }
 
+    public void SetCarController(PrometeoCarController cc, int index)
+    {
+        // set car controller object
+        carController = cc; 
     }
 
     public void SetPickupManager(PickUpManager pm){
+        // set pickup manager
         pickUpManager = pm; 
+    }
+
+    public void SetCameraInputHandler(CameraInputHandler cip){
+        // set camera input handler
+        freelookCam = cip; 
     }
 
     public void OnReloadLevel(CallbackContext context)
     {
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
     }
 
 
-    public void OnForward(CallbackContext context)
+    public void OnMove()
     {
+        Debug.Log("Moving:  " + playerIndex);
 
-        //WTFFFF
-        // try invoking C# events instead to fix issue
-        Debug.Log("aHHHHHHH");
-            
-        
         if(carController)  
         { 
-            Debug.Log("Move Forward");
-            carController.isMovingForward = context.ReadValueAsButton();
-
-            //Debug.Log("Move Forward: " + carController.isMovingForward);
+            //Debug.Log("Car: " + carController.GetPlayerIndex());
+            //Debug.Log("Forward Control: " + controls.GamepadScheme);
+            //carController.isMovingForward = context.ReadValueAsButton();
+            //carController.isMovingForward = true;
         }
-        
+    }
+    public void OnForward(CallbackContext context)
+    {
+        Debug.Log("Moving:  " + playerIndex);
+
+        if(carController)  
+        { 
+            //Debug.Log("Car: " + carController.GetPlayerIndex());
+            //Debug.Log("Forward Control: " + controls.GamepadScheme);
+            carController.isMovingForward = context.ReadValueAsButton();
+            //carController.isMovingForward = true;
+        }
     }
 
     public void OnReverse(CallbackContext context)
@@ -113,12 +164,11 @@ public class PlayerInputHandler : MonoBehaviour, PlayerControls.IPlayerActions
         if(carController){
             carController.isBraking =  context.ReadValueAsButton();
             if(!context.action.IsInProgress()){
-                Debug.Log("RecoverTraction");
+                //Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
         }
 
-        
     }
 
     public void OnUseItem(CallbackContext context)
@@ -131,9 +181,14 @@ public class PlayerInputHandler : MonoBehaviour, PlayerControls.IPlayerActions
         
     }
 
-    public void OnLook(InputAction.CallbackContext ctx)
+    public void OnLook(CallbackContext context)
     {
-        
+        //Debug.Log("Look");
+        var read = context.ReadValue<Vector2>();
+        if(freelookCam){
+            freelookCam.horizontal = read;
+        }
+        //pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>().horizontal = pi.Input.actions.FindAction("Look");
     }
 
     

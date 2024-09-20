@@ -9,23 +9,18 @@ using System.Linq;
 
 public class PlayerManager : MonoBehaviour
 {
-    PlayerControls playerControls; 
     private List<PlayerConfiguration> playerConfigs; 
     private List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField] private List<Transform> startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
-    //private PlayerInputManager playerInputManager; 
     
     private void Awake()
     {
-        //playerInputManager = GetComponent<PlayerInputManager>();
         playerConfigs = new List<PlayerConfiguration>();
-        playerControls = new PlayerControls();
     }
    
    void OnEnable()
     {
-        playerControls.UI.Enable();
         SetupMenuController.vehicleSelected += SetPlayerVehicle; 
         SetupMenuController.playerReady += ReadyPlayer; 
 
@@ -33,8 +28,6 @@ public class PlayerManager : MonoBehaviour
 
     void OnDisable()
     {
-        playerControls.UI.Disable();
-
         SetupMenuController.vehicleSelected -= SetPlayerVehicle; 
         SetupMenuController.playerReady -= ReadyPlayer; 
 
@@ -48,9 +41,6 @@ public class PlayerManager : MonoBehaviour
 
     public void SetPlayerVehicle(int index, GameObject vehicle)
     {
-        //Debug.Log("Player: " + index + " Colour: " + colour.name);
-        //Debug.Log("Configs: " + playerConfigs.Count());
-
         playerConfigs[index].playerObject = vehicle;
     }
 
@@ -60,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 
         if( playerConfigs.All(p => p.isReady == true))
         {
-            // start game
+            // start level
             StartLevel();
         }   
     }
@@ -88,10 +78,6 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Level Start");
 
 
-        playerControls.UI.Disable();
-        playerControls.Player.Enable();
-
-
         foreach(PlayerConfiguration playerConfig in playerConfigs){
             SetupVehicle(playerConfig);
         }
@@ -103,38 +89,39 @@ public class PlayerManager : MonoBehaviour
     public void SetupVehicle(PlayerConfiguration pi)
     {
         Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
-         //pi.Input.uiInputModule = null;
 
-        // disable setup menu and camera
-        Destroy(pi.Input.gameObject.GetComponentInChildren<Camera>().gameObject);
-        //pi.Input.gameObject.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+        // destroy setup menu and camera
+        //Destroy(pi.Input.gameObject.GetComponentInChildren<Camera>().gameObject);
+        Destroy(pi.Input.gameObject.GetComponentInChildren<Canvas>().gameObject);
 
         // spawn vehicle from player config as child of player config
         GameObject vehicle = Instantiate(pi.playerObject, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
-        pi.Input.camera = vehicle.GetComponentInChildren<Camera>();
-        // find car controller and hand it to input handler
-        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCarController(vehicle.GetComponent<PrometeoCarController>());
-        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPickupManager(vehicle.GetComponent<PickUpManager>());
+        //pi.Input.camera = vehicle.GetComponentInChildren<Camera>();
+        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPlayerIndex(pi.playerIndex);
 
-
+        // find car controller, pickup manager and camera input handler and hand them to the player input handler
+        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCarController(pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>(), pi.playerIndex);
+        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
+        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
 
         /*players.Add(player);
 
         player.transform.position = startingPoints[players.Count - 1].position;
         player.transform.rotation = startingPoints[players.Count - 1].rotation;
 
-
-        int layerToAdd = (int)Mathf.Log(playerLayers[players.Count-1].value, 2);
+        */
+        int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
         var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
 
+        vehicle.layer = layerToAdd;
+
         //set the layer
-        player.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
-        player.GetComponentInChildren<Camera>().gameObject.layer = layerToAdd;
+        vehicle.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
+        pi.Input.gameObject.GetComponentInChildren<Camera>().gameObject.layer = layerToAdd;
 
         // add the layer
-        player.GetComponentInChildren<Camera>().cullingMask = bitmask;
-        // set the action in the custom cinemachine input handler
-        player.GetComponentInChildren<CameraInputHandler>().horizontal = player.actions.FindAction("Look");*/
+        pi.Input.gameObject.GetComponentInChildren<Camera>().cullingMask = bitmask;
+        
         
     }
 

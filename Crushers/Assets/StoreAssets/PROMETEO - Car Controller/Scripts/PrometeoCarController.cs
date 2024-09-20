@@ -20,7 +20,10 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PrometeoCarController : MonoBehaviour
 {
+  
     [SerializeField] private Car car;
+
+    [SerializeField] private int playerIndex;
 
     public bool isMovingForward;
     public bool isReversing;
@@ -238,8 +241,12 @@ public class PrometeoCarController : MonoBehaviour
 
     }
 
-    public void setMoving(bool b){
-      isMovingForward = b; 
+    public void SetPlayerIndex(int index){
+      playerIndex = index; 
+    }
+
+    public int GetPlayerIndex(){
+      return playerIndex; 
     }
 
     // Update is called once per frame
@@ -642,7 +649,7 @@ public class PrometeoCarController : MonoBehaviour
     // 1 is the slowest and 10 is the fastest deceleration. This method is called by the function InvokeRepeating,
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
     public void DecelerateCar(){
-      Debug.Log("Decelerating");
+      //Debug.Log("Decelerating");
       if(Mathf.Abs(localVelocityX) > 2.5f){
         isDrifting = true;
         DriftCarPS();
