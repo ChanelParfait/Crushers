@@ -7601,7 +7601,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1612894977}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: AddPlayer
+        m_MethodName: HandlePlayerJoin
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9549,7 +9549,7 @@ PrefabInstance:
     - target: {fileID: 7228420204981597865, guid: f0f278ee8fed8486292cc84742752a9d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
