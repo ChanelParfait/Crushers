@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2,
         type: 3}
       propertyPath: m_Name
-      value: VehicleStandard Variant
+      value: VehicleStandard_ConfigObj
       objectReference: {fileID: 0}
     - target: {fileID: 8321901019582249614, guid: 36020e77e00371f4c93132947e358cb2,
         type: 3}
@@ -163,6 +163,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.033725835
       objectReference: {fileID: 0}
+    - target: {fileID: 8985555941711663014, guid: 36020e77e00371f4c93132947e358cb2,
+        type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 9190988267346349723}
     - target: {fileID: 9062276469302019826, guid: 36020e77e00371f4c93132947e358cb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -201,3 +206,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36020e77e00371f4c93132947e358cb2, type: 3}
+--- !u!1 &9190988267346349723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5926220055172845439, guid: 36020e77e00371f4c93132947e358cb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3292934658167783908}
+  m_PrefabAsset: {fileID: 0}
