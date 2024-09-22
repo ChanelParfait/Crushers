@@ -227,5 +227,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lift: {fileID: 5540445214011606981}
-  liftSpeed: 2
+  liftSpeed: 8
   newPosition_y: 10

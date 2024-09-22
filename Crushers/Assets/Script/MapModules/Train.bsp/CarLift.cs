@@ -27,10 +27,13 @@ public class CarLift : MonoBehaviour
             Color.red,
             0.2f
         );
-        if (playerOnLift && lift.position.y < startingPosition.y + newPosition_y) 
-            lift.Translate(Vector3.up * Time.deltaTime * liftSpeed);
-        if (!playerOnLift)
-        {
+        if (playerOnLift && lift.position.y < startingPosition.y + newPosition_y){
+            timer += Time.deltaTime;
+            if (timer >= 1.5) {
+                lift.Translate(Vector3.up * Time.deltaTime * liftSpeed);
+            }
+        }
+        if (!playerOnLift) {
             timer += Time.deltaTime;
             if (timer >= 3) lift.position = startingPosition;
         }
@@ -47,6 +50,7 @@ public class CarLift : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        timer = 0;
         playerOnLift = false;
     }
 }
