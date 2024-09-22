@@ -6,13 +6,19 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using Unity.VisualScripting;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private int leaderboardScene; 
     private List<PlayerConfiguration> playerConfigs; 
     private List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField] private List<Transform> startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
+
+    // Events
+    public static UnityAction LevelLoaded; 
     
     private void Awake()
     {
@@ -23,15 +29,17 @@ public class PlayerManager : MonoBehaviour
     {
         SetupMenuController.vehicleSelected += SetPlayerVehicle; 
         SetupMenuController.playerReady += ReadyPlayer; 
+        LevelManager.LevelEnded += LoadLeaderboard;
+        LevelManager.LevelStarted += EnablePlayerControls;
 
     }
 
     void OnDisable()
     {
         SetupMenuController.vehicleSelected -= SetPlayerVehicle; 
-        SetupMenuController.playerReady -= ReadyPlayer; 
-
-        
+        SetupMenuController.playerReady -= ReadyPlayer;   
+        LevelManager.LevelEnded -= LoadLeaderboard;
+        LevelManager.LevelStarted -= EnablePlayerControls;      
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
@@ -51,7 +59,7 @@ public class PlayerManager : MonoBehaviour
         if( playerConfigs.All(p => p.isReady == true))
         {
             // start level
-            StartLevel();
+            InitialiseLevel();
         }   
     }
 
@@ -75,17 +83,32 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void StartLevel(){
-        Debug.Log("Level Start");
-        // disable joining once level starts
+    private void InitialiseLevel(){
+        Debug.Log("Level initialising...");
+        // disable joining once level loads / opens
         GetComponent<PlayerInputManager>().DisableJoining();
-
 
         foreach(PlayerConfiguration playerConfig in playerConfigs){
             SetupVehicle(playerConfig);
         }
+
+        if(LevelLoaded != null){
+            LevelLoaded.Invoke();
+        }
     }
 
+    private void LoadLeaderboard()
+    {
+        Debug.Log("Level Complete");
+        //SceneManager.LoadScene(leaderboardScene);
+        // send player configs to leaderboard controller 
+    }
+    
+    private void EnablePlayerControls(){
+        foreach(PlayerConfiguration playerConfig in playerConfigs){
+            playerConfig.InputHandler.GetCarController().enabled = true;
+        }
+    }
     
 
 
@@ -98,12 +121,16 @@ public class PlayerManager : MonoBehaviour
 
         // spawn vehicle from player config as child of player config
         GameObject vehicle = Instantiate(pi.playerObject, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
-        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPlayerIndex(pi.playerIndex);
+        pi.InputHandler.SetPlayerIndex(pi.playerIndex);
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
-        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCarController(pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>(), pi.playerIndex);
-        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
-        pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
+        PrometeoCarController car = pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>();
+        pi.InputHandler.SetCarController(car);
+        // disable vehicle controls initially
+        car.enabled = false;
+
+        pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
+        pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
         // get camera component
         Camera camera = pi.Input.gameObject.GetComponentInChildren<Camera>(); 
         // set vehicle canvas to apply to this camera 
@@ -130,6 +157,8 @@ public class PlayerManager : MonoBehaviour
 public class PlayerConfiguration
 {
     public PlayerInput Input { get; set; }
+    public PlayerInputHandler InputHandler { get; set; }
+
     public int playerIndex {get; set;}
 
     // can store configuration values here 
@@ -139,6 +168,7 @@ public class PlayerConfiguration
     public PlayerConfiguration(PlayerInput pi){
         playerIndex = pi.playerIndex;
         Input = pi;
+        InputHandler = Input.GetComponent<PlayerInputHandler>();
     }
 
 }
