@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpManager : MonoBehaviour
@@ -15,12 +16,13 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] private float ShieldTimer = 10;
 
     private GameObject shield; 
-    public bool useItem = false; 
+    public bool useItem = false;
     
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
     }
+    
     
     private void Update()
     {
@@ -39,14 +41,50 @@ public class PickUpManager : MonoBehaviour
                     break;
             }
         }
+
+        if (Pickup == PickupType.Rocket)
+        {
+            //Turn CrossHair UI On
+        }
+        else
+        {
+            //Turn CrossHair UI Off
+        }
     }
+    
 
     private void UseRocket()
     {
-        GameObject RocketGm = Instantiate(Rocket,transform.position + transform.forward * 10f + transform.up * 2f ,transform.rotation);
+        //RaycastHit hit;
+        //if(Physics.Raycast(GetComponentInChildren<Camera>().gameObject.transform.position, GetComponentInChildren<Camera>().gameObject.transform.TransformDirection(Vector3.forward), out hit , 500f, LayerMask.GetMask("Ground")))
+        {
+            //Vector3 DirectHit = hit.point - transform.position;
+            //Debug.DrawLine(GetComponentInChildren<Camera>().gameObject.transform.position, hit.point);
+            //GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f,transform.rotation);
+            GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f ,transform.rotation);
+            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject); 
+ 
+            
+            Collider rocketCollider = RocketGm.GetComponent<Collider>();
+
+       
+            Collider spawnerCollider = this.GetComponent<Collider>();
+
+            if (spawnerCollider != null && rocketCollider != null)
+            {
+                Physics.IgnoreCollision(rocketCollider, spawnerCollider);
+            }
+            
+            Collider[] spawnerChildrenColliders = this.GetComponentsInChildren<Collider>();
+            foreach (var childCollider in spawnerChildrenColliders)
+            {
+                Physics.IgnoreCollision(rocketCollider, childCollider);
+            }
+            Pickup = PickupType.None; 
+            
+        }
         
-        RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject);
-        Pickup = PickupType.None;
+        
     }
 
     private void UseShield()
@@ -57,6 +95,7 @@ public class PickUpManager : MonoBehaviour
         // spawn in a shield object
         if(!shield){
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
+            shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
         }
         
 

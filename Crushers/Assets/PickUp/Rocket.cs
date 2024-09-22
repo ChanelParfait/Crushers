@@ -24,9 +24,10 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject != FiredBy)
+            if (other.gameObject.transform.root.gameObject != FiredBy)
             {
                 Debug.Log(other.gameObject);
+                Debug.Log(other.gameObject.transform.root);
                 ExplosionDamage(this.transform.position, 10f);
                 Destroy(this.gameObject);
             }
