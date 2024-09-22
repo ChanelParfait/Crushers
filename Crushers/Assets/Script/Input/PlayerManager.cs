@@ -67,7 +67,7 @@ public class PlayerManager : MonoBehaviour
 
         if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
         {
-            Debug.Log("Player Joined" + pi.playerIndex);
+            Debug.Log("Player Joined: " + pi.playerIndex);
 
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);
@@ -76,6 +76,8 @@ public class PlayerManager : MonoBehaviour
 
     private void StartLevel(){
         Debug.Log("Level Start");
+        // disable joining once level starts
+        GetComponent<PlayerInputManager>().DisableJoining();
 
 
         foreach(PlayerConfiguration playerConfig in playerConfigs){
@@ -96,20 +98,17 @@ public class PlayerManager : MonoBehaviour
 
         // spawn vehicle from player config as child of player config
         GameObject vehicle = Instantiate(pi.playerObject, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
-        //pi.Input.camera = vehicle.GetComponentInChildren<Camera>();
         pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPlayerIndex(pi.playerIndex);
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
         pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCarController(pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>(), pi.playerIndex);
         pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
         pi.Input.gameObject.GetComponent<PlayerInputHandler>().SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
+        // get camera component
+        Camera camera = pi.Input.gameObject.GetComponentInChildren<Camera>(); 
+        // set vehicle canvas to apply to this camera 
+        vehicle.gameObject.GetComponentInChildren<Canvas>().worldCamera = camera;
 
-        /*players.Add(player);
-
-        player.transform.position = startingPoints[players.Count - 1].position;
-        player.transform.rotation = startingPoints[players.Count - 1].rotation;
-
-        */
         int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
         var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
 
@@ -117,10 +116,10 @@ public class PlayerManager : MonoBehaviour
 
         //set the layer
         vehicle.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
-        pi.Input.gameObject.GetComponentInChildren<Camera>().gameObject.layer = layerToAdd;
+        camera.gameObject.layer = layerToAdd;
 
         // add the layer
-        pi.Input.gameObject.GetComponentInChildren<Camera>().cullingMask = bitmask;
+        camera.cullingMask = bitmask;
         
         
     }

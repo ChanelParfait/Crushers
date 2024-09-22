@@ -10,7 +10,6 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    //[SerializeField] private PlayerControls controls; 
     private InputActionAsset controls; 
     private InputActionMap player; 
 
@@ -20,53 +19,26 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private int playerIndex;
 
 
-
-
-
-
     private void Awake(){
-        // initialise controls 
+        // initialise controls and enable them 
         controls = GetComponent<PlayerInput>().actions;
         player = controls.FindActionMap("Player");
         player.Enable();
 
     }
     private void OnEnable(){
-        // enable player controls and set callbacks to refer to this object
-        // ensure prefab is set to Invoke C# Events
-        //controls.SetCallbacks(this);
-
-
-        //player.FindAction("Forward").started += OnForward;
-        //player.FindAction("Forward").canceled += OnStopForward;
-        
-        //player.FindAction("Look").started += OnLook;
-
-        //Debug.Log("Action:  " + player.FindAction("Forward"));
-        //Debug.Log("Is Pressed:  " + player.FindAction("Forward").IsPressed());
-
-
 
     }
-
-    private void OnStopForward(CallbackContext context)
-    {
-        if(carController)  
-        { 
-            carController.isMovingForward = false;
-        }
-    
-    }
-
     private void OnDisable(){
-        //controls.Player.Disable();
         
     } 
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // try to find vehicle components
+        // only for testing individual vehicles not vehicles in conjustion with player config object
         carController = GetComponent<PrometeoCarController>();
         pickUpManager = GetComponent<PickUpManager>();
         freelookCam = GetComponentInChildren<CameraInputHandler>();
@@ -75,17 +47,18 @@ public class PlayerInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
     }
 
+    // set player index for input handler
+    // this should match the player input index
+    // for debugging
     public void SetPlayerIndex(int index){
         playerIndex = index; 
     }
 
     public void SetCarController(PrometeoCarController cc, int index)
     {
-        // set car controller object
+        // set car controller
         carController = cc; 
     }
 
@@ -104,29 +77,13 @@ public class PlayerInputHandler : MonoBehaviour
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    public void OnMove()
-    {
-        Debug.Log("Moving:  " + playerIndex);
-
-        if(carController)  
-        { 
-            //Debug.Log("Car: " + carController.GetPlayerIndex());
-            //Debug.Log("Forward Control: " + controls.GamepadScheme);
-            //carController.isMovingForward = context.ReadValueAsButton();
-            //carController.isMovingForward = true;
-        }
-    }
     public void OnForward(CallbackContext context)
     {
-        Debug.Log("Moving:  " + playerIndex);
+        //Debug.Log("Moving Forward:  " + playerIndex);
 
         if(carController)  
         { 
-            //Debug.Log("Car: " + carController.GetPlayerIndex());
-            //Debug.Log("Forward Control: " + controls.GamepadScheme);
             carController.isMovingForward = context.ReadValueAsButton();
-            //carController.isMovingForward = true;
         }
     }
 
@@ -184,11 +141,11 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnLook(CallbackContext context)
     {
         //Debug.Log("Look");
+        // get on look value and pass it to the free look camera
         var read = context.ReadValue<Vector2>();
         if(freelookCam){
             freelookCam.horizontal = read;
         }
-        //pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>().horizontal = pi.Input.actions.FindAction("Look");
     }
 
     

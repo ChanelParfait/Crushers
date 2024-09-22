@@ -1724,7 +1724,7 @@ MonoBehaviour:
         m_MethodName: SetVehicle
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2,
+          m_ObjectArgument: {fileID: 8144304561226117244, guid: 4ae40da7cbe4c904f8ee212af3b0e11e,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0

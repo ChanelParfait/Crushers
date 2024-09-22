@@ -358,7 +358,7 @@ public class PrometeoCarController : MonoBehaviour
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
 
-          Debug.Log("Go Forward!!!!!!");
+          //Debug.Log("Go Forward!!!!!!");
           GoForward();
         }
         if(isReversing){
