@@ -124,7 +124,7 @@ Material:
     - _Activate_Target_3: 0
     - _Activate_Target_4: 1
     - _AlphaCutoff: 0.5
-    - _Animation_speed: 0
+    - _Animation_speed: 1
     - _BackFace_Intensity: 1
     - _BumpScale: 1
     - _ColorBoost: 25
