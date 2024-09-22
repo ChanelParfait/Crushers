@@ -63,12 +63,13 @@ public class PlayerManager : MonoBehaviour
             //if(firstPlayerJoined != null) 
             //    firstPlayerJoined.Invoke();
         }
-
+        pi.gameObject.GetComponentInChildren<SetupMenuController>().SetPlayerIndex(pi.playerIndex);
+            
 
         if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
         {
             Debug.Log("Player Joined: " + pi.playerIndex);
-
+            
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);
         }
@@ -92,8 +93,7 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
 
-        // destroy setup menu and camera
-        //Destroy(pi.Input.gameObject.GetComponentInChildren<Camera>().gameObject);
+        // destroy setup menu
         Destroy(pi.Input.gameObject.GetComponentInChildren<Canvas>().gameObject);
 
         // spawn vehicle from player config as child of player config

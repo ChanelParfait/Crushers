@@ -64,4 +64,7 @@ public static UnityAction<int> playerReady;
         }
 
     }
+
+
+    // create function to update canvas scale
 }

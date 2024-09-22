@@ -13,7 +13,7 @@ public class BasePickUp : MonoBehaviour
         Debug.Log("TESt");
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.transform.root.GetComponent<PickUpManager>().SetPickup(SelectedPU);
+            other.gameObject.transform.root.GetComponentInChildren<PickUpManager>().SetPickup(SelectedPU);
             Destroy(this.gameObject);
         }
         
