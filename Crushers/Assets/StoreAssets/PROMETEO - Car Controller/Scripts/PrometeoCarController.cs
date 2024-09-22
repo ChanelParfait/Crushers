@@ -20,7 +20,10 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PrometeoCarController : MonoBehaviour
 {
+  
     [SerializeField] private Car car;
+
+    [SerializeField] private int playerIndex;
 
     public bool isMovingForward;
     public bool isReversing;
@@ -238,6 +241,14 @@ public class PrometeoCarController : MonoBehaviour
 
     }
 
+    public void SetPlayerIndex(int index){
+      playerIndex = index; 
+    }
+
+    public int GetPlayerIndex(){
+      return playerIndex; 
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -346,6 +357,8 @@ public class PrometeoCarController : MonoBehaviour
         if(isMovingForward){
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
+
+          //Debug.Log("Go Forward!!!!!!");
           GoForward();
         }
         if(isReversing){
