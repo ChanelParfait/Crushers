@@ -30,7 +30,7 @@ public class CarRespawn : MonoBehaviour
         carStats = GetComponent<CarStats>();
     }
     
-    void Respawn(){
+    public void Respawn(){
         transform.position = startPosition;
             transform.rotation = startRotation;
             rb.velocity = Vector3.zero;
@@ -64,6 +64,7 @@ public class CarRespawn : MonoBehaviour
            
     }
     //check flipCollider hits something (ground normally)
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if(other != flipCollider)
@@ -73,5 +74,6 @@ public class CarRespawn : MonoBehaviour
             }
         }
     }
+    */
 
 }
