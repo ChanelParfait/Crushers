@@ -1,59 +1,96 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
+
 public class PlayerInputHandler : MonoBehaviour
 {
-    private PlayerControls controls; 
-    private PrometeoCarController carController; 
-    private PickUpManager pickUpManager;
+    private InputActionAsset controls; 
+    private InputActionMap player; 
+
+    [SerializeField] private PrometeoCarController carController; 
+    [SerializeField] private PickUpManager pickUpManager;
+    [SerializeField] private CameraInputHandler freelookCam; 
+    [SerializeField] private int playerIndex;
 
 
     private void Awake(){
-        // initialise controls 
-        controls = new PlayerControls();
+        // initialise controls and enable them 
+        controls = GetComponent<PlayerInput>().actions;
+        player = controls.FindActionMap("Player");
+        player.Enable();
+
     }
     private void OnEnable(){
-        controls.Enable();
+
+    }
+    private void OnDisable(){
+        
     } 
 
-    private void OnDisable(){
-        controls.Disable();
-    } 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // try to find vehicle components
+        // only for testing individual vehicles not vehicles in conjustion with player config object
         carController = GetComponent<PrometeoCarController>();
         pickUpManager = GetComponent<PickUpManager>();
+        freelookCam = GetComponentInChildren<CameraInputHandler>();
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
 
+    // set player index for input handler
+    // this should match the player input index
+    // for debugging
+    public void SetPlayerIndex(int index){
+        playerIndex = index; 
+    }
+
+    public void SetCarController(PrometeoCarController cc)
+    {
+        // set car controller
+        carController = cc; 
+    }
+
+    public PrometeoCarController GetCarController()
+    {
+        return carController;
+    }
+
+    public void SetPickupManager(PickUpManager pm){
+        // set pickup manager
+        pickUpManager = pm; 
+    }
+
+    public void SetCameraInputHandler(CameraInputHandler cip){
+        // set camera input handler
+        freelookCam = cip; 
     }
 
     public void OnReloadLevel(CallbackContext context)
     {
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
     }
-
 
     public void OnForward(CallbackContext context)
     {
-        //Debug.Log("Move Forward");
+        //Debug.Log("Moving Forward:  " + playerIndex);
 
         if(carController)  
         { 
             carController.isMovingForward = context.ReadValueAsButton();
         }
-        
     }
 
     public void OnReverse(CallbackContext context)
@@ -90,12 +127,11 @@ public class PlayerInputHandler : MonoBehaviour
         if(carController){
             carController.isBraking =  context.ReadValueAsButton();
             if(!context.action.IsInProgress()){
-                Debug.Log("RecoverTraction");
+                //Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
         }
 
-        
     }
 
     public void OnUseItem(CallbackContext context)
@@ -106,6 +142,16 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         
+    }
+
+    public void OnLook(CallbackContext context)
+    {
+        //Debug.Log("Look");
+        // get on look value and pass it to the free look camera
+        var read = context.ReadValue<Vector2>();
+        if(freelookCam){
+            freelookCam.horizontal = read;
+        }
     }
 
     
