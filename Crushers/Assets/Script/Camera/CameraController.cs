@@ -3,7 +3,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour, AxisState.IInputAxisProvider
+public class CameraController : MonoBehaviour
 {
     public static CameraController Instance { get; private set; }
 
@@ -12,11 +12,6 @@ public class CameraController : MonoBehaviour, AxisState.IInputAxisProvider
     private float startingAmplitude;
     private float startingFrequency;
     private float shakeTimerTotal;
-
-    [HideInInspector]
-    public InputAction horizontal;
-    [HideInInspector]
-    public InputAction vertical;
 
     private void Awake()
     {
@@ -42,18 +37,6 @@ public class CameraController : MonoBehaviour, AxisState.IInputAxisProvider
         }
     }
 
-    public float GetAxisValue(int axis)
-    {
-        switch (axis)
-        {
-            case 0: return horizontal.ReadValue<Vector2>().x;
-            case 1: return horizontal.ReadValue<Vector2>().y;
-            case 2: return vertical.ReadValue<float>();
-        }
-
-        return 0;
-    }
-
     public void ShakeCamera(float amplitude, float frequency, float time)
     {
         CinemachineBasicMultiChannelPerlin perlin =
@@ -70,6 +53,6 @@ public class CameraController : MonoBehaviour, AxisState.IInputAxisProvider
             shakeTimer = time;
         }
 
-        Debug.Log($"Camera Shake Amplitude: {amplitude}, Frequency: {frequency}, Duration: {time}");
+       // Debug.Log($"Camera Shake Amplitude: {amplitude}, Frequency: {frequency}, Duration: {time}");
     }
 }

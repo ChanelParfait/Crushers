@@ -25,6 +25,8 @@ public class PrometeoCarController : MonoBehaviour
 
     [SerializeField] private int playerIndex;
 
+    private ImpactController impactController;
+
     public bool isMovingForward;
     public bool isReversing;
     public bool isBraking;
@@ -137,7 +139,7 @@ public class PrometeoCarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+      impactController = GameObject.FindObjectOfType<ImpactController>();
       //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
       //gameObject. Also, we define the center of mass of the car with the Vector3 given
       //in the inspector.
@@ -394,6 +396,11 @@ public class PrometeoCarController : MonoBehaviour
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
+        //Reset cars center of mass when hitTimer is 0
+        if (impactController.GetGotHit() == false) {
+            carRigidbody.centerOfMass = new Vector3(0,0,0);
+        }
+        
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
@@ -473,6 +480,8 @@ public class PrometeoCarController : MonoBehaviour
       frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, car.GetSteeringSpeed());
       frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, car.GetSteeringSpeed());
     }
+
+
 
    /* public void StopTurning(){
       isTurning = false;

@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 5535384286806951313, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
     type: 3}
-  maxSpeed: 190
+  maxSpeed: 250
   maxReverseSpeed: 120
-  accelerationMultiplier: 10
-  maxSteeringAngle: 45
-  steeringSpeed: 1
-  brakeForce: 600
-  decelerationMultiplier: 10
+  accelerationMultiplier: 17
+  maxSteeringAngle: 50
+  steeringSpeed: 2
+  brakeForce: 800
+  decelerationMultiplier: 7.5
   handbrakeDriftMultiplier: 5
   bodyMassCenter: {x: 0, y: 0, z: 0}
-  bodyMass: 300
+  bodyMass: 500
   forceMagnitude: 1200
   useSounds: 0
   carEngineSound: {fileID: 0}
