@@ -27,27 +27,27 @@ public class CarBumperCollision : MonoBehaviour
     {
        if(collision.collider != bumperCollider)
         {
-            Debug.Log("Collision");
+           // Debug.Log("Collision");
             if(collision.gameObject.CompareTag("Player")){
                 
 
                 //crash into a player
 
                 LastCollidedPlayer = collision.gameObject;
-                Debug.Log("collided with " + LastCollidedPlayer.name);
+                //Debug.Log("collided with " + LastCollidedPlayer.name);
                 CarStats collidedPlayerStats = LastCollidedPlayer.GetComponent<CarStats>();
                 
                 //if car has stats, do some dmg when collided into
                 if(collidedPlayerStats != null){
                     collidedPlayerStats.increaseDamage(10);
-                    Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
+                   // Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
                 }
             }
 
 
 
             else{
-                Debug.Log("Not a vehicle");
+                //Debug.Log("Not a vehicle");
             }
         }
     }

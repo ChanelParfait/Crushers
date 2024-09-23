@@ -636,7 +636,7 @@ public class PrometeoCarController : MonoBehaviour
     // 1 is the slowest and 10 is the fastest deceleration. This method is called by the function InvokeRepeating,
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
     public void DecelerateCar(){
-      Debug.Log("Decelerating");
+     // Debug.Log("Decelerating");
       if(Mathf.Abs(localVelocityX) > 2.5f){
         isDrifting = true;
         DriftCarPS();

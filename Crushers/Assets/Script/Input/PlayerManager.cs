@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
         // add the layer
         player.GetComponentInChildren<Camera>().cullingMask = bitmask;
         // set the action in the custom cinemachine input handler
-        player.GetComponentInChildren<CameraInputHandler>().horizontal = player.actions.FindAction("Look");
+        player.GetComponentInChildren<CameraController>().horizontal = player.actions.FindAction("Look");
     }
 
    

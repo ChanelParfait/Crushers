@@ -15,7 +15,9 @@ public class ImpactController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         float hitForce = carController.CalculateHitForce();
+        float hitAmplitude = hitForce * 0.002f;
 
+        CameraController.Instance.ShakeCamera(hitAmplitude, 1f, 1f);
         if (collision.gameObject.CompareTag("Player"))
         {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();

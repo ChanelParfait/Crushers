@@ -40,9 +40,9 @@ public class CarRespawn : MonoBehaviour
             carStats.decreaseDamage(carStats.getDamage());
             carStats.decreaseScore(1);
 
-            Debug.Log("Respawning");
-            Debug.Log("Your score is: " + carStats.getScore());
-            Debug.Log("Your damage is: " + carStats.getDamage());
+           // Debug.Log("Respawning");
+           // Debug.Log("Your score is: " + carStats.getScore());
+            //Debug.Log("Your damage is: " + carStats.getDamage());
     }
     
     void FixedUpdate()
