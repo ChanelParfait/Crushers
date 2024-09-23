@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: PoliceCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 0}
-  maxSpeed: 90
-  maxReverseSpeed: 45
-  accelerationMultiplier: 2
-  maxSteeringAngle: 27
-  steeringSpeed: 0.5
-  brakeForce: 350
-  decelerationMultiplier: 2
-  handbrakeDriftMultiplier: 5
+  carPrefab: {fileID: 7781994489799046140, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1,
+    type: 3}
+  maxSpeed: 170
+  maxReverseSpeed: 90
+  accelerationMultiplier: 12
+  maxSteeringAngle: 50
+  steeringSpeed: 0.75
+  brakeForce: 800
+  decelerationMultiplier: 1.5
+  handbrakeDriftMultiplier: 9
   bodyMassCenter: {x: 0, y: 0, z: 0}
-  bodyMass: 0
-  forceMagnitude: 1200
+  bodyMass: 600
+  forceMagnitude: 1400
   useSounds: 0
   carEngineSound: {fileID: 0}
   tireScreechSound: {fileID: 0}
