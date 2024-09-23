@@ -29,7 +29,9 @@ public class CarBumperCollision : MonoBehaviour
                 
                 if (collidedPlayerStats != null)
                 {
-                    collidedPlayerStats.increaseDamage(10);
+                    float newDamage = Mathf.Round(carStats.getSpeed() / 6);
+                    collidedPlayerStats.increaseDamage(newDamage);
+                    carStats.addCentreOfMass(newDamage);
                     Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
                 }
 

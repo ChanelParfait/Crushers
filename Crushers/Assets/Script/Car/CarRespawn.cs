@@ -53,7 +53,7 @@ public class CarRespawn : MonoBehaviour
                 Debug.Log("Awarded 1 points to " + lastCollidedPlayer.name);
             }
             
-
+            carStats.resetMass();
             Debug.Log("Respawning");
             Debug.Log("Your score is: " + carStats.getScore());
             Debug.Log("Your damage is: " + carStats.getDamage());
