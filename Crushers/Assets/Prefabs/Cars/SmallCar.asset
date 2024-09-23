@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 5535384286806951313, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
     type: 3}
-  maxSpeed: 250
+  maxSpeed: 200
   maxReverseSpeed: 120
-  accelerationMultiplier: 17
+  accelerationMultiplier: 14
   maxSteeringAngle: 50
   steeringSpeed: 2
   brakeForce: 800
