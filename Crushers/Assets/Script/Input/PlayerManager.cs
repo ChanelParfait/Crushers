@@ -11,9 +11,10 @@ using System;
 
 public class PlayerManager : MonoBehaviour
 {
+    private static PlayerManager instance;
     [SerializeField] private int leaderboardScene; 
     private List<PlayerConfiguration> playerConfigs; 
-    private List<PlayerInput> players = new List<PlayerInput>();
+    //private List<PlayerInput> players = new List<PlayerInput>();
     [SerializeField] private List<Transform> startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
 
@@ -22,6 +23,15 @@ public class PlayerManager : MonoBehaviour
     
     private void Awake()
     {
+
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            instance = this;
+        }
+
+        DontDestroyOnLoad(this);
         playerConfigs = new List<PlayerConfiguration>();
     }
    
@@ -49,7 +59,10 @@ public class PlayerManager : MonoBehaviour
 
     public void SetPlayerVehicle(int index, GameObject vehicle)
     {
-        playerConfigs[index].playerObject = vehicle;
+        //Debug.Log("index: " + index + " :" + vehicle);
+        //Debug.Log("player configs: " + playerConfigs.Count);
+
+        playerConfigs[index].vehiclePrefab = vehicle;
     }
 
     public void ReadyPlayer(int index)
@@ -59,7 +72,7 @@ public class PlayerManager : MonoBehaviour
         if( playerConfigs.All(p => p.isReady == true))
         {
             // start level
-            InitialiseLevel();
+            InitialisePlayers();
         }   
     }
 
@@ -83,13 +96,24 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void InitialiseLevel(){
+    // may alter this to be more generic later
+    private void InitialisePlayers(){
+
+        int testscore = 0; 
         Debug.Log("Level initialising...");
         // disable joining once level loads / opens
         GetComponent<PlayerInputManager>().DisableJoining();
 
         foreach(PlayerConfiguration playerConfig in playerConfigs){
-            SetupVehicle(playerConfig);
+            // generic setup
+            // should only run on join level
+            SetupPlayer(playerConfig);
+
+            playerConfig.score = testscore;
+            testscore += 5;
+            // add vehicle for each player
+            // need to implement a check for if this is an arena level
+            AddVehicle(playerConfig);
         }
 
         if(LevelLoaded != null){
@@ -100,8 +124,18 @@ public class PlayerManager : MonoBehaviour
     private void LoadLeaderboard()
     {
         Debug.Log("Level Complete");
-        //SceneManager.LoadScene(leaderboardScene);
+        SceneManager.LoadScene(leaderboardScene);
+        SavePlayerScores();
+        DestroyVehicles();
+        DisableCameras();
+        
         // send player configs to leaderboard controller 
+    }
+
+    private void SavePlayerScores(){
+        foreach(PlayerConfiguration playerConfig in playerConfigs){
+            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().getScore();
+        }
     }
     
     private void EnablePlayerControls(){
@@ -109,19 +143,40 @@ public class PlayerManager : MonoBehaviour
             playerConfig.InputHandler.GetCarController().enabled = true;
         }
     }
+
+    private void DisableCameras(){
+        foreach(PlayerConfiguration playerConfig in playerConfigs){
+            playerConfig.playerCam.enabled = false;
+        }
+    }
     
+    // run this code in the join menu
+    private void SetupPlayer(PlayerConfiguration pi){
+        pi.InputHandler.SetPlayerIndex(pi.playerIndex);
+        // get camera component
+        pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
 
+        int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
+        var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
 
-    public void SetupVehicle(PlayerConfiguration pi)
+        //set the layer
+        pi.Input.gameObject.layer = layerToAdd;
+        pi.playerCam.gameObject.layer = layerToAdd;
+        // add the layer
+        pi.playerCam.cullingMask = bitmask;
+
+    }
+
+    // run this code when loading into any arena level
+    private void AddVehicle(PlayerConfiguration pi)
     {
         Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
-
         // destroy setup menu
+        // later setup menu may be in a separate level
         Destroy(pi.Input.gameObject.GetComponentInChildren<Canvas>().gameObject);
 
         // spawn vehicle from player config as child of player config
-        GameObject vehicle = Instantiate(pi.playerObject, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
-        pi.InputHandler.SetPlayerIndex(pi.playerIndex);
+        pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
         PrometeoCarController car = pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>();
@@ -129,27 +184,29 @@ public class PlayerManager : MonoBehaviour
         // disable vehicle controls initially
         car.enabled = false;
 
+        //initialise other input handler components
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
         pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
-        // get camera component
-        Camera camera = pi.Input.gameObject.GetComponentInChildren<Camera>(); 
-        // set vehicle canvas to apply to this camera 
-        vehicle.gameObject.GetComponentInChildren<Canvas>().worldCamera = camera;
+         
+        // set vehicle canvas to apply to player camera 
+        pi.vehicleObject.GetComponentInChildren<Canvas>().worldCamera = pi.playerCam;
 
         int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
-        var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
-
-        vehicle.layer = layerToAdd;
-
+        pi.vehicleObject.layer = layerToAdd;
         //set the layer
-        vehicle.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
-        camera.gameObject.layer = layerToAdd;
-
-        // add the layer
-        camera.cullingMask = bitmask;
-        
-        
+        pi.vehicleObject.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
     }
+
+    private void DestroyVehicles(){
+        foreach(PlayerConfiguration playerConfig in playerConfigs){
+            if(playerConfig.vehicleObject){
+                Destroy(playerConfig.vehicleObject);
+                playerConfig.vehicleObject = null;  
+            }
+                
+        }
+    }
+
 
    
 }
@@ -160,10 +217,14 @@ public class PlayerConfiguration
     public PlayerInputHandler InputHandler { get; set; }
 
     public int playerIndex {get; set;}
+    public int score {get; set;}
+
+    public Camera playerCam {get; set;}
 
     // can store configuration values here 
     public bool isReady { get; set; }
-    public GameObject playerObject {get; set;}
+    public GameObject vehiclePrefab {get; set;}
+    public GameObject vehicleObject {get; set;}
     
     public PlayerConfiguration(PlayerInput pi){
         playerIndex = pi.playerIndex;
