@@ -20,8 +20,6 @@ public class PickUpManager : MonoBehaviour
 
     private GameObject shield; 
     public bool useItem = false;
-
-    [SerializeField] private GameObject Camera;
     //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
     public void SetPickup(PickupType PickUpPowerup)
     {
@@ -61,7 +59,8 @@ public class PickUpManager : MonoBehaviour
 
     private void UseRocket()
     {
-        Vector3 newLocation = this.gameObject.transform.position - Camera.transform.position;
+        
+        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f, transform.rotation);
             RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject); 
