@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -56,10 +57,15 @@ public class PlayerInputHandler : MonoBehaviour
         playerIndex = index; 
     }
 
-    public void SetCarController(PrometeoCarController cc, int index)
+    public void SetCarController(PrometeoCarController cc)
     {
         // set car controller
         carController = cc; 
+    }
+
+    public PrometeoCarController GetCarController()
+    {
+        return carController;
     }
 
     public void SetPickupManager(PickUpManager pm){
