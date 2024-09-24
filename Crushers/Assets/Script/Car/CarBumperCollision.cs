@@ -31,7 +31,7 @@ public class CarBumperCollision : MonoBehaviour
                 {
                     float newDamage = Mathf.Round(carStats.getSpeed() / 3);
                     collidedPlayerStats.increaseDamage(newDamage);
-                    carStats.addCentreOfMass(newDamage);
+                    collidedPlayerStats.addCentreOfMass(newDamage);
                     Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
                 }
 
