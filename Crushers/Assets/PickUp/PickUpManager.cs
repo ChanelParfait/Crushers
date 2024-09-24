@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
+
 
 public class PickUpManager : MonoBehaviour
 {
@@ -17,21 +19,33 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] public Shield State;
 
     [SerializeField] private float ShieldTimer = 10;
-
-    private GameObject shield; 
     public bool useItem = false;
+
+
+    // Visual Gameobjects
+    private GameObject shield; 
+    // UI Components
+    [SerializeField] private Image pickUpImage;
+    [SerializeField] private List<Sprite> pickupSprites;
     //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
+        Debug.Log("Pickup: " + PickUpPowerup.ToString());
+        //Debug.Log("Gameobject" + gameObject.name);
+        UpdateSprite(PickUpPowerup);
     }
     
+    private void Start(){
+        UpdateSprite(PickupType.None);
+
+    }
     
     private void Update()
     {
         if (useItem)
         {
-
+            UpdateSprite(PickupType.None);
             switch (Pickup)
             {
                 case PickupType.Rocket:
@@ -54,6 +68,19 @@ public class PickUpManager : MonoBehaviour
         {
             //Turn CrossHair UI Off
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            Debug.Log("Picked Up by" + other.gameObject.name);
+            SetPickup(other.GetComponent<BasePickUp>().GetPickupType());
+            Destroy(other.gameObject);
+        }
+        
+        
     }
     
 
@@ -96,7 +123,7 @@ public class PickUpManager : MonoBehaviour
         // spawn in a shield object
         if(!shield){
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
-            shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
+            //shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
         }
         
 
@@ -115,6 +142,17 @@ public class PickUpManager : MonoBehaviour
         State = Shield.IsOff;
         Destroy(shield);
         shield = null;
+    }
+
+    private void UpdateSprite(PickupType pickUpIndex){
+        // set sprite using pickup sprite index
+        /*  None = 0
+            Speed = 1
+            Rocket = 2
+            Shield = 3 
+        */
+    
+        pickUpImage.sprite = pickupSprites[(int)pickUpIndex];
     }
 
   

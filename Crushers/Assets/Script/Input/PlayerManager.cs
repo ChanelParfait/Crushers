@@ -149,6 +149,8 @@ public class PlayerManager : MonoBehaviour
             playerConfig.playerCam.enabled = false;
         }
     }
+
+    
     
     // run this code in the join menu
     private void SetupPlayer(PlayerConfiguration pi){
@@ -177,6 +179,8 @@ public class PlayerManager : MonoBehaviour
 
         // spawn vehicle from player config as child of player config
         pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
+        // get UI controller for each vehicle
+        pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
         PrometeoCarController car = pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>();
@@ -187,7 +191,8 @@ public class PlayerManager : MonoBehaviour
         //initialise other input handler components
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
         pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
-         
+        
+        
         // set vehicle canvas to apply to player camera 
         pi.vehicleObject.GetComponentInChildren<Canvas>().worldCamera = pi.playerCam;
 
@@ -202,6 +207,8 @@ public class PlayerManager : MonoBehaviour
             if(playerConfig.vehicleObject){
                 Destroy(playerConfig.vehicleObject);
                 playerConfig.vehicleObject = null;  
+                playerConfig.UIController = null;  
+
             }
                 
         }
@@ -216,6 +223,7 @@ public class PlayerConfiguration
     public PlayerInput Input { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
 
+
     public int playerIndex {get; set;}
     public int score {get; set;}
 
@@ -225,6 +233,8 @@ public class PlayerConfiguration
     public bool isReady { get; set; }
     public GameObject vehiclePrefab {get; set;}
     public GameObject vehicleObject {get; set;}
+    public VehicleUIController UIController { get; set; }
+
     
     public PlayerConfiguration(PlayerInput pi){
         playerIndex = pi.playerIndex;

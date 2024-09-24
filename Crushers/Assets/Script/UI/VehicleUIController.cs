@@ -4,17 +4,22 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class LevelUIController : MonoBehaviour
+
+public class VehicleUIController : MonoBehaviour
 {
+   
+
     [SerializeField] private TextMeshProUGUI levelTimerTxt;
     [SerializeField] private GameObject startTimer;
 
     [SerializeField] private TextMeshProUGUI startTimerTxt;
 
+
        void OnEnable()
     {
         LevelManager.levelTimeChanged +=  UpdateLevelTimer;
         LevelManager.startTimeChanged +=  UpdateStartTimer;
+
 
     }
 
@@ -49,4 +54,6 @@ public class LevelUIController : MonoBehaviour
         yield return new WaitForSeconds(2);
         startTimer.SetActive(false);
     }
+
+
 }
