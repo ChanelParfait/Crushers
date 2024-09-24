@@ -238,3 +238,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainSpeed: 60
+  timeToLive: 4
