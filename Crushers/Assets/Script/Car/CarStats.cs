@@ -5,18 +5,30 @@ using UnityEngine;
 
 public class CarStats : MonoBehaviour
 {
+    private Rigidbody rb;
+    private PrometeoCarController carController;
     [Header("----------Stats-----------")]
     [SerializeField]public float score;
     [SerializeField]private float damage;
     [SerializeField]private float speed;
+    [SerializeField]private Vector3 centreMass;
+    [SerializeField] private GameObject lastCollidedPlayer;
+    [SerializeField] private float lastCollisionTime;
 
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [SerializeField] private TextMeshProUGUI damageText;
+    private float absoluteCarSpeed;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        lastCollisionTime = -1f;
+        rb = GetComponent<Rigidbody>();
+        centreMass = rb.centerOfMass;
+        carController = GetComponent<PrometeoCarController>();
+                
 
     }
 
@@ -28,7 +40,32 @@ public class CarStats : MonoBehaviour
         
     }
     public float getSpeed(){
-        return speed;
+        return carController.carSpeed;
+    }
+
+    public void addCentreOfMass(float damage){
+        float increase = damage / 100f;
+        centreMass.y += increase;
+        if(centreMass.y > 2.0f){
+            centreMass.y = 2.0f;
+        }
+        rb.centerOfMass = centreMass;
+        
+    }
+    public void resetMass(){
+        centreMass.y = 0.5f;
+        rb.centerOfMass = centreMass;
+    }
+
+    public GameObject getLastCollided(){
+        return lastCollidedPlayer;
+    }
+    public void setLastCollided(GameObject lastCollided){
+        lastCollidedPlayer = lastCollided;
+        lastCollisionTime = Time.time;
+    }
+    public float getLastCollisionTime(){
+        return lastCollisionTime;
     }
 
    
