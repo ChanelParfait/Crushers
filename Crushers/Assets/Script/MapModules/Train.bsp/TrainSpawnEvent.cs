@@ -6,17 +6,16 @@ public class TrainSpawnEvent : MonoBehaviour
 {
     [SerializeField] GameObject trainPrefab;
     [SerializeField] GameObject spawnPoint;
-
-    private float timer;
-    // Start is called before the first frame update
+    [SerializeField] float spawnTimer = 30f;
     void Start()
     {
-        
+        StartCoroutine(SpawnTrain());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SpawnTrain()
     {
-        
+        yield return new WaitForSeconds(spawnTimer);
+        Instantiate(trainPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        StartCoroutine(SpawnTrain());
     }
 }
