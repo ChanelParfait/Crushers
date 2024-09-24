@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
 
     // Events
     public static UnityAction LevelLoaded; 
+    public static UnityAction firstPlayerJoined; 
     
     private void Awake()
     {
@@ -79,17 +80,16 @@ public class PlayerManager : MonoBehaviour
     public void HandlePlayerJoin(PlayerInput pi)
     {
         if(pi.playerIndex == 0){
-            // disable main camera
             // invoke first player joined event 
-            //if(firstPlayerJoined != null) 
-            //    firstPlayerJoined.Invoke();
+            if(firstPlayerJoined != null) 
+                firstPlayerJoined.Invoke();
         }
-        pi.gameObject.GetComponentInChildren<SetupMenuController>().SetPlayerIndex(pi.playerIndex);
-            
+
 
         if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
         {
             Debug.Log("Player Joined: " + pi.playerIndex);
+            pi.gameObject.GetComponentInChildren<SetupMenuController>().SetPlayerIndex(pi.playerIndex);
             
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);

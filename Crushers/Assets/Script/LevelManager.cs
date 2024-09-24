@@ -27,12 +27,14 @@ public class LevelManager : MonoBehaviour
        void OnEnable()
     {
         PlayerManager.LevelLoaded +=  LoadLevel;
+        PlayerManager.firstPlayerJoined +=  DisableSetupComponents;
 
     }
 
     void OnDisable()
     {
         PlayerManager.LevelLoaded -=  LoadLevel;
+        PlayerManager.firstPlayerJoined +=  DisableSetupComponents;
 
     }
 
@@ -87,6 +89,15 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevel(){
         levelLoaded = true;
+    }
+
+    private void DisableSetupComponents(){
+        // get main camera and join canvas and disable objects
+        //GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        //if(camera){ camera.SetActive(false); }
+        GameObject canvas = GameObject.FindGameObjectWithTag("JoinCanvas");
+        if(canvas){ canvas.SetActive(false); }
+
     }
 
     
