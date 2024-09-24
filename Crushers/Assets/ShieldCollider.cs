@@ -17,10 +17,13 @@ public class ShieldCollider : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.transform.root.gameObject != Player && other.gameObject.CompareTag("Player"))
-        {
-            //player
-            //.GetComponent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, 10f, 10, ForceMode.Force);
+        Rigidbody otherRB = other.gameObject.GetComponentInParent<Rigidbody>();
+        if(otherRB){
+            if (otherRB.gameObject != Player && other.gameObject.CompareTag("Player"))
+            {
+                
+                other.gameObject.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, 10f, 10, ForceMode.Force);
+            }
         }
     }
     
