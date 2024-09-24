@@ -10054,6 +10054,7 @@ MonoBehaviour:
   trainPrefab: {fileID: 3633132162027406453, guid: f0f278ee8fed8486292cc84742752a9d,
     type: 3}
   spawnPoint: {fileID: 1296177482}
+  spawnTimer: 25
 --- !u!43 &1646008579
 Mesh:
   m_ObjectHideFlags: 0
