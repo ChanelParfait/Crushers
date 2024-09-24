@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
-{
-
+{ 
     [SerializeField] private int levelDuration; 
 
     private int startCountdownTimer; 
@@ -27,23 +26,24 @@ public class LevelManager : MonoBehaviour
        void OnEnable()
     {
         PlayerManager.LevelLoaded +=  LoadLevel;
-        PlayerManager.firstPlayerJoined +=  DisableSetupComponents;
+        PlayerManager.LevelLoaded +=  DisableSetupComponents;
 
     }
 
     void OnDisable()
     {
         PlayerManager.LevelLoaded -=  LoadLevel;
-        PlayerManager.firstPlayerJoined +=  DisableSetupComponents;
+        PlayerManager.LevelLoaded -=  DisableSetupComponents;
 
     }
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        
         levelCountdownTimer = levelDuration;
-        startCountdownTimer = 3; 
-
+        startCountdownTimer = 3;
+        AudioManager.Instance.PlayMainMusic();
     }
 
     // Update is called once per frame
@@ -80,6 +80,7 @@ public class LevelManager : MonoBehaviour
                     if(LevelEnded != null)
                     levelLoaded = false;
                     LevelEnded.Invoke();
+                    AudioManager.Instance.PlayMainMusic();
                 }
             }
             prevTime = totalTime;
@@ -89,6 +90,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevel(){
         levelLoaded = true;
+        AudioManager.Instance.PlayCrowdSounds();
     }
 
     private void DisableSetupComponents(){

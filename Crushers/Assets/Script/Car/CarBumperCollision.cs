@@ -1,55 +1,55 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarBumperCollision : MonoBehaviour
 {   
-
-    public CarStats carStats;
-    [SerializeField] private Collider bumperCollider;
-    [SerializeField] private GameObject LastCollidedPlayer;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public CarStats carStats;  
+    [SerializeField] private Collider bumperCollider;  
+    void Start(){
+        if(carStats == null){
+            carStats = GetComponent<CarStats>();
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-       if(collision.collider != bumperCollider)
+        // Check if the collision was triggered by the bumperCollider
+        if (collision.contacts.Length > 0 && collision.contacts[0].thisCollider == bumperCollider)
         {
-           // Debug.Log("Collision");
-            if(collision.gameObject.CompareTag("Player")){
-                
+            Debug.Log("Collision");
+           
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                // Set the last collided player in the car's stats
+                carStats.setLastCollided(collision.gameObject);
+                GameObject lastCollidedPlayer = carStats.getLastCollided();
 
-                //crash into a player
+                Debug.Log("Collided with " + lastCollidedPlayer.name);
 
-                LastCollidedPlayer = collision.gameObject;
-                //Debug.Log("collided with " + LastCollidedPlayer.name);
-                CarStats collidedPlayerStats = LastCollidedPlayer.GetComponent<CarStats>();
+                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponent<CarStats>();
                 
-                //if car has stats, do some dmg when collided into
-                if(collidedPlayerStats != null){
-                    collidedPlayerStats.increaseDamage(10);
-                   // Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
+                if (collidedPlayerStats != null)
+                {
+                    float newDamage = Mathf.Round(carStats.getSpeed() / 3);
+                    collidedPlayerStats.increaseDamage(newDamage);
+                    carStats.addCentreOfMass(newDamage);
+                    Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
                 }
+
+                // Start coroutine to clear the last collided player after 5 seconds
+                StartCoroutine(ClearLastCollidedPlayerAfterDelay(5f));
             }
-
-
-
-            else{
-                //Debug.Log("Not a vehicle");
+            else
+            {
+                Debug.Log("Not a vehicle");
             }
         }
     }
-}
+
     
+    private IEnumerator ClearLastCollidedPlayerAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        carStats.setLastCollided(null);  
+        Debug.Log("Cleared last collided player");
+    }
+}
