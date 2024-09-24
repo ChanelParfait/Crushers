@@ -30,10 +30,8 @@ public class Car : ScriptableObject
 
     [SerializeField] private float forceMagnitude =  50f;
 
-    [Header("Sounds")]
-    [SerializeField] private bool useSounds = false;
-    [SerializeField] private AudioSource carEngineSound;
-    [SerializeField] private AudioSource tireScreechSound;
+    
+
 
     // Getter Methods
     public GameObject GetCarPrefab()
@@ -91,19 +89,5 @@ public class Car : ScriptableObject
     }
     public float GetForceMagnitude() {
         return forceMagnitude;
-    }
-
-    public bool GetUseSounds()
-    {
-        return useSounds;
-    }
-
-    public AudioSource GetCarEngineSound()
-    {
-        return carEngineSound;
-    }
-    public AudioSource GetTireScreechSound()
-    {
-        return tireScreechSound;
     }
 }

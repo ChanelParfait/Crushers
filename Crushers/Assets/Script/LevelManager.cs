@@ -44,8 +44,8 @@ public class LevelManager : MonoBehaviour
         musicPlayer = GetComponentInChildren<AudioSource>();
         musicPlayer.Play();
         levelCountdownTimer = levelDuration;
-        startCountdownTimer = 3; 
-
+        startCountdownTimer = 3;
+        AudioManager.Instance.PlayMainMusic();
     }
 
     // Update is called once per frame
@@ -86,6 +86,7 @@ public class LevelManager : MonoBehaviour
                     if(LevelEnded != null)
                     levelLoaded = false;
                     LevelEnded.Invoke();
+                    AudioManager.Instance.PlayMainMusic();
                 }
             }
             prevTime = totalTime;
@@ -95,6 +96,8 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevel(){
         levelLoaded = true;
+       
+        AudioManager.Instance.PlayCrowdSounds();
     }
 
     private void DisableSetupComponents(){
