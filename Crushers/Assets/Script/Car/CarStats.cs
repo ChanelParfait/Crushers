@@ -9,7 +9,7 @@ public class CarStats : MonoBehaviour
     private PrometeoCarController carController;
     [Header("----------Stats-----------")]
     [SerializeField]public float score;
-    [SerializeField]private float damage;
+    [SerializeField]private float damageTaken;
     [SerializeField]private float speed;
     [SerializeField]private Vector3 centreMass;
     [SerializeField] private GameObject lastCollidedPlayer;
@@ -70,14 +70,14 @@ public class CarStats : MonoBehaviour
 
    
     public void increaseDamage(float newDamage){
-        damage = damage + newDamage;
+        damageTaken = damageTaken + newDamage;
         //can respawn if flipped after period of time
     }
     public float getDamage(){
-        return damage;
+        return damageTaken;
     }
     public void decreaseDamage(float newDamage){
-        damage = damage - newDamage;
+        damageTaken = damageTaken - newDamage;
     }
 
     public void increaseScore(float num){
@@ -102,7 +102,7 @@ public class CarStats : MonoBehaviour
     {
         if (damageText != null)
         {
-            damageText.text = "Damage: " + damage.ToString(""); 
+            damageText.text = "Damage: " + damageTaken.ToString(""); 
         }
     }
 }
