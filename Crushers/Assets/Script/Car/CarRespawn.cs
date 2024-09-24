@@ -50,13 +50,13 @@ public class CarRespawn : MonoBehaviour
                 if(otherCarStats == null) return;
 
                 otherCarStats.increaseScore(1);
-                Debug.Log("Awarded 1 points to " + lastCollidedPlayer.name);
+                //Debug.Log("Awarded 1 points to " + lastCollidedPlayer.name);
             }
             
             carStats.resetMass();
-            Debug.Log("Respawning");
-            Debug.Log("Your score is: " + carStats.getScore());
-            Debug.Log("Your damage is: " + carStats.getDamage());
+            //Debug.Log("Respawning");
+            //Debug.Log("Your score is: " + carStats.getScore());
+            //Debug.Log("Your damage is: " + carStats.getDamage());
     }
     
     void FixedUpdate()
