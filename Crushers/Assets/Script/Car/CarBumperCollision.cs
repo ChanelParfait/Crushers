@@ -25,7 +25,7 @@ public class CarBumperCollision : MonoBehaviour
 
                 Debug.Log("Collided with " + lastCollidedPlayer.name);
 
-                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponent<CarStats>();
+                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponentInParent<CarStats>();
                 
                 if (collidedPlayerStats != null)
                 {
