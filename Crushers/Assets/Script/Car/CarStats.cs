@@ -40,7 +40,7 @@ public class CarStats : MonoBehaviour
         
     }
     public float getSpeed(){
-        return carController.carSpeed;
+        return carController.GetCarSpeed();
     }
 
     public void addCentreOfMass(float damage){
@@ -53,7 +53,7 @@ public class CarStats : MonoBehaviour
         
     }
     public void resetMass(){
-        centreMass.y = 0.5f;
+        centreMass.y = 0f;
         rb.centerOfMass = centreMass;
     }
 

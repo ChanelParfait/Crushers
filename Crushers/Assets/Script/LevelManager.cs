@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
-{
-    AudioSource musicPlayer; 
+{ 
     [SerializeField] private int levelDuration; 
 
     private int startCountdownTimer; 
@@ -41,8 +40,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        musicPlayer = GetComponentInChildren<AudioSource>();
-        musicPlayer.Play();
+        
         levelCountdownTimer = levelDuration;
         startCountdownTimer = 3;
         AudioManager.Instance.PlayMainMusic();
@@ -52,10 +50,6 @@ public class LevelManager : MonoBehaviour
     void Update()
     {     
         if(levelLoaded){
-            // stop playing menu music when level starts
-            if(musicPlayer.isPlaying){
-                musicPlayer.Stop();
-            }
             totalTime += Time.deltaTime;
         }
 
@@ -96,7 +90,6 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevel(){
         levelLoaded = true;
-       
         AudioManager.Instance.PlayCrowdSounds();
     }
 
