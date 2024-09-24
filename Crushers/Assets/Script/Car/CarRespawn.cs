@@ -30,7 +30,7 @@ public class CarRespawn : MonoBehaviour
         carStats = GetComponent<CarStats>();
     }
     
-    void Respawn(){
+    public void Respawn(){
         transform.position = startPosition;
             transform.rotation = startRotation;
             rb.velocity = Vector3.zero;
@@ -40,9 +40,9 @@ public class CarRespawn : MonoBehaviour
             carStats.decreaseDamage(carStats.getDamage());
             carStats.decreaseScore(1);
 
-            Debug.Log("Respawning");
-            Debug.Log("Your score is: " + carStats.getScore());
-            Debug.Log("Your damage is: " + carStats.getDamage());
+           // Debug.Log("Respawning");
+           // Debug.Log("Your score is: " + carStats.getScore());
+            //Debug.Log("Your damage is: " + carStats.getDamage());
     }
     
     void FixedUpdate()
@@ -64,16 +64,16 @@ public class CarRespawn : MonoBehaviour
            
     }
     //check flipCollider hits something (ground normally)
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if(other != flipCollider)
         {
             if(other.gameObject.CompareTag("Ground") || other.gameObject.name == "RespawnCollider"){
-                
-                
                 Respawn();
             }
         }
     }
+    */
 
 }

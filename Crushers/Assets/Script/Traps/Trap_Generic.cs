@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap_Spikes : MonoBehaviour
+public class Trap_Generic : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

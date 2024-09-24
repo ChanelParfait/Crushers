@@ -28,6 +28,11 @@ public class RespawnRandomPickUp : MonoBehaviour
     private void Start()
     {
         SpawnPickUp();
+        if (GetComponent<MeshRenderer>())
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+        
     }
 
     private void SpawnPickUp()

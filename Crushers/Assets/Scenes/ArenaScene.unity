@@ -1840,6 +1840,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldPickUp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9142987456405115542, guid: 92bf3fdd24661aa4fa2680bd144efb13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17414,6 +17419,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldPickUp
       objectReference: {fileID: 0}
+    - target: {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9142987456405115542, guid: 92bf3fdd24661aa4fa2680bd144efb13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20395,6 +20405,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1290446663417807755, guid: ed69f62502b74734e81c31342ed4d022,
+        type: 3}
+      propertyPath: levelDuration
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 4302443255420835171, guid: ed69f62502b74734e81c31342ed4d022,
         type: 3}
       propertyPath: m_LocalPosition.x

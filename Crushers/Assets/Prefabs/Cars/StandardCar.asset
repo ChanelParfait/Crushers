@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: StandardCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2,
+  carPrefab: {fileID: 8144304561226117244, guid: 4ae40da7cbe4c904f8ee212af3b0e11e,
     type: 3}
-  maxSpeed: 190
-  maxReverseSpeed: 120
+  maxSpeed: 150
+  maxReverseSpeed: 90
   accelerationMultiplier: 10
-  maxSteeringAngle: 45
-  steeringSpeed: 1
-  brakeForce: 600
-  decelerationMultiplier: 8
+  maxSteeringAngle: 50
+  steeringSpeed: 0.75
+  brakeForce: 800
+  decelerationMultiplier: 1.5
   handbrakeDriftMultiplier: 4
-  bodyMassCenter: {x: 0, y: 0.5, z: 0}
-  bodyMass: 500
-  forceMagnitude: 1200
+  bodyMassCenter: {x: 0, y: 0, z: 0}
+  bodyMass: 600
+  forceMagnitude: 1500
   useSounds: 0
   carEngineSound: {fileID: 0}
   tireScreechSound: {fileID: 0}

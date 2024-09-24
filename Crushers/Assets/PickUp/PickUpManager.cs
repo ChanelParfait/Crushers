@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PickUpManager : MonoBehaviour
 {
@@ -17,7 +20,7 @@ public class PickUpManager : MonoBehaviour
 
     private GameObject shield; 
     public bool useItem = false;
-    
+    //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
@@ -28,6 +31,7 @@ public class PickUpManager : MonoBehaviour
     {
         if (useItem)
         {
+
             switch (Pickup)
             {
                 case PickupType.Rocket:
@@ -55,15 +59,12 @@ public class PickUpManager : MonoBehaviour
 
     private void UseRocket()
     {
-        //RaycastHit hit;
-        //if(Physics.Raycast(GetComponentInChildren<Camera>().gameObject.transform.position, GetComponentInChildren<Camera>().gameObject.transform.TransformDirection(Vector3.forward), out hit , 500f, LayerMask.GetMask("Ground")))
-        {
-            //Vector3 DirectHit = hit.point - transform.position;
-            //Debug.DrawLine(GetComponentInChildren<Camera>().gameObject.transform.position, hit.point);
-            //GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f,transform.rotation);
-            GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f ,transform.rotation);
+        
+        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
+        newLocation.y = 0f;
+            GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f, transform.rotation);
             RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject); 
- 
+            RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
 
@@ -82,7 +83,7 @@ public class PickUpManager : MonoBehaviour
             }
             Pickup = PickupType.None; 
             
-        }
+        
         
         
     }

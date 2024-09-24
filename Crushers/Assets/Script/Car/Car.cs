@@ -7,20 +7,20 @@ public class Car : ScriptableObject
 
     [Header("Car Setup")]
 
-    [Range(20, 190)]
+    [Range(20, 250)]
     [SerializeField] private int maxSpeed = 90;
     [Range(10, 120)]
     [SerializeField] private int maxReverseSpeed = 45;
-    [Range(1, 10)] 
+    [Range(1, 20)] 
     [SerializeField] private int accelerationMultiplier = 2;
-    [Range(10, 45)] 
+    [Range(10, 50)] 
     [SerializeField] private int maxSteeringAngle = 27;
-    [Range(0.1f, 1f)] 
+    [Range(0.1f, 2f)] 
     [SerializeField] private float steeringSpeed = 0.5f;
-    [Range(100, 600)] 
+    [Range(100, 1000)] 
     [SerializeField] private int brakeForce = 350;
     [Range(1, 10)] 
-    [SerializeField] private int decelerationMultiplier = 2;
+    [SerializeField] private float decelerationMultiplier = 2;
     [Range(1, 10)] 
     [SerializeField] private int handbrakeDriftMultiplier = 5;
 
@@ -71,7 +71,7 @@ public class Car : ScriptableObject
         return brakeForce;
     }
 
-    public int GetDecelerationMultiplier()
+    public float GetDecelerationMultiplier()
     {
         return decelerationMultiplier;
     }
