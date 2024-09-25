@@ -145,4 +145,4 @@ MonoBehaviour:
   mainMusic: {fileID: 8300000, guid: df390a40dd845c1479177209ee9e9c67, type: 3}
   mainMusicVolume: 1
   crowdSounds: {fileID: 8300000, guid: 95e4ce36f95baac41b003715554c8717, type: 3}
-  crowdSoundsVolume: 0.6
+  crowdSoundsVolume: 0.5

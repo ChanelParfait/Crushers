@@ -1,7 +1,7 @@
 public enum PickupType
 {
-    None,
-    Speed,
-    Rocket,
-    Shield,
+    None = 0,
+    Speed = 1,
+    Rocket = 2,
+    Shield = 3,
 }

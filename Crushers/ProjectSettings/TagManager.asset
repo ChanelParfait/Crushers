@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Fragile
   - JoinCanvas
+  - Pickup
   layers:
   - Default
   - TransparentFX

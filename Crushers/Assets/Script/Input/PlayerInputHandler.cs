@@ -83,6 +83,15 @@ public class PlayerInputHandler : MonoBehaviour
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void OnRespawn(CallbackContext context)
+    {
+       if(gameObject.GetComponentInChildren<CarRespawn>()){
+            gameObject.GetComponentInChildren<CarRespawn>().Respawn();
+       }
+       
+       
+    }
+
     public void OnForward(CallbackContext context)
     {
         //Debug.Log("Moving Forward:  " + playerIndex);

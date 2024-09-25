@@ -25,13 +25,13 @@ public class CarBumperCollision : MonoBehaviour
 
                 Debug.Log("Collided with " + lastCollidedPlayer.name);
 
-                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponent<CarStats>();
+                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponentInParent<CarStats>();
                 
                 if (collidedPlayerStats != null)
                 {
                     float newDamage = Mathf.Round(carStats.getSpeed() / 3);
                     collidedPlayerStats.increaseDamage(newDamage);
-                    carStats.addCentreOfMass(newDamage);
+                    collidedPlayerStats.addCentreOfMass(newDamage);
                     Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
                 }
 
