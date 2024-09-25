@@ -24,13 +24,9 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.transform.root.gameObject != FiredBy)
-            {
-                Debug.Log(other.gameObject);
-                Debug.Log(other.gameObject.transform.root);
-                ExplosionDamage(this.transform.position, 10f);
-                Destroy(this.gameObject);
-            }
+        ExplosionDamage(this.transform.position, 10f);
+        Destroy(this.gameObject);
+            
     }
 
     private void ExplosionDamage(Vector3 postion, float radius)
@@ -38,6 +34,7 @@ public class Rocket : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(postion, radius);
         foreach (var hitcollider in hitColliders)
         {
+            /*
             if (hitcollider.transform.root.gameObject.CompareTag("Player"))
             {
                 if (hitcollider.transform.root.gameObject.GetComponent<PickUpManager>().State != Shield.IsOn)
@@ -48,6 +45,18 @@ public class Rocket : MonoBehaviour
                 }
                 
             }
+            */
+            if (hitcollider.GetComponentInParent<PickUpManager>().gameObject.CompareTag("Player"))
+            {
+                if (hitcollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
+                {
+                    //hitcollider.transform.root.GetComponent<Rigidbody>().AddForce(hitcollider.transform.root.up  * 100000f, ForceMode.Force);
+                    hitcollider.GetComponentInParent<PickUpManager>().GetComponent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
+
+                }
+                
+            }
+           
         }
     }
 }
