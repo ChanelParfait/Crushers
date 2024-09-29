@@ -22,7 +22,7 @@ public class ShieldCollider : MonoBehaviour
             if (otherRB.gameObject != Player && other.gameObject.CompareTag("Player"))
             {
                 
-                other.gameObject.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, 10f, 10, ForceMode.Force);
+                otherRB.AddExplosionForce(100000, gameObject.transform.position, 10f, 10, ForceMode.Force);
             }
         }
     }

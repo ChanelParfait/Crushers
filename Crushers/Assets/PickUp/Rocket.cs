@@ -32,8 +32,9 @@ public class Rocket : MonoBehaviour
     private void ExplosionDamage(Vector3 postion, float radius)
     {
         Collider[] hitColliders = Physics.OverlapSphere(postion, radius);
-        foreach (var hitcollider in hitColliders)
+        foreach (var hitCollider in hitColliders)
         {
+            
             /*
             if (hitcollider.transform.root.gameObject.CompareTag("Player"))
             {
@@ -46,15 +47,16 @@ public class Rocket : MonoBehaviour
                 
             }
             */
-            if (hitcollider.GetComponentInParent<PickUpManager>().gameObject.CompareTag("Player"))
+            
+            if (hitCollider.GetComponentInParent<PickUpManager>() != null && 
+                hitCollider.GetComponentInParent<PickUpManager>().gameObject.CompareTag("Player"))
             {
-                if (hitcollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
+                // Check if the player's shield is not active
+                if (hitCollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
                 {
-                    //hitcollider.transform.root.GetComponent<Rigidbody>().AddForce(hitcollider.transform.root.up  * 100000f, ForceMode.Force);
-                    hitcollider.GetComponentInParent<PickUpManager>().GetComponent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
-
+                    // Apply explosion force to the player
+                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
                 }
-                
             }
            
         }
