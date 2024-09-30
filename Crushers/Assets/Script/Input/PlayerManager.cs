@@ -8,14 +8,16 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using Unity.VisualScripting;
 using System;
+using Random = UnityEngine.Random;
 
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
-    [SerializeField] private int leaderboardScene; 
+    // build index of leaderboard scene
+    private int leaderboardScene = 4; 
     private List<PlayerConfiguration> playerConfigs; 
     //private List<PlayerInput> players = new List<PlayerInput>();
-    [SerializeField] private List<Transform> startingPoints; 
+    [SerializeField] private Transform[] startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
 
     // Events
@@ -42,6 +44,7 @@ public class PlayerManager : MonoBehaviour
         SetupMenuController.playerReady += ReadyPlayer; 
         LevelManager.LevelEnded += LoadLeaderboard;
         LevelManager.LevelStarted += EnablePlayerControls;
+        SceneManager.sceneLoaded += OnLevelLoaded;
 
     }
 
@@ -50,7 +53,9 @@ public class PlayerManager : MonoBehaviour
         SetupMenuController.vehicleSelected -= SetPlayerVehicle; 
         SetupMenuController.playerReady -= ReadyPlayer;   
         LevelManager.LevelEnded -= LoadLeaderboard;
-        LevelManager.LevelStarted -= EnablePlayerControls;      
+        LevelManager.LevelStarted -= EnablePlayerControls;    
+        SceneManager.sceneLoaded -= OnLevelLoaded;
+
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
@@ -72,9 +77,23 @@ public class PlayerManager : MonoBehaviour
 
         if( playerConfigs.All(p => p.isReady == true))
         {
-            // start level
-            InitialisePlayers();
+            // load selected or random level
+            SceneManager.LoadScene(Random.Range(2,3));
+            
         }   
+    }
+
+
+    public void OnLevelLoaded(Scene scene, LoadSceneMode mode){
+        // if scene index is an arena scene
+        if(scene.buildIndex == 2 || scene.buildIndex == 3){
+            // Find player spawns in this scene 
+            startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
+   
+            // initialise players with vehicles
+            InitialisePlayers();
+        }
+
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
@@ -97,20 +116,16 @@ public class PlayerManager : MonoBehaviour
     }
 
     // may alter this to be more generic later
+    // run at the start of every arena level 
     private void InitialisePlayers(){
-
-        int testscore = 0; 
-        Debug.Log("Level initialising...");
+        Debug.Log("Players initialising...");
         // disable joining once level loads / opens
         GetComponent<PlayerInputManager>().DisableJoining();
 
         foreach(PlayerConfiguration playerConfig in playerConfigs){
-            // generic setup
             // should only run on join level
             SetupPlayer(playerConfig);
 
-            playerConfig.score = testscore;
-            testscore += 5;
             // add vehicle for each player
             // need to implement a check for if this is an arena level
             AddVehicle(playerConfig);
@@ -176,9 +191,10 @@ public class PlayerManager : MonoBehaviour
         // destroy setup menu
         // later setup menu may be in a separate level
         Destroy(pi.Input.gameObject.GetComponentInChildren<Canvas>().gameObject);
+        
 
         // spawn vehicle from player config as child of player config
-        pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex].position, startingPoints[pi.playerIndex].rotation, pi.Input.gameObject.transform);
+        pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex + 1].position, startingPoints[pi.playerIndex + 1].rotation, pi.Input.gameObject.transform);
         // get UI controller for each vehicle
         pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
 
