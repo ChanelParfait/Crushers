@@ -250,7 +250,7 @@ PrefabInstance:
     - target: {fileID: 2704521858122530633, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_TagString
-      value: Fragile
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2769992505592573758, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -450,6 +450,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.934
       objectReference: {fileID: 0}
+    - target: {fileID: 6743043350261643257, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743043350261643257, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6746124027010312172, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_FollowOffset.y
@@ -589,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 7606835715646217555, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Size.y
-      value: 2.4369597
+      value: 3.3197408
       objectReference: {fileID: 0}
     - target: {fileID: 7606835715646217555, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -604,7 +614,7 @@ PrefabInstance:
     - target: {fileID: 7606835715646217555, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Center.y
-      value: -0.8538346
+      value: -0.412447
       objectReference: {fileID: 0}
     - target: {fileID: 7606835715646217555, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -651,6 +661,16 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 7798222552577975981, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798222552577975981, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8020164975279496113, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -696,7 +716,8 @@ PrefabInstance:
       propertyPath: field of view
       value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7798222552577975981, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

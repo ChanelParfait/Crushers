@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -123,7 +122,7 @@ public class PickUpManager : MonoBehaviour
         // spawn in a shield object
         if(!shield){
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
-            //shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
+            shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
         }
         
 

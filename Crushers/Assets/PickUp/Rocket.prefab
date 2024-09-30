@@ -54,7 +54,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8807915258341636007
 MonoBehaviour:
@@ -68,8 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f42549f7dc630469f988fce651f3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Speed: 1000
+  _Speed: 3000
   FiredBy: {fileID: 0}
+  ExplosionVFX: {fileID: 8151073103637540511, guid: b71a59d9199ad244195c26cd25993954,
+    type: 3}
 --- !u!54 &1523102095568285515
 Rigidbody:
   m_ObjectHideFlags: 0

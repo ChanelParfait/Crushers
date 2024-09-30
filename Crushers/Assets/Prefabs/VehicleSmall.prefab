@@ -180,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 2704521858122530633, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_TagString
-      value: Fragile
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2769992505592573758, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}

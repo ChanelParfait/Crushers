@@ -26,7 +26,7 @@ public class ImpactController : MonoBehaviour
             {
                 hitTimer = 0f;
                 gotHit = false;
-                Debug.Log("Got hit reset.");
+                //Debug.Log("Got hit reset.");
             }
         }
     }
@@ -47,10 +47,12 @@ public class ImpactController : MonoBehaviour
             hitForce = Mathf.Max(hitForce, 0f);
 
             float hitAmplitude = hitForce * 0.002f;
-            Debug.Log("hitForce: " + hitForce);
+            //Debug.Log("hitForce: " + hitForce);
             CameraController.Instance.ShakeCamera(hitAmplitude, 1f, 1f);
 
-            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+            Rigidbody rb = collision.gameObject.GetComponentInParent<Rigidbody>();
+            //Debug.Log("RB: " + rb.gameObject);
+
             if (rb != null)
             {
                 Vector3 forceDirection = transform.forward;
@@ -60,7 +62,7 @@ public class ImpactController : MonoBehaviour
                 newCenterOfMass.y = Mathf.Max(newCenterOfMass.y, 0f); 
 
                 rb.centerOfMass = newCenterOfMass;
-                Debug.Log("New center of mass on Y: " + newCenterOfMass);
+                //Debug.Log("New center of mass on Y: " + newCenterOfMass);
                 rb.AddForce(forceDirection * hitForce, ForceMode.Impulse);
             }
         }
