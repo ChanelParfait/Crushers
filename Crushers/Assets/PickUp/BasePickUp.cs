@@ -22,8 +22,6 @@ public class BasePickUp : MonoBehaviour
             other.gameObject.transform.root.GetComponentInChildren<PickUpManager>().SetPickup(SelectedPU);
             Destroy(this.gameObject);
         }
-        
-        
     }*/
     
     
