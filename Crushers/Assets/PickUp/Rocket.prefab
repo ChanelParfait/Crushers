@@ -70,6 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Speed: 3000
   FiredBy: {fileID: 0}
+  ExplosionVFX: {fileID: 8151073103637540511, guid: b71a59d9199ad244195c26cd25993954,
+    type: 3}
 --- !u!54 &1523102095568285515
 Rigidbody:
   m_ObjectHideFlags: 0

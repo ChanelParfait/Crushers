@@ -8,6 +8,7 @@ public class Rocket : MonoBehaviour
 {
     [SerializeField] private float _Speed = 1000f;
     [SerializeField] private GameObject FiredBy;
+    [SerializeField] private GameObject ExplosionVFX;
 
     
     private void Start()
@@ -27,6 +28,12 @@ public class Rocket : MonoBehaviour
         ExplosionDamage(this.transform.position, 10f);
         Destroy(this.gameObject);
             
+    }
+
+    private void OnDestroy()
+    {
+        
+        
     }
 
     private void ExplosionDamage(Vector3 postion, float radius)
@@ -58,7 +65,11 @@ public class Rocket : MonoBehaviour
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
                 }
             }
-           
+            if (ExplosionVFX)
+            {
+                GameObject Explosion =  Instantiate(ExplosionVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                Explosion.GetComponent<Explosion>().SetTimeBeforeDestruction(1);
+            }
         }
     }
 }
