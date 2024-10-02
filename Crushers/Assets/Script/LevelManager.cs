@@ -12,11 +12,11 @@ public class LevelManager : MonoBehaviour
     private float prevTime = 0; 
     private float totalTime = 0; 
     private bool startCountdownEnded = false; 
-    private bool levelLoaded = false; 
+    private bool ArenalevelLoaded = false; 
     // event when players should gain control 
-    public static UnityAction LevelStarted;
+    public static UnityAction ArenaLevelStarted;
 
-    public static UnityAction LevelEnded;
+    public static UnityAction ArenaLevelEnded;
 
     public static UnityAction<int> startTimeChanged;
     public static UnityAction<int> levelTimeChanged;
@@ -25,15 +25,15 @@ public class LevelManager : MonoBehaviour
 
        void OnEnable()
     {
-        PlayerManager.LevelLoaded +=  LoadLevel;
-        PlayerManager.LevelLoaded +=  DisableSetupComponents;
+        PlayerManager.ArenaLevelLoaded +=  LoadLevel;
+        PlayerManager.ArenaLevelLoaded +=  DisableSetupComponents;
 
     }
 
     void OnDisable()
     {
-        PlayerManager.LevelLoaded -=  LoadLevel;
-        PlayerManager.LevelLoaded -=  DisableSetupComponents;
+        PlayerManager.ArenaLevelLoaded -=  LoadLevel;
+        PlayerManager.ArenaLevelLoaded -=  DisableSetupComponents;
 
     }
 
@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-        if(levelLoaded){
+        if(ArenalevelLoaded){
             totalTime += Time.deltaTime;
         }
 
@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
 
                 if(startCountdownTimer == 0){
                     startCountdownEnded = true;
-                    LevelStarted.Invoke();
+                    ArenaLevelStarted.Invoke();
                 }
             } 
             // if level has started, decriment round timer to 0 
@@ -77,9 +77,9 @@ public class LevelManager : MonoBehaviour
 
                 if(levelCountdownTimer == 0){
                     // invoke level ended event
-                    if(LevelEnded != null)
-                    levelLoaded = false;
-                    LevelEnded.Invoke();
+                    if(ArenaLevelEnded != null)
+                    ArenalevelLoaded = false;
+                    ArenaLevelEnded.Invoke();
                     AudioManager.Instance.PlayMainMusic();
                 }
             }
@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void LoadLevel(){
-        levelLoaded = true;
+        ArenalevelLoaded = true;
         AudioManager.Instance.PlayCrowdSounds();
     }
 

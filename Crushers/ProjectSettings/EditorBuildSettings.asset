@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5fae2a4095d04ba439507e1e3c8f1310
   - enabled: 1
+    path: Assets/Scenes/VehicleSelection.unity
+    guid: 91148206aa5240841a8ec26d706d8d4f
+  - enabled: 1
     path: Assets/Scenes/ArenaScene.unity
     guid: 2c5c037eb97a84edebc47fb90d63d135
   - enabled: 1

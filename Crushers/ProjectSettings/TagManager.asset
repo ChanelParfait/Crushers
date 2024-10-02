@@ -9,6 +9,7 @@ TagManager:
   - Fragile
   - JoinCanvas
   - Pickup
+  - Spawns
   layers:
   - Default
   - TransparentFX

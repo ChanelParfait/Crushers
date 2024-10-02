@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +15,10 @@ public class MainMenuController : MonoBehaviour
      [SerializeField] private GameObject levelSelectPnl; 
      [SerializeField] private Button level1Btn; 
      [SerializeField] private Button startBtn; 
+     private int VehicleMenuIndex = 1; 
+
+     public static UnityAction<int> levelSelected; 
+
 
 
     private bool inMainMenu = true; 
@@ -33,8 +39,13 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadLevel(int buildindex){
-        SceneManager.LoadScene(buildindex);
+    public void SelectLevel(int buildindex){
+        // inform the player manager of the level selection made
+        if(levelSelected != null){
+            levelSelected.Invoke(buildindex);
+        }
+        // load vehicle selection menu 
+        SceneManager.LoadScene(VehicleMenuIndex);
     }
 
 }

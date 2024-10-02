@@ -17,8 +17,6 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private PrometeoCarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
     [SerializeField] private CameraInputHandler freelookCam; 
-    [SerializeField] private int playerIndex;
-
 
     private void Awake(){
         // initialise controls and enable them 
@@ -43,18 +41,6 @@ public class PlayerInputHandler : MonoBehaviour
         carController = GetComponent<PrometeoCarController>();
         pickUpManager = GetComponent<PickUpManager>();
         freelookCam = GetComponentInChildren<CameraInputHandler>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    // set player index for input handler
-    // this should match the player input index
-    // for debugging
-    public void SetPlayerIndex(int index){
-        playerIndex = index; 
     }
 
     public void SetCarController(PrometeoCarController cc)
