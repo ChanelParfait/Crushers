@@ -103,15 +103,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if(carController)
         {
-            if(turn.x < 0){
-                carController.TurnLeft();
-            }
-            else if(turn.x > 0){
-                carController.TurnRight();
-            }   
-            else if(turn.x == 0){
-                carController.isTurning = false;
-            }
+            carController.SetSteeringAngle(turn);
         }
         
     }

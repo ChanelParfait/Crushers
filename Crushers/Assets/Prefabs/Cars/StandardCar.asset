@@ -18,13 +18,10 @@ MonoBehaviour:
   maxReverseSpeed: 90
   accelerationMultiplier: 10
   maxSteeringAngle: 50
-  steeringSpeed: 0.75
+  steeringSpeed: 0.5
   brakeForce: 800
   decelerationMultiplier: 1.5
   handbrakeDriftMultiplier: 4
   bodyMassCenter: {x: 0, y: 0, z: 0}
   bodyMass: 600
   forceMagnitude: 1500
-  useSounds: 1
-  carEngineSound: {fileID: 0}
-  tireScreechSound: {fileID: 0}

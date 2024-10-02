@@ -367,7 +367,6 @@ MonoBehaviour:
   carController: {fileID: 0}
   pickUpManager: {fileID: 0}
   freelookCam: {fileID: 0}
-  playerIndex: 0
 --- !u!1 &2992308494568267930
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,8 +394,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.067837544, y: 0.8137918, z: -0.09702734, w: 0.5689699}
-  m_LocalPosition: {x: 47.576096, y: 14.125244, z: 11.29203}
+  m_LocalRotation: {x: 0.08835814, y: -0.6604124, z: 0.07869325, w: 0.74152255}
+  m_LocalPosition: {x: -34.949677, y: 180.82753, z: 36.035538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
