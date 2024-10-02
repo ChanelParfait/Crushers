@@ -94,6 +94,9 @@ public class PlayerInputHandler : MonoBehaviour
         if(carController)
         {
             carController.isReversing = context.ReadValueAsButton();
+            /*if(context.canceled){
+                InvokeRepeating("carController.DecelerateCar", 1,1);
+            }*/
         }
     }
 

@@ -242,8 +242,7 @@ public class PrometeoCarController : MonoBehaviour
       In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
       A (turn left), D (turn right) or Space bar (handbrake).
       */
-      // update wheels
-      UpdateWheels();
+
       
         if(isMovingForward){
           CancelInvoke("DecelerateCar");
@@ -267,11 +266,12 @@ public class PrometeoCarController : MonoBehaviour
         if(!isReversing && !isMovingForward){
           ThrottleOff();
         }
-        /*if(!isReversing && !isMovingForward && !isBraking && !isDecelerating){
+        if(!isReversing && !isMovingForward && !isBraking && !isDecelerating){
           InvokeRepeating("DecelerateCar", 0f, 0.1f);
           
-        }*/
-
+        }
+      // update wheels
+      UpdateWheels();
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
