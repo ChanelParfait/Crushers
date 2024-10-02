@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 public class SetupMenuController : MonoBehaviour
@@ -22,10 +23,16 @@ public static UnityAction<int> playerReady;
      private bool inputEnabled;
 
 
-    public void SetPlayerIndex(int pi)
+/*    public void SetPlayerIndex(int pi)
     {
         playerIndex = pi;
-        titleTxt.SetText("Player" + (pi + 1).ToString());
+        
+    }*/
+
+    void Start(){
+        // find Player Index
+        playerIndex = GetComponentInParent<PlayerInput>().playerIndex; 
+        titleTxt.SetText("Player" + (playerIndex + 1).ToString());
         ignoreInputTime = Time.time + ignoreInputTime;
     }
 
@@ -65,6 +72,4 @@ public static UnityAction<int> playerReady;
 
     }
 
-
-    // create function to update canvas scale
 }
