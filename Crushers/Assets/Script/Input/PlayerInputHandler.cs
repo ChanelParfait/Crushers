@@ -25,13 +25,6 @@ public class PlayerInputHandler : MonoBehaviour
         player.Enable();
 
     }
-    private void OnEnable(){
-
-    }
-    private void OnDisable(){
-        
-    } 
-
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +57,7 @@ public class PlayerInputHandler : MonoBehaviour
         freelookCam = cip; 
     }
 
+    // Input Events // 
     public void OnReloadLevel(CallbackContext context)
     {
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -72,16 +66,14 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnRespawn(CallbackContext context)
     {
        if(gameObject.GetComponentInChildren<CarRespawn>()){
-            gameObject.GetComponentInChildren<CarRespawn>().Respawn();
+            if(context.performed){
+                gameObject.GetComponentInChildren<CarRespawn>().Respawn();
+            }
        }
-       
-       
     }
 
     public void OnForward(CallbackContext context)
     {
-        //Debug.Log("Moving Forward:  " + playerIndex);
-
         if(carController)  
         { 
             carController.isMovingForward = context.ReadValueAsButton();
@@ -90,13 +82,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnReverse(CallbackContext context)
     {
-        //Debug.Log("Reversing");
         if(carController)
         {
             carController.isReversing = context.ReadValueAsButton();
-            /*if(context.canceled){
-                InvokeRepeating("carController.DecelerateCar", 1,1);
-            }*/
         }
     }
 
@@ -116,7 +104,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if(carController){
             carController.isBraking =  context.ReadValueAsButton();
-            if(!context.action.IsInProgress()){
+            if(context.canceled){
                 //Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
@@ -126,12 +114,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnUseItem(CallbackContext context)
     {
-
         if(pickUpManager){
-            pickUpManager.useItem = context.ReadValueAsButton();
-        }
-
-        
+            if(context.performed){
+                pickUpManager.useItem = context.ReadValueAsButton();
+            }
+        }        
     }
 
     public void OnLook(CallbackContext context)
