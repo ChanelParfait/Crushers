@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class PickUpManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] public Shield State;
 
     [SerializeField] private float ShieldTimer = 10;
+
+    [SerializeField] private float KamiKazeTimer = 10;
     public bool useItem = false;
 
 
@@ -55,6 +58,12 @@ public class PickUpManager : MonoBehaviour
                     break;
                 case PickupType.Speed:
                     UseSpeed();
+                    break;
+                case PickupType.KamiKaze:
+                    UseKamiKaze();
+                    break;
+                case PickupType.Stun:
+                    UseStun();
                     break;
             }
         }
@@ -141,6 +150,49 @@ public class PickUpManager : MonoBehaviour
         State = Shield.IsOff;
         Destroy(shield);
         shield = null;
+    }
+
+    private void UseKamiKaze()
+    {
+        
+        StartCoroutine(KamiKazeExplosionTimer(KamiKazeTimer));
+        Pickup = PickupType.None;
+
+    }
+
+    IEnumerator KamiKazeExplosionTimer(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 30f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponentInParent<PickUpManager>() != null && 
+                hitCollider.GetComponentInParent<PickUpManager>().gameObject.CompareTag("Player"))
+            {
+                // Check if the player's shield is not active
+                if (hitCollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
+                {
+                    // Apply explosion force to the player
+                    
+                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
+                    
+                }
+            }
+            /*
+            if (ExplosionVFX)
+            {
+                GameObject Explosion =  Instantiate(ExplosionVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
+                Explosion.GetComponent<Explosion>().SetTimeBeforeDestruction(1);
+            }
+            */
+        }
+
+        
+    }
+
+    private void UseStun()
+    {
+        
     }
 
     private void UpdateSprite(PickupType pickUpIndex){
