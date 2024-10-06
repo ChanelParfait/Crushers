@@ -20,6 +20,8 @@ public class CarStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI damageText;
     private float absoluteCarSpeed;
 
+    private float hitMultiplier;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,7 @@ public class CarStats : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         centreMass = rb.centerOfMass;
         carController = GetComponent<PrometeoCarController>();
+        hitMultiplier = 0.3f;
                 
 
     }
@@ -71,6 +74,12 @@ public class CarStats : MonoBehaviour
    
     public void increaseDamage(float newDamage){
         damageTaken = damageTaken + newDamage;
+        //can respawn if flipped after period of time
+    }
+    public void increaseDamageFromSpeed(float speed){
+
+        damageTaken = damageTaken + Mathf.Round(speed * hitMultiplier);
+        addCentreOfMass(Mathf.Round(speed * hitMultiplier));
         //can respawn if flipped after period of time
     }
     public float getDamage(){

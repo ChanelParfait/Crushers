@@ -19,24 +19,21 @@ public class CarBumperCollision : MonoBehaviour
            
             if (collision.gameObject.CompareTag("Player"))
             {
-                // Set the last collided player in the car's stats
-                carStats.setLastCollided(collision.gameObject);
-                GameObject lastCollidedPlayer = carStats.getLastCollided();
 
-                Debug.Log("Collided with " + lastCollidedPlayer.name);
+                CarStats hitCarStats = collision.gameObject.GetComponent<CarStats>();
 
-                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponentInParent<CarStats>();
                 
-                if (collidedPlayerStats != null)
+                if (hitCarStats != null)
                 {
-                    float newDamage = Mathf.Round(carStats.getSpeed() / 3);
-                    collidedPlayerStats.increaseDamage(newDamage);
-                    collidedPlayerStats.addCentreOfMass(newDamage);
-                    Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
+                    // Set this car (the one doing the hitting) as the last collided car in the hit car's stats
+                    hitCarStats.setLastCollided(carStats.gameObject);
+
+                    hitCarStats.increaseDamageFromSpeed(carStats.getSpeed());
+                    Debug.Log("Collided vehicle damage: " + hitCarStats.getDamage());
+                    
+                    StartCoroutine(ClearLastCollidedPlayerAfterDelay(hitCarStats, 5f));
                 }
 
-                // Start coroutine to clear the last collided player after 5 seconds
-                StartCoroutine(ClearLastCollidedPlayerAfterDelay(5f));
             }
             else
             {
@@ -46,10 +43,10 @@ public class CarBumperCollision : MonoBehaviour
     }
 
     
-    private IEnumerator ClearLastCollidedPlayerAfterDelay(float delay)
+    private IEnumerator ClearLastCollidedPlayerAfterDelay(CarStats hitCarStats, float delay)
     {
         yield return new WaitForSeconds(delay);
-        carStats.setLastCollided(null);  
+        hitCarStats.setLastCollided(null);  
         Debug.Log("Cleared last collided player");
     }
 }
