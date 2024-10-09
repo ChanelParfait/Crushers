@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
 
     // Game / Scene Management
     [SerializeField] private int selectedMapIndex; 
-    private int leaderboardScene = 4; 
+    private int leaderboardScene = 5; 
 
     // Events
     public static UnityAction ArenaLevelLoaded; 
@@ -110,7 +110,7 @@ public class PlayerManager : MonoBehaviour
 
         }
         // if scene index is an arena scene
-        if(scene.buildIndex == 2 || scene.buildIndex == 3){
+        if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
             // initialise players with vehicles
             SetupArena();
         }

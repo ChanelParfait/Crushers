@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Arena_Train.unity
     guid: 6f4cf5f5f9df04faa8029461516d54fb
   - enabled: 1
+    path: Assets/Scenes/Arena_Space.unity
+    guid: b7566ae50eb0e4a239026939888daae2
+  - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 2ea4e47d3ed6bd34fbc8228e42736bc6
   m_configObjects:
