@@ -17,8 +17,6 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private PrometeoCarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
     [SerializeField] private CameraInputHandler freelookCam; 
-    [SerializeField] private int playerIndex;
-
 
     private void Awake(){
         // initialise controls and enable them 
@@ -27,13 +25,6 @@ public class PlayerInputHandler : MonoBehaviour
         player.Enable();
 
     }
-    private void OnEnable(){
-
-    }
-    private void OnDisable(){
-        
-    } 
-
 
     // Start is called before the first frame update
     void Start()
@@ -43,18 +34,6 @@ public class PlayerInputHandler : MonoBehaviour
         carController = GetComponent<PrometeoCarController>();
         pickUpManager = GetComponent<PickUpManager>();
         freelookCam = GetComponentInChildren<CameraInputHandler>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    // set player index for input handler
-    // this should match the player input index
-    // for debugging
-    public void SetPlayerIndex(int index){
-        playerIndex = index; 
     }
 
     public void SetCarController(PrometeoCarController cc)
@@ -78,6 +57,7 @@ public class PlayerInputHandler : MonoBehaviour
         freelookCam = cip; 
     }
 
+    // Input Events // 
     public void OnReloadLevel(CallbackContext context)
     {
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -86,16 +66,14 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnRespawn(CallbackContext context)
     {
        if(gameObject.GetComponentInChildren<CarRespawn>()){
-            gameObject.GetComponentInChildren<CarRespawn>().Respawn();
+            if(context.performed){
+                gameObject.GetComponentInChildren<CarRespawn>().Respawn();
+            }
        }
-       
-       
     }
 
     public void OnForward(CallbackContext context)
     {
-        //Debug.Log("Moving Forward:  " + playerIndex);
-
         if(carController)  
         { 
             carController.isMovingForward = context.ReadValueAsButton();
@@ -104,7 +82,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnReverse(CallbackContext context)
     {
-        //Debug.Log("Reversing");
         if(carController)
         {
             carController.isReversing = context.ReadValueAsButton();
@@ -117,15 +94,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if(carController)
         {
-            if(turn.x < 0){
-                carController.TurnLeft();
-            }
-            else if(turn.x > 0){
-                carController.TurnRight();
-            }   
-            else if(turn.x == 0){
-                carController.isTurning = false;
-            }
+            carController.SetSteeringAngle(turn);
         }
         
     }
@@ -135,7 +104,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if(carController){
             carController.isBraking =  context.ReadValueAsButton();
-            if(!context.action.IsInProgress()){
+            if(context.canceled){
                 //Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
@@ -145,12 +114,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnUseItem(CallbackContext context)
     {
-
         if(pickUpManager){
-            pickUpManager.useItem = context.ReadValueAsButton();
-        }
-
-        
+            if(context.performed){
+                pickUpManager.useItem = context.ReadValueAsButton();
+            }
+        }        
     }
 
     public void OnLook(CallbackContext context)
