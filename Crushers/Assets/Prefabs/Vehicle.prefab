@@ -3305,7 +3305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  damage: 0
+  damageTaken: 0
   speed: 0
   centreMass: {x: 0, y: 0, z: 0}
   lastCollidedPlayer: {fileID: 0}
@@ -3367,9 +3367,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldGO: {fileID: 404739242719888156, guid: ae5452c227c0a144ba2cb8581c5f80d8, type: 3}
   Rocket: {fileID: 3768340816340407569, guid: f5a344c1db949ce479073efacbe3f1e2, type: 3}
+  Stun: {fileID: 8666847585282172510, guid: 150fe28a49a55c1439573e298a495e49, type: 3}
   Pickup: 0
   State: 0
   ShieldTimer: 10
+  KamiKazeTimer: 10
   useItem: 0
   pickUpImage: {fileID: 5369755218889901771}
   pickupSprites:

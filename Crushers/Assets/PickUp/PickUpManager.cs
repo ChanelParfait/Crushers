@@ -14,6 +14,8 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] private GameObject shieldGO; 
     [SerializeField] private GameObject Rocket;
 
+    [SerializeField] private GameObject Stun;
+
     [SerializeField] private PickupType Pickup;
 
     [SerializeField] public Shield State;
@@ -192,7 +194,28 @@ public class PickUpManager : MonoBehaviour
 
     private void UseStun()
     {
-        
+        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
+        newLocation.y = 0f;
+        GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f, transform.rotation);
+        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject); 
+        StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
+            
+        Collider rocketCollider = StunGm.GetComponent<Collider>();
+
+       
+        Collider spawnerCollider = this.GetComponent<Collider>();
+
+        if (spawnerCollider != null && rocketCollider != null)
+        {
+            Physics.IgnoreCollision(rocketCollider, spawnerCollider);
+        }
+            
+        Collider[] spawnerChildrenColliders = this.GetComponentsInChildren<Collider>();
+        foreach (var childCollider in spawnerChildrenColliders)
+        {
+            Physics.IgnoreCollision(rocketCollider, childCollider);
+        }
+        Pickup = PickupType.None; 
     }
 
     private void UpdateSprite(PickupType pickUpIndex){
