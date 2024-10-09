@@ -22,9 +22,6 @@ MonoBehaviour:
   brakeForce: 500
   decelerationMultiplier: 2
   handbrakeDriftMultiplier: 5
-  bodyMassCenter: {x: 0, y: 0, z: 0}
   bodyMass: 700
+  gravityMultiplier: 200
   forceMagnitude: 3000
-  useSounds: 1
-  carEngineSound: {fileID: 0}
-  tireScreechSound: {fileID: 0}
