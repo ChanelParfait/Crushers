@@ -36,6 +36,7 @@ public class Car : ScriptableObject
     [SerializeField] private int bodyMass;
     [Range(200,1000)]
     [SerializeField] private int gravityMultiplier;
+    [Range(1000, 3000)]
     [SerializeField] private float forceMagnitude =  50f;
 
     

@@ -23,5 +23,5 @@ MonoBehaviour:
   decelerationMultiplier: 7.5
   handbrakeDriftMultiplier: 5
   bodyMass: 500
-  gravityMultiplier: 400
+  gravityMultiplier: 800
   forceMagnitude: 1200

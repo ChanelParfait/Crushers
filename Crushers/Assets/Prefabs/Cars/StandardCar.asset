@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: StandardCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 8144304561226117244, guid: 4ae40da7cbe4c904f8ee212af3b0e11e,
+  carPrefab: {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2,
     type: 3}
   maxSpeed: 150
   maxReverseSpeed: 90
@@ -23,5 +23,5 @@ MonoBehaviour:
   decelerationMultiplier: 1.5
   handbrakeDriftMultiplier: 4
   bodyMass: 600
-  gravityMultiplier: 1
+  gravityMultiplier: 200
   forceMagnitude: 1500
