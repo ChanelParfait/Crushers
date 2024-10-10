@@ -62,7 +62,7 @@ public class Rocket : MonoBehaviour
                 if (hitCollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
                 {
                     // Apply explosion force to the player
-                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
+                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position , radius, 10, ForceMode.Force);
                 }
             }
             if (ExplosionVFX)
