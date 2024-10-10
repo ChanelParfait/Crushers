@@ -3271,6 +3271,8 @@ MonoBehaviour:
   isReversing: 0
   isBraking: 0
   isTurning: 0
+  steeringAngle: 0
+  isDecelerating: 0
   frontLeftMesh: {fileID: 1990901242162720777}
   frontLeftCollider: {fileID: 3554988893762316569}
   frontRightMesh: {fileID: 4788973135344169438}
@@ -3378,6 +3380,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c0654ab3113951548a2b2a63c5be311e, type: 3}
   - {fileID: 21300000, guid: 66deea0729b54034eb5e4a6eba3c0e0c, type: 3}
   - {fileID: 21300000, guid: bdf049843ecff4f4c8f6a294eb95a5ca, type: 3}
+  - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
+  - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
   - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
 --- !u!1 &9114952474528041427
 GameObject:
