@@ -336,7 +336,7 @@ public class PrometeoCarController : MonoBehaviour
     //
 
     public void SetSteeringAngle(Vector2 direction){
-      Debug.Log("Wheel Direction: " + direction);
+      //Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * car.GetMaxSteeringAngle();
     }

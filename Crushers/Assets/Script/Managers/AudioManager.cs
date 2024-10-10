@@ -15,6 +15,19 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip crowdSounds;
     [SerializeField][Range(0f, 1f)] float crowdSoundsVolume = 1.0f;
 
+    
+    void OnEnable()
+    {
+        PlayerManager.ArenaLevelLoaded +=  SetMusic;
+        //PlayerManager.ArenaLevelLoaded +=  DisableSetupComponents;
+
+    }
+
+    void OnDisable()
+    {
+        PlayerManager.ArenaLevelLoaded -=  SetMusic;
+        //PlayerManager.ArenaLevelLoaded -=  DisableSetupComponents;
+    }
 
     private void Awake()
     {
@@ -22,41 +35,30 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); 
+            PlayClip(mainMusic, mainMusicVolume);
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    public void PlayClip(AudioClip clip, float volume)
+
+    private void SetMusic(bool isArena){
+        if(isArena){
+            PlayClip(crowdSounds, crowdSoundsVolume);
+        } else {
+            PlayClip(mainMusic, mainMusicVolume);
+        }
+    }
+    private void PlayClip(AudioClip clip, float volume)
     {
         if (clip != null)
         {
+            audioSource.Stop();
             Vector3 camerPos = Camera.main.transform.position;
             AudioSource.PlayClipAtPoint(clip, camerPos, volume);
         }
 
     }
-
-    public void StopCurrentClip()
-    {
-        if (audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
-    }
-
-    public void PlayMainMusic()
-    {
-        StopCurrentClip(); 
-        audioSource.PlayOneShot(mainMusic, mainMusicVolume);
-    }
-
-    public void PlayCrowdSounds()
-    {
-        StopCurrentClip(); 
-        audioSource.PlayOneShot(crowdSounds, crowdSoundsVolume);
-    }
-
 
 }

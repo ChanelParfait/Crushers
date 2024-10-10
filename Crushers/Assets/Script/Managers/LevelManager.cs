@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     private float prevTime = 0; 
     private float totalTime = 0; 
     private bool startCountdownEnded = false; 
-    private bool ArenalevelLoaded = false; 
+    private bool isTimerRunning = false; 
     // event when players should gain control 
     public static UnityAction ArenaLevelStarted;
 
@@ -23,18 +23,17 @@ public class LevelManager : MonoBehaviour
      
 
 
-       void OnEnable()
+    void OnEnable()
     {
         PlayerManager.ArenaLevelLoaded +=  LoadLevel;
-        PlayerManager.ArenaLevelLoaded +=  DisableSetupComponents;
+        //PlayerManager.ArenaLevelLoaded +=  DisableSetupComponents;
 
     }
 
     void OnDisable()
     {
         PlayerManager.ArenaLevelLoaded -=  LoadLevel;
-        PlayerManager.ArenaLevelLoaded -=  DisableSetupComponents;
-
+        //PlayerManager.ArenaLevelLoaded -=  DisableSetupComponents;
     }
 
     // Start is called before the first frame update
@@ -43,13 +42,12 @@ public class LevelManager : MonoBehaviour
         
         levelCountdownTimer = levelDuration;
         startCountdownTimer = 3;
-        AudioManager.Instance.PlayMainMusic();
     }
 
     // Update is called once per frame
     void Update()
     {     
-        if(ArenalevelLoaded){
+        if(isTimerRunning){
             totalTime += Time.deltaTime;
         }
 
@@ -77,10 +75,9 @@ public class LevelManager : MonoBehaviour
 
                 if(levelCountdownTimer == 0){
                     // invoke level ended event
-                    if(ArenaLevelEnded != null)
-                    ArenalevelLoaded = false;
-                    ArenaLevelEnded.Invoke();
-                    AudioManager.Instance.PlayMainMusic();
+                    isTimerRunning = false;
+                    ArenaLevelEnded?.Invoke();
+                    
                 }
             }
             prevTime = totalTime;
@@ -88,18 +85,17 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void LoadLevel(){
-        ArenalevelLoaded = true;
-        AudioManager.Instance.PlayCrowdSounds();
+    private void LoadLevel(bool isArena){
+
+        isTimerRunning = isArena;
     }
 
-    private void DisableSetupComponents(){
-        // get main camera and join canvas and disable objects
-        //GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        //if(camera){ camera.SetActive(false); }
-        GameObject canvas = GameObject.FindGameObjectWithTag("JoinCanvas");
-        if(canvas){ canvas.SetActive(false); }
-
+    private void DisableSetupComponents(bool isArena){
+        // disable join canvas 
+        if(isArena){
+            GameObject canvas = GameObject.FindGameObjectWithTag("JoinCanvas");
+            if(canvas){ canvas.SetActive(false); }
+        }
     }
 
     
