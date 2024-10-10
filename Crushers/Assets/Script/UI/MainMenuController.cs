@@ -18,9 +18,6 @@ public class MainMenuController : MonoBehaviour
      private int VehicleMenuIndex = 1; 
 
      public static UnityAction<int> levelSelected; 
-
-
-
     private bool inMainMenu = true; 
 
     public void SwitchMenu(){
@@ -33,6 +30,12 @@ public class MainMenuController : MonoBehaviour
             startBtn.Select();
 
         }
+    }
+
+    // Create a UI Controller base class with a generic click function 
+    public void Click(AudioSource buttonAudio){
+        //Debug.Log("Click: " + st);
+        buttonAudio.Play();
     }
 
     public void QuitGame(){
