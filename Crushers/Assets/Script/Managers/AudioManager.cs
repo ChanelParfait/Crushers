@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); 
+            audioSource = GetComponent<AudioSource>();
             PlayClip(mainMusic, mainMusicVolume);
         }
         else
@@ -55,8 +56,9 @@ public class AudioManager : MonoBehaviour
         if (clip != null)
         {
             audioSource.Stop();
-            Vector3 camerPos = Camera.main.transform.position;
-            AudioSource.PlayClipAtPoint(clip, camerPos, volume);
+            audioSource.clip = clip;
+            audioSource.volume = volume;
+            audioSource.Play();
         }
 
     }

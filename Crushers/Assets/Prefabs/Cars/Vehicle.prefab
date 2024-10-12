@@ -178,7 +178,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 77835a609bb781649b3c56907ffaf723, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3589,6 +3589,7 @@ MonoBehaviour:
   useSounds: 1
   carEngineSound: {fileID: 2198187969061989764}
   driftingSound: {fileID: 1280518691873253039}
+  vehiclePitch: 1
   carSpeed: 0
   isDrifting: 0
   isTractionLocked: 0

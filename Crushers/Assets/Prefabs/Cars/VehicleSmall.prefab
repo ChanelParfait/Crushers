@@ -79,6 +79,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0847ab2ada2cf484fbbfe8c70d39cb34,
         type: 2}
+    - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: vehiclePitch
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 627225158436590600, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Mesh
@@ -145,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Orbits.Array.data[1].m_Radius
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280518691873253039, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1336327370067440904, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
