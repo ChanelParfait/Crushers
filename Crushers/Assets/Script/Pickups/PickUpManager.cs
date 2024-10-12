@@ -96,7 +96,7 @@ public class PickUpManager : MonoBehaviour
     private void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
-        Debug.Log("Pickup: " + PickUpPowerup.ToString());
+        //Debug.Log("Pickup: " + PickUpPowerup.ToString());
         //Debug.Log("Gameobject" + gameObject.name);
         UpdateSprite(PickUpPowerup);
     }
@@ -105,7 +105,7 @@ public class PickUpManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
-            Debug.Log("Picked Up by" + other.gameObject.name);
+            //Debug.Log("Picked Up by" + other.gameObject.name);
             // Play item picked up SFX
             PlayAudio();
             SetPickup(other.GetComponent<BasePickUp>().GetPickupType());

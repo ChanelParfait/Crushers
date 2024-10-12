@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ImpactController : MonoBehaviour
 {
     private PrometeoCarController carController;
+    [SerializeField] private AudioSource crashAudio; 
+    [SerializeField] private List<AudioClip> crashSFX; 
+
 
     private float hitTimer = 5f;
     private bool gotHit = false;
@@ -33,6 +37,9 @@ public class ImpactController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // play impact audio
+        // alter this to adjust volume for speed
+        PlayAudio();
         Hit(collision);
         CheckForHit(collision);
     }
@@ -84,4 +91,25 @@ public class ImpactController : MonoBehaviour
     {
         return gotHit;
     }
+
+    private void PlayAudio(){
+        if(crashAudio){      
+            float hitForce = carController.CalculateHitForce();
+            // Map Hitforce to a value between 0 and 1
+            hitForce = Mathf.Max(hitForce, 0f);
+            
+            float volume = Utility.Map(hitForce, 0, 4000, 0, 1);
+            //Debug.Log("Hit: " + volume) ;
+
+            //hitForce = Mathf.Max(hitForce, 0f);  
+            crashAudio.clip  = crashSFX[Random.Range(0, crashSFX.Count - 1) ];
+            crashAudio.volume = volume;
+            crashAudio.Play();
+        }
+    }
+
+
+
+
+    
 }
