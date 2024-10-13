@@ -313,8 +313,8 @@ public class PrometeoCarController : MonoBehaviour
           if((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
             if(!driftingSound.isPlaying){
               // randomly pitch drift sound up and down
-              //driftingSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f); 
-              driftingSound.pitch = vehiclePitch; 
+              driftingSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f); 
+              //driftingSound.pitch = vehiclePitch; 
               
               driftingSound.Play();
             }
