@@ -6,9 +6,11 @@ using Random = UnityEngine.Random;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] private float _Speed = 1000f;
+    [SerializeField] private float _Speed = 100f;
     [SerializeField] private GameObject FiredBy;
     [SerializeField] private GameObject ExplosionVFX;
+
+    //private AudioSource audioSource;
 
     
     private void Start()

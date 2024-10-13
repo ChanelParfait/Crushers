@@ -16,7 +16,7 @@ public class CarBumperCollision : MonoBehaviour
         if (collision.contacts.Length > 0 && collision.contacts[0].thisCollider == bumperCollider)
         {
             Debug.Log("Collision");
-           
+           // Play a crash sound 
             if (collision.gameObject.CompareTag("Player"))
             {
                 // Set the last collided player in the car's stats

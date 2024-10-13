@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     private int leaderboardScene = 5; 
 
     // Events
-    public static UnityAction ArenaLevelLoaded; 
+    public static UnityAction<bool> ArenaLevelLoaded; 
     public static UnityAction firstPlayerJoined; 
 
     
@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
 
         if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         } else {
             instance = this;
         }
@@ -113,6 +113,8 @@ public class PlayerManager : MonoBehaviour
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
             // initialise players with vehicles
             SetupArena();
+        } else {
+            ArenaLevelLoaded?.Invoke(false);
         }
     }
 
@@ -148,7 +150,7 @@ public class PlayerManager : MonoBehaviour
         }
         // invoke arena level loaded event 
 
-        ArenaLevelLoaded?.Invoke();
+        ArenaLevelLoaded?.Invoke(true);
 
     }
 
