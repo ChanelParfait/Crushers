@@ -147,9 +147,8 @@ public class PlayerManager : MonoBehaviour
             AddVehicle(playerConfig);
         }
         // invoke arena level loaded event 
-        if(ArenaLevelLoaded != null){
-            ArenaLevelLoaded.Invoke();
-        }
+
+        ArenaLevelLoaded?.Invoke();
 
     }
 

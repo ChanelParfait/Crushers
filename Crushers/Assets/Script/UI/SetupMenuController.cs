@@ -44,8 +44,10 @@ public static UnityAction<int> playerReady;
         }
     }
 
-    public void Click(string st){
-        Debug.Log("Click: " + st);
+    // Create a UI Controller base class with a generic click function 
+    public void Click(AudioSource buttonAudio){
+        //Debug.Log("Click: " + st);
+        buttonAudio.Play();
     }
 
     public void SetVehicle(GameObject vehicle){
