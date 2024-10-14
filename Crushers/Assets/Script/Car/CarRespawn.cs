@@ -19,7 +19,6 @@ public class CarRespawn : MonoBehaviour
 
     //reference to the stats of each car
     public CarStats carStats;
-    private readonly float flipProtectionTime = 5f;
 
     void Start(){
         //save position and rotation for respawn

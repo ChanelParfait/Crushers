@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum VehicleType{
+    Standard,
+    Small,
+    Big,
+    Police,
+    Unknown
+}
+
 public class CarStats : MonoBehaviour
 {
     private Rigidbody rb;
@@ -25,6 +33,9 @@ public class CarStats : MonoBehaviour
 
     private float hitMultiplier;
 
+    private VehicleType vehicleType;
+    [SerializeField]private float baseDamageModifier;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +54,36 @@ public class CarStats : MonoBehaviour
     public float GetSpeed(){
         return carController.GetCarSpeed();
     }
+    public void SetVehicleType(VehicleType type){
+        vehicleType = type;
+        switch(vehicleType){
+
+            //these modifiers impact how much damage a car takes. Higher = less damage taken
+
+            //if speed = 100: 
+            case VehicleType.Standard:
+                //take 33 dmg
+                baseDamageModifier = 3f;
+                break;
+            case VehicleType.Small:
+                //take 50 dmg
+                baseDamageModifier = 2f;
+                break;
+            case VehicleType.Big:
+                //take 25 dmg
+                baseDamageModifier = 4f;
+                break;
+            case VehicleType.Police:
+                //take 28 dmg
+                baseDamageModifier = 3.5f;
+                break;
+            case VehicleType.Unknown:
+                baseDamageModifier = 3f;
+                Debug.LogWarning("Vehicle type unkown, setting as default");
+                break;
+        }
+    }
+
 
     public void AddCentreOfMass(float damage){
         float increase = damage / 100f;
@@ -82,8 +123,8 @@ public class CarStats : MonoBehaviour
     }
     public void IncreaseDamageFromSpeed(float speed){
 
-        damageTaken = damageTaken + Mathf.Round(speed * hitMultiplier);
-        AddCentreOfMass(Mathf.Round(speed * hitMultiplier));
+        damageTaken = damageTaken + Mathf.Round(speed / baseDamageModifier);
+        AddCentreOfMass(Mathf.Round(speed / baseDamageModifier));
         //can respawn if flipped after period of time
     }
     public float GetDamage(){
