@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,9 @@ public class ImpactController : MonoBehaviour
 {
     private PrometeoCarController carController;
     [SerializeField] private AudioSource crashAudio; 
-    [SerializeField] private List<AudioClip> crashSFX; 
+    [SerializeField] private List<AudioClip> crashSFX;
+
+    private CinemachineImpulseSource impulseSource;
 
 
     private float hitTimer = 5f;
@@ -17,6 +20,7 @@ public class ImpactController : MonoBehaviour
     private void Start()
     {
         carController = GetComponent<PrometeoCarController>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void Update()
@@ -53,9 +57,9 @@ public class ImpactController : MonoBehaviour
             float hitForce = carController.CalculateHitForce();
             hitForce = Mathf.Max(hitForce, 0f);
 
-            float hitAmplitude = hitForce * 0.002f;
-            //Debug.Log("hitForce: " + hitForce);
-            CameraController.Instance.ShakeCamera(hitAmplitude, 1f, 1f);
+            float hitAmplitude = hitForce * 0.0001f;
+            Debug.Log("hitForce: " + hitAmplitude);
+            CameraController.Instance.ShakeCamera(impulseSource, hitAmplitude);
 
             Rigidbody rb = collision.gameObject.GetComponentInParent<Rigidbody>();
             //Debug.Log("RB: " + rb.gameObject);
