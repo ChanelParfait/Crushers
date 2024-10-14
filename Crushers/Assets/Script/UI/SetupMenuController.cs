@@ -1,3 +1,4 @@
+using ShapesFX;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,13 +11,18 @@ public class SetupMenuController : MonoBehaviour
 {
 private int playerIndex;
 public static UnityAction<int, GameObject> vehicleSelected; 
-public static UnityAction<int> playerReady; 
+public static UnityAction<int> playerReady;
 
+     //List of vehicles to choose from 
+     [SerializeField] private GameObject[] vehicleList;
+     private int currentVehicleIndex = 0;
 
      [SerializeField] private TextMeshProUGUI titleTxt; 
      [SerializeField] private GameObject readyPnl; 
      [SerializeField] private GameObject menuPnl; 
-     [SerializeField] private Button readyBtn; 
+     [SerializeField] private Button readyBtn;
+     [SerializeField] private GameObject nextBtn;
+     [SerializeField] private GameObject prevBtn;
 
 
      private float ignoreInputTime = 1.5f;
@@ -34,6 +40,8 @@ public static UnityAction<int> playerReady;
         playerIndex = GetComponentInParent<PlayerInput>().playerIndex; 
         titleTxt.SetText("Player" + (playerIndex + 1).ToString());
         ignoreInputTime = Time.time + ignoreInputTime;
+
+        UpdateVehicleDisplay();
     }
 
     // Update is called once per frame
@@ -48,6 +56,30 @@ public static UnityAction<int> playerReady;
         Debug.Log("Click: " + st);
     }
 
+    //Show next vehicle
+    public void PreviousVehicle()
+    {
+        if (!inputEnabled) return;
+
+        vehicleList[currentVehicleIndex].SetActive(false);
+
+        currentVehicleIndex = (currentVehicleIndex - 1 + vehicleList.Length) % vehicleList.Length;
+
+        UpdateVehicleDisplay();
+    }
+
+    //Show previous vehicle
+    public void NextVehicle()
+    {
+        if (!inputEnabled) return;
+
+        vehicleList[currentVehicleIndex].SetActive(false);
+
+        currentVehicleIndex = (currentVehicleIndex + 1) % vehicleList.Length;
+
+        UpdateVehicleDisplay();
+    }
+
     public void SetVehicle(GameObject vehicle){
 
         if(!inputEnabled){ return; }
@@ -55,6 +87,9 @@ public static UnityAction<int> playerReady;
         readyPnl.SetActive(true);
         menuPnl.SetActive(false);
         readyBtn.Select();
+        nextBtn.SetActive(false);
+        prevBtn.SetActive(false);
+
 
         if(vehicleSelected != null){
             vehicleSelected.Invoke(playerIndex, vehicle); 
@@ -72,4 +107,10 @@ public static UnityAction<int> playerReady;
 
     }
 
+
+    private void UpdateVehicleDisplay()
+    {
+        // display selected vehicle
+        vehicleList[currentVehicleIndex].SetActive(true);
+    }
 }
