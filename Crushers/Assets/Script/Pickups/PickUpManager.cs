@@ -111,7 +111,7 @@ public class PickUpManager : MonoBehaviour
         Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f, transform.rotation);
-            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject); 
+            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
             RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
@@ -171,7 +171,7 @@ public class PickUpManager : MonoBehaviour
         if (!KamiKaze)
         {
             KamiKaze = Instantiate(KamiKazeGo, this.gameObject.transform.position + new Vector3(0, 7, 0.25f), transform.rotation, transform);
-            KamiKaze.GetComponent<KamiKazeBomb>().SetPlayer(this.gameObject);
+            KamiKaze.GetComponent<KamiKazeBomb>().SetPlayer(this.gameObject.GetComponent<CarStats>());
         }
         
         StartCoroutine(KamiKazeExplosionTimer(KamiKazeTimer));
@@ -214,7 +214,7 @@ public class PickUpManager : MonoBehaviour
         Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
         GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f, transform.rotation);
-        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject); 
+        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
         StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
         Collider rocketCollider = StunGm.GetComponent<Collider>();

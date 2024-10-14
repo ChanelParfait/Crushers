@@ -3369,7 +3369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldGO: {fileID: 404739242719888156, guid: ae5452c227c0a144ba2cb8581c5f80d8, type: 3}
   Rocket: {fileID: 3768340816340407569, guid: f5a344c1db949ce479073efacbe3f1e2, type: 3}
-  KamiKazeGo: {fileID: 3565015708328552895, guid: 1082571b8df9ec84fada2cce58e1e21f,
+  KamiKazeGo: {fileID: 3565015708328552895, guid: d4bf661927ec37c45932cdfbb1736c81,
     type: 3}
   Stun: {fileID: 8666847585282172510, guid: 150fe28a49a55c1439573e298a495e49, type: 3}
   Pickup: 0

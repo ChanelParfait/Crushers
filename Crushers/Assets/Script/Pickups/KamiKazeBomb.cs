@@ -7,8 +7,8 @@ public class KamiKazeBomb : MonoBehaviour
     [SerializeField] private float growShrinkDuration = 10f;   // Duration before the bomb explodes
     [SerializeField] private Vector3 minScale = new Vector3(1f, 1f, 1f);  // Minimum scale
     [SerializeField] private Vector3 maxScale = new Vector3(2f, 2f, 2f);  // Maximum scale
-    [SerializeField] private GameObject Player;
-    public void SetPlayer(GameObject player)
+    [SerializeField] private CarStats Player;
+    public void SetPlayer(CarStats player)
     {
         Player = player;
     }
