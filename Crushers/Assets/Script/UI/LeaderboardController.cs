@@ -71,6 +71,13 @@ public class LeaderboardController : MonoBehaviour
         }
     }
 
+    // Create a UI Controller base class with a generic click function 
+    // could change this to find audio source in parent instead
+    public void Click(AudioSource buttonAudio){
+        //Debug.Log("Click: " + st);
+        buttonAudio.Play();
+    }
+
     public void RestartGame(){
         // destroy player manager
         if(pm){
