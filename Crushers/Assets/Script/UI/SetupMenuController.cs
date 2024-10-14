@@ -1,12 +1,18 @@
 using ShapesFX;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
+
 public class SetupMenuController : MonoBehaviour
 {
 private int playerIndex;
@@ -24,22 +30,25 @@ public static UnityAction<int> playerReady;
      [SerializeField] private GameObject nextBtn;
      [SerializeField] private GameObject prevBtn;
 
+     private Button currentBtn;
+
 
      private float ignoreInputTime = 1.5f;
      private bool inputEnabled;
 
 
-/*    public void SetPlayerIndex(int pi)
+    void Start()
     {
-        playerIndex = pi;
-        
-    }*/
-
-    void Start(){
+        /// initialise controls and enable them 
+        InputActionAsset controls = GetComponentInParent<PlayerInput>().actions;
+        InputActionMap UI = controls.FindActionMap("UI");
+        UI.Enable();
+   
         // find Player Index
         playerIndex = GetComponentInParent<PlayerInput>().playerIndex; 
         titleTxt.SetText("Player" + (playerIndex + 1).ToString());
         ignoreInputTime = Time.time + ignoreInputTime;
+        //nextBtn.GetComponent<Button>().Select();
 
         UpdateVehicleDisplay();
     }
@@ -52,6 +61,36 @@ public static UnityAction<int> playerReady;
         }
     }
 
+    // UI Navigation for setup menu
+    public void OnLeft(CallbackContext context)
+    {
+    
+        if(context.performed){
+            prevBtn.GetComponent<Button>().onClick.Invoke();
+        
+            PreviousVehicle();
+        }
+
+    }
+
+    public void OnRight(CallbackContext context)
+    {
+        if(context.performed){
+            nextBtn.GetComponent<Button>().onClick.Invoke();
+
+            NextVehicle();
+        }
+
+    }
+
+    public void OnEnter(CallbackContext context){
+        if(currentBtn && context.performed){
+            Debug.Log("Enter: " + currentBtn);
+            currentBtn.onClick.Invoke();
+            ignoreInputTime = Time.time + 1;
+        }
+    }
+
     public void Click(string st){
         Debug.Log("Click: " + st);
     }
@@ -59,11 +98,15 @@ public static UnityAction<int> playerReady;
     //Show next vehicle
     public void PreviousVehicle()
     {
-        if (!inputEnabled) return;
+        Debug.Log("PREV Vehicle " + currentVehicleIndex);
+
+        
 
         vehicleList[currentVehicleIndex].SetActive(false);
 
         currentVehicleIndex = (currentVehicleIndex - 1 + vehicleList.Length) % vehicleList.Length;
+        Debug.Log("New vehicle " + currentVehicleIndex);
+
 
         UpdateVehicleDisplay();
     }
@@ -71,12 +114,15 @@ public static UnityAction<int> playerReady;
     //Show previous vehicle
     public void NextVehicle()
     {
-        if (!inputEnabled) return;
+        
+        Debug.Log("NXT Vehicle " + currentVehicleIndex);
+
 
         vehicleList[currentVehicleIndex].SetActive(false);
 
         currentVehicleIndex = (currentVehicleIndex + 1) % vehicleList.Length;
-
+        
+         Debug.Log("New vehicle " + currentVehicleIndex);
         UpdateVehicleDisplay();
     }
 
@@ -86,24 +132,22 @@ public static UnityAction<int> playerReady;
 
         readyPnl.SetActive(true);
         menuPnl.SetActive(false);
-        readyBtn.Select();
-        nextBtn.SetActive(false);
-        prevBtn.SetActive(false);
-
-
-        if(vehicleSelected != null){
-            vehicleSelected.Invoke(playerIndex, vehicle); 
-        }
         
+        
+        //nextBtn.SetActive(false);
+        //prevBtn.SetActive(false);
+        vehicleSelected?.Invoke(playerIndex, vehicle);
+
+        currentBtn = readyBtn;
+
     }
 
     public void ReadyPlayer(){
+        Debug.Log("Ready");
         if(!inputEnabled){ return; }
         readyBtn.gameObject.SetActive(false);
 
-        if(playerReady != null){
-            playerReady.Invoke(playerIndex); 
-        }
+        playerReady?.Invoke(playerIndex);
 
     }
 
@@ -111,6 +155,8 @@ public static UnityAction<int> playerReady;
     private void UpdateVehicleDisplay()
     {
         // display selected vehicle
+        Debug.Log("Vehicle: " + vehicleList[currentVehicleIndex]);
         vehicleList[currentVehicleIndex].SetActive(true);
+        currentBtn =  vehicleList[currentVehicleIndex].GetComponent<Button>();
     }
 }

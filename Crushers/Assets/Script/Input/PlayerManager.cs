@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     private int leaderboardScene = 5; 
 
     // Events
-    public static UnityAction ArenaLevelLoaded; 
+    public static UnityAction<bool> ArenaLevelLoaded; 
     public static UnityAction firstPlayerJoined; 
 
     
@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
 
         if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         } else {
             instance = this;
         }
@@ -41,7 +41,6 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(this);
         playerConfigs = new List<PlayerConfiguration>();
         GetComponent<PlayerInputManager>().DisableJoining();
-
     }
    
    void OnEnable()
@@ -113,6 +112,8 @@ public class PlayerManager : MonoBehaviour
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
             // initialise players with vehicles
             SetupArena();
+        } else {
+            ArenaLevelLoaded?.Invoke(false);
         }
     }
 
@@ -120,9 +121,10 @@ public class PlayerManager : MonoBehaviour
     public void HandlePlayerJoin(PlayerInput pi)
     {
         if(pi.playerIndex == 0){
+            startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
+
             // invoke first player joined event 
-            if(firstPlayerJoined != null) 
-                firstPlayerJoined.Invoke();
+            firstPlayerJoined?.Invoke();
         }
 
         if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
@@ -148,7 +150,7 @@ public class PlayerManager : MonoBehaviour
         }
         // invoke arena level loaded event 
 
-        ArenaLevelLoaded?.Invoke();
+        ArenaLevelLoaded?.Invoke(true);
 
     }
 
@@ -184,10 +186,13 @@ public class PlayerManager : MonoBehaviour
     }
     
     private void SetupPlayerCamera(PlayerConfiguration pi){
+
         int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
         if(pi.playerCam == null){
             // get camera component
             pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
+            pi.playerCam.transform.position = startingPoints[pi.playerIndex + 1].position;
+
             var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
 
             // set the layer
@@ -220,7 +225,7 @@ public class PlayerManager : MonoBehaviour
     // Helper Functions
     private void SavePlayerScores(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().getScore();
+            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().GetScore();
         }
     }
     

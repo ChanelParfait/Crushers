@@ -60,7 +60,9 @@ public class PlayerInputHandler : MonoBehaviour
     // Input Events // 
     public void OnReloadLevel(CallbackContext context)
     {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if(context.performed){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void OnRespawn(CallbackContext context)
@@ -115,9 +117,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnUseItem(CallbackContext context)
     {
         if(pickUpManager){
-            if(context.performed){
-                pickUpManager.useItem = context.ReadValueAsButton();
-            }
+            pickUpManager.useItem = context.ReadValueAsButton();
         }        
     }
 

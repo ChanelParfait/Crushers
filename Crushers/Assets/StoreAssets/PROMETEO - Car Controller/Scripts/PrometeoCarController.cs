@@ -88,7 +88,8 @@ public class PrometeoCarController : MonoBehaviour
       [SerializeField] private bool useSounds = false;
       [SerializeField] private AudioSource carEngineSound;
       [SerializeField] private AudioSource driftingSound; 
-      private float initialCarEngineSoundPitch;
+      [SerializeField] private float vehiclePitch; 
+     // private float initialCarEngineSoundPitch;
     //CAR DATA
 
       [SerializeField]
@@ -167,9 +168,9 @@ public class PrometeoCarController : MonoBehaviour
         RRwheelFriction.stiffness = rearRightCollider.sidewaysFriction.stiffness;
 
         // We save the initial pitch of the car engine sound.
-        if(useSounds != false){
+        /*if(useSounds != false){
           initialCarEngineSoundPitch= carEngineSound.pitch;
-        }
+        }*/
 
         // We invoke 2 methods inside this script. CarSpeedUI() changes the text of the UI object that stores
         // the speed of the car and CarSounds() controls the engine and drifting sounds. Both methods are invoked
@@ -308,12 +309,16 @@ public class PrometeoCarController : MonoBehaviour
       if(useSounds){
         try{
           if(carEngineSound != null){
-            float engineSoundPitch = initialCarEngineSoundPitch + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
+            float engineSoundPitch = vehiclePitch + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
             carEngineSound.pitch = engineSoundPitch;
             carEngineSound.Play();
           }
           if((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
             if(!driftingSound.isPlaying){
+              // randomly pitch drift sound up and down
+              driftingSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f); 
+              //driftingSound.pitch = vehiclePitch; 
+              
               driftingSound.Play();
             }
           }else if((!isDrifting) && (!isTractionLocked || Mathf.Abs(carSpeed) < 12f)){
@@ -339,7 +344,8 @@ public class PrometeoCarController : MonoBehaviour
     //
 
     public void SetSteeringAngle(Vector2 direction){
-     // Debug.Log("Wheel Direction: " + direction);
+
+      //Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * car.GetMaxSteeringAngle();
     }
