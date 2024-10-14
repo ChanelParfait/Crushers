@@ -87,6 +87,7 @@ public static UnityAction<int> playerReady;
         if(currentBtn && context.performed){
             Debug.Log("Enter: " + currentBtn);
             currentBtn.onClick.Invoke();
+            ignoreInputTime = Time.time + 1;
         }
     }
 
@@ -131,17 +132,18 @@ public static UnityAction<int> playerReady;
 
         readyPnl.SetActive(true);
         menuPnl.SetActive(false);
-        currentBtn = readyBtn;
-        readyBtn.Select();
+        
+        
         //nextBtn.SetActive(false);
         //prevBtn.SetActive(false);
-
-
         vehicleSelected?.Invoke(playerIndex, vehicle);
+
+        currentBtn = readyBtn;
 
     }
 
     public void ReadyPlayer(){
+        Debug.Log("Ready");
         if(!inputEnabled){ return; }
         readyBtn.gameObject.SetActive(false);
 
