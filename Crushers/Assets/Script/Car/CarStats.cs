@@ -80,10 +80,10 @@ public class CarStats : MonoBehaviour
         damageTaken = damageTaken + newDamage;
         //can respawn if flipped after period of time
     }
-    public void increaseDamageFromSpeed(float speed){
+    public void IncreaseDamageFromSpeed(float speed){
 
         damageTaken = damageTaken + Mathf.Round(speed * hitMultiplier);
-        addCentreOfMass(Mathf.Round(speed * hitMultiplier));
+        AddCentreOfMass(Mathf.Round(speed * hitMultiplier));
         //can respawn if flipped after period of time
     }
     public float GetDamage(){

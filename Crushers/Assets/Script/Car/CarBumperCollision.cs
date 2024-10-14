@@ -26,10 +26,10 @@ public class CarBumperCollision : MonoBehaviour
                 if (hitCarStats != null)
                 {
                     // Set this car (the one doing the hitting) as the last collided car in the hit car's stats
-                    hitCarStats.setLastCollided(carStats.gameObject);
+                    hitCarStats.SetLastCollidedVehicle(hitCarStats);
 
-                    hitCarStats.increaseDamageFromSpeed(carStats.getSpeed());
-                    Debug.Log("Collided vehicle damage: " + hitCarStats.getDamage());
+                    hitCarStats.IncreaseDamageFromSpeed(carStats.GetSpeed());
+                    Debug.Log("Collided vehicle damage: " + hitCarStats.GetDamage());
                     
                     StartCoroutine(ClearLastCollidedPlayerAfterDelay(hitCarStats, 5f));
                 }
@@ -46,7 +46,7 @@ public class CarBumperCollision : MonoBehaviour
     private IEnumerator ClearLastCollidedPlayerAfterDelay(CarStats hitCarStats, float delay)
     {
         yield return new WaitForSeconds(delay);
-        hitCarStats.setLastCollided(null);  
+        hitCarStats.SetLastCollidedVehicle(null);  
         Debug.Log("Cleared last collided player");
     }
 }
