@@ -35,6 +35,7 @@ public static UnityAction<int> playerReady;
 
      private float ignoreInputTime = 1.5f;
      private bool inputEnabled;
+     private bool selectionEnabled;
 
 
     void Start()
@@ -50,6 +51,7 @@ public static UnityAction<int> playerReady;
         ignoreInputTime = Time.time + ignoreInputTime;
         //nextBtn.GetComponent<Button>().Select();
 
+        selectionEnabled = true;
         UpdateVehicleDisplay();
     }
 
@@ -64,7 +66,7 @@ public static UnityAction<int> playerReady;
     // UI Navigation for setup menu
     public void OnLeft(CallbackContext context)
     {
-    
+        if(!selectionEnabled){ return; }
         if(context.performed){
             prevBtn.GetComponent<Button>().onClick.Invoke();
         
@@ -75,6 +77,7 @@ public static UnityAction<int> playerReady;
 
     public void OnRight(CallbackContext context)
     {
+        if(!selectionEnabled){ return; }
         if(context.performed){
             nextBtn.GetComponent<Button>().onClick.Invoke();
 
@@ -84,10 +87,10 @@ public static UnityAction<int> playerReady;
     }
 
     public void OnEnter(CallbackContext context){
+        
         if(currentBtn && context.performed){
             Debug.Log("Enter: " + currentBtn);
             currentBtn.onClick.Invoke();
-            ignoreInputTime = Time.time + 1;
         }
     }
 
@@ -132,13 +135,12 @@ public static UnityAction<int> playerReady;
 
         readyPnl.SetActive(true);
         menuPnl.SetActive(false);
-        
-        
-        //nextBtn.SetActive(false);
-        //prevBtn.SetActive(false);
+    
         vehicleSelected?.Invoke(playerIndex, vehicle);
 
         currentBtn = readyBtn;
+        selectionEnabled = false;
+
 
     }
 

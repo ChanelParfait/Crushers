@@ -165,6 +165,7 @@ public class PlayerManager : MonoBehaviour
         
         // spawn vehicle from player config as child of player config
         pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex + 1].position, startingPoints[pi.playerIndex + 1].rotation, pi.Input.gameObject.transform);
+        
         // get UI controller for each vehicle
         pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
 
@@ -241,6 +242,14 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void SetMaterial(PlayerConfiguration pi){
+        //MeshRenderer[] materials =  pi.vehicleObject.
+        //foreach(Material material in materials){
+            
+        //}
+
+    }
+
     private void DestroyVehicles(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
             if(playerConfig.vehicleObject){
@@ -267,6 +276,7 @@ public class PlayerConfiguration
     // can store configuration values here 
     public bool isReady { get; set; }
     public GameObject vehiclePrefab {get; set;}
+    public Material material {get; set;}
     public GameObject vehicleObject {get; set;}
     public VehicleUIController UIController { get; set; }
 
