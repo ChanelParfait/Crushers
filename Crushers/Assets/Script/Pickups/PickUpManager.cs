@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -22,6 +20,10 @@ public enum PickupType
 
 public class PickUpManager : MonoBehaviour
 {
+    [SerializeField] private GameObject shieldGO; 
+    [SerializeField] private GameObject Rocket;
+    [SerializeField] private GameObject KamiKazeGo;
+    [SerializeField] private GameObject Stun;
 
     [SerializeField] private PickupType Pickup;
 
@@ -30,32 +32,28 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] private float ShieldTimer = 10;
 
     [SerializeField] private float KamiKazeTimer = 10;
-    // Input Manager Flag
     public bool useItem = false;
 
+
     // Visual Gameobjects
-    [SerializeField] private GameObject shieldGO;
-    [SerializeField] private GameObject Rocket;
+    private GameObject shield;
 
-    [SerializeField] private GameObject Stun;
-
-    // Pickup Object References
-    private GameObject shield; 
-
+    private GameObject KamiKaze;
     // UI Components
     [SerializeField] private Image pickUpImage;
     [SerializeField] private List<Sprite> pickupSprites;
-
-    // SFX
-    [SerializeField] private AudioSource audioSource;
-
-    
-
     //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
-
+    public void SetPickup(PickupType PickUpPowerup)
+    {
+        Pickup = PickUpPowerup;
+        Debug.Log("Pickup: " + PickUpPowerup.ToString());
+        //Debug.Log("Gameobject" + gameObject.name);
+        UpdateSprite(PickUpPowerup);
+    }
     
     private void Start(){
         UpdateSprite(PickupType.None);
+
     }
     
     private void Update()
@@ -93,40 +91,33 @@ public class PickUpManager : MonoBehaviour
         }
     }
 
-    private void SetPickup(PickupType PickUpPowerup)
-    {
-        Pickup = PickUpPowerup;
-        //Debug.Log("Pickup: " + PickUpPowerup.ToString());
-        //Debug.Log("Gameobject" + gameObject.name);
-        UpdateSprite(PickUpPowerup);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.gameObject.CompareTag("Pickup"))
         {
-            //Debug.Log("Picked Up by" + other.gameObject.name);
-            // Play item picked up SFX
-            PlayAudio();
+            Debug.Log("Picked Up by" + other.gameObject.name);
             SetPickup(other.GetComponent<BasePickUp>().GetPickupType());
             Destroy(other.gameObject);
         }
+        
+        
     }
     
 
     private void UseRocket()
     {
         
-        Vector3 newLocation = gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
+        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f, transform.rotation);
-            RocketGm.GetComponent<Rocket>().SetFiredBy(GetComponent<CarStats>()); 
+            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
             RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
 
        
-            Collider spawnerCollider = GetComponent<Collider>();
+            Collider spawnerCollider = this.GetComponent<Collider>();
 
             if (spawnerCollider != null && rocketCollider != null)
             {
@@ -139,6 +130,10 @@ public class PickUpManager : MonoBehaviour
                 Physics.IgnoreCollision(rocketCollider, childCollider);
             }
             Pickup = PickupType.None; 
+            
+        
+        
+        
     }
 
     private void UseShield()
@@ -148,10 +143,11 @@ public class PickUpManager : MonoBehaviour
         
         // spawn in a shield object
         if(!shield){
+            
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
             shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
-            shield.GetComponent<ShieldCollider>().PlayAudio(1, 0);
         }
+        
 
         StartCoroutine(UndoShield(ShieldTimer));
     }
@@ -164,10 +160,7 @@ public class PickUpManager : MonoBehaviour
 
     IEnumerator UndoShield(float Delay)
     {
-        yield return new WaitForSeconds(Delay - 0.2f);
-        shield.GetComponent<ShieldCollider>().PlayAudio(2, 0);
-        yield return new WaitForSeconds(0.2f);
-
+        yield return new WaitForSeconds(Delay);
         State = Shield.IsOff;
         Destroy(shield);
         shield = null;
@@ -175,9 +168,15 @@ public class PickUpManager : MonoBehaviour
 
     private void UseKamiKaze()
     {
+        if (!KamiKaze)
+        {
+            KamiKaze = Instantiate(KamiKazeGo, this.gameObject.transform.position + new Vector3(0, 7, 0.25f), transform.rotation, transform);
+            KamiKaze.GetComponent<KamiKazeBomb>().SetPlayer(this.gameObject.GetComponent<CarStats>());
+        }
         
         StartCoroutine(KamiKazeExplosionTimer(KamiKazeTimer));
         Pickup = PickupType.None;
+
     }
 
     IEnumerator KamiKazeExplosionTimer(float Delay)
@@ -195,16 +194,15 @@ public class PickUpManager : MonoBehaviour
                     // Apply explosion force to the player
                     
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
+                    
                 }
             }
-            /*
-            if (ExplosionVFX)
-            {
-                GameObject Explosion =  Instantiate(ExplosionVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
-                Explosion.GetComponent<Explosion>().SetTimeBeforeDestruction(1);
-            }
-            */
+            
+            
+            
         }
+        Destroy(KamiKaze);
+        
     }
 
     private void UseStun()
@@ -212,7 +210,7 @@ public class PickUpManager : MonoBehaviour
         Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
         GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f, transform.rotation);
-        StunGm.GetComponent<Stun>().SetFiredBy(gameObject.GetComponent<CarStats>()); 
+        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
         StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
         Collider rocketCollider = StunGm.GetComponent<Collider>();
@@ -234,20 +232,14 @@ public class PickUpManager : MonoBehaviour
     }
 
     private void UpdateSprite(PickupType pickUpIndex){
-        // set sprite using pickup index
-        /*  None = 0,
-            Speed = 1,
-            Rocket = 2,
-            Shield = 3,
-            KamiKaze = 4,
-            Stun = 5,
+        // set sprite using pickup sprite index
+        /*  None = 0
+            Speed = 1
+            Rocket = 2
+            Shield = 3 
         */
     
         pickUpImage.sprite = pickupSprites[(int)pickUpIndex];
-    }
-
-    private void PlayAudio(){
-        audioSource.Play();
     }
 
   

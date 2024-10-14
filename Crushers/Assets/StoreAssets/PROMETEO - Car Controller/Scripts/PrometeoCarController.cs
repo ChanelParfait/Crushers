@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -32,7 +33,8 @@ public class PrometeoCarController : MonoBehaviour
     public bool isBraking;
     public bool isTurning;
     public float steeringAngle;
-     public bool isDecelerating;
+    public bool isDecelerating;
+    public bool isGrounded;
 
     //WHEELS
 
@@ -218,18 +220,19 @@ public class PrometeoCarController : MonoBehaviour
       return playerIndex; 
     }
 
-    // Update is called once per frame
     void Update()
     {
+        GroundChecker();
+        GravityModifier();
 
-      //CAR DATA
+        //CAR DATA
 
-      // We determine the speed of the car.
-      carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
-      // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
-      localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
-      // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
-      localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
+        // We determine the speed of the car.
+        carSpeed = carRigidbody.velocity.magnitude * 3.6f;
+        // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
+        localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
+        // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
+        localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
       //CAR PHYSICS
 
@@ -341,6 +344,7 @@ public class PrometeoCarController : MonoBehaviour
     //
 
     public void SetSteeringAngle(Vector2 direction){
+
       //Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * car.GetMaxSteeringAngle();
@@ -675,6 +679,26 @@ public class PrometeoCarController : MonoBehaviour
         driftingAxis = 0f;
       }
     }
+
+    //check if any of the wheel is collided with thes ground, set isGrounded to true
+    //mb use events ?
+    public void GroundChecker()
+    {
+        WheelHit hit;
+        isGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit);
+    }
+
+    public void GravityModifier()
+    {
+        if (!isGrounded)
+        {
+            float airGravityModifier = (-1 * car.GetGravityMultiplier()) * Time.deltaTime;
+            carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
+
+            Debug.Log("Current Gravity Applied: " + airGravityModifier);
+        }
+    }
+
 
     public float CalculateHitForce() {
 

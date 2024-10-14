@@ -48,10 +48,10 @@ public class Stun : MonoBehaviour
         
     }
 
-    IEnumerator DisablePlayers(float delay, PrometeoCarController Players)
+    IEnumerator DisablePlayers(float delay, PrometeoCarController players)
     {
-        Players.enabled = false;
+        players.enabled = false;
         yield return new WaitForSeconds(delay);
-        Players.enabled = true;
+        players.enabled = true;
     }
 }
