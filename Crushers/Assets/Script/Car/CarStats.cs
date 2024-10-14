@@ -37,7 +37,6 @@ public class CarStats : MonoBehaviour
     {
         DisplayDamage();
         DisplayScore();
-        
     }
     public float GetSpeed(){
         return carController.GetCarSpeed();
@@ -61,6 +60,8 @@ public class CarStats : MonoBehaviour
         return lastCollidedVehicle;
     }
     public void SetLastCollidedVehicle(CarStats lastCollided){
+        Debug.Log("Set last Collided");
+        StopCoroutine(ClearLastCollided(5f));
         lastCollidedVehicle = lastCollided;
         // Start coroutine to clear the last collided player after 5 seconds
         StartCoroutine(ClearLastCollided(5f));
@@ -69,7 +70,7 @@ public class CarStats : MonoBehaviour
     private IEnumerator ClearLastCollided(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SetLastCollidedVehicle(null);  
+        lastCollidedVehicle = null;
         Debug.Log("Cleared last collided player");
     }
 

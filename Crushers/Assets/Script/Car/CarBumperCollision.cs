@@ -20,7 +20,7 @@ public class CarBumperCollision : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 CarStats collidedVehicle = collision.gameObject.GetComponentInParent<CarStats>();
-                
+                Debug.Log("Collision with Player" + collidedVehicle.name);
                 
                 if (collidedVehicle)
                 {
@@ -35,7 +35,7 @@ public class CarBumperCollision : MonoBehaviour
                     collidedVehicle.IncreaseDamage(newDamage);
                     collidedVehicle.AddCentreOfMass(newDamage);
 
-                    Debug.Log("Collided vehicle damage: " + collidedVehicle.GetDamage());
+                    //Debug.Log("Collided vehicle damage: " + collidedVehicle.GetDamage());
                 }
 
                 

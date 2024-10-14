@@ -117,16 +117,16 @@ public class PickUpManager : MonoBehaviour
     private void UseRocket()
     {
         
-        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
+        Vector3 newLocation = gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f, transform.rotation);
-            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject); 
+            RocketGm.GetComponent<Rocket>().SetFiredBy(GetComponent<CarStats>()); 
             RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
 
        
-            Collider spawnerCollider = this.GetComponent<Collider>();
+            Collider spawnerCollider = GetComponent<Collider>();
 
             if (spawnerCollider != null && rocketCollider != null)
             {
@@ -212,7 +212,7 @@ public class PickUpManager : MonoBehaviour
         Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
         GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f, transform.rotation);
-        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject); 
+        StunGm.GetComponent<Stun>().SetFiredBy(gameObject.GetComponent<CarStats>()); 
         StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
         Collider rocketCollider = StunGm.GetComponent<Collider>();
