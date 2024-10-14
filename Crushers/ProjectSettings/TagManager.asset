@@ -10,6 +10,8 @@ TagManager:
   - JoinCanvas
   - Pickup
   - Spawns
+  - FxTemporaire
+  - Projectile
   layers:
   - Default
   - TransparentFX
