@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10401619, y: -0.04217237, z: 0.004414547, w: 0.9936713}
+  m_LocalRotation: {x: 0.10878105, y: -0.042151652, z: 0.004616876, w: 0.9931609}
   m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2311,7 +2311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08597242, y: -0.042245243, z: 0.0036487284, w: 0.9953948}
+  m_LocalRotation: {x: 0.09548776, y: -0.042210393, z: 0.004052756, w: 0.994527}
   m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3271,6 +3271,9 @@ MonoBehaviour:
   isReversing: 0
   isBraking: 0
   isTurning: 0
+  steeringAngle: 0
+  isDecelerating: 0
+  isGrounded: 0
   frontLeftMesh: {fileID: 1990901242162720777}
   frontLeftCollider: {fileID: 3554988893762316569}
   frontRightMesh: {fileID: 4788973135344169438}
@@ -3305,7 +3308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  damage: 0
+  damageTaken: 0
   speed: 0
   centreMass: {x: 0, y: 0, z: 0}
   lastCollidedPlayer: {fileID: 0}
@@ -3495,6 +3498,8 @@ GameObject:
   - component: {fileID: 1210878329686162239}
   - component: {fileID: 8700224313896586584}
   - component: {fileID: 54489607109337404}
+  - component: {fileID: 2956263606931786348}
+  - component: {fileID: 8389802237403118605}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -3659,6 +3664,52 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   horizontal: {x: 0, y: 0}
+--- !u!114 &2956263606931786348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166503309574242643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.01
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
+--- !u!114 &8389802237403118605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166503309574242643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 3
+  m_Damping: 6
+  m_MinFOV: 50
+  m_MaxFOV: 70
 --- !u!1 &9191802261591236016
 GameObject:
   m_ObjectHideFlags: 0
