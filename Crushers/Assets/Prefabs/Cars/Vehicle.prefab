@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10401619, y: -0.04217237, z: 0.004414547, w: 0.9936713}
+  m_LocalRotation: {x: 0.114855714, y: -0.042121876, z: 0.004874611, w: 0.99247676}
   m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2311,7 +2311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08597242, y: -0.042245243, z: 0.0036487284, w: 0.9953948}
+  m_LocalRotation: {x: 0.1076349, y: -0.04215594, z: 0.0045681214, w: 0.99328583}
   m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3198,6 +3198,7 @@ GameObject:
   - component: {fileID: 1807791585810362269}
   - component: {fileID: 8741482368120771810}
   - component: {fileID: 5888672055751983498}
+  - component: {fileID: 1493166302703072454}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Player
@@ -3273,6 +3274,7 @@ MonoBehaviour:
   isTurning: 0
   steeringAngle: 0
   isDecelerating: 0
+  isGrounded: 0
   frontLeftMesh: {fileID: 1990901242162720777}
   frontLeftCollider: {fileID: 3554988893762316569}
   frontRightMesh: {fileID: 4788973135344169438}
@@ -3291,6 +3293,7 @@ MonoBehaviour:
   useSounds: 1
   carEngineSound: {fileID: 2198187969061989764}
   driftingSound: {fileID: 1280518691873253039}
+  vehiclePitch: 0
   carSpeed: 0
   isDrifting: 0
   isTractionLocked: 0
@@ -3310,8 +3313,7 @@ MonoBehaviour:
   damageTaken: 0
   speed: 0
   centreMass: {x: 0, y: 0, z: 0}
-  lastCollidedPlayer: {fileID: 0}
-  lastCollisionTime: 0
+  lastCollidedVehicle: {fileID: 0}
   scoreText: {fileID: 5970591887534121917}
   damageText: {fileID: 9010784452370359719}
 --- !u!114 &4702013352652804568
@@ -3355,6 +3357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edfb81ada70f8542a0499ce96beddb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crashAudio: {fileID: 0}
+  crashSFX: []
 --- !u!114 &5888672055751983498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3385,6 +3389,59 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
   - {fileID: 21300000, guid: 9ddc34c9b398e744caff4826abb99c18, type: 3}
   - {fileID: 21300000, guid: ec8f4f61fa01e80448d82c6049347405, type: 3}
+--- !u!114 &1493166302703072454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 3
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.5
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: -1, y: -1, z: 0}
 --- !u!1 &9114952474528041427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,6 +3560,8 @@ GameObject:
   - component: {fileID: 1210878329686162239}
   - component: {fileID: 8700224313896586584}
   - component: {fileID: 54489607109337404}
+  - component: {fileID: 294828230199390933}
+  - component: {fileID: 2915937298614444018}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -3667,6 +3726,45 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   horizontal: {x: 0, y: 0}
+--- !u!114 &294828230199390933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166503309574242643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 709.25073, y: -796.6373, z: -299.96716}
+--- !u!114 &2915937298614444018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166503309574242643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 3
+  m_Damping: 6
+  m_MinFOV: 60
+  m_MaxFOV: 70
 --- !u!1 &9191802261591236016
 GameObject:
   m_ObjectHideFlags: 0
