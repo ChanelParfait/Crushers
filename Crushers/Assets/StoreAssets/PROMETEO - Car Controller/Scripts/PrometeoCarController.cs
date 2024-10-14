@@ -74,9 +74,13 @@ public class PrometeoCarController : MonoBehaviour
       public TrailRenderer RLWTireSkid;
       public TrailRenderer RRWTireSkid;
 
+      [Space(10)]
+      //Speedlines       
+      public SpeedLines speedLines;
+
     //SPEED TEXT (UI)
 
-      [Space(20)]
+    [Space(20)]
       //[Header("UI")]
       [Space(10)]
       //The following variable lets you to set up a UI text to display the speed of your car.
@@ -224,6 +228,7 @@ public class PrometeoCarController : MonoBehaviour
     {
         GroundChecker();
         GravityModifier();
+    
 
         //CAR DATA
 
@@ -283,7 +288,10 @@ public class PrometeoCarController : MonoBehaviour
         if (impactController.GetGotHit() == false) {
             carRigidbody.centerOfMass = new Vector3(0,0,0);
         }
-        
+
+        CameraController.Instance.ShakeCameraOnAcceleration(carSpeed);
+
+        speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.

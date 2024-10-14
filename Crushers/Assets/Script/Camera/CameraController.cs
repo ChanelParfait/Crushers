@@ -8,10 +8,6 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance { get; private set; }
 
     private CinemachineFreeLook freeLookCamera;
-    private float shakeTimer;
-    private float startingAmplitude;
-    private float startingFrequency;
-    private float shakeTimerTotal;
 
     private void Awake()
     {
@@ -23,11 +19,43 @@ public class CameraController : MonoBehaviour
     }
 
 
-
-    public void ShakeCamera(CinemachineImpulseSource impulseSource, float impulseForce)
+    public void ShakeCameraOnImpact(CinemachineImpulseSource impulseSource, float impulseForce)
     {
         impulseSource.GenerateImpulseWithForce(impulseForce);
 
        // Debug.Log($"Camera Shake Amplitude: {amplitude}, Frequency: {frequency}, Duration: {time}");
+    }
+
+    public void ShakeCameraOnAcceleration(float speed) {
+
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
+       freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        float shakeSpeed = speed * Time.deltaTime;
+
+        float maxAplitude = 1f;
+
+        float targetAmplitude = Mathf.Lerp(0, maxAplitude, shakeSpeed);
+
+        if (targetAmplitude > cinemachineBasicMultiChannelPerlin.m_AmplitudeGain)
+        {
+            // Accelerating: Increase shake quickly
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain,
+                targetAmplitude,
+                Time.deltaTime * 5f  
+            );
+        }
+        else
+        {
+            // Decelerating: Decrease shake faster
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain,
+                targetAmplitude,
+                Time.deltaTime * 10f 
+            );
+        }
+
+        //Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
     }
 }

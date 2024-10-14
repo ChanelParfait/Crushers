@@ -287,8 +287,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.114855714, y: -0.042121876, z: 0.004874611, w: 0.99247676}
-  m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
+  m_LocalRotation: {x: 0.09633462, y: -0.00000017675043, z: 0.00000001710675, w: 0.99534905}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -490,8 +490,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084420502779646190}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12207334, y: -0.042085208, z: 0.005180924, w: 0.9916149}
-  m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
+  m_LocalRotation: {x: 0.122183256, y: -0, z: -0, w: 0.9925076}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1783,6 +1783,7 @@ GameObject:
   - component: {fileID: 3605173380067155964}
   - component: {fileID: 917531686857304176}
   - component: {fileID: 5368503896206573642}
+  - component: {fileID: 1124999955371104735}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1898,6 +1899,23 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!114 &1124999955371104735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4207628950511152630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: -705.58887, y: -195.43112, z: -844.55225}
 --- !u!1 &4358900282340051097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,8 +2329,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1076349, y: -0.04215594, z: 0.0045681214, w: 0.99328583}
-  m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
+  m_LocalRotation: {x: 0.07056081, y: -0.00000016249197, z: 0.0000000114942145, w: 0.9975075}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3288,6 +3306,7 @@ MonoBehaviour:
   RRWParticleSystem: {fileID: 6871073060044288269}
   RLWTireSkid: {fileID: 253828338488097218}
   RRWTireSkid: {fileID: 253828337045818116}
+  speedLines: {fileID: 837026892017072283}
   useUI: 1
   carSpeedText: {fileID: 8095894635103764551}
   useSounds: 1
@@ -3578,7 +3597,7 @@ Transform:
   m_GameObject: {fileID: 9166503309574242643}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.84729576, y: 2.8300002, z: -9.964043}
+  m_LocalPosition: {x: 0, y: 2.83, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3762,8 +3781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Width: 3
-  m_Damping: 6
-  m_MinFOV: 60
+  m_Damping: 1
+  m_MinFOV: 55
   m_MaxFOV: 70
 --- !u!1 &9191802261591236016
 GameObject:
@@ -3907,6 +3926,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 49643463266541418}
     m_Modifications:
+    - target: {fileID: 6954851484683414165, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8452432144136123460, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3979,6 +4003,18 @@ TrailRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1661367874261639838}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &837026892017072283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2059247571514956293, guid: f8a8636676556664482c1776eeb61bb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661367874261639838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65fe594b0e1ae5247bb190537d221365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &6871073060044288269 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5211977365284869011, guid: f8a8636676556664482c1776eeb61bb2,
