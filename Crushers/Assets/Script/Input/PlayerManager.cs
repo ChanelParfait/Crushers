@@ -222,7 +222,7 @@ public class PlayerManager : MonoBehaviour
     // Helper Functions
     private void SavePlayerScores(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().getScore();
+            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().GetScore();
         }
     }
     
