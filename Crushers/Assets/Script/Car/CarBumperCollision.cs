@@ -15,7 +15,7 @@ public class CarBumperCollision : MonoBehaviour
         // Check if the collision was triggered by the bumperCollider
         if (collision.contacts.Length > 0 && collision.contacts[0].thisCollider == bumperCollider)
         {
-            Debug.Log("Collision");
+            //Debug.Log("Collision");
            
             if (collision.gameObject.CompareTag("Player"))
             {

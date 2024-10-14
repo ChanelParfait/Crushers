@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,13 +13,15 @@ public class CarStats : MonoBehaviour
     [SerializeField]private float damageTaken;
     [SerializeField]private float speed;
     [SerializeField]private Vector3 centreMass;
-    [SerializeField] private GameObject lastCollidedPlayer;
-    [SerializeField] private float lastCollisionTime;
+    [SerializeField] private CarStats lastCollidedVehicle;
+    //[SerializeField] private float lastCollisionTime;
+
+    [Header("----------UI Elements-----------")]
 
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [SerializeField] private TextMeshProUGUI damageText;
-    private float absoluteCarSpeed;
+
 
     private float hitMultiplier;
 
@@ -26,27 +29,22 @@ public class CarStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastCollisionTime = -1f;
         rb = GetComponent<Rigidbody>();
         centreMass = rb.centerOfMass;
         carController = GetComponent<PrometeoCarController>();
-        hitMultiplier = 0.3f;
-                
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        displayDamage();
-        displayScore();
-        
+        DisplayDamage();
+        DisplayScore();
     }
-    public float getSpeed(){
+    public float GetSpeed(){
         return carController.GetCarSpeed();
     }
 
-    public void addCentreOfMass(float damage){
+    public void AddCentreOfMass(float damage){
         float increase = damage / 100f;
         centreMass.y += increase;
         if(centreMass.y > 2.0f){
@@ -55,24 +53,30 @@ public class CarStats : MonoBehaviour
         rb.centerOfMass = centreMass;
         
     }
-    public void resetMass(){
+    public void ResetMass(){
         centreMass.y = 0f;
         rb.centerOfMass = centreMass;
     }
 
-    public GameObject getLastCollided(){
-        return lastCollidedPlayer;
+    public CarStats GetLastCollidedVehicle(){
+        return lastCollidedVehicle;
     }
-    public void setLastCollided(GameObject lastCollided){
-        lastCollidedPlayer = lastCollided;
-        lastCollisionTime = Time.time;
-    }
-    public float getLastCollisionTime(){
-        return lastCollisionTime;
+    public void SetLastCollidedVehicle(CarStats lastCollided){
+        Debug.Log("Set last Collided");
+        StopCoroutine(ClearLastCollided(5f));
+        lastCollidedVehicle = lastCollided;
+        // Start coroutine to clear the last collided player after 5 seconds
+        StartCoroutine(ClearLastCollided(5f));
     }
 
-   
-    public void increaseDamage(float newDamage){
+    private IEnumerator ClearLastCollided(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        lastCollidedVehicle = null;
+        Debug.Log("Cleared last collided player");
+    }
+
+    public void IncreaseDamage(float newDamage){
         damageTaken = damageTaken + newDamage;
         //can respawn if flipped after period of time
     }
@@ -82,24 +86,24 @@ public class CarStats : MonoBehaviour
         addCentreOfMass(Mathf.Round(speed * hitMultiplier));
         //can respawn if flipped after period of time
     }
-    public float getDamage(){
+    public float GetDamage(){
         return damageTaken;
     }
-    public void decreaseDamage(float newDamage){
+    public void DecreaseDamage(float newDamage){
         damageTaken = damageTaken - newDamage;
     }
 
-    public void increaseScore(float num){
+    public void IncreaseScore(float num){
         score = score + num;
     }
-    public void decreaseScore(float num){
+    public void DecreaseScore(float num){
         score = score - num;
     }
-    public float getScore(){
+    public float GetScore(){
         return score;
     }
 
-    public void displayScore()
+    private void DisplayScore()
     {
         if (scoreText != null)
         {
@@ -107,7 +111,7 @@ public class CarStats : MonoBehaviour
         }
     }
 
-    public void displayDamage()
+    private void DisplayDamage()
     {
         if (damageText != null)
         {
