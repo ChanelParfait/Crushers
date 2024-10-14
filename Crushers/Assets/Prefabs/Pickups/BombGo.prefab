@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f8cb5ca0020d54e95e08e1a7aab726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  growShrinkDuration: 10
+  minScale: {x: 1, y: 1, z: 1}
+  maxScale: {x: 2, y: 2, z: 2}
   Player: {fileID: 0}
+  ExplosionVFX: {fileID: 8151073103637540511, guid: e7f9af584fa2f19468c3f75873611454,
+    type: 3}
 --- !u!1001 &3662228194857164631
 PrefabInstance:
   m_ObjectHideFlags: 0

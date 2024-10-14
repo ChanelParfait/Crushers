@@ -197,13 +197,9 @@ public class PickUpManager : MonoBehaviour
                     
                 }
             }
-            /*
-            if (ExplosionVFX)
-            {
-                GameObject Explosion =  Instantiate(ExplosionVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
-                Explosion.GetComponent<Explosion>().SetTimeBeforeDestruction(1);
-            }
-            */
+            
+            
+            
         }
         Destroy(KamiKaze);
         
