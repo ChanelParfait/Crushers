@@ -6,7 +6,7 @@ using UnityEngine;
 public class Stun : MonoBehaviour
 {
     [SerializeField] private float _Speed = 3000f;
-    [SerializeField] private GameObject FiredBy;
+    [SerializeField] private CarStats FiredBy;
     [SerializeField] private GameObject ExplosionVFX;
     [SerializeField] private float Timer;
     [SerializeField] private float Counter;
@@ -17,9 +17,14 @@ public class Stun : MonoBehaviour
         this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
     }
 
-    public void SetFiredBy(GameObject FiredFrom)
+    public void SetFiredBy(CarStats FiredFrom)
     {
         FiredBy = FiredFrom;
+    }
+    
+    public CarStats GetFiredBy()
+    {
+        return FiredBy;
     }
 
     private void Update()

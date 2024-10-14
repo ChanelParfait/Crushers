@@ -15,28 +15,30 @@ public class CarBumperCollision : MonoBehaviour
         // Check if the collision was triggered by the bumperCollider
         if (collision.contacts.Length > 0 && collision.contacts[0].thisCollider == bumperCollider)
         {
-            Debug.Log("Collision");
-           // Play a crash sound 
+            //Debug.Log("Collision");
+           
             if (collision.gameObject.CompareTag("Player"))
             {
-                // Set the last collided player in the car's stats
-                carStats.setLastCollided(collision.gameObject);
-                GameObject lastCollidedPlayer = carStats.getLastCollided();
-
-                Debug.Log("Collided with " + lastCollidedPlayer.name);
-
-                CarStats collidedPlayerStats = lastCollidedPlayer.GetComponentInParent<CarStats>();
+                CarStats collidedVehicle = collision.gameObject.GetComponentInParent<CarStats>();
+                Debug.Log("Collision with Player" + collidedVehicle.name);
                 
-                if (collidedPlayerStats != null)
+                if (collidedVehicle)
                 {
-                    float newDamage = Mathf.Round(carStats.getSpeed() / 3);
-                    collidedPlayerStats.increaseDamage(newDamage);
-                    collidedPlayerStats.addCentreOfMass(newDamage);
-                    Debug.Log("Collided vehicle damage: " + collidedPlayerStats.getDamage());
+                    // Set this vehicles last collided to the collided player
+                    carStats.SetLastCollidedVehicle(collidedVehicle);
+                    // Set the collided vehicles last collided to this vehicle
+                    collidedVehicle.SetLastCollidedVehicle(carStats);
+                    Debug.Log("Collided with " + collidedVehicle.gameObject.name);
+
+                    // apply damage
+                    float newDamage = Mathf.Round(carStats.GetSpeed() / 3);
+                    collidedVehicle.IncreaseDamage(newDamage);
+                    collidedVehicle.AddCentreOfMass(newDamage);
+
+                    //Debug.Log("Collided vehicle damage: " + collidedVehicle.GetDamage());
                 }
 
-                // Start coroutine to clear the last collided player after 5 seconds
-                StartCoroutine(ClearLastCollidedPlayerAfterDelay(5f));
+                
             }
             else
             {
@@ -45,11 +47,4 @@ public class CarBumperCollision : MonoBehaviour
         }
     }
 
-    
-    private IEnumerator ClearLastCollidedPlayerAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        carStats.setLastCollided(null);  
-        Debug.Log("Cleared last collided player");
-    }
 }

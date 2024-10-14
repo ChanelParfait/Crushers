@@ -21,7 +21,7 @@ public class Trap_Generic : MonoBehaviour
                 var carStats = other.gameObject.GetComponentInParent<CarStats>();
             
                 // with how the car is designed + this code check, this deals 3x DMG
-                carStats.increaseDamage(-100);
+                carStats.IncreaseDamage(-100);
             }
             
         }

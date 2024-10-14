@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class Rocket : MonoBehaviour
 {
     [SerializeField] private float _Speed = 100f;
-    [SerializeField] private GameObject FiredBy;
+    [SerializeField] private CarStats FiredBy;
     [SerializeField] private GameObject ExplosionVFX;
 
     //private AudioSource audioSource;
@@ -15,12 +15,17 @@ public class Rocket : MonoBehaviour
     
     private void Start()
     {
-        this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
     }
 
-    public void SetFiredBy(GameObject FiredFrom)
+    public void SetFiredBy(CarStats FiredFrom)
     {
         FiredBy = FiredFrom;
+    }
+    
+    public CarStats GetFiredBy()
+    {
+        return FiredBy;
     }
     
     
@@ -65,6 +70,8 @@ public class Rocket : MonoBehaviour
                 {
                     // Apply explosion force to the player
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position , radius, 10, ForceMode.Force);
+                    // set last collided vehicle of player
+                    hitCollider.GetComponentInParent<CarStats>().SetLastCollidedVehicle(FiredBy);
                 }
             }
             if (ExplosionVFX)
