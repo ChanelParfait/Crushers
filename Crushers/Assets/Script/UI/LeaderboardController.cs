@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,14 +25,8 @@ public class LeaderboardController : MonoBehaviour
         // get player configs
         if(pm){
             leaderboardConfigs = pm.GetPlayerConfigs();
-            // temporary code to destroy pm since leaderboard is the end of the game
-            // can remove later if we make the leaderboard load in between maps
-            if(pm){
-                Destroy(pm);
-                pm = null;
-            }
-            
         }
+
         // set up leaderboard
         SortScores();
         DisplayScores();
@@ -67,7 +62,7 @@ public class LeaderboardController : MonoBehaviour
 
             scoreSlots[i].SetText("Player " + player + "            " + score);
 
-            Debug.Log("Player " + player + "            " + score);
+            //Debug.Log("Player " + player + "            " + score);
         }
     }
 
@@ -79,9 +74,11 @@ public class LeaderboardController : MonoBehaviour
     }
 
     public void RestartGame(){
-        // destroy player manager
         if(pm){
-            Destroy(pm);
+            // remove player objects
+            pm.DestroyConfigs();
+            // destroy player input manager
+            DestroyImmediate(pm.gameObject);
         }
         // load main menu
         SceneManager.LoadScene(0);

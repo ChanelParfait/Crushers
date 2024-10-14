@@ -9,6 +9,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using System;
 using Random = UnityEngine.Random;
+using UnityEditor.PackageManager.Requests;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -30,17 +31,17 @@ public class PlayerManager : MonoBehaviour
     
     private void Awake()
     {
-
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
         } else {
             instance = this;
-        }
+            DontDestroyOnLoad(this);
+            playerConfigs = new List<PlayerConfiguration>();
+            startingPoints = null;
+        }        
 
-        DontDestroyOnLoad(this);
-        playerConfigs = new List<PlayerConfiguration>();
-        GetComponent<PlayerInputManager>().DisableJoining();
+        Debug.Log(this);
     }
    
    void OnEnable()
@@ -82,8 +83,6 @@ public class PlayerManager : MonoBehaviour
 
         if( playerConfigs.All(p => p.isReady == true))
         {
-            Debug.Log("Selected Map: " + selectedMapIndex);
-
             // load selected level
             SceneManager.LoadScene(selectedMapIndex);
             
@@ -91,8 +90,7 @@ public class PlayerManager : MonoBehaviour
     }
     
     public void SaveMapSelection(int index){
-        Debug.Log("Level Selected: " + index);
-
+        //Debug.Log("Level Selected: " + index);
         selectedMapIndex = index;
     }
 
@@ -100,14 +98,15 @@ public class PlayerManager : MonoBehaviour
 
     // keep track of what level we are currently in
     public void OnLevelLoaded(Scene scene, LoadSceneMode mode){
+        //Debug.Log("Level Loaded: " + scene);
         // ensure joining is initially disabled
         GetComponent<PlayerInputManager>().DisableJoining();
-
+    
         if(scene.buildIndex == 1){
             // allow joining in vehicle selection level
             GetComponent<PlayerInputManager>().EnableJoining();
-
         }
+        
         // if scene index is an arena scene
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
             // initialise players with vehicles
@@ -117,9 +116,19 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void DestroyConfigs(){
+        if(playerConfigs != null){
+            foreach(PlayerConfiguration player in playerConfigs){
+                Destroy(player.Input.gameObject);
+            }
+        }
+        playerConfigs = new List<PlayerConfiguration>();
+    }
+
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
+        
         if(pi.playerIndex == 0){
             startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
 
@@ -130,7 +139,7 @@ public class PlayerManager : MonoBehaviour
         if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
         {
             // Setup Player
-            Debug.Log("Player Joined: " + pi.playerIndex);
+            //Debug.Log("Player Joined: " + pi.playerIndex);
             // create configuration object for player 
             PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
             SetupPlayerCamera(playerConfig); 
@@ -139,8 +148,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void OnPlayerLeft(PlayerInput pi){
+        //Debug.Log("Player " + pi.playerIndex + " Left");
+    }
+
     private void SetupArena(){
-        Debug.Log("Arena initialising...");
+        //Debug.Log("Arena initialising...");
         // find starting points
         startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
 
@@ -219,7 +232,6 @@ public class PlayerManager : MonoBehaviour
         SavePlayerScores();
         DestroyVehicles();
         DisableCameras();
-        
         // send player configs to leaderboard controller 
     }
 
@@ -247,7 +259,6 @@ public class PlayerManager : MonoBehaviour
         //foreach(Material material in materials){
             
         //}
-
     }
 
     private void DestroyVehicles(){

@@ -954,6 +954,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357480169}
   m_CullTransparentMesh: 1
+--- !u!114 &385388860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4447447418211516732, guid: 971ffdfba4c038649a3f60c2f57b6995,
+    type: 3}
+  m_PrefabInstance: {fileID: 1566285843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8384f9bbfb26057418cfd940e2361919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &460462123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,6 +3164,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_AllowJoining
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 385388860}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayerLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8654218146217569675, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
