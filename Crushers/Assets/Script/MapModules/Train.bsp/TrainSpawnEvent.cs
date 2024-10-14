@@ -6,6 +6,7 @@ public class TrainSpawnEvent : MonoBehaviour
 {
     [SerializeField] GameObject trainPrefab;
     [SerializeField] GameObject spawnPoint;
+    [SerializeField] private AudioSource trainWarn;
     [SerializeField] float spawnTimer = 30f;
     void Start()
     {
@@ -14,8 +15,11 @@ public class TrainSpawnEvent : MonoBehaviour
 
     IEnumerator SpawnTrain()
     {
-        yield return new WaitForSeconds(spawnTimer);
-        Instantiate(trainPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-        StartCoroutine(SpawnTrain());
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnTimer);
+            trainWarn.Play();
+            Instantiate(trainPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        }
     }
 }
