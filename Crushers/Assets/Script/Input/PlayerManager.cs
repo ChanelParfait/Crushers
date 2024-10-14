@@ -41,7 +41,6 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(this);
         playerConfigs = new List<PlayerConfiguration>();
         GetComponent<PlayerInputManager>().DisableJoining();
-
     }
    
    void OnEnable()
@@ -120,9 +119,10 @@ public class PlayerManager : MonoBehaviour
     public void HandlePlayerJoin(PlayerInput pi)
     {
         if(pi.playerIndex == 0){
+            startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
+
             // invoke first player joined event 
-            if(firstPlayerJoined != null) 
-                firstPlayerJoined.Invoke();
+            firstPlayerJoined?.Invoke();
         }
 
         if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
@@ -184,10 +184,13 @@ public class PlayerManager : MonoBehaviour
     }
     
     private void SetupPlayerCamera(PlayerConfiguration pi){
+
         int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
         if(pi.playerCam == null){
             // get camera component
             pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
+            pi.playerCam.transform.position = startingPoints[pi.playerIndex + 1].position;
+
             var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
 
             // set the layer
