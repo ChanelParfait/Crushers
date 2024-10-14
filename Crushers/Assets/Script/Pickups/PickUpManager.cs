@@ -22,7 +22,7 @@ public class PickUpManager : MonoBehaviour
 {
     [SerializeField] private GameObject shieldGO; 
     [SerializeField] private GameObject Rocket;
-
+    [SerializeField] private GameObject KamiKazeGo;
     [SerializeField] private GameObject Stun;
 
     [SerializeField] private PickupType Pickup;
@@ -36,7 +36,9 @@ public class PickUpManager : MonoBehaviour
 
 
     // Visual Gameobjects
-    private GameObject shield; 
+    private GameObject shield;
+
+    private GameObject KamiKaze;
     // UI Components
     [SerializeField] private Image pickUpImage;
     [SerializeField] private List<Sprite> pickupSprites;
@@ -141,6 +143,7 @@ public class PickUpManager : MonoBehaviour
         
         // spawn in a shield object
         if(!shield){
+            
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
             shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
         }
@@ -165,6 +168,11 @@ public class PickUpManager : MonoBehaviour
 
     private void UseKamiKaze()
     {
+        if (!KamiKaze)
+        {
+            KamiKaze = Instantiate(KamiKazeGo, this.gameObject.transform.position + new Vector3(0, 7, 0.25f), transform.rotation, transform);
+            KamiKaze.GetComponent<KamiKazeBomb>().SetPlayer(this.gameObject);
+        }
         
         StartCoroutine(KamiKazeExplosionTimer(KamiKazeTimer));
         Pickup = PickupType.None;
@@ -197,7 +205,7 @@ public class PickUpManager : MonoBehaviour
             }
             */
         }
-
+        Destroy(KamiKaze);
         
     }
 

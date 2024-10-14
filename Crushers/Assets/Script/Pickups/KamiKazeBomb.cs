@@ -5,4 +5,9 @@ using UnityEngine;
 public class KamiKazeBomb : MonoBehaviour
 {
     
+    [SerializeField] private GameObject Player;
+    public void SetPlayer(GameObject player)
+    {
+        Player = player;
+    }
 }
