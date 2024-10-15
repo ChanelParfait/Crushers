@@ -33,7 +33,7 @@ public static UnityAction<int> playerReady;
      private Button currentBtn;
 
 
-     private float ignoreInputTime = 1.5f;
+     private float ignoreInputTime = 0.1f;
      private bool inputEnabled;
      private bool selectionEnabled;
 
