@@ -72,10 +72,43 @@ public class PlayerManager : MonoBehaviour
 
     // UI Functions // 
     public void SetPlayerVehicle(int index, GameObject vehicle)
-    {
-        //Debug.Log("index: " + index + " :" + vehicle);
-        playerConfigs[index].vehiclePrefab = vehicle;
+{
+    //Debug.Log("index: " + index + " :" + vehicle);
+    playerConfigs[index].vehiclePrefab = vehicle;
+
+    // Set the vehicle type based on the vehicle name
+    CarStats carStats = vehicle.GetComponent<CarStats>();
+        if (carStats != null){
+            VehicleType vehicleType = GetVehicleType(vehicle.name);
+            
+            if (vehicle.name != null) {
+                carStats.SetVehicleType(vehicleType); // Set the vehicle type
+            }
+
+            else{
+                Debug.LogWarning("Unknown vehicle type: " + vehicle.name);
+            }
+        }
     }
+
+    private VehicleType GetVehicleType(string vehicleName)
+    {
+        switch (vehicleName){
+            case "VehicleStandard":
+                return VehicleType.Standard;
+            case "VehicleSmall":
+                return VehicleType.Small;
+            case "VehicleBig":
+                return VehicleType.Big;
+            case "VehiclePolice":
+                return VehicleType.Police;
+            default:
+                return VehicleType.Unknown;
+        }
+    }
+
+
+
 
     public void ReadyPlayer(int index)
     {
