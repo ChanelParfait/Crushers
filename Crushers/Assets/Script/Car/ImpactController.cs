@@ -111,7 +111,7 @@ public class ImpactController : MonoBehaviour
             // Map Hitforce to a value between 0 and 1
             hitForce = Mathf.Max(hitForce, 0f);
             
-            float volume = Utility.Map(hitForce, 0, 4000, 0, 1);
+            float volume = Utility.Map(hitForce, 0, 6000, 0, 0.5f);
             //Debug.Log("Hit: " + volume) ;
 
             //hitForce = Mathf.Max(hitForce, 0f);  

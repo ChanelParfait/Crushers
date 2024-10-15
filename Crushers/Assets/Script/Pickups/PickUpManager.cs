@@ -42,6 +42,11 @@ public class PickUpManager : MonoBehaviour
     // UI Components
     [SerializeField] private Image pickUpImage;
     [SerializeField] private List<Sprite> pickupSprites;
+
+    // SFX
+    [SerializeField] private AudioSource audioSource;
+
+
     //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
     public void SetPickup(PickupType PickUpPowerup)
     {
@@ -97,6 +102,8 @@ public class PickUpManager : MonoBehaviour
         if (other.gameObject.CompareTag("Pickup"))
         {
             Debug.Log("Picked Up by" + other.gameObject.name);
+            // play pickup audio
+            PlayAudio();
             SetPickup(other.GetComponent<BasePickUp>().GetPickupType());
             Destroy(other.gameObject);
         }
@@ -115,8 +122,6 @@ public class PickUpManager : MonoBehaviour
             RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
-
-       
             Collider spawnerCollider = this.GetComponent<Collider>();
 
             if (spawnerCollider != null && rocketCollider != null)
@@ -146,6 +151,7 @@ public class PickUpManager : MonoBehaviour
             
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
             shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
+            shield.GetComponent<ShieldCollider>().PlayAudio(1, 0);
         }
         
 
@@ -240,6 +246,10 @@ public class PickUpManager : MonoBehaviour
         */
     
         pickUpImage.sprite = pickupSprites[(int)pickUpIndex];
+    }
+
+    private void PlayAudio(){
+        audioSource.Play();
     }
 
   
