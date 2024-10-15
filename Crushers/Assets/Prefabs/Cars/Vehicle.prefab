@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09633462, y: -0.0000001609507, z: 0.000000015577575, w: 0.99534905}
+  m_LocalRotation: {x: 0.09633461, y: -0.00000029612085, z: 0.00000002865998, w: 0.99534905}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2329,7 +2329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07056081, y: -0.00000014507023, z: 0.000000010261851, w: 0.9975075}
+  m_LocalRotation: {x: 0.07056081, y: -0.00000031865758, z: 0.00000002254092, w: 0.9975075}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3379,6 +3379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 0}
   crashSFX: []
+  impactSpark: {fileID: 5608740451774923146}
 --- !u!114 &5888672055751983498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,16 +3928,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 49643463266541418}
     m_Modifications:
-    - target: {fileID: 6954851484683414165, guid: f8a8636676556664482c1776eeb61bb2,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7341945554946687143, guid: f8a8636676556664482c1776eeb61bb2,
-        type: 3}
-      propertyPath: m_VelocityScale
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8452432144136123460, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4006,6 +3997,12 @@ TrailRenderer:
 --- !u!96 &253828338488097218 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 1480447055957515100, guid: f8a8636676556664482c1776eeb61bb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661367874261639838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5608740451774923146 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6546090905671361300, guid: f8a8636676556664482c1776eeb61bb2,
     type: 3}
   m_PrefabInstance: {fileID: 1661367874261639838}
   m_PrefabAsset: {fileID: 0}
@@ -4118,7 +4115,7 @@ PrefabInstance:
     - target: {fileID: 8878099548803394227, guid: 300ab69d5c93b6c4685680ced2363807,
         type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 7
+      value: 6.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

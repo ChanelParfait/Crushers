@@ -22,8 +22,6 @@ public class CameraController : MonoBehaviour
     public void ShakeCameraOnImpact(CinemachineImpulseSource impulseSource, float impulseForce)
     {
         impulseSource.GenerateImpulseWithForce(impulseForce);
-
-       // Debug.Log($"Camera Shake Amplitude: {amplitude}, Frequency: {frequency}, Duration: {time}");
     }
 
     public void ShakeCameraOnAcceleration(float speed) {
