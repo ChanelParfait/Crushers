@@ -188,13 +188,14 @@ public class PlayerManager : MonoBehaviour
         pi.InputHandler.SetCarController(car);
         // disable vehicle controls initially
         car.enabled = false;
-        pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = true;
+        
 
 
         //initialise other input handler components
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
         pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
-        
+        // disable camera shake
+        pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
         
         // set vehicle canvas to apply to player camera 
         pi.vehicleObject.GetComponentInChildren<Canvas>().worldCamera = pi.playerCam;
