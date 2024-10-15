@@ -59,7 +59,7 @@ public class ImpactController : MonoBehaviour
 
             float hitAmplitude = hitForce * 0.0001f;
             Debug.Log("hitForce: " + hitAmplitude);
-            CameraController.Instance.ShakeCamera(impulseSource, hitAmplitude);
+            CameraController.Instance.ShakeCameraOnImpact(impulseSource, hitAmplitude);
 
             Rigidbody rb = collision.gameObject.GetComponentInParent<Rigidbody>();
             //Debug.Log("RB: " + rb.gameObject);
