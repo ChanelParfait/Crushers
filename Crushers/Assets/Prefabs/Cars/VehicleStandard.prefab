@@ -78,21 +78,6 @@ PrefabInstance:
       propertyPath: m_CenterOfMass.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 915066075104220464, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.919935
-      objectReference: {fileID: 0}
-    - target: {fileID: 915066075104220464, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 915066075104220464, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.3839111
-      objectReference: {fileID: 0}
     - target: {fileID: 917531686857304176, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_FollowOffset.y
@@ -122,31 +107,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.53682
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210878329686162239, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210878329686162239, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210878329686162239, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_YAxis.m_MaxSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210878329686162239, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_Orbits.Array.data[1].m_Height
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210878329686162239, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_Orbits.Array.data[1].m_Radius
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1776236823146876093, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
