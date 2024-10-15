@@ -47,6 +47,11 @@ public class PlayerInputHandler : MonoBehaviour
         return carController;
     }
 
+    public CameraInputHandler GetFreelook()
+    {
+        return freelookCam;
+    }
+
     public void SetPickupManager(PickUpManager pm){
         // set pickup manager
         pickUpManager = pm; 

@@ -145,6 +145,7 @@ public class PlayerManager : MonoBehaviour
             SetupPlayerCamera(playerConfig); 
             playerConfigs.Add(playerConfig);
             pi.transform.SetParent(transform);
+            pi.transform.position = new Vector3(0,0,0);
         }
     }
 
@@ -187,6 +188,8 @@ public class PlayerManager : MonoBehaviour
         pi.InputHandler.SetCarController(car);
         // disable vehicle controls initially
         car.enabled = false;
+        pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = true;
+
 
         //initialise other input handler components
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
@@ -245,6 +248,7 @@ public class PlayerManager : MonoBehaviour
     private void EnableVehicleControls(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
             playerConfig.InputHandler.GetCarController().enabled = true;
+            playerConfig.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = true;
         }
     }
 

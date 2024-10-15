@@ -28,8 +28,7 @@ public class CarBumperCollision : MonoBehaviour
                     carStats.SetLastCollidedVehicle(collidedVehicle);
                     // Set the collided vehicles last collided to this vehicle
                     collidedVehicle.SetLastCollidedVehicle(carStats);
-                    Debug.Log("Collided with " + collidedVehicle.gameObject.name);
-
+                    
                     // apply damage
                     float newDamage = Mathf.Round(carStats.GetSpeed() / 3);
                     collidedVehicle.IncreaseDamage(newDamage);
