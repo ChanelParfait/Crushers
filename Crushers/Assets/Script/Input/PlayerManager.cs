@@ -242,6 +242,7 @@ public class PlayerManager : MonoBehaviour
             // get camera component
             pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
             pi.playerCam.transform.position = startingPoints[pi.playerIndex + 1].position;
+            pi.playerCam.transform.rotation = startingPoints[pi.playerIndex + 1].rotation;
 
             var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
 
@@ -256,6 +257,8 @@ public class PlayerManager : MonoBehaviour
             pi.vehicleObject.layer = layerToAdd;
             //set the layer
             pi.vehicleObject.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
+            // find speed lines and put them on the player layer
+            pi.vehicleObject.GetComponentInChildren<SpeedLines>().gameObject.layer = layerToAdd;
         }
 
     }

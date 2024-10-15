@@ -39,7 +39,7 @@ public class CarRespawn : MonoBehaviour
 
         if(carStats.GetLastCollidedVehicle()){
             carStats.GetLastCollidedVehicle().IncreaseScore(1);
-            //Debug.Log("Awarded 1 points to " + carStats.GetLastCollidedVehicle().gameObject.name);
+            Debug.Log("Awarded 1 points to " + carStats.GetLastCollidedVehicle().gameObject.name);
         } else {
             // decrease car score by 1 if it is above 0
             if(carStats.score > 0){

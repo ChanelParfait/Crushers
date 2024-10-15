@@ -19,20 +19,22 @@ public class CarBumperCollision : MonoBehaviour
            
             if (collision.gameObject.CompareTag("Player"))
             {
-
-                CarStats hitCarStats = collision.gameObject.GetComponent<CarStats>();
-
+                CarStats collidedVehicle = collision.gameObject.GetComponentInParent<CarStats>();
+                //Debug.Log("Collision with Player" + collidedVehicle.name);
                 
-                if (hitCarStats != null)
+                if (collidedVehicle)
                 {
-                    // Set this car (the one doing the hitting) as the last collided car in the hit car's stats
-                    hitCarStats.SetLastCollidedVehicle(hitCarStats);
-
-                    hitCarStats.IncreaseDamageFromSpeed(carStats.GetSpeed());
-                    Debug.Log("Collided vehicle damage: " + hitCarStats.GetDamage());
+                    // Set this vehicles last collided to the collided player
+                    carStats.SetLastCollidedVehicle(collidedVehicle);
+                    // Set the collided vehicles last collided to this vehicle
+                    collidedVehicle.SetLastCollidedVehicle(carStats);
                     
-                    StartCoroutine(ClearLastCollidedPlayerAfterDelay(hitCarStats, 5f));
+                    // apply damage
+                    collidedVehicle.IncreaseDamageFromSpeed(carStats.GetSpeed());
+
+                    //Debug.Log("Collided vehicle damage: " + collidedVehicle.GetDamage());
                 }
+
 
             }
             else
