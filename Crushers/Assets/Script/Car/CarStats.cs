@@ -88,8 +88,8 @@ public class CarStats : MonoBehaviour
     public void AddCentreOfMass(float damage){
         float increase = damage / 100f;
         centreMass.y += increase;
-        if(centreMass.y > 2.0f){
-            centreMass.y = 2.0f;
+        if(centreMass.y > 3.0f){
+            centreMass.y = 3.0f;
         }
         rb.centerOfMass = centreMass;
         
@@ -119,13 +119,12 @@ public class CarStats : MonoBehaviour
 
     public void IncreaseDamage(float newDamage){
         damageTaken = damageTaken + newDamage;
-        //can respawn if flipped after period of time
     }
     public void IncreaseDamageFromSpeed(float speed){
-
+        
         damageTaken = damageTaken + Mathf.Round(speed / baseDamageModifier);
+        Debug.Log("Damage taken " + damageTaken + " from speed " + speed + " and base modifier" + baseDamageModifier);
         AddCentreOfMass(Mathf.Round(speed / baseDamageModifier));
-        //can respawn if flipped after period of time
     }
     public float GetDamage(){
         return damageTaken;
