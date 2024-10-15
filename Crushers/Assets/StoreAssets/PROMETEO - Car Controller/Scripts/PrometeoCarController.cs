@@ -138,7 +138,6 @@ public class PrometeoCarController : MonoBehaviour
       carRigidbody = gameObject.GetComponent<Rigidbody>();
       carRigidbody.centerOfMass = car.GetBodyMassCenter();
       carRigidbody.mass = car.GetBodyMass();
-
       //Initial setup to calculate the drift value of the car. This part could look a bit
       //complicated, but do not be afraid, the only thing we're doing here is to save the default
       //friction values of the car wheels so we can set an appropiate drifting value later.

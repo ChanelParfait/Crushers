@@ -6,27 +6,32 @@ public class SpeedLines : MonoBehaviour
 {
     private ParticleSystem speedLines;
     private ParticleSystem.EmissionModule emissionModule;
-    private ParticleSystem.MainModule mainModule;
+
+    [SerializeField] private float speedThreshold = 50f;
+    [SerializeField] private float emmisionsPerFrame = 10f;
+
 
     private void Start()
     {
         speedLines = this.gameObject.GetComponent<ParticleSystem>();
         emissionModule = speedLines.emission;
-        mainModule = speedLines.main;
     }
 
     public void scaleSpeedLinesOnAcceleration(float speed)
     {
-        emissionModule.rateOverTime = Mathf.Lerp(10f, 30f, speed * Time.deltaTime);
-
-        mainModule.startLifetime = Mathf.Lerp(0.5f, 1.5f, speed * Time.deltaTime);
-        mainModule.startSpeed = Mathf.Lerp(20f, 40f, speed * Time.deltaTime);
-
-        if (speed > 50)
-        {
-            speedLines.Play();    
+        if (!speedLines.isPlaying) {
+            speedLines.Play();
         }
-        else speedLines.Pause();
-        
+
+        if (speed > speedThreshold)
+        {
+            float emissionRate = Mathf.Lerp(0f, 100f, emmisionsPerFrame *Time.deltaTime);
+            emissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(emissionRate);
+        }
+        else
+        {
+            emissionModule.rateOverTime = 0f;
+        }
+
     }
 }

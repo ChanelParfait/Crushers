@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5651398054168424187}
   - component: {fileID: 8878099548803394227}
   - component: {fileID: 9102360366218166401}
+  - component: {fileID: 4667149462210934712}
   m_Layer: 0
   m_Name: SpeedLines
   m_TagString: Untagged
@@ -50,7 +51,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -670,7 +671,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: 0, y: 1, z: 8}
+    m_Position: {x: 0, y: 0, z: 1.02}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -751,7 +752,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 7
+      value: 6.5
       mode: 0
       spread: 0
       speed:
@@ -4830,3 +4831,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4667149462210934712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840498553716203027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65fe594b0e1ae5247bb190537d221365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 80
+  emmisionsPerFrame: 100
