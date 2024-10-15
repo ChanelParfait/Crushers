@@ -346,6 +346,14 @@ public class PrometeoCarController : MonoBehaviour
 
     }
 
+    // JUMP to get unstuck
+    public void Jump(){
+      // if(jumpEnabled){
+      //}
+      Debug.Log("Jump");
+      carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
+    }
+
     //
     //STEERING METHODS
     //
