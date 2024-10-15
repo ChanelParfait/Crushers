@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -17,6 +18,8 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private PrometeoCarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
     [SerializeField] private CameraInputHandler freelookCam; 
+
+    private bool canJump = true;
 
     private void Awake(){
         // initialise controls and enable them 
@@ -77,6 +80,21 @@ public class PlayerInputHandler : MonoBehaviour
                 gameObject.GetComponentInChildren<CarRespawn>().Respawn();
             }
        }
+    }
+
+    public void OnJump(CallbackContext context){
+        if(context.performed){
+            if(canJump){
+                canJump = false;
+                carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
+                StartCoroutine(JumpCooldown(5));
+            }
+        }
+    }
+
+    private IEnumerator JumpCooldown(float delay){
+        yield return new WaitForSeconds(delay); 
+        canJump = true;
     }
 
     public void OnForward(CallbackContext context)
