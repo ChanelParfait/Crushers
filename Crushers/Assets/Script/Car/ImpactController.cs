@@ -13,6 +13,7 @@ public class ImpactController : MonoBehaviour
 
     private CinemachineImpulseSource impulseSource;
 
+    [SerializeField] private ParticleSystem impactSpark;
 
     private float hitTimer = 5f;
     private bool gotHit = false;
@@ -54,18 +55,25 @@ public class ImpactController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            //Calculate a hitForce based on the speed 
             float hitForce = carController.CalculateHitForce();
             hitForce = Mathf.Max(hitForce, 0f);
 
+            //Calculate hit amplitude for CAMERA SHAKE
             float hitAmplitude = hitForce * 0.0001f;
-            Debug.Log("hitForce: " + hitAmplitude);
+            //Debug.Log("hitForce: " + hitAmplitude);
             CameraController.Instance.ShakeCameraOnImpact(impulseSource, hitAmplitude);
 
+            //Get the rb of hit Object
             Rigidbody rb = collision.gameObject.GetComponentInParent<Rigidbody>();
             //Debug.Log("RB: " + rb.gameObject);
 
             if (rb != null)
             {
+               /* Vector3 impactPoint = collision.contacts[0].point;
+                ParticleSystem effect = Instantiate(impactSpark, impactPoint, Quaternion.identity);
+                if(!effect.isPlaying) effect.Play();*/
+
                 Vector3 forceDirection = transform.forward;
 
                 // Calculate new center of mass

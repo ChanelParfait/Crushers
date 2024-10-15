@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09633462, y: -0.0000001609507, z: 0.000000015577575, w: 0.99534905}
+  m_LocalRotation: {x: 0.0963348, y: 0, z: 0, w: 0.995349}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -490,7 +490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084420502779646190}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.122183256, y: -0, z: -0, w: 0.9925076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2.5, z: -10}
+  m_FollowOffset: {x: 0, y: 3, z: -12}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2.5, z: -10}
+  m_FollowOffset: {x: 0, y: 3, z: -12}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 3605173380067155964}
   - component: {fileID: 917531686857304176}
   - component: {fileID: 5368503896206573642}
-  - component: {fileID: 1124999955371104735}
+  - component: {fileID: 8577476282770043073}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1831,7 +1831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2.5, z: -10}
+  m_FollowOffset: {x: 0, y: 3, z: -12}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1899,7 +1899,7 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &1124999955371104735
+--- !u!114 &8577476282770043073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1913,9 +1913,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
+  m_AmplitudeGain: 0
   m_FrequencyGain: 1
-  mNoiseOffsets: {x: -705.58887, y: -195.43112, z: -844.55225}
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &4358900282340051097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,7 +2329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07056081, y: -0.00000014507023, z: 0.000000010261851, w: 0.9975075}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3379,6 +3379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 0}
   crashSFX: []
+  impactSpark: {fileID: 5608740451774923146}
 --- !u!114 &5888672055751983498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3404,11 +3405,11 @@ MonoBehaviour:
   pickUpImage: {fileID: 5369755218889901771}
   pickupSprites:
   - {fileID: 21300000, guid: c0654ab3113951548a2b2a63c5be311e, type: 3}
-  - {fileID: 21300000, guid: 66deea0729b54034eb5e4a6eba3c0e0c, type: 3}
+  - {fileID: 21300000, guid: a2a2197249d8f1e4a88855a4416d28e1, type: 3}
   - {fileID: 21300000, guid: bdf049843ecff4f4c8f6a294eb95a5ca, type: 3}
   - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
   - {fileID: 21300000, guid: 9ddc34c9b398e744caff4826abb99c18, type: 3}
-  - {fileID: 21300000, guid: ec8f4f61fa01e80448d82c6049347405, type: 3}
+  - {fileID: 21300000, guid: 66deea0729b54034eb5e4a6eba3c0e0c, type: 3}
 --- !u!114 &1493166302703072454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3598,7 +3599,7 @@ Transform:
   m_GameObject: {fileID: 9166503309574242643}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.83, z: -10}
+  m_LocalPosition: {x: 0, y: 3.33, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3629,7 +3630,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2076987966805777968}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -3649,7 +3650,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 0
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -3703,8 +3704,8 @@ MonoBehaviour:
   m_Orbits:
   - m_Height: 4.5
     m_Radius: 9.5
-  - m_Height: 2.5
-    m_Radius: 10
+  - m_Height: 3.5
+    m_Radius: 12
   - m_Height: 0.4
     m_Radius: 9.5
   m_LegacyHeadingBias: 3.4028235e+38
@@ -3927,16 +3928,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 49643463266541418}
     m_Modifications:
-    - target: {fileID: 6954851484683414165, guid: f8a8636676556664482c1776eeb61bb2,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7341945554946687143, guid: f8a8636676556664482c1776eeb61bb2,
-        type: 3}
-      propertyPath: m_VelocityScale
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8452432144136123460, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4006,6 +3997,12 @@ TrailRenderer:
 --- !u!96 &253828338488097218 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 1480447055957515100, guid: f8a8636676556664482c1776eeb61bb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661367874261639838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5608740451774923146 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6546090905671361300, guid: f8a8636676556664482c1776eeb61bb2,
     type: 3}
   m_PrefabInstance: {fileID: 1661367874261639838}
   m_PrefabAsset: {fileID: 0}
@@ -4118,7 +4115,7 @@ PrefabInstance:
     - target: {fileID: 8878099548803394227, guid: 300ab69d5c93b6c4685680ced2363807,
         type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 7
+      value: 6.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
