@@ -61,7 +61,7 @@ public class ImpactController : MonoBehaviour
 
             //Calculate hit amplitude for CAMERA SHAKE
             float hitAmplitude = hitForce * 0.0001f;
-            //Debug.Log("hitForce: " + hitAmplitude);
+            //Debug.Log("hitAmplitude: " + hitAmplitude);
             CameraController.Instance.ShakeCameraOnImpact(impulseSource, hitAmplitude);
 
             //Get the rb of hit Object
@@ -81,7 +81,8 @@ public class ImpactController : MonoBehaviour
                 newCenterOfMass.y = Mathf.Max(newCenterOfMass.y, 0f); 
 
                 rb.centerOfMass = newCenterOfMass;
-                //Debug.Log("New center of mass on Y: " + newCenterOfMass);
+                Debug.Log("New center of mass on Y: " + newCenterOfMass);
+                Debug.Log("hitforce: " + hitForce);
                 rb.AddForce(forceDirection * hitForce, ForceMode.Impulse);
             }
         }
