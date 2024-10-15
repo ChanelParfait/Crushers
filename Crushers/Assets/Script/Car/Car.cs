@@ -13,7 +13,7 @@ public class Car : ScriptableObject
     [SerializeField] private int maxSpeed = 90;
     [Range(10, 120)]
     [SerializeField] private int maxReverseSpeed = 45;
-    [Range(1, 20)] 
+    [Range(1, 15)] 
     [SerializeField] private int accelerationMultiplier = 2;
 
     [Header("Steering")]
@@ -23,7 +23,7 @@ public class Car : ScriptableObject
     [SerializeField] private float steeringSpeed = 0.5f;
 
     [Header("Deceleration")]
-    [Range(100, 1000)] 
+    [Range(1000, 2000)] 
     [SerializeField] private int brakeForce = 350;
     [Range(1, 10)] 
     [SerializeField] private float decelerationMultiplier = 2;
@@ -36,7 +36,7 @@ public class Car : ScriptableObject
     [SerializeField] private int bodyMass;
     [Range(200,1000)]
     [SerializeField] private int gravityMultiplier;
-    [Range(1000, 3000)]
+    [Range(1000, 5000)]
     [SerializeField] private float forceMagnitude =  50f;
 
     

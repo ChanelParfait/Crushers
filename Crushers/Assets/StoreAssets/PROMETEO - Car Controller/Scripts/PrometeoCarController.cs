@@ -710,7 +710,7 @@ public class PrometeoCarController : MonoBehaviour
             float airGravityModifier = (-1 * car.GetGravityMultiplier()) * Time.deltaTime;
             carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
 
-            Debug.Log("Current Gravity Applied: " + airGravityModifier);
+            //Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
 

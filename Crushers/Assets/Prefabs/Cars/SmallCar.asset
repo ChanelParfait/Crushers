@@ -16,12 +16,12 @@ MonoBehaviour:
     type: 3}
   maxSpeed: 200
   maxReverseSpeed: 120
-  accelerationMultiplier: 14
+  accelerationMultiplier: 12
   maxSteeringAngle: 50
   steeringSpeed: 2
-  brakeForce: 800
-  decelerationMultiplier: 7.5
+  brakeForce: 1000
+  decelerationMultiplier: 2
   handbrakeDriftMultiplier: 5
   bodyMass: 500
   gravityMultiplier: 800
-  forceMagnitude: 1200
+  forceMagnitude: 2000
