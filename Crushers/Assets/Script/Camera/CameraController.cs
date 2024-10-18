@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain,
                 targetAmplitude,
-                Time.deltaTime * 5f  
+                Time.deltaTime * 2.5f  
             );
         }
         else

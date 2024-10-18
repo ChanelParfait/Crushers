@@ -53,16 +53,17 @@ public class ImpactController : MonoBehaviour
     // If yes, applies force and changes center of mass of the player you hit
     private void Hit(Collision collision)
     {
+        //Calculate a hitForce based on the speed 
+        float hitForce = carController.CalculateHitForce();
+        hitForce = Mathf.Max(hitForce, 0f);
+
+        //Calculate hit amplitude for CAMERA SHAKE
+        float hitAmplitude = hitForce * 0.00008f;
+        //Debug.Log("hitAmplitude: " + hitAmplitude);
+        CameraController.Instance.ShakeCameraOnImpact(impulseSource, hitAmplitude);
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Calculate a hitForce based on the speed 
-            float hitForce = carController.CalculateHitForce();
-            hitForce = Mathf.Max(hitForce, 0f);
-
-            //Calculate hit amplitude for CAMERA SHAKE
-            float hitAmplitude = hitForce * 0.0001f;
-            //Debug.Log("hitAmplitude: " + hitAmplitude);
-            CameraController.Instance.ShakeCameraOnImpact(impulseSource, hitAmplitude);
 
             //Get the rb of hit Object
             Rigidbody rb = collision.gameObject.GetComponentInParent<Rigidbody>();
