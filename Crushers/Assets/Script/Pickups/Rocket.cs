@@ -10,6 +10,8 @@ public class Rocket : MonoBehaviour
     [SerializeField] private CarStats FiredBy;
     [SerializeField] private GameObject ExplosionVFX;
 
+    [SerializeField] private float Radius;
+
     //private AudioSource audioSource;
 
     
@@ -32,7 +34,7 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ExplosionDamage(this.transform.position, 10f);
+        ExplosionDamage(this.transform.position, Radius);
         Destroy(this.gameObject);
             
     }

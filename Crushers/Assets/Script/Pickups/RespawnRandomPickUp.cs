@@ -10,6 +10,10 @@ public class RespawnRandomPickUp : MonoBehaviour
     [SerializeField] private float TimeUntilRespawnPickups = 10;
 
     [SerializeField] private GameObject[] listofPickupTypes;
+
+    [SerializeField] private GameObject HighValuePickUp;
+
+    [SerializeField] private float percentageofHighPickup;
     public void Update()
     {
         if (this.gameObject.transform.childCount == 0)
@@ -42,8 +46,19 @@ public class RespawnRandomPickUp : MonoBehaviour
 
     private GameObject GetRandomPickUp()
     {
+        if (HighValuePickUp)
+        {
+            float randomvalue = UnityEngine.Random.Range(0f, 100f);
+            if (randomvalue <= percentageofHighPickup)
+            {
+                
+                return HighValuePickUp;
+            }
+        }
         int Random = UnityEngine.Random.Range(0, listofPickupTypes.Length);
 
         return (listofPickupTypes[Random]);
+        
+        
     }
 }

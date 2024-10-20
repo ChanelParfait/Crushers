@@ -29,9 +29,11 @@ public class PickUpManager : MonoBehaviour
 
     [SerializeField] public Shield State;
 
-    [SerializeField] private float ShieldTimer = 10;
+    [SerializeField] private float ShieldTimer = 7;
 
     [SerializeField] private float KamiKazeTimer = 10;
+
+    [SerializeField] private float KamiKazeRadius;
     public bool useItem = false;
 
 
@@ -115,11 +117,12 @@ public class PickUpManager : MonoBehaviour
     private void UseRocket()
     {
         
-        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
+        /*Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;
-            GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f, transform.rotation);
+        */
+            GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f + transform.forward, transform.rotation);
             RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
-            RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
+            //RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
             Collider spawnerCollider = this.GetComponent<Collider>();
@@ -136,9 +139,7 @@ public class PickUpManager : MonoBehaviour
             }
             Pickup = PickupType.None; 
             
-        
-        
-        
+            
     }
 
     private void UseShield()
@@ -148,7 +149,6 @@ public class PickUpManager : MonoBehaviour
         
         // spawn in a shield object
         if(!shield){
-            
             shield = Instantiate(shieldGO , transform.position + new Vector3(0, 1, 0.25f),transform.rotation, transform);
             shield.GetComponent<ShieldCollider>().SetPlayer(this.gameObject);
             shield.GetComponent<ShieldCollider>().PlayAudio(1, 0);
@@ -188,7 +188,7 @@ public class PickUpManager : MonoBehaviour
     IEnumerator KamiKazeExplosionTimer(float Delay)
     {
         yield return new WaitForSeconds(Delay);
-        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 30f);
+        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, KamiKazeRadius);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.GetComponentInParent<PickUpManager>() != null && 
@@ -200,12 +200,8 @@ public class PickUpManager : MonoBehaviour
                     // Apply explosion force to the player
                     
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
-                    
                 }
             }
-            
-            
-            
         }
         Destroy(KamiKaze);
         
@@ -213,11 +209,11 @@ public class PickUpManager : MonoBehaviour
 
     private void UseStun()
     {
-        Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
-        newLocation.y = 0f;
-        GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f, transform.rotation);
+        /*Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
+        newLocation.y = 0f;*/
+        GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f + transform.forward, transform.rotation);
         StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
-        StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
+        //StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
         Collider rocketCollider = StunGm.GetComponent<Collider>();
 

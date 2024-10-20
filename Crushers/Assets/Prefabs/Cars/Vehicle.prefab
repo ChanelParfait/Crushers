@@ -3666,6 +3666,7 @@ MonoBehaviour:
   State: 0
   ShieldTimer: 10
   KamiKazeTimer: 10
+  KamiKazeRadius: 50
   useItem: 0
   pickUpImage: {fileID: 5369755218889901771}
   pickupSprites:

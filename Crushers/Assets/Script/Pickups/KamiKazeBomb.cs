@@ -10,6 +10,7 @@ public class KamiKazeBomb : MonoBehaviour
     [SerializeField] private Vector3 maxScale = new Vector3(2f, 2f, 2f);  // Maximum scale
     [SerializeField] private CarStats Player;
     [SerializeField] private GameObject ExplosionVFX;
+   
     
     public void SetPlayer(CarStats player)
     {
