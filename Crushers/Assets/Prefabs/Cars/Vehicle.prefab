@@ -3668,6 +3668,7 @@ MonoBehaviour:
   KamiKazeTimer: 10
   KamiKazeRadius: 50
   useItem: 0
+  DisabledEffect: {fileID: 4138785285165660041}
   pickUpImage: {fileID: 5369755218889901771}
   pickupSprites:
   - {fileID: 21300000, guid: c0654ab3113951548a2b2a63c5be311e, type: 3}
@@ -4195,6 +4196,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 49643463266541418}
     m_Modifications:
+    - target: {fileID: 3342152571366528279, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233285593094085346, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549796321027737082, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549796321027737082, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8452432144136123460, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4264,6 +4285,12 @@ TrailRenderer:
 --- !u!96 &253828338488097218 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 1480447055957515100, guid: f8a8636676556664482c1776eeb61bb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661367874261639838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4138785285165660041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3342152571366528279, guid: f8a8636676556664482c1776eeb61bb2,
     type: 3}
   m_PrefabInstance: {fileID: 1661367874261639838}
   m_PrefabAsset: {fileID: 0}

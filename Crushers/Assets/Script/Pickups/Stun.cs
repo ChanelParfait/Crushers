@@ -42,16 +42,22 @@ public class Stun : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PrometeoCarController>().isActiveAndEnabled)
             {
-                StartCoroutine(DisablePlayers(5f, other.gameObject.GetComponentInParent<PrometeoCarController>()));
+                StartCoroutine(DisablePlayers(5f, other.gameObject.GetComponentInParent<PrometeoCarController>(), other.GetComponentInParent<PickUpManager>()));
             }
         }
         
     }
 
-    IEnumerator DisablePlayers(float delay, PrometeoCarController players)
+    IEnumerator DisablePlayers(float delay, PrometeoCarController players, PickUpManager playerdisabledeffect)
     {
         players.enabled = false;
+        if (!playerdisabledeffect.DisabledEffect.GetComponent<ParticleSystem>().isPlaying)
+        {
+            playerdisabledeffect.DisabledEffect.GetComponent<ParticleSystem>().Play();
+        }
         yield return new WaitForSeconds(delay);
+        playerdisabledeffect.DisabledEffect.GetComponent<ParticleSystem>().Stop();
         players.enabled = true;
+       
     }
 }

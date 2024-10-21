@@ -37,6 +37,8 @@ public class PickUpManager : MonoBehaviour
     public bool useItem = false;
 
 
+    [SerializeField] public GameObject DisabledEffect;
+
     // Visual Gameobjects
     private GameObject shield;
 
