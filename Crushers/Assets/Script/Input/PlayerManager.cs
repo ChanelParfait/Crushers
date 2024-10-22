@@ -244,7 +244,7 @@ public class PlayerManager : MonoBehaviour
             pi.playerCam.transform.position = startingPoints[pi.playerIndex + 1].position;
             pi.playerCam.transform.rotation = startingPoints[pi.playerIndex + 1].rotation;
 
-            var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5);
+            var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
 
             // set the layer
             pi.Input.gameObject.layer = layerToAdd;
