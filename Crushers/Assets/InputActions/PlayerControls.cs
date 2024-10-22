@@ -82,7 +82,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Restart"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""1d702693-62f5-4804-84ba-fef49e59fd57"",
                     ""expectedControlType"": ""Button"",
@@ -275,18 +275,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Restart"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""ab384a2c-2799-46b1-a48d-88a12148e8f3"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Restart"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -995,7 +995,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Reverse = m_Player.FindAction("Reverse", throwIfNotFound: true);
         m_Player_Brake = m_Player.FindAction("Brake", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
-        m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1078,7 +1078,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Reverse;
     private readonly InputAction m_Player_Brake;
     private readonly InputAction m_Player_UseItem;
-    private readonly InputAction m_Player_Restart;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1089,7 +1089,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Reverse => m_Wrapper.m_Player_Reverse;
         public InputAction @Brake => m_Wrapper.m_Player_Brake;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
-        public InputAction @Restart => m_Wrapper.m_Player_Restart;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1117,9 +1117,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
-            @Restart.started += instance.OnRestart;
-            @Restart.performed += instance.OnRestart;
-            @Restart.canceled += instance.OnRestart;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1142,9 +1142,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
-            @Restart.started -= instance.OnRestart;
-            @Restart.performed -= instance.OnRestart;
-            @Restart.canceled -= instance.OnRestart;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1357,7 +1357,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnReverse(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
-        void OnRestart(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
