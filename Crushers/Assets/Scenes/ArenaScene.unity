@@ -55557,6 +55557,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cutscene
       objectReference: {fileID: 0}
+    - target: {fileID: 6130025935202488544, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6208128880613152246, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
         type: 3}
       propertyPath: m_LocalPosition.x
