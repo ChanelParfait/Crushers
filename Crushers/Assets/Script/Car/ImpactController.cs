@@ -71,9 +71,13 @@ public class ImpactController : MonoBehaviour
 
             if (rb != null)
             {
-               /* Vector3 impactPoint = collision.contacts[0].point;
-                ParticleSystem effect = Instantiate(impactSpark, impactPoint, Quaternion.identity);
-                if(!effect.isPlaying) effect.Play();*/
+                Vector3 impactPoint = collision.contacts[0].point;
+
+                if (impactSpark != null)
+                {
+                    ParticleSystem effect = Instantiate(impactSpark, impactPoint, Quaternion.identity);
+                    effect.Play();
+                }
 
                 Vector3 forceDirection = transform.forward;
 

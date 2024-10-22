@@ -2457,7 +2457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.089905664, y: -0.0000010586099, z: 0.000000095562015, w: 0.99595034}
+  m_LocalRotation: {x: 0.089905664, y: -0.0000017300225, z: 0.00000015617125, w: 0.99595034}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4227,6 +4227,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 49643463266541418}
     m_Modifications:
+    - target: {fileID: 2349220544270260766, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349220544270260766, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349220544270260766, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3342152571366528279, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
       propertyPath: m_IsActive
@@ -4236,6 +4251,21 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546090905671361301, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546090905671361321, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: clearBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546090905671361322, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.18
       objectReference: {fileID: 0}
     - target: {fileID: 7549796321027737082, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
