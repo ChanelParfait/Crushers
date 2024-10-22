@@ -68,7 +68,7 @@ public static UnityAction<int> playerReady;
     {
         if(!selectionEnabled){ return; }
         if(context.performed){
-            prevBtn.GetComponent<Button>().onClick.Invoke();
+            //prevBtn.GetComponent<Button>().onClick.Invoke();
         
             PreviousVehicle();
         }
@@ -79,7 +79,7 @@ public static UnityAction<int> playerReady;
     {
         if(!selectionEnabled){ return; }
         if(context.performed){
-            nextBtn.GetComponent<Button>().onClick.Invoke();
+            //nextBtn.GetComponent<Button>().onClick.Invoke();
 
             NextVehicle();
         }
@@ -87,8 +87,9 @@ public static UnityAction<int> playerReady;
     }
 
     public void OnEnter(CallbackContext context){
-        
+        if(!inputEnabled){ return; }
         if(currentBtn && context.performed){
+            currentBtn.interactable = inputEnabled; 
             Debug.Log("Enter: " + currentBtn);
             currentBtn.onClick.Invoke();
         }
@@ -132,15 +133,35 @@ public static UnityAction<int> playerReady;
     public void SetVehicle(GameObject vehicle){
 
         if(!inputEnabled){ return; }
-
-        readyPnl.SetActive(true);
+        Debug.Log("Set Vehicle: " + vehicle);
+        // display ready menu
         menuPnl.SetActive(false);
-    
+        readyPnl.SetActive(true);
+        // invoke vehicle selected event
         vehicleSelected?.Invoke(playerIndex, vehicle);
-
-        currentBtn = readyBtn;
+        // erase currend button
+        currentBtn = null;
+        // disable selection and reset input delay
         selectionEnabled = false;
+        inputEnabled = false;
+        ignoreInputTime = Time.time + 0.5f;
+        // select ready button
+        readyBtn.Select();
 
+
+    }
+
+    public void Back(){
+        if(!inputEnabled){ return; }
+        Debug.Log("Back");
+        readyPnl.SetActive(false);
+        menuPnl.SetActive(true);
+        
+        UpdateVehicleDisplay();
+        selectionEnabled = true;
+        inputEnabled = false;
+        ignoreInputTime = Time.time + 0.5f;
+        currentBtn.Select();
 
     }
 
