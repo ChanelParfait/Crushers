@@ -54432,6 +54432,26 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 
       objectReference: {fileID: 1049226632}
+    - target: {fileID: 1775871804385350184, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9141361
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775871804385350184, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.11528677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775871804385350184, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.38561523
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775871804385350184, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.04863207
+      objectReference: {fileID: 0}
     - target: {fileID: 2169719375459613210, guid: 701c7ab9b65f2154fa3ebf69d777cf5e,
         type: 3}
       propertyPath: m_LookAt

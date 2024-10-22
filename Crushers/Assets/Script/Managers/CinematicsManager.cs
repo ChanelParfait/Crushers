@@ -10,18 +10,20 @@ public class CinematicsManager : MonoBehaviour
     private void Start()
     {
         playableDirector = GetComponent<PlayableDirector>();
+
+        PlayCutscene();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) {
-         PlayCutscene();
-        }
+    
     }
 
     public void PlayCutscene() {
 
         playableDirector.Play();
+
+        Debug.Log("Cutscene is playing");
 
     }
 }
