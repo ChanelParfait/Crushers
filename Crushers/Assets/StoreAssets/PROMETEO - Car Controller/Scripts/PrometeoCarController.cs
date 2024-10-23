@@ -288,9 +288,12 @@ public class PrometeoCarController : MonoBehaviour
             carRigidbody.centerOfMass = new Vector3(0,0,0);
         }
 
-        CameraController.Instance.ShakeCameraOnAcceleration(carSpeed);
-
         speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
+    }
+
+    private void FixedUpdate()
+    {
+        CameraController.Instance.ShakeCameraOnAcceleration(carSpeed);
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.

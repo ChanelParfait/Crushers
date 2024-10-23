@@ -29,19 +29,19 @@ public class CameraController : MonoBehaviour
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
        freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        float shakeSpeed = speed * Time.deltaTime;
+        float shakeSpeed = (speed * 0.5f ) * Time.deltaTime;
 
-        float maxAplitude = 1f;
+        float maxAplitude = 0.6f;
 
         float targetAmplitude = Mathf.Lerp(0, maxAplitude, shakeSpeed);
-
+        Debug.Log("Target amplitude: " + targetAmplitude);
         if (targetAmplitude > cinemachineBasicMultiChannelPerlin.m_AmplitudeGain)
         {
             // Accelerating: Increase shake quickly
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain,
                 targetAmplitude,
-                Time.deltaTime * 2.5f  
+                Time.deltaTime * 0.25f  
             );
         }
         else
@@ -50,10 +50,10 @@ public class CameraController : MonoBehaviour
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain,
                 targetAmplitude,
-                Time.deltaTime * 10f 
+                Time.deltaTime * 100f 
             );
         }
 
-        //Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
+        Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
     }
 }
