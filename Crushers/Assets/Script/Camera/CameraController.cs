@@ -24,20 +24,22 @@ public class CameraController : MonoBehaviour
         impulseSource.GenerateImpulseWithForce(impulseForce);
     }
 
+    //CameraShake on acceleration is supposed to be slow to build up and easy to lose 
     public void ShakeCameraOnAcceleration(float speed) {
 
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
        freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
+       
+        //Sets max target amplitude to be half of the vehicles speed 
         float shakeSpeed = (speed * 0.5f ) * Time.deltaTime;
 
         float maxAplitude = 0.6f;
 
         float targetAmplitude = Mathf.Lerp(0, maxAplitude, shakeSpeed);
-        Debug.Log("Target amplitude: " + targetAmplitude);
+        //Debug.Log("Target amplitude: " + targetAmplitude);
         if (targetAmplitude > cinemachineBasicMultiChannelPerlin.m_AmplitudeGain)
         {
-            // Accelerating: Increase shake quickly
+            // Accelerating: Increase shake slowly
             cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain,
                 targetAmplitude,
@@ -54,6 +56,6 @@ public class CameraController : MonoBehaviour
             );
         }
 
-        Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
+        //Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
     }
 }
