@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.115632914, y: 0.0000000074006037, z: -8.6153246e-10, w: 0.9932921}
+  m_LocalRotation: {x: 0.115632914, y: 0, z: 0, w: 0.99329203}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2457,7 +2457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08990566, y: 0, z: 0, w: 0.99595034}
+  m_LocalRotation: {x: 0.08990567, y: 0, z: 0, w: 0.9959503}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4271,6 +4271,16 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233285593094085346, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233285593094085346, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6336528869081166113, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
