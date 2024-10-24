@@ -14490,7 +14490,17 @@ PrefabInstance:
     - target: {fileID: 7854602314100448826, guid: fdf6f67f53b9d274c80efe4f313d7113,
         type: 3}
       propertyPath: crowdSoundsVolume
-      value: 0.4
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256939815437422399, guid: fdf6f67f53b9d274c80efe4f313d7113,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256939815437422399, guid: fdf6f67f53b9d274c80efe4f313d7113,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
