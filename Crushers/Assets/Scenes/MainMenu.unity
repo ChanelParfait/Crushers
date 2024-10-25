@@ -14484,6 +14484,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7854602314100448826, guid: fdf6f67f53b9d274c80efe4f313d7113,
         type: 3}
+      propertyPath: mainMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 39a5eedb589087645a9c122581386c52, type: 3}
+    - target: {fileID: 7854602314100448826, guid: fdf6f67f53b9d274c80efe4f313d7113,
+        type: 3}
+      propertyPath: crowdCheer
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a36877d9434e4745b3852414892b573, type: 3}
+    - target: {fileID: 7854602314100448826, guid: fdf6f67f53b9d274c80efe4f313d7113,
+        type: 3}
       propertyPath: mainMusicVolume
       value: 0.6
       objectReference: {fileID: 0}
