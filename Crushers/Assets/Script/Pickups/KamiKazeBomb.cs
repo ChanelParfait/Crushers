@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class KamiKazeBomb : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class KamiKazeBomb : MonoBehaviour
     [SerializeField] private Vector3 maxScale = new Vector3(2f, 2f, 2f);  // Maximum scale
     [SerializeField] private CarStats Player;
     [SerializeField] private GameObject ExplosionVFX;
-   
+    [SerializeField] private AudioClip[] explosionSFX;
     
     public void SetPlayer(CarStats player)
     {
@@ -28,5 +29,9 @@ public class KamiKazeBomb : MonoBehaviour
     {
         GameObject Explosion =  Instantiate(ExplosionVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
         Explosion.GetComponent<Explosion>().SetTimeBeforeDestruction(1);
+
+        // select random explosion SFX
+        AudioClip activeClip = explosionSFX[Random.Range(0,explosionSFX.Length - 1)];
+        AudioSource.PlayClipAtPoint(activeClip, transform.position);
     }
 }

@@ -84,7 +84,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnJump(CallbackContext context){
         if(context.performed){
-            if(canJump){
+            if(canJump && carController != null){
                 canJump = false;
                 carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
                 StartCoroutine(JumpCooldown(5));

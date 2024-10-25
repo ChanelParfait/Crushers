@@ -82,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: vehiclePitch
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 627225158436590600, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -131,6 +131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Lens.FieldOfView
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2198187969061989764, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2198187969061989764, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}

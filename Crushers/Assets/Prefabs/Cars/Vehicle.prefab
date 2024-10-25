@@ -178,7 +178,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f5a3af278a6a2024dad4a53719ffe0bb, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3644,6 +3644,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 16e285ba8a538d14c8c6b9462ae67dfd, type: 3}
   - {fileID: 8300000, guid: 5c1a605c1574bf74fb9b06c78626cbaf, type: 3}
   - {fileID: 8300000, guid: a61202141683e4f4aa3302f4d8e1d480, type: 3}
+  - {fileID: 8300000, guid: d4e21a906c5e8bc4bb28c41ff86f4960, type: 3}
+  - {fileID: 8300000, guid: d38f75dd23cce134b9c5429bb8c1cf10, type: 3}
+  - {fileID: 8300000, guid: b2a5a821a9f106f43ba3a6b05e98451a, type: 3}
+  - {fileID: 8300000, guid: 8b1574de629e356468253f3ab332bba9, type: 3}
+  - {fileID: 8300000, guid: a03fb341259a06b4aa5d13242c66ef5d, type: 3}
+  - {fileID: 8300000, guid: 80aca9db851e84647bb2d399da63a5b5, type: 3}
   impactSpark: {fileID: 5608740451774923146}
 --- !u!114 &5888672055751983498
 MonoBehaviour:

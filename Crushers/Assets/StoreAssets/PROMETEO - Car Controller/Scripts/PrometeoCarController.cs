@@ -321,7 +321,9 @@ public class PrometeoCarController : MonoBehaviour
           if(carEngineSound != null){
             float engineSoundPitch = 1 + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
             carEngineSound.pitch = engineSoundPitch;
-            carEngineSound.Play();
+            if(!carEngineSound.isPlaying){
+              carEngineSound.Play();
+            }
           }
           if((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
             if(!driftingSound.isPlaying){

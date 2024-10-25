@@ -4935,6 +4935,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 0
+  explosionSFX:
+  - {fileID: 8300000, guid: 509198f3735c1564bb7d51d4a9d084ce, type: 3}
+  - {fileID: 8300000, guid: b37a42f5e495de945bbdc6a0539d71d2, type: 3}
+  - {fileID: 8300000, guid: 2efdf7b84d4a24e4e84242385e02a866, type: 3}
+  - {fileID: 8300000, guid: 590f6fdd45920db448d33a0967e91b22, type: 3}
 --- !u!82 &-9005492786950886942
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4946,7 +4951,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 51a0fd218b54bbd4691583a37185bea0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.165
   m_Pitch: 1
   Loop: 0

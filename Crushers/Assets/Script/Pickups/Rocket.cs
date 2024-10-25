@@ -12,7 +12,7 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] private float Radius;
 
-    //private AudioSource audioSource;
+    [SerializeField] private AudioClip[] explosionSFX;
 
     
     private void Start()
@@ -41,8 +41,11 @@ public class Rocket : MonoBehaviour
 
     private void OnDestroy()
     {
-        
-        
+        // select random explosion SFX
+        AudioClip activeClip = explosionSFX[Random.Range(0,explosionSFX.Length - 1)];
+        GameObject listener = Camera.main.gameObject;
+        AudioSource.PlayClipAtPoint(activeClip,  listener.transform.position, 10);
+        Debug.Log("Explode: " + listener);
     }
 
     private void ExplosionDamage(Vector3 postion, float radius)

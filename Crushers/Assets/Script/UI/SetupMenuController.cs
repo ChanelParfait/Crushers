@@ -87,6 +87,8 @@ public static UnityAction<int> playerReady;
     }
 
     public void OnEnter(CallbackContext context){
+        Debug.Log("Input Enabled: " + inputEnabled);
+
         if(!inputEnabled){ return; }
         if(currentBtn && context.performed){
             currentBtn.interactable = inputEnabled; 
@@ -147,6 +149,7 @@ public static UnityAction<int> playerReady;
         ignoreInputTime = Time.time + 0.5f;
         // select ready button
         readyBtn.Select();
+        currentBtn = readyBtn;
 
 
     }
