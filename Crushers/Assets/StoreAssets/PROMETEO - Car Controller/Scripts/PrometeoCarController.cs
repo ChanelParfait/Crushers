@@ -288,9 +288,12 @@ public class PrometeoCarController : MonoBehaviour
             carRigidbody.centerOfMass = new Vector3(0,0,0);
         }
 
-        CameraController.Instance.ShakeCameraOnAcceleration(carSpeed);
-
         speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
+    }
+
+    private void FixedUpdate()
+    {
+        CameraController.Instance.ShakeCameraOnAcceleration(carSpeed);
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
@@ -316,9 +319,11 @@ public class PrometeoCarController : MonoBehaviour
       if(useSounds){
         try{
           if(carEngineSound != null){
-            float engineSoundPitch = vehiclePitch + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
+            float engineSoundPitch = 1 + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
             carEngineSound.pitch = engineSoundPitch;
-            carEngineSound.Play();
+            if(!carEngineSound.isPlaying){
+              carEngineSound.Play();
+            }
           }
           if((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
             if(!driftingSound.isPlaying){
