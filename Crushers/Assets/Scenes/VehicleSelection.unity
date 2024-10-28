@@ -238,6 +238,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4367505245486343689, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080337366505696747, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
         type: 3}
       propertyPath: m_Pivot.x
@@ -337,6 +362,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094774976790790112, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963001159325210661, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -778,6 +813,11 @@ PrefabInstance:
     - target: {fileID: 6452144840200849116, guid: 76ba1fdcfd88b9441a657063afdddffb,
         type: 3}
       propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863998798655086004, guid: 76ba1fdcfd88b9441a657063afdddffb,
+        type: 3}
+      propertyPath: m_PixelPerfect
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8546471179961501438, guid: 76ba1fdcfd88b9441a657063afdddffb,

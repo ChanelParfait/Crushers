@@ -117,17 +117,24 @@ public class PlayerManager : MonoBehaviour
         if( playerConfigs.All(p => p.isReady == true))
         {
             // load selected level
-            StartCoroutine(LoadSceneAsync(selectedMapIndex));
-            
+            StartCoroutine(DelayScreen(2));
         }   
+    }
+
+    private IEnumerator DelayScreen(float delay){
+        loadingScreen.DisplayScreen();
+        
+        yield return new WaitForSeconds(delay);
+        StartCoroutine(LoadSceneAsync(selectedMapIndex));
+
+
     }
 
     private IEnumerator LoadSceneAsync(int buildIndex){
         AsyncOperation operation = SceneManager.LoadSceneAsync(buildIndex);
-        loadingScreen.DisplayScreen();
 
         while(!operation.isDone){
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            float progress = Mathf.Clamp01(operation.progress / 0.9f );
             loadingScreen.UpdateProgress(progress);
             yield return null;
         }
