@@ -4278,6 +4278,16 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5233285593094085346, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233285593094085346, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6336528869081166113, guid: f8a8636676556664482c1776eeb61bb2,
         type: 3}
       propertyPath: playOnAwake

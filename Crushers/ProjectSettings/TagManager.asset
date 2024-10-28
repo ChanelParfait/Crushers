@@ -25,8 +25,8 @@ TagManager:
   - Player4
   - Ground
   - 
-  - 
-  - 
+  - Explosion1
+  - Explosion2
   - 
   - 
   - 
@@ -48,4 +48,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Explosion1
+    uniqueID: 427443141
+    locked: 0
+  - name: Explosion2
+    uniqueID: 2600111827
     locked: 0

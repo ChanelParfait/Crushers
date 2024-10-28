@@ -7,6 +7,9 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private float Timer;
 
+    [SerializeField] private GameObject Explosion1;
+    
+    [SerializeField] private GameObject Explosion2;
     private float TimeBeforeDestruction;
 
     private void Update()
@@ -23,6 +26,22 @@ public class Explosion : MonoBehaviour
     {
         TimeBeforeDestruction = time;
     }
-    
-    
+
+    private void OnEnable()
+    {
+        if (Explosion1 && Explosion1)
+        {
+            int randomNum = UnityEngine.Random.Range(0, 1);
+            if (randomNum == 0)
+            {
+                Explosion1.SetActive(true);
+            }
+
+            if (randomNum == 1)
+            {
+                Explosion2.SetActive(true);
+            }
+        }
+        
+    }
 }
