@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     // Game / Scene Management
     [SerializeField] private int selectedMapIndex; 
     private int leaderboardScene = 5; 
+    private LoadingScreen loadingScreen;
 
     // Events
     public static UnityAction<bool> ArenaLevelLoaded; 
@@ -116,10 +117,23 @@ public class PlayerManager : MonoBehaviour
         if( playerConfigs.All(p => p.isReady == true))
         {
             // load selected level
-            SceneManager.LoadScene(selectedMapIndex);
+            StartCoroutine(LoadSceneAsync(selectedMapIndex));
             
         }   
     }
+
+    private IEnumerator LoadSceneAsync(int buildIndex){
+        AsyncOperation operation = SceneManager.LoadSceneAsync(buildIndex);
+        loadingScreen.DisplayScreen();
+
+        while(!operation.isDone){
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingScreen.UpdateProgress(progress);
+            yield return null;
+        }
+    }
+
+
     
     public void SaveMapSelection(int index){
         //Debug.Log("Level Selected: " + index);
@@ -137,6 +151,9 @@ public class PlayerManager : MonoBehaviour
         if(scene.buildIndex == 1){
             // allow joining in vehicle selection level
             GetComponent<PlayerInputManager>().EnableJoining();
+            // find the loading screen game object
+            loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
+            Debug.Log("Loading Screen" + loadingScreen.gameObject.name);
         }
         
         // if scene index is an arena scene

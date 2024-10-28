@@ -12,6 +12,7 @@ TagManager:
   - Spawns
   - FxTemporaire
   - Projectile
+  - LoadingScreen
   layers:
   - Default
   - TransparentFX

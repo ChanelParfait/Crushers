@@ -87,9 +87,10 @@ GameObject:
   - component: {fileID: 7094774976790790112}
   - component: {fileID: 3881335019202761351}
   - component: {fileID: 1064302280136251791}
+  - component: {fileID: 804852668027957816}
   m_Layer: 5
   m_Name: LoadingScreen
-  m_TagString: Untagged
+  m_TagString: LoadingScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +178,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &804852668027957816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119150164144280867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874ed4ea658caac448c5bcb2fa9877e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 3640986428149945440}
+  progress: {fileID: 4367505245486343689}
 --- !u!1 &1573902427394986377
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4489421962153751450
 RectTransform:
   m_ObjectHideFlags: 0

@@ -390,6 +390,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 3640986428149945440, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489421962153751450, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6080337366505696747, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
         type: 3}
       propertyPath: m_Pivot.x
