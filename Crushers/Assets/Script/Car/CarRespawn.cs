@@ -43,7 +43,7 @@ public class CarRespawn : MonoBehaviour
         } else {
             // decrease car score by 1 if it is above 0
             if(carStats.score > 0){
-                carStats.DecreaseScore(1);
+                //carStats.DecreaseScore(1);
             }
         }
         
