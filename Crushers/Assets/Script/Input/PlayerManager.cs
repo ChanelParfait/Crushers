@@ -9,20 +9,27 @@ using System.Linq;
 using Unity.VisualScripting;
 using System;
 using Random = UnityEngine.Random;
+using UnityEditor;
 
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
+    private List<PlayerConfiguration> playerConfigs;
 
-    private List<PlayerConfiguration> playerConfigs; 
     // Player Initialising Values
     [SerializeField] private Transform[] startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
+    // Game State
+    private bool isPaused; 
 
+    private int currentScene = 0;
     // Game / Scene Management
     [SerializeField] private int selectedMapIndex; 
     private int leaderboardScene = 5; 
+    // Menus
     private LoadingScreen loadingScreen;
+    private PauseMenuController pauseMenu;
+
 
     // Events
     public static UnityAction<bool> ArenaLevelLoaded; 
@@ -52,6 +59,7 @@ public class PlayerManager : MonoBehaviour
         LevelManager.ArenaLevelStarted += EnableVehicleControls;
         SceneManager.sceneLoaded += OnLevelLoaded;
         MainMenuController.levelSelected += SaveMapSelection; 
+        PlayerInputHandler.Pause += OnPause;
 
     }
 
@@ -63,6 +71,8 @@ public class PlayerManager : MonoBehaviour
         LevelManager.ArenaLevelStarted -= EnableVehicleControls;    
         SceneManager.sceneLoaded -= OnLevelLoaded;
         MainMenuController.levelSelected -= SaveMapSelection; 
+        PlayerInputHandler.Pause -= OnPause;
+
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
@@ -108,8 +118,6 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-
-
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].isReady = true; 
@@ -140,9 +148,30 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    
+    private void OnPause(int playerIndex){
+        // display a pause menu and give the player who paused control
+        if(currentScene == 2 || currentScene == 3 || currentScene == 4){
+            if(pauseMenu){
+                if(!isPaused){
+                    Debug.Log("Pause: " + playerIndex);
+                    Time.timeScale = 0;  
+                    isPaused = true;
+                    pauseMenu.SetActive(true);
+                } else {
+                    Debug.Log("Unpause: " + playerIndex);
+                    Time.timeScale = 1; 
+                    isPaused = false;
+                    pauseMenu.SetActive(false);
+
+                }
+                
+            }
+        }
+    }
 
     
-    public void SaveMapSelection(int index){
+    private void SaveMapSelection(int index){
         //Debug.Log("Level Selected: " + index);
         selectedMapIndex = index;
     }
@@ -150,12 +179,13 @@ public class PlayerManager : MonoBehaviour
     // Level / Player Management 
 
     // keep track of what level we are currently in
-    public void OnLevelLoaded(Scene scene, LoadSceneMode mode){
+    private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
         //Debug.Log("Level Loaded: " + scene);
+        currentScene = scene.buildIndex;
         // ensure joining is initially disabled
         GetComponent<PlayerInputManager>().DisableJoining();
     
-        if(scene.buildIndex == 1){
+        if(currentScene == 1){
             // allow joining in vehicle selection level
             GetComponent<PlayerInputManager>().EnableJoining();
             // find the loading screen game object
@@ -164,7 +194,7 @@ public class PlayerManager : MonoBehaviour
         }
         
         // if scene index is an arena scene
-        if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
+        if(currentScene == 2 || currentScene == 3 || currentScene == 4){
             // initialise players with vehicles
             SetupArena();
         } else {
@@ -213,6 +243,7 @@ public class PlayerManager : MonoBehaviour
         //Debug.Log("Arena initialising...");
         // find starting points
         startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
+        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenuController>();
 
         // add vehicle for each player
         foreach(PlayerConfiguration playerConfig in playerConfigs){
@@ -224,7 +255,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    
+    // Level Initialisation // 
     private void AddVehicle(PlayerConfiguration pi)
     {
         Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
@@ -287,7 +318,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    // Level End Event
+    // Level End Event // 
     private void LoadLeaderboard()
     {
         Debug.Log("Level Complete");

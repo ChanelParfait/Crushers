@@ -13,6 +13,7 @@ TagManager:
   - FxTemporaire
   - Projectile
   - LoadingScreen
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
