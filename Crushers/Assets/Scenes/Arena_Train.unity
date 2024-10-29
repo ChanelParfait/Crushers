@@ -9879,7 +9879,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 894aa3f33b2c5ff4fac76e673bb6747d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 068eeaa6e78424d5487ef1944e3f7115, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -21732,6 +21732,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738876689844706551, guid: f0f278ee8fed8486292cc84742752a9d,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738876689844706551, guid: f0f278ee8fed8486292cc84742752a9d,
+        type: 3}
+      propertyPath: MinDistance
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738876689844706551, guid: f0f278ee8fed8486292cc84742752a9d,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738876689844706551, guid: f0f278ee8fed8486292cc84742752a9d,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
