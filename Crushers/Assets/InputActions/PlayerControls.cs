@@ -89,6 +89,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Honk"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce247f16-4dae-4db5-bb8c-9a763a2bc448"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""de38f0e0-72e0-4849-be31-f076e7d34118"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,7 +289,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5d0be3a9-07eb-4cfd-92b1-0b717aaa238f"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -287,6 +305,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b646284-3755-4801-bb0f-64d9a065787d"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Honk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""700da23e-3292-4c04-a66c-9bad14f5d046"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Honk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80838e16-65d9-4ba1-beed-ead4a0f20bbb"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfd47e62-9dd5-4388-8c77-7263cb9764e3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -965,6 +1027,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Brake = m_Player.FindAction("Brake", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Honk = m_Player.FindAction("Honk", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1047,6 +1111,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Brake;
     private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Honk;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1058,6 +1124,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Brake => m_Wrapper.m_Player_Brake;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Honk => m_Wrapper.m_Player_Honk;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1088,6 +1156,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Honk.started += instance.OnHonk;
+            @Honk.performed += instance.OnHonk;
+            @Honk.canceled += instance.OnHonk;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1113,6 +1187,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Honk.started -= instance.OnHonk;
+            @Honk.performed -= instance.OnHonk;
+            @Honk.canceled -= instance.OnHonk;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1318,6 +1398,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBrake(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnHonk(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
