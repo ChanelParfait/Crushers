@@ -380,7 +380,19 @@ MonoBehaviour:
     m_ActionId: e65e592b-0c0f-439d-aad7-e18e0f92d057
     m_ActionName: UI/Right[/Keyboard/a,/XInputControllerWindows/leftStick/right,/Keyboard/leftArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8042942846443331091}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnHonk
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ce247f16-4dae-4db5-bb8c-9a763a2bc448
     m_ActionName: Player/Honk[/Keyboard/c,/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:

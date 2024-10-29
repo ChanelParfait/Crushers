@@ -166,9 +166,9 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    public void OnHonkHorn(CallbackContext context) {
-        if (carController) {
-            carController.HonkHorn();
+    public void OnHonk(CallbackContext context) {
+        if (carController) {    
+            carController.HonkHorn(); 
         }
     }
     

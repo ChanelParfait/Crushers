@@ -354,9 +354,9 @@ public class PrometeoCarController : MonoBehaviour
 
     public void HonkHorn() {
         if (!hornSound.isPlaying) {
+            hornSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f);
             hornSound.Play();
         }
-        
     }
 
     // JUMP to get unstuck
