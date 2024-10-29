@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class ImpactController : MonoBehaviour
 {
     private PrometeoCarController carController;
+    private CameraController cameraController;
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
 
@@ -22,6 +23,7 @@ public class ImpactController : MonoBehaviour
     {
         carController = GetComponent<PrometeoCarController>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        cameraController = GetComponentInChildren<CameraController>();
     }
 
     private void Update()
@@ -60,7 +62,7 @@ public class ImpactController : MonoBehaviour
         //Calculate hit amplitude for CAMERA SHAKE
         float hitAmplitude = hitForce * 0.00008f;
         //Debug.Log("hitAmplitude: " + hitAmplitude);
-        CameraController.Instance.ShakeCameraOnImpact(impulseSource, hitAmplitude);
+        cameraController.ShakeCameraOnImpact(impulseSource, hitAmplitude);
 
         if (collision.gameObject.CompareTag("Player"))
         {

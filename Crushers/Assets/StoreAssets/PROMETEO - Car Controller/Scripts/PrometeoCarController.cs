@@ -28,6 +28,8 @@ public class PrometeoCarController : MonoBehaviour
 
     private ImpactController impactController;
 
+    private CameraController cameraController;
+
     public bool isMovingForward;
     public bool isReversing;
     public bool isBraking;
@@ -133,6 +135,7 @@ public class PrometeoCarController : MonoBehaviour
     void Start()
     {
       impactController = GameObject.FindObjectOfType<ImpactController>();
+      cameraController = GetComponentInChildren<CameraController>();
       //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
       //gameObject. Also, we define the center of mass of the car with the Vector3 given
       //in the inspector.
@@ -294,7 +297,7 @@ public class PrometeoCarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CameraController.Instance.ShakeCameraOnAcceleration(carSpeed);
+        cameraController.ShakeCameraOnAcceleration(carSpeed);
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.

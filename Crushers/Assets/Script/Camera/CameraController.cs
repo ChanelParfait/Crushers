@@ -5,16 +5,11 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    public static CameraController Instance { get; private set; }
 
     private CinemachineFreeLook freeLookCamera;
 
     private void Awake()
-    {
-        if (Instance == null) {
-            Instance = this;
-        }
-        
+    { 
         freeLookCamera = GetComponent<CinemachineFreeLook>();
     }
 
