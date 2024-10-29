@@ -50,7 +50,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 20
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 1985433619900671021}
   m_Follow: {fileID: 0}
@@ -324,6 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6208128880613152246}
+  - component: {fileID: 7243101907210346634}
   m_Layer: 0
   m_Name: Cutscene
   m_TagString: Untagged
@@ -350,6 +351,18 @@ Transform:
   - {fileID: 933184529651365872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7243101907210346634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130025935202488544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161d5df694e006e419f91bc7a7d9feae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7839720394953420608
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +373,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8429566204248873793}
   - component: {fileID: 65257890738096007}
-  - component: {fileID: 4176432614394534905}
   m_Layer: 0
   m_Name: Intro Sequence
   m_TagString: Untagged
@@ -411,15 +423,3 @@ PlayableDirector:
     - 584734de0322a8e4d961cfad764890b4: {fileID: 0}
     - 9507e6f126d57ea4eb9d43db5a8290d4: {fileID: 0}
     - 88705d3914282c64a81b12f53ed2801d: {fileID: 0}
---- !u!114 &4176432614394534905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7839720394953420608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 161d5df694e006e419f91bc7a7d9feae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

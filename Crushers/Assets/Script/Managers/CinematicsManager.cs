@@ -1,29 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class CinematicsManager : MonoBehaviour
+public class CutsceneController : MonoBehaviour
 {
     private PlayableDirector playableDirector;
 
     private void Start()
     {
-        playableDirector = GetComponent<PlayableDirector>();
-
-        PlayCutscene();
+        playableDirector = GetComponentInChildren<PlayableDirector>();
+        
+        if (playableDirector != null)
+        {
+            playableDirector.stopped += OnPlayableDirectorStopped;
+        }
     }
 
-    private void Update()
+    private void OnPlayableDirectorStopped(PlayableDirector director)
     {
-    
+        // Destroy the game object when the timeline finishes
+        Destroy(gameObject);
     }
 
-    public void PlayCutscene() {
-
-        playableDirector.Play();
-
-        Debug.Log("Cutscene is playing");
-
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event when the object is destroyed
+        if (playableDirector != null)
+        {
+            playableDirector.stopped -= OnPlayableDirectorStopped;
+        }
     }
 }
