@@ -91,7 +91,8 @@ public class PrometeoCarController : MonoBehaviour
       [Header("Sounds")]
       [SerializeField] private bool useSounds = false;
       [SerializeField] private AudioSource carEngineSound;
-      [SerializeField] private AudioSource driftingSound; 
+      [SerializeField] private AudioSource driftingSound;
+      [SerializeField] private AudioSource hornSound;
       [SerializeField] private float vehiclePitch; 
      // private float initialCarEngineSoundPitch;
     //CAR DATA
@@ -349,6 +350,13 @@ public class PrometeoCarController : MonoBehaviour
         }
       }
 
+    }
+
+    public void HonkHorn() {
+        if (!hornSound.isPlaying) {
+            hornSound.Play();
+        }
+        
     }
 
     // JUMP to get unstuck

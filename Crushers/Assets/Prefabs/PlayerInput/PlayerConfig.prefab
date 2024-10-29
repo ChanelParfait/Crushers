@@ -380,10 +380,14 @@ MonoBehaviour:
     m_ActionId: e65e592b-0c0f-439d-aad7-e18e0f92d057
     m_ActionName: UI/Right[/Keyboard/a,/XInputControllerWindows/leftStick/right,/Keyboard/leftArrow]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce247f16-4dae-4db5-bb8c-9a763a2bc448
+    m_ActionName: Player/Honk[/Keyboard/c,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5451132908520326122}
-        m_TargetAssemblyTypeName: SetupMenuController, Assembly-CSharp
-        m_MethodName: OnEnter
+      - m_Target: {fileID: 8042942846443331091}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnPause
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -393,8 +397,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e7a4ca06-7a78-4530-8dd3-c8995597d973
-    m_ActionName: UI/Enter[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+    m_ActionId: de38f0e0-72e0-4849-be31-f076e7d34118
+    m_ActionName: Player/Pause[/XInputControllerWindows/start,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -442,8 +446,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -34.949677, y: 180.82753, z: 36.035538}
+  m_LocalRotation: {x: 0.033532117, y: -0.3544352, z: 0.012719453, w: 0.93439263}
+  m_LocalPosition: {x: 51.33, y: 72.79599, z: 76.81848}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -480,11 +484,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 50
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 38
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -743,7 +747,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6969347420349152103, guid: 6027ea41d6186bb469aa2b68505fba76, type: 3}
+    - {fileID: 4960864326887935, guid: 6027ea41d6186bb469aa2b68505fba76, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

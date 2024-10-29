@@ -14,16 +14,22 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private InputActionAsset controls; 
     private InputActionMap player; 
+    private int playerIndex; 
 
     [SerializeField] private PrometeoCarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
     [SerializeField] private CameraInputHandler freelookCam; 
 
     private bool canJump = true;
+    // Actions
+    public static UnityAction<int> Pause; 
+
 
     private void Awake(){
         // initialise controls and enable them 
-        controls = GetComponent<PlayerInput>().actions;
+        PlayerInput input = GetComponent<PlayerInput>();
+        controls = input.actions;
+        playerIndex = input.playerIndex;
         player = controls.FindActionMap("Player");
         player.Enable();
 
@@ -154,5 +160,16 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnPause(CallbackContext context){
+        // invoke a pause event
+        Pause?.Invoke(playerIndex);
+    }
+
+
+    public void OnHonkHorn(CallbackContext context) {
+        if (carController) {
+            carController.HonkHorn();
+        }
+    }
     
 }

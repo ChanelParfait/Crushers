@@ -22,6 +22,7 @@ public class LeaderboardController : MonoBehaviour
         leaderboardConfigs = new List<PlayerConfiguration>();
         // look for the player manager
         pm = FindObjectOfType<PlayerManager>();
+
         // get player configs
         if(pm){
             leaderboardConfigs = pm.GetPlayerConfigs();
