@@ -2554,7 +2554,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 894aa3f33b2c5ff4fac76e673bb6747d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3700,6 +3700,7 @@ MonoBehaviour:
   useSounds: 1
   carEngineSound: {fileID: 2198187969061989764}
   driftingSound: {fileID: 1280518691873253039}
+  hornSound: {fileID: 163063040914083204}
   vehiclePitch: 0
   carSpeed: 0
   isDrifting: 0
