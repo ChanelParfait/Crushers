@@ -1164,6 +1164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f993ce4f2c48e4cb93ee947daa1057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   vehicleList:
   - {fileID: 7787799874494901794}
   - {fileID: 6663109085373646067}
@@ -1175,6 +1176,7 @@ MonoBehaviour:
   readyBtn: {fileID: 9181028400679246515}
   nextBtn: {fileID: 4731796564584267801}
   prevBtn: {fileID: 613471967300643998}
+  currentBtn: {fileID: 0}
 --- !u!1 &1464857908034965758
 GameObject:
   m_ObjectHideFlags: 0

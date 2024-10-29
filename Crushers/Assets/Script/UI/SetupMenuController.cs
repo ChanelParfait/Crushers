@@ -14,29 +14,29 @@ using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class SetupMenuController : MonoBehaviour
-{
-private int playerIndex;
-public static UnityAction<int, GameObject> vehicleSelected; 
-public static UnityAction<int> playerReady;
+{   
+    // player index and event system
+    private int playerIndex;
+    private MultiplayerEventSystem eventSystem;
 
-     //List of vehicles to choose from 
+    // Events //
+    public static UnityAction<int, GameObject> vehicleSelected; 
+    public static UnityAction<int> playerReady;
+
+     //List of vehicles to choose from
      [SerializeField] private GameObject[] vehicleList;
      private int currentVehicleIndex = 0;
 
-     [SerializeField] private TextMeshProUGUI titleTxt; 
-     [SerializeField] private GameObject readyPnl; 
-     [SerializeField] private GameObject menuPnl; 
-     [SerializeField] private Button readyBtn;
-     [SerializeField] private GameObject nextBtn;
-     [SerializeField] private GameObject prevBtn;
-
-     private Button currentBtn;
+     /// UI Gameobjects //
+    [SerializeField] private TextMeshProUGUI titleTxt; 
+    [SerializeField] private GameObject readyPnl; 
+    [SerializeField] private GameObject menuPnl; 
+    [SerializeField] private Button readyBtn;
 
 
      private float ignoreInputTime = 0.1f;
      private bool inputEnabled;
      private bool selectionEnabled;
-
 
     void Start()
     {
@@ -49,7 +49,8 @@ public static UnityAction<int> playerReady;
         playerIndex = GetComponentInParent<PlayerInput>().playerIndex; 
         titleTxt.SetText("Player" + (playerIndex + 1).ToString());
         ignoreInputTime = Time.time + ignoreInputTime;
-        //nextBtn.GetComponent<Button>().Select();
+        
+        eventSystem = GetComponentInChildren<MultiplayerEventSystem>();
 
         selectionEnabled = true;
         UpdateVehicleDisplay();
@@ -68,9 +69,10 @@ public static UnityAction<int> playerReady;
     {
         if(!selectionEnabled){ return; }
         if(context.performed){
-            //prevBtn.GetComponent<Button>().onClick.Invoke();
-        
-            PreviousVehicle();
+            // select previous vehicle
+            vehicleList[currentVehicleIndex].SetActive(false);
+            currentVehicleIndex = (currentVehicleIndex - 1 + vehicleList.Length) % vehicleList.Length;
+            UpdateVehicleDisplay();
         }
 
     }
@@ -79,110 +81,65 @@ public static UnityAction<int> playerReady;
     {
         if(!selectionEnabled){ return; }
         if(context.performed){
-            //nextBtn.GetComponent<Button>().onClick.Invoke();
-
-            NextVehicle();
+            // select next vehicle
+            vehicleList[currentVehicleIndex].SetActive(false);
+            currentVehicleIndex = (currentVehicleIndex + 1) % vehicleList.Length;
+            UpdateVehicleDisplay();
         }
 
-    }
-
-    public void OnEnter(CallbackContext context){
-        Debug.Log("Input Enabled: " + inputEnabled);
-
-        if(!inputEnabled){ return; }
-        if(currentBtn && context.performed){
-            currentBtn.interactable = inputEnabled; 
-            Debug.Log("Enter: " + currentBtn);
-            currentBtn.onClick.Invoke();
-        }
     }
 
     public void Click(string st){
         Debug.Log("Click: " + st);
     }
 
-    //Show next vehicle
-    public void PreviousVehicle()
-    {
-        Debug.Log("PREV Vehicle " + currentVehicleIndex);
-
-        
-
-        vehicleList[currentVehicleIndex].SetActive(false);
-
-        currentVehicleIndex = (currentVehicleIndex - 1 + vehicleList.Length) % vehicleList.Length;
-        Debug.Log("New vehicle " + currentVehicleIndex);
-
-
-        UpdateVehicleDisplay();
-    }
-
-    //Show previous vehicle
-    public void NextVehicle()
-    {
-        
-        Debug.Log("NXT Vehicle " + currentVehicleIndex);
-
-
-        vehicleList[currentVehicleIndex].SetActive(false);
-
-        currentVehicleIndex = (currentVehicleIndex + 1) % vehicleList.Length;
-        
-         Debug.Log("New vehicle " + currentVehicleIndex);
-        UpdateVehicleDisplay();
-    }
 
     public void SetVehicle(GameObject vehicle){
-
         if(!inputEnabled){ return; }
-        Debug.Log("Set Vehicle: " + vehicle);
+
         // display ready menu
         menuPnl.SetActive(false);
         readyPnl.SetActive(true);
         // invoke vehicle selected event
         vehicleSelected?.Invoke(playerIndex, vehicle);
-        // erase currend button
-        currentBtn = null;
         // disable selection and reset input delay
         selectionEnabled = false;
-        inputEnabled = false;
-        ignoreInputTime = Time.time + 0.5f;
         // select ready button
-        readyBtn.Select();
-        currentBtn = readyBtn;
-
-
+        Select(readyBtn.gameObject);
     }
 
     public void Back(){
         if(!inputEnabled){ return; }
-        Debug.Log("Back");
+        // display selection menu
         readyPnl.SetActive(false);
         menuPnl.SetActive(true);
-        
-        UpdateVehicleDisplay();
+        // enable selection
         selectionEnabled = true;
-        inputEnabled = false;
-        ignoreInputTime = Time.time + 0.5f;
-        currentBtn.Select();
-
+        UpdateVehicleDisplay();
     }
 
     public void ReadyPlayer(){
-        Debug.Log("Ready");
         if(!inputEnabled){ return; }
+        // hide ready button
         readyBtn.gameObject.SetActive(false);
-
+        // ready up player
         playerReady?.Invoke(playerIndex);
-
     }
 
 
     private void UpdateVehicleDisplay()
     {
         // display selected vehicle
-        Debug.Log("Vehicle: " + vehicleList[currentVehicleIndex]);
         vehicleList[currentVehicleIndex].SetActive(true);
-        currentBtn =  vehicleList[currentVehicleIndex].GetComponent<Button>();
+        Select(vehicleList[currentVehicleIndex]);
+    }
+
+
+    private void Select(GameObject button){
+        if(gameObject.GetComponentInParent<SetupMenuController>().playerIndex == playerIndex){
+            eventSystem.SetSelectedGameObject(button);
+            Debug.Log("Player " + playerIndex + " Selected: " + eventSystem.currentSelectedGameObject); 
+        }
+        
     }
 }

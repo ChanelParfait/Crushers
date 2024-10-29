@@ -31,11 +31,16 @@ public class VehicleUIController : MonoBehaviour
     }
 
     public void UpdateLevelTimer(int time){
+        if(time <= 10){
+            StartCountdown(time);
+            return; 
+        }
+
         // convert time to minutes and seconds
         int minutes = time / 60;
         int seconds = time % 60;
 
-        levelTimerTxt.SetText(minutes.ToString() + ":" + seconds.ToString());
+        levelTimerTxt.SetText(string.Format("{0:0}:{1:00}", minutes, seconds));
     }
 
     public void UpdateStartTimer(int time){
@@ -50,8 +55,15 @@ public class VehicleUIController : MonoBehaviour
         }
     }
 
+    private void StartCountdown(int time){
+        levelTimerTxt.gameObject.SetActive(false);
+        startTimerTxt.color = Color.red;
+        startTimerTxt.SetText(time.ToString());
+        startTimer.SetActive(true);
+    }
+
     private IEnumerator ClearStartTimer(){
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         startTimer.SetActive(false);
     }
 
