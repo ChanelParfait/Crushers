@@ -161,8 +161,10 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     public void OnPause(CallbackContext context){
-        // invoke a pause event
-        Pause?.Invoke(playerIndex);
+        if(context.performed){
+            // invoke a pause event
+            Pause?.Invoke(playerIndex);
+        }
     }
 
 
