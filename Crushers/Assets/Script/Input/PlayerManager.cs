@@ -282,7 +282,7 @@ public class PlayerManager : MonoBehaviour
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
         pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
         // disable camera shake
-        pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
+        //pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
         
         // set vehicle canvas to apply to player camera 
         pi.vehicleObject.GetComponentInChildren<Canvas>().worldCamera = pi.playerCam;
@@ -293,25 +293,34 @@ public class PlayerManager : MonoBehaviour
     private void SetupPlayerCamera(PlayerConfiguration pi){
 
         int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
+        var cullingMask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
+        var impulseMask = 1 << pi.playerIndex;
         if(pi.playerCam == null){
             // get camera component
             pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
             pi.playerCam.transform.position = startingPoints[pi.playerIndex + 1].position;
             pi.playerCam.transform.rotation = startingPoints[pi.playerIndex + 1].rotation;
 
-            var bitmask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
+            
 
             // set the layer
             pi.Input.gameObject.layer = layerToAdd;
             pi.playerCam.gameObject.layer = layerToAdd;
             // add the layer
-            pi.playerCam.cullingMask = bitmask;
+            pi.playerCam.cullingMask = cullingMask;
         }
         // put vehicle and free look camera on player layer 
         if(pi.vehicleObject != null){
             pi.vehicleObject.layer = layerToAdd;
             //set the layer
-            pi.vehicleObject.GetComponentInChildren<CinemachineFreeLook>().gameObject.layer = layerToAdd;
+            CinemachineFreeLook freeLook = pi.vehicleObject.GetComponentInChildren<CinemachineFreeLook>();
+            freeLook.gameObject.layer = layerToAdd;
+
+            CinemachineImpulseSource source = pi.vehicleObject.GetComponent<CinemachineImpulseSource>();
+            source.m_ImpulseDefinition.m_ImpulseChannel = impulseMask;
+            CinemachineImpulseListener listener = freeLook.gameObject.GetComponent<CinemachineImpulseListener>();
+            listener.m_ChannelMask = impulseMask;
+
             // find speed lines and put them on the player layer
             pi.vehicleObject.GetComponentInChildren<SpeedLines>().gameObject.layer = layerToAdd;
         }
@@ -339,7 +348,7 @@ public class PlayerManager : MonoBehaviour
     private void EnableVehicleControls(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
             playerConfig.InputHandler.GetCarController().enabled = true;
-            playerConfig.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = true;
+            //playerConfig.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = true;
         }
     }
 

@@ -65,6 +65,7 @@ public class VehicleUIController : MonoBehaviour
     private IEnumerator ClearStartTimer(){
         yield return new WaitForSeconds(1);
         startTimer.SetActive(false);
+
     }
 
 

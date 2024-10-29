@@ -58,8 +58,8 @@ public class LevelManager : MonoBehaviour
             if(!startCountdownEnded){
                 startCountdownTimer--;
                 
-                if(startTimeChanged != null)
-                    startTimeChanged.Invoke(startCountdownTimer);
+                
+                startTimeChanged?.Invoke(startCountdownTimer);
 
                 if(startCountdownTimer == 0){
                     startCountdownEnded = true;
