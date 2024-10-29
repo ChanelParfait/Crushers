@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePnl: {fileID: 7287209444589202775}
+  eventSystem: {fileID: 7456258131037016742}
 --- !u!1 &5567650688694223199
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &723638225706056533
 Transform:
   m_ObjectHideFlags: 0

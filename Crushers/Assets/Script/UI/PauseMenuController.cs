@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class PauseMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject pausePnl; 
+    [SerializeField] private GameObject eventSystem; 
 
     public void SetActive(bool isActive){
+        eventSystem.SetActive(isActive);
         pausePnl.SetActive(isActive);
     }
 
