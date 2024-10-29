@@ -1366,7 +1366,7 @@ GameObject:
   - component: {fileID: 1064802462}
   m_Layer: 0
   m_Name: Cone
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2434,7 +2434,7 @@ GameObject:
   - component: {fileID: 1229254594}
   - component: {fileID: 1229254593}
   - component: {fileID: 1229254592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BlackHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8083,7 +8083,7 @@ GameObject:
   - component: {fileID: 1472137062}
   - component: {fileID: 1472137064}
   - component: {fileID: 1472137063}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arena
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -20534,6 +20534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336156100681036938, guid: 8f17e752ff83c488e9899f93a5089c9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 7417726245448925154, guid: 8f17e752ff83c488e9899f93a5089c9d,
         type: 3}
