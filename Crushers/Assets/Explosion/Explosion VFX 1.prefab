@@ -4855,7 +4855,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 1
@@ -4968,6 +4968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 0
+  Explosion1: {fileID: 0}
+  Explosion2: {fileID: 0}
 --- !u!82 &-9005492786950886942
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5181,6 +5183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startDelay.scalar
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226888052703040408, guid: 7ec363c8df426644ea85f8d6d570561c,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7226888052703040408, guid: 7ec363c8df426644ea85f8d6d570561c,
         type: 3}

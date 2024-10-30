@@ -9,9 +9,41 @@ public class ShieldCollider : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip bubble;
     [SerializeField] private AudioClip pop;
+
+    public LayerMask groundLayer;
+    
     void OnEnable()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        Collider shieldCollider = GetComponent<Collider>();
+        
+        if (shieldCollider != null)
+        {
+            // Get all colliders on the ground layer
+            
+            Collider[] allColliders = FindObjectsOfType<Collider>();
+
+            foreach (Collider col in allColliders)
+            {
+                // Check if the collider belongs to the ground layer using LayerMask
+                if (groundLayer == (groundLayer | (1 << col.gameObject.layer)))
+                {
+                    Physics.IgnoreCollision(shieldCollider, col);
+                }
+            }
+
+            // Ignore collisions with all player child colliders
+            Collider[] playerColliders = Player.GetComponentsInChildren<Collider>();
+            foreach (Collider playerCollider in playerColliders)
+            {
+                Physics.IgnoreCollision(shieldCollider, playerCollider);
+            }
+        }
+        
     }
 
     void OnDisable()
@@ -37,17 +69,16 @@ public class ShieldCollider : MonoBehaviour
             audioSource.Play();
         }
     }
-
     
     
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         Rigidbody otherRB = other.gameObject.GetComponentInParent<Rigidbody>();
         if(otherRB){
             if (otherRB.gameObject != Player && other.gameObject.CompareTag("Player"))
             {
-                
                 otherRB.AddExplosionForce(100000, gameObject.transform.position, 10f, 10, ForceMode.Force);
+               
             }
         }
     }

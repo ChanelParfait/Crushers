@@ -101,7 +101,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -122,6 +122,9 @@ MonoBehaviour:
   Player: {fileID: 0}
   bubble: {fileID: 8300000, guid: f72ec02718e93054bad1440076a8f3bd, type: 3}
   pop: {fileID: 8300000, guid: f8ec2ace670010e448e4189a9d78f84b, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!82 &4659280408270141957
 AudioSource:
   m_ObjectHideFlags: 0

@@ -11544,7 +11544,7 @@ GameObject:
   - component: {fileID: 208765790}
   - component: {fileID: 208765789}
   - component: {fileID: 208765788}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13186,7 +13186,7 @@ GameObject:
   - component: {fileID: 295076173}
   - component: {fileID: 295076172}
   - component: {fileID: 295076171}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prism (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30999,7 +30999,7 @@ GameObject:
   - component: {fileID: 1443312922}
   - component: {fileID: 1443312921}
   - component: {fileID: 1443312920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prism (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -52277,7 +52277,7 @@ GameObject:
   - component: {fileID: 2080318560}
   - component: {fileID: 2080318559}
   - component: {fileID: 2080318558}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Terrain_Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -54153,7 +54153,7 @@ GameObject:
   - component: {fileID: 2119611412}
   - component: {fileID: 2119611411}
   - component: {fileID: 2119611410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prism (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
