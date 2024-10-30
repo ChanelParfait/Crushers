@@ -78,7 +78,7 @@ public class ShieldCollider : MonoBehaviour
             if (otherRB.gameObject != Player && other.gameObject.CompareTag("Player"))
             {
                 otherRB.AddExplosionForce(100000, gameObject.transform.position, 10f, 10, ForceMode.Force);
-               
+                other.gameObject.GetComponentInParent<CarStats>().SetLastCollidedVehicle(Player.GetComponent<CarStats>());
             }
         }
     }

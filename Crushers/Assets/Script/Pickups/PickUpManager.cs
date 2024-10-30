@@ -202,6 +202,8 @@ public class PickUpManager : MonoBehaviour
                     // Apply explosion force to the player
                     
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
+                    
+                    hitCollider.gameObject.GetComponentInParent<CarStats>().SetLastCollidedVehicle(this.gameObject.GetComponent<CarStats>());
                 }
             }
         }

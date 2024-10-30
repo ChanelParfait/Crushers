@@ -42,6 +42,7 @@ public class Stun : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<PrometeoCarController>().isActiveAndEnabled)
             {
+                
                 StartCoroutine(DisablePlayers(5f, other.gameObject.GetComponentInParent<PrometeoCarController>(), other.GetComponentInParent<PickUpManager>()));
             }
         }
