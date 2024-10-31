@@ -37,7 +37,7 @@ public class PrometeoCarController : MonoBehaviour
     public bool isTurning;
     public float steeringAngle;
     public bool isDecelerating;
-    public bool isGrounded;
+    public bool isGrounded = true;
 
     // Event
     public static UnityAction hitGround; 
@@ -147,6 +147,7 @@ public class PrometeoCarController : MonoBehaviour
       carRigidbody = gameObject.GetComponent<Rigidbody>();
       carRigidbody.centerOfMass = car.GetBodyMassCenter();
       carRigidbody.mass = car.GetBodyMass();
+      isGrounded = true;
       //Initial setup to calculate the drift value of the car. This part could look a bit
       //complicated, but do not be afraid, the only thing we're doing here is to save the default
       //friction values of the car wheels so we can set an appropiate drifting value later.
@@ -723,6 +724,7 @@ public class PrometeoCarController : MonoBehaviour
       WheelHit hit;
       bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
       if(!isGrounded && newIsGrounded){
+        Debug.Log("Wheels Hit Ground");
         hitGround?.Invoke();
       }
         isGrounded = newIsGrounded;
