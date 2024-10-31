@@ -228,7 +228,7 @@ public class PlayerManager : MonoBehaviour
             //Debug.Log("Player Joined: " + pi.playerIndex);
             // create configuration object for player 
             PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
-            SetupPlayerCamera(playerConfig); 
+            SetupPlayerLayers(playerConfig); 
             playerConfigs.Add(playerConfig);
             pi.transform.SetParent(transform);
             pi.transform.position = new Vector3(0,0,0);
@@ -267,6 +267,8 @@ public class PlayerManager : MonoBehaviour
         // spawn vehicle from player config as child of player config
         pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex + 1].position, startingPoints[pi.playerIndex + 1].rotation, pi.Input.gameObject.transform);
         
+
+
         // get UI controller for each vehicle
         pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
 
@@ -275,8 +277,7 @@ public class PlayerManager : MonoBehaviour
         pi.InputHandler.SetCarController(car);
         // disable vehicle controls initially
         car.enabled = false;
-        
-
+    
 
         //initialise other input handler components
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
@@ -286,15 +287,16 @@ public class PlayerManager : MonoBehaviour
         
         // set vehicle canvas to apply to player camera 
         pi.vehicleObject.GetComponentInChildren<Canvas>().worldCamera = pi.playerCam;
-        SetupPlayerCamera(pi); 
+        SetupPlayerLayers(pi); 
         
     }
     
-    private void SetupPlayerCamera(PlayerConfiguration pi){
+    private void SetupPlayerLayers(PlayerConfiguration pi){
 
         int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
         var cullingMask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
         var impulseMask = 1 << pi.playerIndex;
+        var colliderMask = 1 << layerToAdd;
         if(pi.playerCam == null){
             // get camera component
             pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
@@ -312,6 +314,14 @@ public class PlayerManager : MonoBehaviour
         // put vehicle and free look camera on player layer 
         if(pi.vehicleObject != null){
             pi.vehicleObject.layer = layerToAdd;
+            BoxCollider[] colliders = pi.vehicleObject.GetComponentsInChildren<BoxCollider>();
+            foreach(BoxCollider collider in colliders){
+                if(collider.gameObject.tag == "Player"){
+                    collider.gameObject.layer = layerToAdd;
+                    collider.excludeLayers = colliderMask;
+                }
+            }
+
             //set the layer
             CinemachineFreeLook freeLook = pi.vehicleObject.GetComponentInChildren<CinemachineFreeLook>();
             freeLook.gameObject.layer = layerToAdd;

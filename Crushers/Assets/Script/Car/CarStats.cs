@@ -103,11 +103,14 @@ public class CarStats : MonoBehaviour
         return lastCollidedVehicle;
     }
     public void SetLastCollidedVehicle(CarStats lastCollided){
-        Debug.Log("Set last Collided");
-        StopCoroutine(ClearLastCollided(5f));
-        lastCollidedVehicle = lastCollided;
-        // Start coroutine to clear the last collided player after 5 seconds
-        StartCoroutine(ClearLastCollided(5f));
+        if(lastCollided){
+            Debug.Log("Set last Collided");
+            StopCoroutine(ClearLastCollided(5f));
+            lastCollidedVehicle = lastCollided;
+            // Start coroutine to clear the last collided player after 5 seconds
+            StartCoroutine(ClearLastCollided(5f));
+        }
+        
     }
 
     private IEnumerator ClearLastCollided(float delay)

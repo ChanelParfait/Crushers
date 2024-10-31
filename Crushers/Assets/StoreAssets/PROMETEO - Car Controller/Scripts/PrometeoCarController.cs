@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
@@ -37,6 +38,10 @@ public class PrometeoCarController : MonoBehaviour
     public float steeringAngle;
     public bool isDecelerating;
     public bool isGrounded;
+
+    // Event
+    public static UnityAction hitGround; 
+
 
     //WHEELS
 
@@ -715,8 +720,12 @@ public class PrometeoCarController : MonoBehaviour
     //mb use events ?
     public void GroundChecker()
     {
-        WheelHit hit;
-        isGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit);
+      WheelHit hit;
+      bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
+      if(!isGrounded && newIsGrounded){
+        hitGround?.Invoke();
+      }
+        isGrounded = newIsGrounded;
     }
 
     public void GravityModifier()
