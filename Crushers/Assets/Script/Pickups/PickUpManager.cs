@@ -179,7 +179,6 @@ public class PickUpManager : MonoBehaviour
         if (!KamiKaze)
         {
             KamiKaze = Instantiate(KamiKazeGo, this.gameObject.transform.position + new Vector3(0, 7, 0.25f), transform.rotation, transform);
-            KamiKaze.GetComponent<KamiKazeBomb>().SetPlayer(this.gameObject.GetComponent<CarStats>());
         }
         
         StartCoroutine(KamiKazeExplosionTimer(KamiKazeTimer));
@@ -203,7 +202,7 @@ public class PickUpManager : MonoBehaviour
                     
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
                     
-                    hitCollider.gameObject.GetComponentInParent<CarStats>().SetLastCollidedVehicle(this.gameObject.GetComponent<CarStats>());
+                    hitCollider.gameObject.GetComponentInParent<CarStats>().SetLastCollidedVehicle(gameObject.GetComponent<CarStats>());
                 }
             }
         }
