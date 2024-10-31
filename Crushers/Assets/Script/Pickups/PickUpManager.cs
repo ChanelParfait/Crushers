@@ -49,6 +49,8 @@ public class PickUpManager : MonoBehaviour
 
     // SFX
     [SerializeField] private AudioSource audioSource;
+    // 0 = glimmer //  1 = speed // 2 = stun //
+    [SerializeField] private AudioClip[] sfx;
 
 
     //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
@@ -107,7 +109,7 @@ public class PickUpManager : MonoBehaviour
         {
             Debug.Log("Picked Up by" + other.gameObject.name);
             // play pickup audio
-            PlayAudio();
+            PlayAudio(sfx[0]);
             SetPickup(other.GetComponent<BasePickUp>().GetPickupType());
             Destroy(other.gameObject);
         }
@@ -162,6 +164,7 @@ public class PickUpManager : MonoBehaviour
 
     private void UseSpeed()
     {
+        PlayAudio(sfx[1]);
         this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 10000f, ForceMode.Impulse);
         Pickup = PickupType.None;
     }
@@ -212,6 +215,7 @@ public class PickUpManager : MonoBehaviour
 
     private void UseStun()
     {
+        PlayAudio(sfx[2]);
         /*Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;*/
         GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f + transform.forward, transform.rotation);
@@ -247,7 +251,9 @@ public class PickUpManager : MonoBehaviour
         pickUpImage.sprite = pickupSprites[(int)pickUpIndex];
     }
 
-    private void PlayAudio(){
+    
+    private void PlayAudio(AudioClip clip){
+        audioSource.clip = clip;
         audioSource.Play();
     }
 
