@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using Random = UnityEngine.Random;
 
 public class ImpactController : MonoBehaviour
@@ -11,6 +12,7 @@ public class ImpactController : MonoBehaviour
     private CameraController cameraController;
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
+    [SerializeField] private List<AudioClip> landSFX;
 
     private CinemachineImpulseSource impulseSource;
 
@@ -19,11 +21,27 @@ public class ImpactController : MonoBehaviour
     private float hitTimer = 5f;
     private bool gotHit = false;
 
+
+    void OnEnable()
+    {
+        //PlayerManager.ArenaLevelLoaded +=  DisableSetupComponents;
+
+    }
+
+    void OnDisable()
+    {
+        PrometeoCarController.hitGround -= OnGroundHit;
+
+    }
+
+
     private void Start()
     {
         carController = GetComponent<PrometeoCarController>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         cameraController = GetComponentInChildren<CameraController>();
+        PrometeoCarController.hitGround += OnGroundHit;
+
     }
 
     private void Update()
@@ -112,7 +130,15 @@ public class ImpactController : MonoBehaviour
         return gotHit;
     }
 
+    private void OnGroundHit(){
+        crashAudio.clip  = landSFX[Random.Range(0, landSFX.Count) ];
+        crashAudio.volume = 0.35f;
+        crashAudio.Play();
+
+    }
+
     private void PlayAudio(){
+        
         if(crashAudio){      
             float hitForce = carController.CalculateHitForce();
             // Map Hitforce to a value between 0 and 1
@@ -122,7 +148,7 @@ public class ImpactController : MonoBehaviour
             //Debug.Log("Hit: " + volume) ;
 
             //hitForce = Mathf.Max(hitForce, 0f);  
-            crashAudio.clip  = crashSFX[Random.Range(0, crashSFX.Count - 1) ];
+            crashAudio.clip  = crashSFX[Random.Range(0, crashSFX.Count) ];
             crashAudio.volume = volume;
             crashAudio.Play();
         }
