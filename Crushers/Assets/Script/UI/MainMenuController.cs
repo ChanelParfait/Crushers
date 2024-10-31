@@ -48,7 +48,7 @@ public class MainMenuController : MonoBehaviour
             levelSelected.Invoke(buildindex);
         }
         // load vehicle selection menu 
-        SceneManager.LoadScene(VehicleMenuIndex);
+        SceneManager.LoadSceneAsync(VehicleMenuIndex);
     }
 
 }

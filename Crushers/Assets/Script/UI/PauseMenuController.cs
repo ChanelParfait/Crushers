@@ -13,7 +13,11 @@ public class PauseMenuController : MonoBehaviour
         pausePnl.SetActive(isActive);
     }
 
-    
+    public void Click(AudioSource buttonAudio){
+        //Debug.Log("Click: " + st);
+        buttonAudio.Play();
+    }
+
     public void Unpause(){
         SetActive(false);
         Time.timeScale = 1.0f;

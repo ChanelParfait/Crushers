@@ -89,10 +89,10 @@ public class SetupMenuController : MonoBehaviour
 
     }
 
-    public void Click(string st){
-        Debug.Log("Click: " + st);
+    public void Click(AudioSource buttonAudio){
+        //Debug.Log("Click: " + st);
+        buttonAudio.Play();
     }
-
 
     public void SetVehicle(GameObject vehicle){
         if(!inputEnabled){ return; }
