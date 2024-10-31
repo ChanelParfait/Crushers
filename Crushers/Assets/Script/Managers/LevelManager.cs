@@ -13,6 +13,9 @@ public class LevelManager : MonoBehaviour
     private float totalTime = 0; 
     private bool startCountdownEnded = false; 
     private bool isTimerRunning = false; 
+    private AudioSource source; 
+
+
     // event when players should gain control 
     public static UnityAction ArenaLevelStarted;
 
@@ -39,7 +42,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        
+        source = GetComponent<AudioSource>();
         levelCountdownTimer = levelDuration;
         startCountdownTimer = 3;
     }
@@ -88,6 +91,7 @@ public class LevelManager : MonoBehaviour
     private void LoadLevel(bool isArena){
 
         isTimerRunning = isArena;
+        //source.Play();
     }
 
     private void DisableSetupComponents(bool isArena){
