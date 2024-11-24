@@ -13,24 +13,28 @@ public class SpeedLines : MonoBehaviour
 
     private void Start()
     {
-        speedLines = this.gameObject.GetComponent<ParticleSystem>();
+        speedLines = gameObject.GetComponent<ParticleSystem>();
         emissionModule = speedLines.emission;
     }
 
     public void scaleSpeedLinesOnAcceleration(float speed)
     {
-        if (!speedLines.isPlaying) {
-            speedLines.Play();
-        }
+        if(speedLines){
+            if (!speedLines.isPlaying) {
+                speedLines.Play();
+            }
 
-        if (speed > speedThreshold)
-        {
-            float emissionRate = Mathf.Lerp(0f, 100f, emmisionsPerFrame *Time.deltaTime);
-            emissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(emissionRate);
-        }
-        else
-        {
-            emissionModule.rateOverTime = 0f;
+            if (speed > speedThreshold)
+            {
+                float emissionRate = Mathf.Lerp(0f, 100f, emmisionsPerFrame *Time.deltaTime);
+                emissionModule.rateOverTime = new ParticleSystem.MinMaxCurve(emissionRate);
+            }
+            else
+            {
+                emissionModule.rateOverTime = 0f;
+            }
+        } else {
+            speedLines = gameObject.GetComponent<ParticleSystem>();
         }
 
     }

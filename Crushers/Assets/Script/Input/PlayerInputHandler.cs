@@ -39,10 +39,10 @@ public class PlayerInputHandler : MonoBehaviour
     void Start()
     {
         // try to find vehicle components
-        // only for testing individual vehicles not vehicles in conjustion with player config object
-        carController = GetComponent<PrometeoCarController>();
-        pickUpManager = GetComponent<PickUpManager>();
-        freelookCam = GetComponentInChildren<CameraInputHandler>();
+        // only for testing individual vehicles not vehicles in conjuction with player config object
+        //carController = GetComponent<PrometeoCarController>();
+        //pickUpManager = GetComponent<PickUpManager>();
+        //freelookCam = GetComponentInChildren<CameraInputHandler>();
     }
 
     public void SetCarController(PrometeoCarController cc)

@@ -19,10 +19,12 @@ public class PlayerManager : MonoBehaviour
     // Player Initialising Values
     [SerializeField] private Transform[] startingPoints; 
     [SerializeField] private List<LayerMask> playerLayers; 
+    [SerializeField] private GameObject defaultVehiclePrefab; 
     // Game State
     private bool isPaused; 
 
     private int currentScene = 0;
+    public bool isTesting = false;
     // Game / Scene Management
     [SerializeField] private int selectedMapIndex; 
     private int leaderboardScene = 5; 
@@ -82,12 +84,12 @@ public class PlayerManager : MonoBehaviour
 
     // UI Functions // 
     public void SetPlayerVehicle(int index, GameObject vehicle)
-{
-    //Debug.Log("index: " + index + " :" + vehicle);
-    playerConfigs[index].vehiclePrefab = vehicle;
+    {
+        //Debug.Log("index: " + index + " :" + vehicle);
+        playerConfigs[index].vehiclePrefab = vehicle;
 
-    // Set the vehicle type based on the vehicle name
-    CarStats carStats = vehicle.GetComponent<CarStats>();
+        // Set the vehicle type based on the vehicle name
+        CarStats carStats = vehicle.GetComponent<CarStats>();
         if (carStats != null){
             VehicleType vehicleType = GetVehicleType(vehicle.name);
             
@@ -184,6 +186,11 @@ public class PlayerManager : MonoBehaviour
         currentScene = scene.buildIndex;
         // ensure joining is initially disabled
         GetComponent<PlayerInputManager>().DisableJoining();
+
+        if(scene.name == "TestingScene"){
+            GetComponent<PlayerInputManager>().EnableJoining();
+            SetupArena();
+        }
     
         if(currentScene == 1){
             // allow joining in vehicle selection level
@@ -214,6 +221,19 @@ public class PlayerManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
+        if(isTesting){
+            // create configuration object for player 
+            PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
+            SetupPlayerLayers(playerConfig); 
+            playerConfigs.Add(playerConfig);
+            pi.transform.SetParent(transform);
+            pi.transform.position = new Vector3(0,0,0);
+            GetComponent<PlayerInputManager>().DisableJoining();
+            // create default vehicle
+            SetPlayerVehicle(0, defaultVehiclePrefab);
+            SetupArena();
+
+        }
         
         if(pi.playerIndex == 0){
             startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
@@ -275,8 +295,9 @@ public class PlayerManager : MonoBehaviour
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
         PrometeoCarController car = pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>();
         pi.InputHandler.SetCarController(car);
-        // disable vehicle controls initially
-        car.enabled = false;
+        // disable vehicle controls initially if not testing
+        car.enabled = isTesting;
+        pi.UIController.startTimer.SetActive(!isTesting);
     
 
         //initialise other input handler components
@@ -401,7 +422,7 @@ public class PlayerConfiguration
     // can store configuration values here 
     public bool isReady { get; set; }
     public GameObject vehiclePrefab {get; set;}
-    public Material material {get; set;}
+    //public Material material {get; set;}
     public GameObject vehicleObject {get; set;}
     public VehicleUIController UIController { get; set; }
 

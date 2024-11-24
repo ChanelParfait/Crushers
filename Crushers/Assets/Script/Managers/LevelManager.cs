@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 { 
+    [SerializeField] private bool isTesting = false; 
     [SerializeField] private int levelDuration; 
-
-    private int startCountdownTimer; 
+    private int startCountdownTimer = 3; 
     private int levelCountdownTimer;
     private float prevTime = 0; 
     private float totalTime = 0; 
@@ -45,6 +45,14 @@ public class LevelManager : MonoBehaviour
         source = GetComponent<AudioSource>();
         levelCountdownTimer = levelDuration;
         startCountdownTimer = 3;
+        if(isTesting){
+             startCountdownTimer = 0;
+
+            startTimeChanged?.Invoke(0);
+            startCountdownEnded = true;
+
+        }
+
     }
 
     // Update is called once per frame
@@ -60,8 +68,6 @@ public class LevelManager : MonoBehaviour
             // decriment start countdown to 0 
             if(!startCountdownEnded){
                 startCountdownTimer--;
-                
-                
                 startTimeChanged?.Invoke(startCountdownTimer);
 
                 if(startCountdownTimer == 0){

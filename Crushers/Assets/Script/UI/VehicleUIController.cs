@@ -10,7 +10,7 @@ public class VehicleUIController : MonoBehaviour
    
 
     [SerializeField] private TextMeshProUGUI levelTimerTxt;
-    [SerializeField] private GameObject startTimer;
+    public GameObject startTimer;
 
     [SerializeField] private TextMeshProUGUI startTimerTxt;
 
