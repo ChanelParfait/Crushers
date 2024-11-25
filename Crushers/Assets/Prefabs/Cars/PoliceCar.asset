@@ -24,4 +24,4 @@ MonoBehaviour:
   handbrakeDriftMultiplier: 6
   bodyMass: 600
   gravityMultiplier: 400
-  forceMagnitude: 2500
+  damageMultiplier: 2500

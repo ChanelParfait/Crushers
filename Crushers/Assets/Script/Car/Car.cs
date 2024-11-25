@@ -31,13 +31,14 @@ public class Car : ScriptableObject
     [SerializeField] private int handbrakeDriftMultiplier = 5;
 
     [Header("Mass and Physics")]
+
     private Vector3 bodyMassCenter;
     [Range(200, 1000)]
     [SerializeField] private int bodyMass;
     [Range(200,1000)]
     [SerializeField] private int gravityMultiplier;
     [Range(1000, 5000)]
-    [SerializeField] private float forceMagnitude =  50f;
+    [SerializeField] private float damageMultiplier =  50f;
 
     
 
@@ -87,7 +88,6 @@ public class Car : ScriptableObject
     {
         return handbrakeDriftMultiplier;
     }
-
     public Vector3 GetBodyMassCenter()
     {
         return bodyMassCenter;
@@ -96,8 +96,8 @@ public class Car : ScriptableObject
     {
         return bodyMass;
     }
-    public float GetForceMagnitude() {
-        return forceMagnitude;
+    public float GetDamageMultiplier() {
+        return damageMultiplier;
     }
 
     public int GetGravityMultiplier() {

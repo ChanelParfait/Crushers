@@ -293,12 +293,7 @@ public class PrometeoCarController : MonoBehaviour
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
-        //Reset cars center of mass when hitTimer is 0
-        if (impactController.GetGotHit() == false) {
-            carRigidbody.centerOfMass = new Vector3(0,0,0);
-        }
-
-        speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
+      speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
     }
 
     private void FixedUpdate()
@@ -724,7 +719,7 @@ public class PrometeoCarController : MonoBehaviour
       WheelHit hit;
       bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
       if(!isGrounded && newIsGrounded){
-        Debug.Log("Wheels Hit Ground");
+        //Debug.Log("Wheels Hit Ground");
         hitGround?.Invoke();
       }
         isGrounded = newIsGrounded;
@@ -744,7 +739,7 @@ public class PrometeoCarController : MonoBehaviour
 
     public float CalculateHitForce() {
 
-      return carSpeed * car.GetForceMagnitude() * Time.deltaTime;
+      return carSpeed * car.GetDamageMultiplier() * Time.deltaTime;
 
     }
 

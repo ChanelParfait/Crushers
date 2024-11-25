@@ -15,13 +15,8 @@ public class Trap_Generic : MonoBehaviour
             
             if (other.gameObject.GetComponentInParent<PickUpManager>().State == Shield.IsOff)
             {
-                //Debug.Log("Other Obj: " + other.gameObject.GetComponentInParent<CarStats>().gameObject);
-                
-                // Find CarStats in Parent objects
-                var carStats = other.gameObject.GetComponentInParent<CarStats>();
-            
-                // with how the car is designed + this code check, this deals 3x DMG
-                carStats.IncreaseDamage(-100);
+                var carRespawn = other.gameObject.GetComponentInParent<CarRespawn>();
+                carRespawn.Respawn();
             }
             
         }

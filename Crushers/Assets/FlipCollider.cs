@@ -14,11 +14,11 @@ public class FlipCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log("Trigger");
+       // Debug.Log("Trigger");
 
         if (other.gameObject.CompareTag("Ground") || other.gameObject.name == "RespawnCollider")
         {
-            Debug.Log("Ground Hit");
+            //Debug.Log("Ground Hit");
             
             respawn.Respawn();
         }
