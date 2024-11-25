@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
             startingPoints = null;
         }        
 
-        Debug.Log(this);
+        //Debug.Log(this);
     }
    
    void OnEnable()
@@ -190,7 +190,7 @@ public class PlayerManager : MonoBehaviour
             GetComponent<PlayerInputManager>().EnableJoining();
             // find the loading screen game object
             loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
-            Debug.Log("Loading Screen" + loadingScreen.gameObject.name);
+            //Debug.Log("Loading Screen" + loadingScreen.gameObject.name);
         }
         
         // if scene index is an arena scene
@@ -258,7 +258,7 @@ public class PlayerManager : MonoBehaviour
     // Level Initialisation // 
     private void AddVehicle(PlayerConfiguration pi)
     {
-        Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
+        //Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
         // destroy setup menu
         // later setup menu may be in a separate level
         // move this to set up menu controller? 

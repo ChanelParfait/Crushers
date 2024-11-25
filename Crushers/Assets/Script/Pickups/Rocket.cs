@@ -76,7 +76,7 @@ public class Rocket : MonoBehaviour
                     // Apply explosion force to the player
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position , radius, 10, ForceMode.Force);
                     // set last collided vehicle of player
-                    hitCollider.GetComponentInParent<CarStats>().SetLastCollidedVehicle(FiredBy);
+                    hitCollider.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(FiredBy);
                 }
             }
             if (ExplosionVFX)

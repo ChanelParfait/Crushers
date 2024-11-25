@@ -138,7 +138,7 @@ public class SetupMenuController : MonoBehaviour
     private void Select(GameObject button){
         if(gameObject.GetComponentInParent<SetupMenuController>().playerIndex == playerIndex){
             eventSystem.SetSelectedGameObject(button);
-            Debug.Log("Player " + playerIndex + " Selected: " + eventSystem.currentSelectedGameObject); 
+            //Debug.Log("Player " + playerIndex + " Selected: " + eventSystem.currentSelectedGameObject); 
         }
         
     }
