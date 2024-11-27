@@ -10,7 +10,7 @@ public class ImpactController : MonoBehaviour
 {
     private CinemachineImpulseSource impulseSource;
 
-    private PrometeoCarController carController;
+    private CarController carController;
     private CameraController cameraController;
 
     [SerializeField] private CarStats lastCollidedVehicle;
@@ -32,16 +32,16 @@ public class ImpactController : MonoBehaviour
 
     void OnDisable()
     {
-        PrometeoCarController.hitGround -= OnGroundHit;
+        CarController.hitGround -= OnGroundHit;
 
     }
 
     private void Start()
     {
-        carController = GetComponent<PrometeoCarController>();
+        carController = GetComponent<CarController>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         cameraController = GetComponentInChildren<CameraController>();
-        PrometeoCarController.hitGround += OnGroundHit;
+        CarController.hitGround += OnGroundHit;
 
     }
 

@@ -16,7 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputActionMap player; 
     private int playerIndex; 
 
-    [SerializeField] private PrometeoCarController carController; 
+    [SerializeField] private CarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
     [SerializeField] private CameraInputHandler freelookCam; 
 
@@ -45,13 +45,13 @@ public class PlayerInputHandler : MonoBehaviour
         //freelookCam = GetComponentInChildren<CameraInputHandler>();
     }
 
-    public void SetCarController(PrometeoCarController cc)
+    public void SetCarController(CarController cc)
     {
         // set car controller
         carController = cc; 
     }
 
-    public PrometeoCarController GetCarController()
+    public CarController GetCarController()
     {
         return carController;
     }

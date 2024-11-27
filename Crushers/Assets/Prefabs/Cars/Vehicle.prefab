@@ -3521,7 +3521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 49643463266541418}
   - component: {fileID: 828559772023116797}
-  - component: {fileID: 314256638417223185}
+  - component: {fileID: 4176357864898292693}
   - component: {fileID: 4702013352652804568}
   - component: {fileID: 1506561942402502631}
   - component: {fileID: 8741482368120771810}
@@ -3582,7 +3582,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &314256638417223185
+--- !u!114 &4176357864898292693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3591,7 +3591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8196380668202205108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fefceefe666bb4682b272ec8c5bdd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c5212cd4ef60844b8726127ed083865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 11400000, guid: b922879b45b102045b152a340d196bb5, type: 2}
@@ -3602,7 +3602,7 @@ MonoBehaviour:
   isTurning: 0
   steeringAngle: 0
   isDecelerating: 0
-  isGrounded: 0
+  isGrounded: 1
   frontLeftMesh: {fileID: 1990901242162720777}
   frontLeftCollider: {fileID: 3554988893762316569}
   frontRightMesh: {fileID: 4788973135344169438}
@@ -3687,7 +3687,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d38f75dd23cce134b9c5429bb8c1cf10, type: 3}
   - {fileID: 8300000, guid: a03fb341259a06b4aa5d13242c66ef5d, type: 3}
   impactSpark: {fileID: 5608740451774923146}
-  damageTaken: 0
   bumperCollider: {fileID: 2862711602247294519}
 --- !u!114 &5888672055751983498
 MonoBehaviour:

@@ -1,13 +1,3 @@
-/*
-MESSAGE FROM CREATOR: This script was coded by Mena. You can use it in your games either these are commercial or
-personal projects. You can even add or remove functions as you wish. However, you cannot sell copies of this
-script by itself, since it is originally distributed as a free product.
-I wish you the best for your project. Good luck!
-
-P.S: If you need more cars, you can check my other vehicle assets on the Unity Asset Store, perhaps you could find
-something useful for your game. Best regards, Mena.
-*/
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +10,7 @@ using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
-public class PrometeoCarController : MonoBehaviour
+public class CarController : MonoBehaviour
 {
   
     [SerializeField] private Car car;
@@ -31,22 +21,58 @@ public class PrometeoCarController : MonoBehaviour
 
     private CameraController cameraController;
 
-    public bool isMovingForward;
-    public bool isReversing;
-    public bool isBraking;
-    public bool isTurning;
-    public float steeringAngle;
-    public bool isDecelerating;
-    public bool isGrounded = true;
+    [HideInInspector] public bool isMovingForward;
+    [HideInInspector] public bool isReversing;
+    [HideInInspector] public bool isBraking;
+    [HideInInspector] public bool isTurning;
+    [HideInInspector] public float steeringAngle;
+    [HideInInspector] public bool isDecelerating;
+    [HideInInspector] public bool isGrounded = true;
 
     // Event
-    public static UnityAction hitGround; 
+    public static UnityAction hitGround;
 
+    //BASE STATS / CAR DATA
+    [Header("CAR DATA")]
 
+    [Space(10)]
+    [Header("Acceleration")]
+    [Space(10)]
+
+    [SerializeField] private int currentMaxSpeed;
+    [SerializeField] private int currentMaxReverseSpeed;
+    [SerializeField] private int currentAccelerationMultiplier;
+    [SerializeField] private float carSpeed;
+
+    [Space(10)]
+    [Header("Steering")]
+    [Space(10)]
+
+    [SerializeField] private int currentMaxSteeringAngle;
+    [SerializeField] private float currentSteeringSpeed;
+
+    [Space(10)]
+    [Header("Deceleration")]
+    [Space(10)]
+
+    [SerializeField] private int currentBrakeForce;
+    [SerializeField] private float currentDecelerationMultiplier;
+    [SerializeField] private int currentHandbrakeDriftMultiplier;
+
+    [Space(10)]
+    [Header("Deceleration")]
+    [Space(10)]
+
+    private Vector3 currentBodyMassCenter;
+    [SerializeField] private int currentBodyMass;
+    [SerializeField] private int currentGravityMultiplier;
+    [SerializeField] private float currentDamageMultiplier;
+    [HideInInspector] public bool isDrifting; // Used to know whether the car is drifting or not.
+    [HideInInspector] public bool isTractionLocked; // Used to know whether the traction of the car is locked or not.
+    
     //WHEELS
 
-      //[Header("WHEELS")]
-
+    [Header("WHEELS SETUP")]
       /*
       The following variables are used to store the wheels' data of the car. We need both the mesh-only game objects and wheel
       collider components of the wheels. The wheel collider components and 3D meshes of the wheels cannot come from the same
@@ -67,7 +93,7 @@ public class PrometeoCarController : MonoBehaviour
     //PARTICLE SYSTEMS
 
       [Space(20)]
-      //[Header("EFFECTS")]
+      [Header("EFFECTS SETUP")]
       [Space(10)]
       //The following variable lets you to set up particle systems in your car
       public bool useEffects = false;
@@ -85,31 +111,23 @@ public class PrometeoCarController : MonoBehaviour
       //Speedlines       
       public SpeedLines speedLines;
 
-    //SPEED TEXT (UI)
 
-    [Space(20)]
-      //[Header("UI")]
+      [Space(20)]
+      [Header("UI SETUP")]
       [Space(10)]
       //The following variable lets you to set up a UI text to display the speed of your car.
       public bool useUI = false;
       public TextMeshProUGUI carSpeedText; // Used to store the UI object that is going to show the speed of the car.
 
     //SOUNDS
-      [Header("Sounds")]
+      [Header("AUDIO SETUP")]
       [SerializeField] private bool useSounds = false;
       [SerializeField] private AudioSource carEngineSound;
       [SerializeField] private AudioSource driftingSound;
       [SerializeField] private AudioSource hornSound;
       [SerializeField] private float vehiclePitch; 
      // private float initialCarEngineSoundPitch;
-    //CAR DATA
 
-      [SerializeField]
-      private float carSpeed; // Used to store the speed of the car.
-      [HideInInspector]
-      public bool isDrifting; // Used to know whether the car is drifting or not.
-      [HideInInspector]
-      public bool isTractionLocked; // Used to know whether the traction of the car is locked or not.
 
     //PRIVATE VARIABLES
 
@@ -145,8 +163,8 @@ public class PrometeoCarController : MonoBehaviour
       //gameObject. Also, we define the center of mass of the car with the Vector3 given
       //in the inspector.
       carRigidbody = gameObject.GetComponent<Rigidbody>();
-      carRigidbody.centerOfMass = car.GetBodyMassCenter();
-      carRigidbody.mass = car.GetBodyMass();
+      carRigidbody.centerOfMass = car.GetBaseBodyMassCenter();
+      carRigidbody.mass = car.GetBaseBodyMass();
       isGrounded = true;
       //Initial setup to calculate the drift value of the car. This part could look a bit
       //complicated, but do not be afraid, the only thing we're doing here is to save the default
@@ -179,11 +197,6 @@ public class PrometeoCarController : MonoBehaviour
         RRwheelFriction.asymptoteSlip = rearRightCollider.sidewaysFriction.asymptoteSlip;
         RRwheelFriction.asymptoteValue = rearRightCollider.sidewaysFriction.asymptoteValue;
         RRwheelFriction.stiffness = rearRightCollider.sidewaysFriction.stiffness;
-
-        // We save the initial pitch of the car engine sound.
-        /*if(useSounds != false){
-          initialCarEngineSoundPitch= carEngineSound.pitch;
-        }*/
 
         // We invoke 2 methods inside this script. CarSpeedUI() changes the text of the UI object that stores
         // the speed of the car and CarSounds() controls the engine and drifting sounds. Both methods are invoked
@@ -265,8 +278,6 @@ public class PrometeoCarController : MonoBehaviour
         if(isMovingForward){
           CancelInvoke("DecelerateCar");
           isDecelerating = false;
-
-          //Debug.Log("Go Forward!!!!!!");
           GoForward();
         }
         if(isReversing){
@@ -379,12 +390,12 @@ public class PrometeoCarController : MonoBehaviour
 
       //Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
-      steeringAngle = steeringAxis * car.GetMaxSteeringAngle();
+      steeringAngle = steeringAxis * car.GetBaseMaxSteeringAngle();
     }
 
     public void UpdateWheels(){
-      frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, car.GetSteeringSpeed());
-      frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, car.GetSteeringSpeed());
+      frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, car.GetBaseSteeringSpeed());
+      frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, car.GetBaseSteeringSpeed());
     }
 
 
@@ -446,17 +457,17 @@ public class PrometeoCarController : MonoBehaviour
       if(localVelocityZ < -1f){
         Brakes();
       }else{
-        if(Mathf.RoundToInt(carSpeed) < car.GetMaxSpeed())
+        if(Mathf.RoundToInt(carSpeed) < car.GetBaseMaxSpeed())
             {
           //Apply positive torque in all wheels to go forward if maxSpeed has not been reached.
           frontLeftCollider.brakeTorque = 0;
-          frontLeftCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          frontLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
           frontRightCollider.brakeTorque = 0;
-          frontRightCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          frontRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
           rearLeftCollider.brakeTorque = 0;
-          rearLeftCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          rearLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
           rearRightCollider.brakeTorque = 0;
-          rearRightCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          rearRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
         }else {
           // If the maxSpeed has been reached, then stop applying torque to the wheels.
           // IMPORTANT: The maxSpeed variable should be considered as an approximation; the speed of the car
@@ -468,10 +479,6 @@ public class PrometeoCarController : MonoBehaviour
     		}
       }
     }
-
-    /*public void StopForward(){
-      isMovingForward = false;
-    }*/
 
     // This method apply negative torque to the wheels in order to go backwards.
     public void GoReverse(){
@@ -495,16 +502,16 @@ public class PrometeoCarController : MonoBehaviour
       if(localVelocityZ > 1f){
         Brakes();
       }else{
-        if(Mathf.Abs(Mathf.RoundToInt(carSpeed)) < car.GetMaxReverseSpeed()){
+        if(Mathf.Abs(Mathf.RoundToInt(carSpeed)) < car.GetBaseMaxReverseSpeed()){
           //Apply negative torque in all wheels to go in reverse if maxReverseSpeed has not been reached.
           frontLeftCollider.brakeTorque = 0;
-          frontLeftCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          frontLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
           frontRightCollider.brakeTorque = 0;
-          frontRightCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          frontRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
           rearLeftCollider.brakeTorque = 0;
-          rearLeftCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          rearLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
           rearRightCollider.brakeTorque = 0;
-          rearRightCollider.motorTorque = (car.GetAccelerationMultiplier() * 50f) * throttleAxis;
+          rearRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
         }else {
           //If the maxReverseSpeed has been reached, then stop applying torque to the wheels.
           // IMPORTANT: The maxReverseSpeed variable should be considered as an approximation; the speed of the car
@@ -550,7 +557,7 @@ public class PrometeoCarController : MonoBehaviour
           throttleAxis = 0f;
         }
       }
-      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * car.GetDecelerationMultiplier())));
+      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * car.GetBaseDecelerationMultiplier())));
       // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
       frontLeftCollider.motorTorque = 0;
       frontRightCollider.motorTorque = 0;
@@ -566,10 +573,10 @@ public class PrometeoCarController : MonoBehaviour
 
     // This function applies brake torque to the wheels according to the brake force given by the user.
     public void Brakes(){
-      frontLeftCollider.brakeTorque = car.GetBrakeForce();
-      frontRightCollider.brakeTorque = car.GetBrakeForce();
-      rearLeftCollider.brakeTorque = car.GetBrakeForce();
-      rearRightCollider.brakeTorque = car.GetBrakeForce();
+      frontLeftCollider.brakeTorque = car.GetBaseBrakeForce();
+      frontRightCollider.brakeTorque = car.GetBaseBrakeForce();
+      rearLeftCollider.brakeTorque = car.GetBaseBrakeForce();
+      rearRightCollider.brakeTorque = car.GetBaseBrakeForce();
     }
 
     // This function is used to make the car lose traction. By using this, the car will start drifting. The amount of traction lost
@@ -581,10 +588,10 @@ public class PrometeoCarController : MonoBehaviour
       // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
       // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
       driftingAxis = driftingAxis + (Time.deltaTime);
-      float secureStartingPoint = driftingAxis * FLWextremumSlip * car.GetHandbrakeDriftMultiplier();
+      float secureStartingPoint = driftingAxis * FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier();
 
       if(secureStartingPoint < FLWextremumSlip){
-        driftingAxis = FLWextremumSlip / (FLWextremumSlip * car.GetHandbrakeDriftMultiplier());
+        driftingAxis = FLWextremumSlip / (FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier());
       }
       if(driftingAxis > 1f){
         driftingAxis = 1f;
@@ -600,16 +607,16 @@ public class PrometeoCarController : MonoBehaviour
       //value, so, we are going to continue increasing the sideways friction of the wheels until driftingAxis
       // = 1f.
       if(driftingAxis < 1f){
-        FLwheelFriction.extremumSlip = FLWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        FLwheelFriction.extremumSlip = FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         frontLeftCollider.sidewaysFriction = FLwheelFriction;
 
-        FRwheelFriction.extremumSlip = FRWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        FRwheelFriction.extremumSlip = FRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         frontRightCollider.sidewaysFriction = FRwheelFriction;
 
-        RLwheelFriction.extremumSlip = RLWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        RLwheelFriction.extremumSlip = RLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         rearLeftCollider.sidewaysFriction = RLwheelFriction;
 
-        RRwheelFriction.extremumSlip = RRWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        RRwheelFriction.extremumSlip = RRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
       }
 
@@ -619,10 +626,6 @@ public class PrometeoCarController : MonoBehaviour
       DriftCarPS();
 
     }
-
-    /*public void StopBrake(){
-      isBraking = false;
-    }*/
 
     // This function is used to emit both the particle systems of the tires' smoke and the trail renderers of the tire skids
     // depending on the value of the bool variables 'isDrifting' and 'isTractionLocked'.
@@ -681,16 +684,16 @@ public class PrometeoCarController : MonoBehaviour
       //We are going to continue decreasing the sideways friction of the wheels until we reach the initial
       // car's grip.
       if(FLwheelFriction.extremumSlip > FLWextremumSlip){
-        FLwheelFriction.extremumSlip = FLWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        FLwheelFriction.extremumSlip = FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         frontLeftCollider.sidewaysFriction = FLwheelFriction;
 
-        FRwheelFriction.extremumSlip = FRWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        FRwheelFriction.extremumSlip = FRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         frontRightCollider.sidewaysFriction = FRwheelFriction;
 
-        RLwheelFriction.extremumSlip = RLWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        RLwheelFriction.extremumSlip = RLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         rearLeftCollider.sidewaysFriction = RLwheelFriction;
 
-        RRwheelFriction.extremumSlip = RRWextremumSlip * car.GetHandbrakeDriftMultiplier() * driftingAxis;
+        RRwheelFriction.extremumSlip = RRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
 
         Invoke("RecoverTraction", Time.deltaTime);
@@ -729,9 +732,8 @@ public class PrometeoCarController : MonoBehaviour
     {
         if (!isGrounded)
         {
-            float airGravityModifier = (-1 * car.GetGravityMultiplier()) * Time.deltaTime;
+            float airGravityModifier = (-1 * car.GetBaseGravityMultiplier()) * Time.deltaTime;
             carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
-
             //Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
@@ -739,7 +741,7 @@ public class PrometeoCarController : MonoBehaviour
 
     public float CalculateHitForce() {
 
-      return carSpeed * car.GetDamageMultiplier() * Time.deltaTime;
+      return carSpeed * car.GetBaseDamageMultiplier() * Time.deltaTime;
 
     }
 

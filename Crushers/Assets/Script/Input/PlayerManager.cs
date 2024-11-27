@@ -293,7 +293,7 @@ public class PlayerManager : MonoBehaviour
         pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
-        PrometeoCarController car = pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>();
+        CarController car = pi.Input.gameObject.GetComponentInChildren<CarController>();
         pi.InputHandler.SetCarController(car);
         // disable vehicle controls initially if not testing
         car.enabled = isTesting;

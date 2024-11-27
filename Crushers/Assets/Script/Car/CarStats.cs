@@ -18,7 +18,7 @@ public class CarStats : MonoBehaviour
 
     private Rigidbody rb;
 
-    private PrometeoCarController carController;
+    private CarController carController;
 
 
     //NEED TO CREATE A SCORE MANAGER 
@@ -41,7 +41,7 @@ public class CarStats : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         centreMass = rb.centerOfMass;
-        carController = GetComponent<PrometeoCarController>();
+        carController = GetComponent<CarController>();
     }
 
     // Update is called once per frame
