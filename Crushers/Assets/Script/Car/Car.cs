@@ -32,7 +32,6 @@ public class Car : ScriptableObject
 
     [Header("Mass and Physics")]
 
-    private Vector3 baseBodyMassCenter;
     [Range(200, 1000)]
     [SerializeField] private int baseBodyMass;
     [Range(200,1000)]
@@ -88,10 +87,7 @@ public class Car : ScriptableObject
     {
         return baseHandbrakeDriftMultiplier;
     }
-    public Vector3 GetBaseBodyMassCenter()
-    {
-        return baseBodyMassCenter;
-    }
+
     public int GetBaseBodyMass()
     {
         return baseBodyMass;

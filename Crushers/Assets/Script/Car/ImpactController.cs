@@ -13,8 +13,8 @@ public class ImpactController : MonoBehaviour
     private CarController carController;
     private CameraController cameraController;
 
-    [SerializeField] private CarStats lastCollidedVehicle;
-    [SerializeField] private CarStats carStats;
+    private Vector3 centerOfMassY;
+    [SerializeField] private ScoreKeeper lastCollidedVehicle;
 
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
@@ -38,7 +38,7 @@ public class ImpactController : MonoBehaviour
 
     private void Start()
     {
-        carController = GetComponent<CarController>();
+        carController = GetComponent<CarController>(); 
         impulseSource = GetComponent<CinemachineImpulseSource>();
         cameraController = GetComponentInChildren<CameraController>();
         CarController.hitGround += OnGroundHit;
@@ -95,7 +95,7 @@ public class ImpactController : MonoBehaviour
     //We are setting a last collided vehicle with the player 
     private void CheckFrontBumperCollision(Collision collision) {
 
-        CarStats collidedVehicle = collision.gameObject.GetComponentInParent<CarStats>();
+        ScoreKeeper collidedVehicle = collision.gameObject.GetComponentInParent<ScoreKeeper>();
         //Debug.Log("Collision with Player" + collidedVehicle.name);
 
         if (collidedVehicle)
@@ -106,11 +106,11 @@ public class ImpactController : MonoBehaviour
 
     }
 
-    public CarStats GetLastCollidedVehicle()
+    public ScoreKeeper GetLastCollidedVehicle()
     {
         return lastCollidedVehicle;
     }
-    public void SetLastCollidedVehicle(CarStats lastCollided)
+    public void SetLastCollidedVehicle(ScoreKeeper lastCollided)
     {
         if (lastCollided)
         {
@@ -127,7 +127,13 @@ public class ImpactController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         lastCollidedVehicle = null;
-        carStats.ResetMass();
+        ResetMass();
+    }
+
+    public void ResetMass()
+    {
+        centerOfMassY.y = 0f;
+        carController.SetActiveBodyMassCenterY(centerOfMassY);
     }
 
     private void OnGroundHit(){

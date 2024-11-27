@@ -89,12 +89,12 @@ public class PlayerManager : MonoBehaviour
         playerConfigs[index].vehiclePrefab = vehicle;
 
         // Set the vehicle type based on the vehicle name
-        CarStats carStats = vehicle.GetComponent<CarStats>();
-        if (carStats != null){
+        CarController carController = vehicle.GetComponent<CarController>();
+        if (carController != null){
             VehicleType vehicleType = GetVehicleType(vehicle.name);
             
             if (vehicle.name != null) {
-                carStats.SetVehicleType(vehicleType); // Set the vehicle type
+                carController.SetVehicleType(vehicleType); // Set the vehicle type
             }
 
             else{
@@ -372,7 +372,7 @@ public class PlayerManager : MonoBehaviour
     // Helper Functions
     private void SavePlayerScores(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().GetScore();
+            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<ScoreKeeper>().GetScore();
         }
     }
     

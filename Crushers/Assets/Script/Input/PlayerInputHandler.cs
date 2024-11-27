@@ -71,7 +71,7 @@ public class PlayerInputHandler : MonoBehaviour
         freelookCam = cip; 
     }
 
-    // Input Events // 
+    // Input Events
     public void OnReloadLevel(CallbackContext context)
     {
         if(context.performed){

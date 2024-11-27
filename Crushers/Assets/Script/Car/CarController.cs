@@ -10,9 +10,19 @@ using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
+public enum VehicleType
+{
+    Standard,
+    Small,
+    Big,
+    Police,
+    Unknown
+}
+
 public class CarController : MonoBehaviour
 {
-  
+    private VehicleType vehicleType;
+
     [SerializeField] private Car car;
 
     [SerializeField] private int playerIndex;
@@ -167,7 +177,6 @@ public class CarController : MonoBehaviour
         activeBrakeForce = car.GetBaseBrakeForce();
         activeDecelerationMultiplier = car.GetBaseDecelerationMultiplier();
         activeHandbrakeDriftMultiplier = car.GetBaseHandbrakeDriftMultiplier();
-        activeBodyMassCenter = car.GetBaseBodyMassCenter();
         activeBodyMass = car.GetBaseBodyMass();
         activeGravityMultiplier = car.GetBaseGravityMultiplier();
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
@@ -255,6 +264,26 @@ public class CarController : MonoBehaviour
           }
         }
 
+    }
+
+    public void SetVehicleType(VehicleType type)
+    {
+        vehicleType = type;
+        switch (vehicleType)
+        {
+
+            case VehicleType.Standard:
+                break;
+            case VehicleType.Small:
+                break;
+            case VehicleType.Big:
+                break;
+            case VehicleType.Police:
+                break;
+            case VehicleType.Unknown:
+                Debug.LogWarning("Vehicle type unkown, setting as default");
+                break;
+        }
     }
 
     public void SetPlayerIndex(int index){
@@ -764,5 +793,9 @@ public class CarController : MonoBehaviour
 
     public float GetCarSpeed() {
         return carSpeed;
+    }
+
+    public void SetActiveBodyMassCenterY(Vector3 activeBodyMassCenterY) {
+        carRigidbody.centerOfMass = activeBodyMassCenterY;
     }
 }

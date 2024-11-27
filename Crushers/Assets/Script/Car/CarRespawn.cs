@@ -19,7 +19,6 @@ public class CarRespawn : MonoBehaviour
 
     //reference to the stats of each car
     private ImpactController impactController;
-    private CarStats carStats;
 
 
     void Start(){
@@ -29,7 +28,6 @@ public class CarRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
-        carStats = GetComponent<CarStats>();
     }
     
     public void Respawn(){
@@ -44,7 +42,7 @@ public class CarRespawn : MonoBehaviour
             Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
         }
         
-        carStats.ResetMass();
+        impactController.ResetMass();
         //Debug.Log("Respawning");
         //Debug.Log("Your score is: " + carStats.getScore());
         //Debug.Log("Your damage is: " + carStats.getDamage());
