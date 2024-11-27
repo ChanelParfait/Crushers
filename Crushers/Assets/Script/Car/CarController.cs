@@ -35,50 +35,51 @@ public class CarController : MonoBehaviour
     //BASE STATS / CAR DATA
     [Header("CAR DATA")]
 
-    [Space(10)]
     [Header("Acceleration")]
     [Space(10)]
 
-    [SerializeField] private int currentMaxSpeed;
-    [SerializeField] private int currentMaxReverseSpeed;
-    [SerializeField] private int currentAccelerationMultiplier;
+    [SerializeField] private int activeMaxSpeed;
+    [SerializeField] private int activeMaxReverseSpeed;
+    [SerializeField] private int activeAccelerationMultiplier;
     [SerializeField] private float carSpeed;
 
     [Space(10)]
     [Header("Steering")]
     [Space(10)]
 
-    [SerializeField] private int currentMaxSteeringAngle;
-    [SerializeField] private float currentSteeringSpeed;
+    [SerializeField] private int activeMaxSteeringAngle;
+    [SerializeField] private float activeSteeringSpeed;
 
     [Space(10)]
     [Header("Deceleration")]
     [Space(10)]
 
-    [SerializeField] private int currentBrakeForce;
-    [SerializeField] private float currentDecelerationMultiplier;
-    [SerializeField] private int currentHandbrakeDriftMultiplier;
+    [SerializeField] private int activeBrakeForce;
+    [SerializeField] private float activeDecelerationMultiplier;
+    [SerializeField] private int activeHandbrakeDriftMultiplier;
 
     [Space(10)]
     [Header("Deceleration")]
     [Space(10)]
 
-    private Vector3 currentBodyMassCenter;
-    [SerializeField] private int currentBodyMass;
-    [SerializeField] private int currentGravityMultiplier;
-    [SerializeField] private float currentDamageMultiplier;
+    private Vector3 activeBodyMassCenter;
+    [SerializeField] private int activeBodyMass;
+    [SerializeField] private int activeGravityMultiplier;
+    [SerializeField] private float activeDamageMultiplier;
+
     [HideInInspector] public bool isDrifting; // Used to know whether the car is drifting or not.
     [HideInInspector] public bool isTractionLocked; // Used to know whether the traction of the car is locked or not.
     
     //WHEELS
 
     [Header("WHEELS SETUP")]
-      /*
-      The following variables are used to store the wheels' data of the car. We need both the mesh-only game objects and wheel
-      collider components of the wheels. The wheel collider components and 3D meshes of the wheels cannot come from the same
-      game object; they must be separate game objects.
-      */
-      public GameObject frontLeftMesh;
+    [Space(10)]
+    /*
+    The following variables are used to store the wheels' data of the car. We need both the mesh-only game objects and wheel
+    collider components of the wheels. The wheel collider components and 3D meshes of the wheels cannot come from the same
+    game object; they must be separate game objects.
+    */
+    public GameObject frontLeftMesh;
       public WheelCollider frontLeftCollider;
       [Space(10)]
       public GameObject frontRightMesh;
@@ -92,7 +93,7 @@ public class CarController : MonoBehaviour
 
     //PARTICLE SYSTEMS
 
-      [Space(20)]
+      [Space(10)]
       [Header("EFFECTS SETUP")]
       [Space(10)]
       //The following variable lets you to set up particle systems in your car
@@ -120,7 +121,9 @@ public class CarController : MonoBehaviour
       public TextMeshProUGUI carSpeedText; // Used to store the UI object that is going to show the speed of the car.
 
     //SOUNDS
+      [Space(10)]
       [Header("AUDIO SETUP")]
+      [Space(10)]
       [SerializeField] private bool useSounds = false;
       [SerializeField] private AudioSource carEngineSound;
       [SerializeField] private AudioSource driftingSound;
@@ -153,6 +156,22 @@ public class CarController : MonoBehaviour
       float RLWextremumSlip;
       WheelFrictionCurve RRwheelFriction;
       float RRWextremumSlip;
+    private void Awake()
+    {
+        //We assign base car stats to the stats of the vehicle that will be controlled by player. All the rest methods will be affecting "Current" stats
+        activeMaxSpeed = car.GetBaseMaxSpeed();
+        activeMaxReverseSpeed = car.GetBaseMaxReverseSpeed();
+        activeAccelerationMultiplier = car.GetBaseAccelerationMultiplier();
+        activeMaxSteeringAngle = car.GetBaseMaxSteeringAngle();
+        activeSteeringSpeed = car.GetBaseSteeringSpeed();
+        activeBrakeForce = car.GetBaseBrakeForce();
+        activeDecelerationMultiplier = car.GetBaseDecelerationMultiplier();
+        activeHandbrakeDriftMultiplier = car.GetBaseHandbrakeDriftMultiplier();
+        activeBodyMassCenter = car.GetBaseBodyMassCenter();
+        activeBodyMass = car.GetBaseBodyMass();
+        activeGravityMultiplier = car.GetBaseGravityMultiplier();
+        activeDamageMultiplier = car.GetBaseDamageMultiplier();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -163,8 +182,8 @@ public class CarController : MonoBehaviour
       //gameObject. Also, we define the center of mass of the car with the Vector3 given
       //in the inspector.
       carRigidbody = gameObject.GetComponent<Rigidbody>();
-      carRigidbody.centerOfMass = car.GetBaseBodyMassCenter();
-      carRigidbody.mass = car.GetBaseBodyMass();
+      carRigidbody.centerOfMass = activeBodyMassCenter;
+      carRigidbody.mass = activeBodyMass;
       isGrounded = true;
       //Initial setup to calculate the drift value of the car. This part could look a bit
       //complicated, but do not be afraid, the only thing we're doing here is to save the default
@@ -376,8 +395,6 @@ public class CarController : MonoBehaviour
 
     // JUMP to get unstuck
     public void Jump(){
-      // if(jumpEnabled){
-      //}
       Debug.Log("Jump");
       carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
     }
@@ -390,12 +407,12 @@ public class CarController : MonoBehaviour
 
       //Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
-      steeringAngle = steeringAxis * car.GetBaseMaxSteeringAngle();
+      steeringAngle = steeringAxis * activeMaxSteeringAngle;
     }
 
     public void UpdateWheels(){
-      frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, car.GetBaseSteeringSpeed());
-      frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, car.GetBaseSteeringSpeed());
+      frontLeftCollider.steerAngle = Mathf.Lerp(frontLeftCollider.steerAngle, steeringAngle, activeSteeringSpeed);
+      frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, steeringAngle, activeSteeringSpeed);
     }
 
 
@@ -457,17 +474,17 @@ public class CarController : MonoBehaviour
       if(localVelocityZ < -1f){
         Brakes();
       }else{
-        if(Mathf.RoundToInt(carSpeed) < car.GetBaseMaxSpeed())
+        if(Mathf.RoundToInt(carSpeed) < activeMaxSpeed)
             {
           //Apply positive torque in all wheels to go forward if maxSpeed has not been reached.
           frontLeftCollider.brakeTorque = 0;
-          frontLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          frontLeftCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
           frontRightCollider.brakeTorque = 0;
-          frontRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          frontRightCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
           rearLeftCollider.brakeTorque = 0;
-          rearLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          rearLeftCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
           rearRightCollider.brakeTorque = 0;
-          rearRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          rearRightCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
         }else {
           // If the maxSpeed has been reached, then stop applying torque to the wheels.
           // IMPORTANT: The maxSpeed variable should be considered as an approximation; the speed of the car
@@ -502,16 +519,16 @@ public class CarController : MonoBehaviour
       if(localVelocityZ > 1f){
         Brakes();
       }else{
-        if(Mathf.Abs(Mathf.RoundToInt(carSpeed)) < car.GetBaseMaxReverseSpeed()){
+        if(Mathf.Abs(Mathf.RoundToInt(carSpeed)) < activeMaxReverseSpeed){
           //Apply negative torque in all wheels to go in reverse if maxReverseSpeed has not been reached.
           frontLeftCollider.brakeTorque = 0;
-          frontLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          frontLeftCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
           frontRightCollider.brakeTorque = 0;
-          frontRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          frontRightCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
           rearLeftCollider.brakeTorque = 0;
-          rearLeftCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          rearLeftCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
           rearRightCollider.brakeTorque = 0;
-          rearRightCollider.motorTorque = (car.GetBaseAccelerationMultiplier() * 50f) * throttleAxis;
+          rearRightCollider.motorTorque = (activeAccelerationMultiplier * 50f) * throttleAxis;
         }else {
           //If the maxReverseSpeed has been reached, then stop applying torque to the wheels.
           // IMPORTANT: The maxReverseSpeed variable should be considered as an approximation; the speed of the car
@@ -557,7 +574,7 @@ public class CarController : MonoBehaviour
           throttleAxis = 0f;
         }
       }
-      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * car.GetBaseDecelerationMultiplier())));
+      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * activeDecelerationMultiplier)));
       // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
       frontLeftCollider.motorTorque = 0;
       frontRightCollider.motorTorque = 0;
@@ -573,10 +590,10 @@ public class CarController : MonoBehaviour
 
     // This function applies brake torque to the wheels according to the brake force given by the user.
     public void Brakes(){
-      frontLeftCollider.brakeTorque = car.GetBaseBrakeForce();
-      frontRightCollider.brakeTorque = car.GetBaseBrakeForce();
-      rearLeftCollider.brakeTorque = car.GetBaseBrakeForce();
-      rearRightCollider.brakeTorque = car.GetBaseBrakeForce();
+      frontLeftCollider.brakeTorque = activeBrakeForce;
+      frontRightCollider.brakeTorque = activeBrakeForce;
+      rearLeftCollider.brakeTorque = activeBrakeForce;
+      rearRightCollider.brakeTorque = activeBrakeForce;
     }
 
     // This function is used to make the car lose traction. By using this, the car will start drifting. The amount of traction lost
@@ -588,10 +605,10 @@ public class CarController : MonoBehaviour
       // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
       // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
       driftingAxis = driftingAxis + (Time.deltaTime);
-      float secureStartingPoint = driftingAxis * FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier();
+      float secureStartingPoint = driftingAxis * FLWextremumSlip * activeHandbrakeDriftMultiplier;
 
       if(secureStartingPoint < FLWextremumSlip){
-        driftingAxis = FLWextremumSlip / (FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier());
+        driftingAxis = FLWextremumSlip / (FLWextremumSlip * activeHandbrakeDriftMultiplier);
       }
       if(driftingAxis > 1f){
         driftingAxis = 1f;
@@ -607,16 +624,16 @@ public class CarController : MonoBehaviour
       //value, so, we are going to continue increasing the sideways friction of the wheels until driftingAxis
       // = 1f.
       if(driftingAxis < 1f){
-        FLwheelFriction.extremumSlip = FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        FLwheelFriction.extremumSlip = FLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         frontLeftCollider.sidewaysFriction = FLwheelFriction;
 
-        FRwheelFriction.extremumSlip = FRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        FRwheelFriction.extremumSlip = FRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         frontRightCollider.sidewaysFriction = FRwheelFriction;
 
-        RLwheelFriction.extremumSlip = RLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        RLwheelFriction.extremumSlip = RLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         rearLeftCollider.sidewaysFriction = RLwheelFriction;
 
-        RRwheelFriction.extremumSlip = RRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        RRwheelFriction.extremumSlip = RRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
       }
 
@@ -684,16 +701,16 @@ public class CarController : MonoBehaviour
       //We are going to continue decreasing the sideways friction of the wheels until we reach the initial
       // car's grip.
       if(FLwheelFriction.extremumSlip > FLWextremumSlip){
-        FLwheelFriction.extremumSlip = FLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        FLwheelFriction.extremumSlip = FLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         frontLeftCollider.sidewaysFriction = FLwheelFriction;
 
-        FRwheelFriction.extremumSlip = FRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        FRwheelFriction.extremumSlip = FRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         frontRightCollider.sidewaysFriction = FRwheelFriction;
 
-        RLwheelFriction.extremumSlip = RLWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        RLwheelFriction.extremumSlip = RLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
         rearLeftCollider.sidewaysFriction = RLwheelFriction;
 
-        RRwheelFriction.extremumSlip = RRWextremumSlip * car.GetBaseHandbrakeDriftMultiplier() * driftingAxis;
+        RRwheelFriction.extremumSlip = RRWextremumSlip *    activeHandbrakeDriftMultiplier  * driftingAxis;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
 
         Invoke("RecoverTraction", Time.deltaTime);
@@ -732,7 +749,7 @@ public class CarController : MonoBehaviour
     {
         if (!isGrounded)
         {
-            float airGravityModifier = (-1 * car.GetBaseGravityMultiplier()) * Time.deltaTime;
+            float airGravityModifier = (-1 * activeGravityMultiplier) * Time.deltaTime;
             carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
             //Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
