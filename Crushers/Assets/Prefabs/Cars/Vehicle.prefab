@@ -3521,12 +3521,12 @@ GameObject:
   m_Component:
   - component: {fileID: 49643463266541418}
   - component: {fileID: 828559772023116797}
-  - component: {fileID: 314256638417223185}
+  - component: {fileID: 4176357864898292693}
   - component: {fileID: 4702013352652804568}
-  - component: {fileID: 1506561942402502631}
   - component: {fileID: 8741482368120771810}
   - component: {fileID: 5888672055751983498}
   - component: {fileID: 1493166302703072454}
+  - component: {fileID: 5581503148192929400}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Player
@@ -3582,7 +3582,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &314256638417223185
+--- !u!114 &4176357864898292693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3591,7 +3591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8196380668202205108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fefceefe666bb4682b272ec8c5bdd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c5212cd4ef60844b8726127ed083865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 11400000, guid: b922879b45b102045b152a340d196bb5, type: 2}
@@ -3602,7 +3602,21 @@ MonoBehaviour:
   isTurning: 0
   steeringAngle: 0
   isDecelerating: 0
-  isGrounded: 0
+  isGrounded: 1
+  activeMaxSpeed: 0
+  activeMaxReverseSpeed: 0
+  activeAccelerationMultiplier: 0
+  carSpeed: 0
+  activeMaxSteeringAngle: 0
+  activeSteeringSpeed: 0
+  activeBrakeForce: 0
+  activeDecelerationMultiplier: 0
+  activeHandbrakeDriftMultiplier: 0
+  activeBodyMass: 0
+  activeGravityMultiplier: 0
+  activeDamageMultiplier: 0
+  isDrifting: 0
+  isTractionLocked: 0
   frontLeftMesh: {fileID: 1990901242162720777}
   frontLeftCollider: {fileID: 3554988893762316569}
   frontRightMesh: {fileID: 4788973135344169438}
@@ -3624,9 +3638,6 @@ MonoBehaviour:
   driftingSound: {fileID: 1280518691873253039}
   hornSound: {fileID: 163063040914083204}
   vehiclePitch: 0
-  carSpeed: 0
-  isDrifting: 0
-  isTractionLocked: 0
 --- !u!114 &4702013352652804568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3641,25 +3652,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: -30
   flipCollider: {fileID: 7606835715646217555}
-  PlayerScored:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1506561942402502631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8196380668202205108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57d8b3b31df0abd42a4eaba70eadad1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  speed: 0
-  centreMass: {x: 0, y: 0, z: 0}
-  scoreText: {fileID: 5970591887534121917}
 --- !u!114 &8741482368120771810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3673,7 +3665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastCollidedVehicle: {fileID: 0}
-  carStats: {fileID: 1506561942402502631}
+  carStats: {fileID: 0}
   crashAudio: {fileID: 4306295225162495126}
   crashSFX:
   - {fileID: 8300000, guid: 6d486dfc422797b4e8aa821fe461cd57, type: 3}
@@ -3781,6 +3773,20 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: -1, y: -1, z: -2}
+--- !u!114 &5581503148192929400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178ea08eee4bcb94594446daf12cc00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  scoreText: {fileID: 5970591887534121917}
 --- !u!1 &9114952474528041427
 GameObject:
   m_ObjectHideFlags: 0

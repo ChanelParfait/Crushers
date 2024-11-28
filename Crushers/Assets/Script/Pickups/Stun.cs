@@ -6,7 +6,7 @@ using UnityEngine;
 public class Stun : MonoBehaviour
 {
     [SerializeField] private float _Speed = 3000f;
-    [SerializeField] private CarStats FiredBy;
+    [SerializeField] private ScoreKeeper FiredBy;
     [SerializeField] private GameObject ExplosionVFX;
     [SerializeField] private float Timer;
     [SerializeField] private float Counter;
@@ -17,12 +17,12 @@ public class Stun : MonoBehaviour
         this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
     }
 
-    public void SetFiredBy(CarStats FiredFrom)
+    public void SetFiredBy(ScoreKeeper FiredFrom)
     {
         FiredBy = FiredFrom;
     }
     
-    public CarStats GetFiredBy()
+    public ScoreKeeper GetFiredBy()
     {
         return FiredBy;
     }
@@ -40,16 +40,16 @@ public class Stun : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.GetComponentInParent<PrometeoCarController>().isActiveAndEnabled)
+            if (other.gameObject.GetComponentInParent<CarController>().isActiveAndEnabled)
             {
                 
-                StartCoroutine(DisablePlayers(5f, other.gameObject.GetComponentInParent<PrometeoCarController>(), other.GetComponentInParent<PickUpManager>()));
+                StartCoroutine(DisablePlayers(5f, other.gameObject.GetComponentInParent<CarController>(), other.GetComponentInParent<PickUpManager>()));
             }
         }
         
     }
 
-    IEnumerator DisablePlayers(float delay, PrometeoCarController players, PickUpManager playerdisabledeffect)
+    IEnumerator DisablePlayers(float delay, CarController players, PickUpManager playerdisabledeffect)
     {
         players.enabled = false;
         if (!playerdisabledeffect.DisabledEffect.GetComponent<ParticleSystem>().isPlaying)

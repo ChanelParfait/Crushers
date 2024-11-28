@@ -10,35 +10,34 @@ public class Car : ScriptableObject
 
     [Header("Acceleration")]
     [Range(20, 250)]
-    [SerializeField] private int maxSpeed = 90;
+    [SerializeField] private int baseMaxSpeed = 90;
     [Range(10, 120)]
-    [SerializeField] private int maxReverseSpeed = 45;
+    [SerializeField] private int baseMaxReverseSpeed = 45;
     [Range(1, 15)] 
-    [SerializeField] private int accelerationMultiplier = 2;
+    [SerializeField] private int baseAccelerationMultiplier = 2;
 
     [Header("Steering")]
     [Range(10, 50)] 
-    [SerializeField] private int maxSteeringAngle = 27;
+    [SerializeField] private int baseMaxSteeringAngle = 27;
     [Range(0.1f, 2f)] 
-    [SerializeField] private float steeringSpeed = 0.5f;
+    [SerializeField] private float baseSteeringSpeed = 0.5f;
 
     [Header("Deceleration")]
     [Range(1000, 2000)] 
-    [SerializeField] private int brakeForce = 350;
+    [SerializeField] private int baseBrakeForce = 350;
     [Range(1, 10)] 
-    [SerializeField] private float decelerationMultiplier = 2;
+    [SerializeField] private float baseDecelerationMultiplier = 2;
     [Range(1, 10)] 
-    [SerializeField] private int handbrakeDriftMultiplier = 5;
+    [SerializeField] private int baseHandbrakeDriftMultiplier = 5;
 
     [Header("Mass and Physics")]
 
-    private Vector3 bodyMassCenter;
     [Range(200, 1000)]
-    [SerializeField] private int bodyMass;
+    [SerializeField] private int baseBodyMass;
     [Range(200,1000)]
-    [SerializeField] private int gravityMultiplier;
+    [SerializeField] private int baseGravityMultiplier;
     [Range(1000, 5000)]
-    [SerializeField] private float damageMultiplier =  50f;
+    [SerializeField] private float baseDamageMultiplier =  50f;
 
     
 
@@ -49,58 +48,55 @@ public class Car : ScriptableObject
         return carPrefab;
     }
 
-    public int GetMaxSpeed()
+    public int GetBaseMaxSpeed()
     {
-        return maxSpeed;
+        return baseMaxSpeed;
     }
 
-    public int GetMaxReverseSpeed()
+    public int GetBaseMaxReverseSpeed()
     {
-        return maxReverseSpeed;
+        return baseMaxReverseSpeed;
     }
 
-    public int GetAccelerationMultiplier()
+    public int GetBaseAccelerationMultiplier()
     {
-        return accelerationMultiplier;
+        return baseAccelerationMultiplier;
     }
 
-    public int GetMaxSteeringAngle()
+    public int GetBaseMaxSteeringAngle()
     {
-        return maxSteeringAngle;
+        return baseMaxSteeringAngle;
     }
 
-    public float GetSteeringSpeed()
+    public float GetBaseSteeringSpeed()
     {
-        return steeringSpeed;
+        return baseSteeringSpeed;
     }
 
-    public int GetBrakeForce()
+    public int GetBaseBrakeForce()
     {
-        return brakeForce;
+        return baseBrakeForce;
     }
 
-    public float GetDecelerationMultiplier()
+    public float GetBaseDecelerationMultiplier()
     {
-        return decelerationMultiplier;
+        return baseDecelerationMultiplier;
     }
 
-    public int GetHandbrakeDriftMultiplier()
+    public int GetBaseHandbrakeDriftMultiplier()
     {
-        return handbrakeDriftMultiplier;
-    }
-    public Vector3 GetBodyMassCenter()
-    {
-        return bodyMassCenter;
-    }
-    public int GetBodyMass()
-    {
-        return bodyMass;
-    }
-    public float GetDamageMultiplier() {
-        return damageMultiplier;
+        return baseHandbrakeDriftMultiplier;
     }
 
-    public int GetGravityMultiplier() {
-        return gravityMultiplier;
+    public int GetBaseBodyMass()
+    {
+        return baseBodyMass;
+    }
+    public float GetBaseDamageMultiplier() {
+        return baseDamageMultiplier;
+    }
+
+    public int GetBaseGravityMultiplier() {
+        return baseGravityMultiplier;
     }
 }

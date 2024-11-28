@@ -10,12 +10,11 @@ public class ImpactController : MonoBehaviour
 {
     private CinemachineImpulseSource impulseSource;
 
-    private PrometeoCarController carController;
+    private CarController carController;
     private CameraController cameraController;
 
-    [SerializeField] private CarStats lastCollidedVehicle;
-    [SerializeField] private TypeOfDeath DeathType;
-    [SerializeField] private CarStats carStats;
+    private Vector3 centerOfMassY;
+    [SerializeField] private ScoreKeeper lastCollidedVehicle;
 
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
@@ -33,16 +32,16 @@ public class ImpactController : MonoBehaviour
 
     void OnDisable()
     {
-        PrometeoCarController.hitGround -= OnGroundHit;
+        CarController.hitGround -= OnGroundHit;
 
     }
 
     private void Start()
     {
-        carController = GetComponent<PrometeoCarController>();
+        carController = GetComponent<CarController>(); 
         impulseSource = GetComponent<CinemachineImpulseSource>();
         cameraController = GetComponentInChildren<CameraController>();
-        PrometeoCarController.hitGround += OnGroundHit;
+        CarController.hitGround += OnGroundHit;
 
     }
 
@@ -96,7 +95,7 @@ public class ImpactController : MonoBehaviour
     //We are setting a last collided vehicle with the player 
     private void CheckFrontBumperCollision(Collision collision) {
 
-        CarStats collidedVehicle = collision.gameObject.GetComponentInParent<CarStats>();
+        ScoreKeeper collidedVehicle = collision.gameObject.GetComponentInParent<ScoreKeeper>();
         //Debug.Log("Collision with Player" + collidedVehicle.name);
 
         if (collidedVehicle)
@@ -104,13 +103,14 @@ public class ImpactController : MonoBehaviour
             // Set this vehicles last collided to the collided player
             SetLastCollidedVehicle(collidedVehicle);
         }
-        
+
     }
-    public CarStats GetLastCollidedVehicle()
+
+    public ScoreKeeper GetLastCollidedVehicle()
     {
         return lastCollidedVehicle;
     }
-    public void SetLastCollidedVehicle(CarStats lastCollided)
+    public void SetLastCollidedVehicle(ScoreKeeper lastCollided)
     {
         if (lastCollided)
         {
@@ -120,17 +120,20 @@ public class ImpactController : MonoBehaviour
             // Start coroutine to clear the last collided player after 5 seconds
             StartCoroutine(ClearLastCollided(5f));
         }
+
     }
 
-    public TypeOfDeath GetDeathType()
-    {
-        return DeathType;
-    }
     private IEnumerator ClearLastCollided(float delay)
     {
         yield return new WaitForSeconds(delay);
         lastCollidedVehicle = null;
-        carStats.ResetMass();
+        ResetMass();
+    }
+
+    public void ResetMass()
+    {
+        centerOfMassY.y = 0f;
+        carController.SetActiveBodyMassCenterY(centerOfMassY);
     }
 
     private void OnGroundHit(){
