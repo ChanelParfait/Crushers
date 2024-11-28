@@ -3641,6 +3641,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: -30
   flipCollider: {fileID: 7606835715646217555}
+  PlayerScored:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1506561942402502631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3687,7 +3690,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d38f75dd23cce134b9c5429bb8c1cf10, type: 3}
   - {fileID: 8300000, guid: a03fb341259a06b4aa5d13242c66ef5d, type: 3}
   impactSpark: {fileID: 5608740451774923146}
-  damageTaken: 0
   bumperCollider: {fileID: 2862711602247294519}
 --- !u!114 &5888672055751983498
 MonoBehaviour:

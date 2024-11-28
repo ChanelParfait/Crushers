@@ -12,6 +12,18 @@ public enum VehicleType{
     Unknown
 }
 
+public enum TypeOfDeath
+{
+    None,
+    Flip,
+    Rocket,
+    Explosion,
+    Spike,
+    Void,
+    Shield,
+    Train
+}
+
 public class CarStats : MonoBehaviour
 {
     private VehicleType vehicleType;
@@ -23,7 +35,6 @@ public class CarStats : MonoBehaviour
 
     //NEED TO CREATE A SCORE MANAGER 
     [SerializeField] private float score;
-
 
     [Header("----------Stats-----------")]
 

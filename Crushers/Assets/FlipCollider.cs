@@ -8,7 +8,7 @@ public class FlipCollider : MonoBehaviour
 {
     // ideally this component should have access to the correct player index
     // and trigger this event when a respawn is required
-    //public static UnityAction<int> RespawnTriggered; 
+    public static UnityAction<int> RespawnTriggered; 
 
     [SerializeField] private CarRespawn respawn;
     private void OnTriggerEnter(Collider other)
@@ -20,7 +20,9 @@ public class FlipCollider : MonoBehaviour
         {
             //Debug.Log("Ground Hit");
             
-            respawn.Respawn();
+            //respawn.Respawn();
+            
+            //RespawnTriggered.Invoke();
         }
     }
 }

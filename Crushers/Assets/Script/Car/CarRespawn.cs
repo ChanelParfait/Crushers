@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CarRespawn : MonoBehaviour
 {
@@ -20,8 +23,11 @@ public class CarRespawn : MonoBehaviour
     //reference to the stats of each car
     private ImpactController impactController;
     private CarStats carStats;
-
-
+    
+    //event when Players respawn and score points
+    public UnityEvent<GameObject, GameObject, TypeOfDeath> PlayerScored ;
+    
+    
     void Start(){
         //save position and rotation for respawn
         startPosition = transform.position;
@@ -30,6 +36,10 @@ public class CarRespawn : MonoBehaviour
 
         impactController = GetComponent<ImpactController>();
         carStats = GetComponent<CarStats>();
+        
+        
+        PlayerScored.AddListener((scoringPlayer, defeatedPlayer, typeofdeath) =>
+            GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().TestInvoke(scoringPlayer, defeatedPlayer, typeofdeath));
     }
     
     public void Respawn(){
@@ -42,6 +52,8 @@ public class CarRespawn : MonoBehaviour
         if(impactController.GetLastCollidedVehicle()){
             impactController.GetLastCollidedVehicle().IncreaseScore(1);
             Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
+            
+            PlayerScored?.Invoke(impactController.GetLastCollidedVehicle().gameObject, this.gameObject, impactController.GetDeathType() );
         }
         
         carStats.ResetMass();
@@ -49,5 +61,4 @@ public class CarRespawn : MonoBehaviour
         //Debug.Log("Your score is: " + carStats.getScore());
         //Debug.Log("Your damage is: " + carStats.getDamage());
     }
-
 }

@@ -14,6 +14,7 @@ public class ImpactController : MonoBehaviour
     private CameraController cameraController;
 
     [SerializeField] private CarStats lastCollidedVehicle;
+    [SerializeField] private TypeOfDeath DeathType;
     [SerializeField] private CarStats carStats;
 
     [SerializeField] private AudioSource crashAudio; 
@@ -103,9 +104,8 @@ public class ImpactController : MonoBehaviour
             // Set this vehicles last collided to the collided player
             SetLastCollidedVehicle(collidedVehicle);
         }
-
+        
     }
-
     public CarStats GetLastCollidedVehicle()
     {
         return lastCollidedVehicle;
@@ -120,9 +120,12 @@ public class ImpactController : MonoBehaviour
             // Start coroutine to clear the last collided player after 5 seconds
             StartCoroutine(ClearLastCollided(5f));
         }
-
     }
 
+    public TypeOfDeath GetDeathType()
+    {
+        return DeathType;
+    }
     private IEnumerator ClearLastCollided(float delay)
     {
         yield return new WaitForSeconds(delay);
