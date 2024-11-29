@@ -253,6 +253,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.07869322
       objectReference: {fileID: 0}
+    - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: vehiclePitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5984226980119889469, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Camera

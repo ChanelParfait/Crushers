@@ -57,7 +57,7 @@ public class PickUpManager : MonoBehaviour
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
-        Debug.Log("Pickup: " + PickUpPowerup.ToString());
+        //Debug.Log("Pickup: " + PickUpPowerup.ToString());
         //Debug.Log("Gameobject" + gameObject.name);
         UpdateSprite(PickUpPowerup);
     }
@@ -107,7 +107,7 @@ public class PickUpManager : MonoBehaviour
        
         if (other.gameObject.CompareTag("Pickup"))
         {
-            Debug.Log("Picked Up by" + other.gameObject.name);
+            //Debug.Log("Picked Up by" + other.gameObject.name);
             // play pickup audio
             PlayAudio(sfx[0]);
             SetPickup(other.GetComponent<BasePickUp>().GetPickupType());
@@ -125,7 +125,7 @@ public class PickUpManager : MonoBehaviour
         newLocation.y = 0f;
         */
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f + transform.forward, transform.rotation);
-            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
+            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject.GetComponent<ScoreKeeper>()); 
             //RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
@@ -205,7 +205,7 @@ public class PickUpManager : MonoBehaviour
                     
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
                     
-                    hitCollider.gameObject.GetComponentInParent<CarStats>().SetLastCollidedVehicle(gameObject.GetComponent<CarStats>());
+                    hitCollider.gameObject.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(gameObject.GetComponent<ScoreKeeper>());
                 }
             }
         }
@@ -219,7 +219,7 @@ public class PickUpManager : MonoBehaviour
         /*Vector3 newLocation = this.gameObject.transform.position - GetComponentInChildren<CinemachineFreeLook>().GetComponent<Transform>().transform.position;
         newLocation.y = 0f;*/
         GameObject StunGm = Instantiate(Stun,transform.position + transform.up * 2f + transform.forward, transform.rotation);
-        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject.GetComponent<CarStats>()); 
+        StunGm.GetComponent<Stun>().SetFiredBy(this.gameObject.GetComponent<ScoreKeeper>()); 
         //StunGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
         Collider rocketCollider = StunGm.GetComponent<Collider>();

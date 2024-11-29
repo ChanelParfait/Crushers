@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
             startingPoints = null;
         }        
 
-        Debug.Log(this);
+        //Debug.Log(this);
     }
    
    void OnEnable()
@@ -89,12 +89,12 @@ public class PlayerManager : MonoBehaviour
         playerConfigs[index].vehiclePrefab = vehicle;
 
         // Set the vehicle type based on the vehicle name
-        CarStats carStats = vehicle.GetComponent<CarStats>();
-        if (carStats != null){
+        CarController carController = vehicle.GetComponent<CarController>();
+        if (carController != null){
             VehicleType vehicleType = GetVehicleType(vehicle.name);
             
             if (vehicle.name != null) {
-                carStats.SetVehicleType(vehicleType); // Set the vehicle type
+                carController.SetVehicleType(vehicleType); // Set the vehicle type
             }
 
             else{
@@ -197,7 +197,7 @@ public class PlayerManager : MonoBehaviour
             GetComponent<PlayerInputManager>().EnableJoining();
             // find the loading screen game object
             loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
-            Debug.Log("Loading Screen" + loadingScreen.gameObject.name);
+            //Debug.Log("Loading Screen" + loadingScreen.gameObject.name);
         }
         
         // if scene index is an arena scene
@@ -278,7 +278,7 @@ public class PlayerManager : MonoBehaviour
     // Level Initialisation // 
     private void AddVehicle(PlayerConfiguration pi)
     {
-        Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
+        //Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
         // destroy setup menu
         // later setup menu may be in a separate level
         // move this to set up menu controller? 
@@ -293,7 +293,7 @@ public class PlayerManager : MonoBehaviour
         pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
-        PrometeoCarController car = pi.Input.gameObject.GetComponentInChildren<PrometeoCarController>();
+        CarController car = pi.Input.gameObject.GetComponentInChildren<CarController>();
         pi.InputHandler.SetCarController(car);
         // disable vehicle controls initially if not testing
         car.enabled = isTesting;
@@ -372,7 +372,7 @@ public class PlayerManager : MonoBehaviour
     // Helper Functions
     private void SavePlayerScores(){
         foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<CarStats>().GetScore();
+            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<ScoreKeeper>().GetScore();
         }
     }
     

@@ -11546,7 +11546,7 @@ GameObject:
   - component: {fileID: 208765788}
   m_Layer: 10
   m_Name: Prism
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -13353,7 +13353,7 @@ GameObject:
   - component: {fileID: 295076171}
   m_Layer: 10
   m_Name: Prism (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -19383,7 +19383,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1474099194}
+  m_Mesh: {fileID: 256889581}
 --- !u!33 &627567707
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -55936,7 +55936,7 @@ GameObject:
   - component: {fileID: 2119611410}
   m_Layer: 10
   m_Name: Prism (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

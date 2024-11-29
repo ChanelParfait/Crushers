@@ -18,7 +18,8 @@ public class CarRespawn : MonoBehaviour
 
 
     //reference to the stats of each car
-    public CarStats carStats;
+    private ImpactController impactController;
+
 
     void Start(){
         //save position and rotation for respawn
@@ -26,7 +27,7 @@ public class CarRespawn : MonoBehaviour
         startRotation = transform.rotation;
         rb = GetComponent<Rigidbody>();
 
-        carStats = GetComponent<CarStats>();
+        impactController = GetComponent<ImpactController>();
     }
     
     public void Respawn(){
@@ -35,33 +36,16 @@ public class CarRespawn : MonoBehaviour
         transform.rotation = startRotation;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        carStats.DecreaseDamage(carStats.GetDamage());
 
-        if(carStats.GetLastCollidedVehicle()){
-            carStats.GetLastCollidedVehicle().IncreaseScore(1);
-            Debug.Log("Awarded 1 points to " + carStats.GetLastCollidedVehicle().gameObject.name);
-        } else {
-            // decrease car score by 1 if it is above 0
-            if(carStats.score > 0){
-                //carStats.DecreaseScore(1);
-            }
+        if(impactController.GetLastCollidedVehicle()){
+            impactController.GetLastCollidedVehicle().IncreaseScore(1);
+            Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
         }
         
-        carStats.ResetMass();
+        impactController.ResetMass();
         //Debug.Log("Respawning");
         //Debug.Log("Your score is: " + carStats.getScore());
         //Debug.Log("Your damage is: " + carStats.getDamage());
-    }
-    
-    void FixedUpdate()
-    {
-        //check if below threshold OR upside down and hitting the ground. 
-        //still want to be able to flip even if not in contact with ground
-
-        if (carStats.GetDamage() < threshold)
-        {
-            Respawn();
-        }
     }
 
 }

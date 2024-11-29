@@ -8,56 +8,41 @@ using Random = UnityEngine.Random;
 
 public class ImpactController : MonoBehaviour
 {
-    private PrometeoCarController carController;
+    private CinemachineImpulseSource impulseSource;
+
+    private CarController carController;
     private CameraController cameraController;
+
+    private Vector3 centerOfMassY;
+    [SerializeField] private ScoreKeeper lastCollidedVehicle;
+
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
     [SerializeField] private List<AudioClip> landSFX;
 
-    private CinemachineImpulseSource impulseSource;
 
     [SerializeField] private ParticleSystem impactSpark;
 
-    private float hitTimer = 5f;
-    private bool gotHit = false;
-
+    [SerializeField] private Collider bumperCollider;
 
     void OnEnable()
     {
         //PlayerManager.ArenaLevelLoaded +=  DisableSetupComponents;
-
     }
 
     void OnDisable()
     {
-        PrometeoCarController.hitGround -= OnGroundHit;
+        CarController.hitGround -= OnGroundHit;
 
     }
-
 
     private void Start()
     {
-        carController = GetComponent<PrometeoCarController>();
+        carController = GetComponent<CarController>(); 
         impulseSource = GetComponent<CinemachineImpulseSource>();
         cameraController = GetComponentInChildren<CameraController>();
-        PrometeoCarController.hitGround += OnGroundHit;
+        CarController.hitGround += OnGroundHit;
 
-    }
-
-    private void Update()
-    {
-        // Timer that checks if player got hit
-        // If yes, starts the countdown to 0, to reset gotHit
-        if (gotHit)
-        {
-            hitTimer -= Time.deltaTime;
-            if (hitTimer <= 0f)
-            {
-                hitTimer = 0f;
-                gotHit = false;
-                //Debug.Log("Got hit reset.");
-            }
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -66,7 +51,6 @@ public class ImpactController : MonoBehaviour
         // alter this to adjust volume for speed
         PlayAudio();
         Hit(collision);
-        CheckForHit(collision);
     }
 
     // Checks if you hit the player
@@ -88,21 +72,16 @@ public class ImpactController : MonoBehaviour
             //Get the rb of hit Object
             Rigidbody rb = collision.gameObject.GetComponentInParent<Rigidbody>();
             //Debug.Log("RB: " + rb.gameObject);
-
+ 
             if (rb != null)
             {
-                Vector3 impactPoint = collision.contacts[0].point;
-
-                if (impactSpark != null)
-                {
-                    ParticleSystem effect = Instantiate(impactSpark, impactPoint, Quaternion.identity);
-                    effect.Play();
-                }
+                CheckFrontBumperCollision(collision);
+                PlayHitEffect(collision);
 
                 Vector3 forceDirection = transform.forward;
 
                 // Calculate new center of mass
-                Vector3 newCenterOfMass = rb.centerOfMass + new Vector3(0, hitForce * 0.0001f, 0);
+                Vector3 newCenterOfMass = rb.centerOfMass + new Vector3(0, hitForce * 0.0004f, 0);
                 newCenterOfMass.y = Mathf.Max(newCenterOfMass.y, 0f); 
 
                 rb.centerOfMass = newCenterOfMass;
@@ -113,21 +92,48 @@ public class ImpactController : MonoBehaviour
         }
     }
 
-    // Checks if you got hit
-    // If yes, set gotHit to true 
-    // The logic that resets center of mass of your car is in PrometeoCarController
-    private void CheckForHit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+    //We are setting a last collided vehicle with the player 
+    private void CheckFrontBumperCollision(Collision collision) {
+
+        ScoreKeeper collidedVehicle = collision.gameObject.GetComponentInParent<ScoreKeeper>();
+        //Debug.Log("Collision with Player" + collidedVehicle.name);
+
+        if (collidedVehicle)
         {
-            gotHit = true;
-            hitTimer = 5f;
+            // Set this vehicles last collided to the collided player
+            SetLastCollidedVehicle(collidedVehicle);
         }
+
     }
 
-    public bool GetGotHit()
+    public ScoreKeeper GetLastCollidedVehicle()
     {
-        return gotHit;
+        return lastCollidedVehicle;
+    }
+    public void SetLastCollidedVehicle(ScoreKeeper lastCollided)
+    {
+        if (lastCollided)
+        {
+            //Debug.Log("Set last Collided");
+            StopCoroutine(ClearLastCollided(5f));
+            lastCollidedVehicle = lastCollided;
+            // Start coroutine to clear the last collided player after 5 seconds
+            StartCoroutine(ClearLastCollided(5f));
+        }
+
+    }
+
+    private IEnumerator ClearLastCollided(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        lastCollidedVehicle = null;
+        ResetMass();
+    }
+
+    public void ResetMass()
+    {
+        centerOfMassY.y = 0f;
+        carController.SetActiveBodyMassCenterY(centerOfMassY);
     }
 
     private void OnGroundHit(){
@@ -145,16 +151,23 @@ public class ImpactController : MonoBehaviour
             hitForce = Mathf.Max(hitForce, 0f);
             
             float volume = Utility.Map(hitForce, 0, 6000, 0.1f, 0.5f);
-            //Debug.Log("Hit: " + volume) ;
 
-            //hitForce = Mathf.Max(hitForce, 0f);  
             crashAudio.clip  = crashSFX[Random.Range(0, crashSFX.Count) ];
             crashAudio.volume = volume;
             crashAudio.Play();
         }
     }
 
+    private void PlayHitEffect(Collision collision) {
+        Vector3 impactPoint = collision.contacts[0].point;
 
+        if (impactSpark != null)
+        {
+            ParticleSystem effect = Instantiate(impactSpark, impactPoint, Quaternion.identity);
+            effect.Play();
+            Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constantMax);
+        }
+    }
 
 
     
