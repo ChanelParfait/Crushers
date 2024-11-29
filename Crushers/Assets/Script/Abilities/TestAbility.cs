@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TestAbility", menuName ="Abilities/TestAbility")]
+[CreateAssetMenu(fileName = "SpringJump", menuName = "Abilities/SpringJump")]
 public class TestAbility : AbilityBase
 {
     public override void Use()

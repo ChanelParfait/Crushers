@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class AbilityManager : MonoBehaviour
 {
@@ -10,9 +11,17 @@ public class AbilityManager : MonoBehaviour
 
     [SerializeField] private List<AbilityBase> abilities;
 
-    [SerializeField] float cooldownTime = 1;
+    [SerializeField] float cooldownTime = 5;
     [SerializeField] public bool canUse = true;
 
+
+    [SerializeField] private Image abilityCanvas;
+
+
+    private void Start()
+    {
+        UpdateAbilitySprite(abilities[0]);
+    }
     public void UseAbility() {
         if (canUse)
         {
@@ -35,5 +44,9 @@ public class AbilityManager : MonoBehaviour
             yield return new WaitForSeconds(cooldownTime);
             canUse = true;
         }
+    }
+
+    public void UpdateAbilitySprite(AbilityBase abilityIndex) {
+        abilityCanvas.sprite = abilityIndex.icon; 
     }
 }

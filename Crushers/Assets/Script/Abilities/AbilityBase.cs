@@ -8,7 +8,7 @@ public abstract class AbilityBase : ScriptableObject
 {
     [Header("Ability Info")]
     [SerializeField] string title;
-    [SerializeField] Sprite icon;
+    [SerializeField] public Sprite icon;
 
     public abstract void Use(); 
 
