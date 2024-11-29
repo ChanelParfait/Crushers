@@ -3525,6 +3525,7 @@ GameObject:
   - component: {fileID: 4702013352652804568}
   - component: {fileID: 8741482368120771810}
   - component: {fileID: 5888672055751983498}
+  - component: {fileID: 2448720167452322469}
   - component: {fileID: 1493166302703072454}
   - component: {fileID: 5581503148192929400}
   m_Layer: 0
@@ -3665,7 +3666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastCollidedVehicle: {fileID: 0}
-  carStats: {fileID: 0}
   crashAudio: {fileID: 4306295225162495126}
   crashSFX:
   - {fileID: 8300000, guid: 6d486dfc422797b4e8aa821fe461cd57, type: 3}
@@ -3720,6 +3720,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6c141c2b5a05f894ab28b134a0104c97, type: 3}
   - {fileID: 8300000, guid: 22a7a8e15150f2d4c815e3a5cc3b26e2, type: 3}
   - {fileID: 8300000, guid: d294f9e3560fe3a4380d123689fcc539, type: 3}
+--- !u!114 &2448720167452322469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a396ad7c3e32a41a22d1f976e72a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities:
+  - {fileID: 11400000, guid: fb2c1f56eec8b054db061ef316fcd9d4, type: 2}
 --- !u!114 &1493166302703072454
 MonoBehaviour:
   m_ObjectHideFlags: 0
