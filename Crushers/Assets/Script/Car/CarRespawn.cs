@@ -22,7 +22,7 @@ public class CarRespawn : MonoBehaviour
 
     //reference to the stats of each car
     private ImpactController impactController;
-    private CarStats carStats;
+    private ScoreKeeper carStats;
     
     //event when Players respawn and score points
     public UnityEvent<GameObject, GameObject, TypeOfDeath> PlayerScored ;
@@ -35,7 +35,7 @@ public class CarRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
-        carStats = GetComponent<CarStats>();
+        carStats = GetComponent<ScoreKeeper>();
         
         
         PlayerScored.AddListener((scoringPlayer, defeatedPlayer, typeofdeath) =>
@@ -56,7 +56,7 @@ public class CarRespawn : MonoBehaviour
             PlayerScored?.Invoke(impactController.GetLastCollidedVehicle().gameObject, this.gameObject, impactController.GetDeathType() );
         }
         
-        carStats.ResetMass();
+        impactController.ResetMass();
         //Debug.Log("Respawning");
         //Debug.Log("Your score is: " + carStats.getScore());
         //Debug.Log("Your damage is: " + carStats.getDamage());

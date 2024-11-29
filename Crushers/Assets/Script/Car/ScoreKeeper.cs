@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-
-
 public class ScoreKeeper : MonoBehaviour
 {
     //NEED TO CREATE A SCORE MANAGER 
@@ -37,4 +35,6 @@ public class ScoreKeeper : MonoBehaviour
             scoreText.text = "Score: " + score.ToString("");  
         }
     }
+    
+    
 }

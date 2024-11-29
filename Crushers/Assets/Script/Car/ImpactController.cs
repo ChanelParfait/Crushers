@@ -14,7 +14,11 @@ public class ImpactController : MonoBehaviour
     private CameraController cameraController;
 
     private Vector3 centerOfMassY;
+    
+    
     [SerializeField] private ScoreKeeper lastCollidedVehicle;
+    [SerializeField] private TypeOfDeath DeathType;
+    
 
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
@@ -167,6 +171,11 @@ public class ImpactController : MonoBehaviour
             effect.Play();
             Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constantMax);
         }
+    }
+
+    public TypeOfDeath GetDeathType()
+    {
+        return DeathType;
     }
 
 
