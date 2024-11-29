@@ -16,6 +16,8 @@ public class ImpactController : MonoBehaviour
     private Vector3 centerOfMassY;
     [SerializeField] private ScoreKeeper lastCollidedVehicle;
 
+    [SerializeField] private TypeOfDeath DeathType;
+
     [SerializeField] private AudioSource crashAudio; 
     [SerializeField] private List<AudioClip> crashSFX;
     [SerializeField] private List<AudioClip> landSFX;

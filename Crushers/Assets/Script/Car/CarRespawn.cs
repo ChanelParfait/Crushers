@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarRespawn : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class CarRespawn : MonoBehaviour
     private ImpactController impactController;
 
 
+    public UnityEvent<GameObject, GameObject, TypeOfDeath> PlayerScored ;
+    
     void Start(){
         //save position and rotation for respawn
         startPosition = transform.position;
@@ -28,6 +31,8 @@ public class CarRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
+        
+        
     }
     
     public void Respawn(){
