@@ -28,7 +28,7 @@ public class ScoreKeeper : MonoBehaviour
 
     public void IncreaseScore(float num){
         score = score + num;
-        OnPlayerScored.Invoke(GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject, this.gameObject,GetComponent<ImpactController>().GetDeathType() );
+        OnPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject,GetComponent<ImpactController>().GetDeathType() );
     }
 
     public float GetScore(){
