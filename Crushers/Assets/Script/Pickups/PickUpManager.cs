@@ -41,8 +41,8 @@ public class PickUpManager : MonoBehaviour
 
     // Visual Gameobjects
     private GameObject shield;
-
     private GameObject KamiKaze;
+    
     // UI Components
     [SerializeField] private Image pickUpImage;
     [SerializeField] private List<Sprite> pickupSprites;
@@ -52,8 +52,6 @@ public class PickUpManager : MonoBehaviour
     // 0 = glimmer //  1 = speed // 2 = stun //
     [SerializeField] private AudioClip[] sfx;
 
-
-    //For Camera need to change it to Same Level Camera as Player. Not the CineMachine one. 
     public void SetPickup(PickupType PickUpPowerup)
     {
         Pickup = PickUpPowerup;
@@ -64,7 +62,6 @@ public class PickUpManager : MonoBehaviour
     
     private void Start(){
         UpdateSprite(PickupType.None);
-
     }
     
     private void Update()
@@ -90,15 +87,6 @@ public class PickUpManager : MonoBehaviour
                     UseStun();
                     break;
             }
-        }
-
-        if (Pickup == PickupType.Rocket)
-        {
-            //Turn CrossHair UI On
-        }
-        else
-        {
-            //Turn CrossHair UI Off
         }
     }
 

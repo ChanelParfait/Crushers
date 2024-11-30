@@ -17056,6 +17056,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
       propertyPath: TimeUntilRespawnPickups
       value: 15
       objectReference: {fileID: 0}
@@ -17142,6 +17147,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_Rocket 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
@@ -21118,6 +21128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_Common 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
@@ -27743,6 +27758,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
       propertyPath: TimeUntilRespawnPickups
       value: 15
       objectReference: {fileID: 0}
@@ -32154,6 +32174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isTesting
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447447418211516732, guid: 971ffdfba4c038649a3f60c2f57b6995,
+        type: 3}
+      propertyPath: selectedMapIndex
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4447447418211516732, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
@@ -54238,6 +54263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_Common 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
