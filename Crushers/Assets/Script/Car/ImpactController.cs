@@ -171,6 +171,10 @@ public class ImpactController : MonoBehaviour
         }
     }
 
+    public TypeOfDeath GetDeathType()
+    {
+        return DeathType;
+    }
 
     
 }
