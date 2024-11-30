@@ -20,9 +20,7 @@ public class CarRespawn : MonoBehaviour
 
     //reference to the stats of each car
     private ImpactController impactController;
-
-
-    public UnityEvent<GameObject, GameObject, TypeOfDeath> PlayerScored ;
+    
     
     void Start(){
         //save position and rotation for respawn
