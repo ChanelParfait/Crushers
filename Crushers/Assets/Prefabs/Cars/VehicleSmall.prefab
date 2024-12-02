@@ -157,6 +157,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2d7d6e6d9bb383d4bba2b2783602bf28, type: 2}
+    - target: {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: cooldownTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2704521858122530633, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_TagString
@@ -405,6 +410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356153075400762092, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7546639555313590966, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}

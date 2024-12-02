@@ -16,11 +16,12 @@ public class AbilityManager : MonoBehaviour
 
 
     [SerializeField] private Image abilityCanvas;
-
+    private GameObject controlledCar;
 
     private void Start()
     {
         UpdateAbilitySprite(abilities[0]);
+        controlledCar = this.gameObject;
     }
     public void UseAbility() {
         if (canUse)
@@ -29,7 +30,7 @@ public class AbilityManager : MonoBehaviour
             {
                 OnAbilityUse.Invoke(cooldownTime);
                 var ability = abilities[0];
-                ability.Use();
+                ability.Use(controlledCar);
                 StartCooldown();
             }
         }

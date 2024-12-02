@@ -10,7 +10,7 @@ public abstract class AbilityBase : ScriptableObject
     [SerializeField] string title;
     [SerializeField] public Sprite icon;
 
-    public abstract void Use(); 
+    public abstract void Use(GameObject controlledCar); 
 
 
 }
