@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba358a2ad5095a947bde73b9fb4bc3e0, type: 3}
   m_Name: TestAbility
   m_EditorClassIdentifier: 
-  title: 
+  title: TestAbility
   icon: {fileID: 21300000, guid: 07caf3d1930bab14aa8f6dcdf2db871a, type: 3}
