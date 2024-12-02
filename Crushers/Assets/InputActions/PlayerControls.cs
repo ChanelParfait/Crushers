@@ -107,6 +107,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""19bad496-1744-402e-8f01-2f4a3bcf08e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -267,7 +276,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dd1bce30-f8c6-44c6-805e-c5874a6f11c7"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -289,7 +298,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5d0be3a9-07eb-4cfd-92b1-0b717aaa238f"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -349,6 +358,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc79a6a1-9985-4af1-b9ba-57d81e29cbf3"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96911a9e-893b-41eb-ada6-b060c0816fde"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UseAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1029,6 +1060,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Honk = m_Player.FindAction("Honk", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_UseAbility = m_Player.FindAction("UseAbility", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1113,6 +1145,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Honk;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_UseAbility;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1126,6 +1159,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Honk => m_Wrapper.m_Player_Honk;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @UseAbility => m_Wrapper.m_Player_UseAbility;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1162,6 +1196,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @UseAbility.started += instance.OnUseAbility;
+            @UseAbility.performed += instance.OnUseAbility;
+            @UseAbility.canceled += instance.OnUseAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1193,6 +1230,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @UseAbility.started -= instance.OnUseAbility;
+            @UseAbility.performed -= instance.OnUseAbility;
+            @UseAbility.canceled -= instance.OnUseAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1400,6 +1440,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnHonk(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnUseAbility(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

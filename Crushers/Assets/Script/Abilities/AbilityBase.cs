@@ -4,33 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AbilityBase : MonoBehaviour
+public abstract class AbilityBase : ScriptableObject
 {
-    public class MyFloatEvent : UnityEvent<float> { }
-    public MyFloatEvent OnAbilityUse = new MyFloatEvent();
+    [Header("Ability Info")]
+    [SerializeField] string title;
+    [SerializeField] public Sprite icon;
 
-    [SerializeField] Ability ability;
-    [SerializeField] float cooldownTime;
-    [SerializeField] bool canUse = true;
+    public abstract void Use(GameObject controlledCar); 
 
-    public void UseAbility() {
-        if (canUse)
-        {
-            OnAbilityUse.Invoke(cooldownTime);
-            Ability();
-            StartCooldown();
 
-        }
-    }
-
-    public abstract void Ability();
-
-    public void StartCooldown() {
-        StartCoroutine(Cooldown());
-        IEnumerator Cooldown() {
-            canUse = false;
-            yield return new WaitForSeconds(cooldownTime);
-            canUse = true;
-        }
-    }
 }
