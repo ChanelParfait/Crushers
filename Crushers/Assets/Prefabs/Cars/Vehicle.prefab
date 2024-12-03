@@ -1075,6 +1075,37 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &2290200865698492925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 245319457172767827}
+  m_Layer: 0
+  m_Name: GunMountPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &245319457172767827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290200865698492925}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5375, z: 1.574997}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 49643463266541418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2704521858122530633
 GameObject:
   m_ObjectHideFlags: 0
@@ -3294,6 +3325,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7082426763580379146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8133359398781209111}
+  m_Layer: 0
+  m_Name: ThrusterMountPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8133359398781209111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7082426763580379146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.646, z: -2.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 49643463266541418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7224534262797948846
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,12 +3609,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 245319457172767827}
   - {fileID: 4326497937542387540}
   - {fileID: 2076987966805777968}
   - {fileID: 2972559642586846593}
   - {fileID: 7080589930871641818}
   - {fileID: 617803700732613319}
   - {fileID: 6743043350261643257}
+  - {fileID: 8133359398781209111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &828559772023116797
@@ -3665,7 +3729,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastCollidedVehicle: {fileID: 0}
-  carStats: {fileID: 0}
   crashAudio: {fileID: 4306295225162495126}
   crashSFX:
   - {fileID: 8300000, guid: 6d486dfc422797b4e8aa821fe461cd57, type: 3}
@@ -3700,10 +3763,14 @@ MonoBehaviour:
   KamiKazeGo: {fileID: 3565015708328552895, guid: d4bf661927ec37c45932cdfbb1736c81,
     type: 3}
   Stun: {fileID: 8666847585282172510, guid: 150fe28a49a55c1439573e298a495e49, type: 3}
+  Turret: {fileID: 3226583421603586234, guid: 027d3d2e3059a8a4497ef9f01a9ac5cc, type: 3}
+  Thruster: {fileID: 5933485014121273202, guid: e93e3f3f38c04a64aa0b5dc2ae6f165e,
+    type: 3}
   Pickup: 0
   State: 0
   ShieldTimer: 10
   KamiKazeTimer: 10
+  machineGunDuration: 10
   KamiKazeRadius: 50
   useItem: 0
   DisabledEffect: {fileID: 4138785285165660041}
@@ -3715,6 +3782,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
   - {fileID: 21300000, guid: 9ddc34c9b398e744caff4826abb99c18, type: 3}
   - {fileID: 21300000, guid: 66deea0729b54034eb5e4a6eba3c0e0c, type: 3}
+  - {fileID: 21300000, guid: b3ddb23cfca73dd469454cac67e00de8, type: 3}
   audioSource: {fileID: 9065036127462537712}
   sfx:
   - {fileID: 8300000, guid: 6c141c2b5a05f894ab28b134a0104c97, type: 3}
@@ -4311,7 +4379,11 @@ PrefabInstance:
         type: 3}
       insertIndex: 5
       addedObject: {fileID: 5249279928147387811}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 672529761344718153, guid: f8a8636676556664482c1776eeb61bb2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4737477243542501472}
   m_SourcePrefab: {fileID: 100100000, guid: f8a8636676556664482c1776eeb61bb2, type: 3}
 --- !u!96 &253828337045818116 stripped
 TrailRenderer:
@@ -4325,6 +4397,35 @@ TrailRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1661367874261639838}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2187362963584247767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 672529761344718153, guid: f8a8636676556664482c1776eeb61bb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661367874261639838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4737477243542501472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2187362963584247767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &4138785285165660041 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3342152571366528279, guid: f8a8636676556664482c1776eeb61bb2,

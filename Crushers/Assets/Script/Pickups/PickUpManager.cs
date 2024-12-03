@@ -16,6 +16,7 @@ public enum PickupType
     Shield = 3,
     KamiKaze = 4,
     Stun = 5,
+    Turret = 6,
 }
 
 public class PickUpManager : MonoBehaviour
@@ -24,15 +25,16 @@ public class PickUpManager : MonoBehaviour
     [SerializeField] private GameObject Rocket;
     [SerializeField] private GameObject KamiKazeGo;
     [SerializeField] private GameObject Stun;
-
+    [SerializeField] private GameObject Turret;
+    [SerializeField] private GameObject Thruster;
     [SerializeField] private PickupType Pickup;
-
+    private GameObject mountedMachineGun;
+    private GameObject mountedThruster;
+    
     [SerializeField] public Shield State;
-
     [SerializeField] private float ShieldTimer = 7;
-
     [SerializeField] private float KamiKazeTimer = 10;
-
+    [SerializeField] private float machineGunDuration = 10f;
     [SerializeField] private float KamiKazeRadius;
     public bool useItem = false;
 
@@ -85,6 +87,9 @@ public class PickUpManager : MonoBehaviour
                     break;
                 case PickupType.Stun:
                     UseStun();
+                    break;
+                case PickupType.Turret:
+                    UseMachineGun();
                     break;
             }
         }
@@ -154,9 +159,34 @@ public class PickUpManager : MonoBehaviour
     {
         PlayAudio(sfx[1]);
         this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 10000f, ForceMode.Impulse);
+
+        Transform thrusterMountPoint = transform.Find("ThrusterMountPoint");
+        if (thrusterMountPoint == null)
+        {
+            Debug.LogError("thrusterMountPoint not found!");
+            return;
+        }
+
+        // Instantiate the machine gun at the mount point
+        mountedThruster = Instantiate(Thruster, thrusterMountPoint.position, thrusterMountPoint.rotation, thrusterMountPoint);
+
+        // Start a coroutine to disable the gun after the duration
+        StartCoroutine(DisableThruster(2));
         Pickup = PickupType.None;
     }
 
+    private IEnumerator DisableThruster(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (mountedThruster != null)
+        {
+            // Destroy the machine gun
+            Destroy(mountedThruster);
+            mountedThruster = null;
+        }
+    }
+    
     IEnumerator UndoShield(float Delay)
     {
         yield return new WaitForSeconds(Delay);
@@ -200,6 +230,38 @@ public class PickUpManager : MonoBehaviour
         Destroy(KamiKaze);
         
     }
+    
+    private void UseMachineGun()
+    {
+        if (mountedMachineGun == null)
+        {
+            // Attach the machine gun to the mount point
+            Transform gunMountPoint = transform.Find("GunMountPoint");
+            if (gunMountPoint == null)
+            {
+                Debug.LogError("GunMountPoint not found!");
+                return;
+            }
+            mountedMachineGun = Instantiate(Turret, gunMountPoint.position, gunMountPoint.rotation, gunMountPoint);
+
+            // Countdown
+            StartCoroutine(DisableMachineGunAfterTime(machineGunDuration));
+        }
+    }
+
+    private IEnumerator DisableMachineGunAfterTime(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (mountedMachineGun != null)
+        {
+            // Destroy the machine gun
+            Destroy(mountedMachineGun);
+            mountedMachineGun = null;
+        }
+
+        Pickup = PickupType.None; // Reset the pickup type
+    }
 
     private void UseStun()
     {
@@ -227,18 +289,17 @@ public class PickUpManager : MonoBehaviour
         }
         Pickup = PickupType.None; 
     }
-
-    private void UpdateSprite(PickupType pickUpIndex){
-        // set sprite using pickup sprite index
-        /*  None = 0
-            Speed = 1
-            Rocket = 2
-            Shield = 3 
-        */
-    
-        pickUpImage.sprite = pickupSprites[(int)pickUpIndex];
+    private void UpdateSprite(PickupType pickUpIndex)
+    {
+        if (pickupSprites.Count > (int)pickUpIndex)
+        {
+            pickUpImage.sprite = pickupSprites[(int)pickUpIndex];
+        }
+        else
+        {
+            Debug.LogError("Sprite index out of bounds! Ensure pickupSprites matches PickupType.");
+        }
     }
-
     
     private void PlayAudio(AudioClip clip){
         audioSource.clip = clip;

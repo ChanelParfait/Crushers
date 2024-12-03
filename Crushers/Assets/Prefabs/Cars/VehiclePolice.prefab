@@ -315,6 +315,23 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 600df41a2afa13849bd802d281a1e695, type: 2}
+    - target: {fileID: 5888672055751983498, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: Turret
+      value: 
+      objectReference: {fileID: 3226583421603586234, guid: 027d3d2e3059a8a4497ef9f01a9ac5cc,
+        type: 3}
+    - target: {fileID: 5888672055751983498, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: pickupSprites.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888672055751983498, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: pickupSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: b3ddb23cfca73dd469454cac67e00de8,
+        type: 3}
     - target: {fileID: 6364864424819101101, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Mesh

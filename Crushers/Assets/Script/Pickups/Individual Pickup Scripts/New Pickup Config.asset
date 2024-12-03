@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2e1e1ef3256f74b89caedf2b732901, type: 3}
   m_Name: New Pickup Config
   m_EditorClassIdentifier: 
-  PUtype: 0
+  PUtype: 2
   DmgMultiplier: 1
   duration: 0
   StatsMultiplier: 0
   speedMultiplier: 0
-  radius: 0
+  radius: 1
   homing: 0
