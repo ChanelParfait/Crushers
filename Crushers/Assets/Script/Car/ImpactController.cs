@@ -176,5 +176,10 @@ public class ImpactController : MonoBehaviour
         return DeathType;
     }
 
+    public void SetDeathType(TypeOfDeath setDeathType)
+    {
+        DeathType = setDeathType;
+    }
+
     
 }
