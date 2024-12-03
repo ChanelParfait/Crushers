@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class AbilityManager : MonoBehaviour
 {
     public class MyFloatEvent : UnityEvent<float> { }
-    public MyFloatEvent OnAbilityUse = new MyFloatEvent();
+    public static MyFloatEvent OnAbilityUse = new MyFloatEvent();
 
     [SerializeField] private List<AbilityBase> abilities;
 
-    [SerializeField] float cooldownTime = 5;
+    [SerializeField] private float cooldownTime = 5;
     [SerializeField] public bool canUse = true;
 
 
@@ -49,5 +49,9 @@ public class AbilityManager : MonoBehaviour
 
     public void UpdateAbilitySprite(AbilityBase abilityIndex) {
         abilityCanvas.sprite = abilityIndex.icon; 
+    }
+
+    public float GetAbilityCooldownTime() {
+        return cooldownTime;
     }
 }

@@ -13,14 +13,18 @@ public class VehicleUIController : MonoBehaviour
     public GameObject startTimer;
 
     [SerializeField] private TextMeshProUGUI startTimerTxt;
+    [SerializeField] private UnityEngine.UI.Slider abilityResetSlider;
 
+    [SerializeField] private AbilityManager abilityManager;
 
-       void OnEnable()
+    private Coroutine cooldownRoutine;
+
+    void OnEnable()
     {
         LevelManager.levelTimeChanged +=  UpdateLevelTimer;
         LevelManager.startTimeChanged +=  UpdateStartTimer;
 
-
+        AbilityManager.OnAbilityUse.AddListener(StartCooldownUI);
     }
 
     void OnDisable()
@@ -28,6 +32,38 @@ public class VehicleUIController : MonoBehaviour
         LevelManager.levelTimeChanged -=  UpdateLevelTimer;
         LevelManager.startTimeChanged -=  UpdateStartTimer;
 
+        AbilityManager.OnAbilityUse.RemoveListener(StartCooldownUI);
+    }
+
+    private void Start()
+    {
+        abilityManager = gameObject.GetComponentInParent<AbilityManager>();
+        abilityResetSlider.maxValue = abilityManager.GetAbilityCooldownTime();
+        abilityResetSlider.value = abilityResetSlider.maxValue;
+    }
+
+    private void StartCooldownUI(float cooldownTime)
+    {
+        if (cooldownRoutine != null)
+        {
+            StopCoroutine(cooldownRoutine);
+        }
+        cooldownRoutine = StartCoroutine(CooldownUI(cooldownTime));
+    }
+
+    private IEnumerator CooldownUI(float cooldownTime)
+    {
+        float elapsedTime = 0f;
+        abilityResetSlider.value = 0; 
+
+        while (elapsedTime < cooldownTime)
+        {
+            elapsedTime += Time.deltaTime;
+            abilityResetSlider.value = Mathf.Min(abilityResetSlider.maxValue, elapsedTime / cooldownTime * abilityResetSlider.maxValue);
+            yield return null;
+        }
+
+        abilityResetSlider.value = abilityResetSlider.maxValue; 
     }
 
     public void UpdateLevelTimer(int time){
