@@ -41,8 +41,8 @@ public class CarRespawn : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         if(impactController.GetLastCollidedVehicle()){
-            impactController.GetLastCollidedVehicle().IncreaseScore(1);
-            Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
+            impactController.GetLastCollidedVehicle().IncreaseScore(impactController.GetDeathType());
+            //Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
         }
         
         impactController.ResetMass();
