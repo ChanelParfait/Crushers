@@ -132,6 +132,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     private IEnumerator DelayScreen(float delay){
+        GetComponent<PlayerInputManager>().DisableJoining();
         loadingScreen.DisplayScreen();
         
         yield return new WaitForSeconds(delay);
