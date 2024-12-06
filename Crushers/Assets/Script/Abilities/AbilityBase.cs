@@ -17,9 +17,10 @@ public enum AttachmentPos
 public abstract class AbilityBase : ScriptableObject
 {
     [Header("Ability Info")]
-    [SerializeField] string title;
+    [SerializeField] public AttachmentPos attachmentPos;
+    [SerializeField] public string title;
     [SerializeField] public Sprite icon;
-    public AttachmentPos attachmentPos;
+    
     public abstract void Use(GameObject controlledCar); 
 
 
