@@ -9,14 +9,14 @@ public class LightUpdater : MonoBehaviour
 
     [SerializeField] private TrainSpawnEvent _trainSpawnEvent; // this probably could be better lol
     private float trainSpawnTime;
-    private float timer;
+    private float timer, timer2;
     
     // Start is called before the first frame update
     void Start()
     {
         trainSpawnTime = _trainSpawnEvent.GetTrainTimer();
         if (trainSpawnTime == 0) trainSpawnTime = 1; // avoid div by 0
-        timer = trainSpawnTime;
+        timer = trainSpawnTime; timer2 = trainSpawnTime;
         Light_Green();
     }
 
@@ -24,11 +24,19 @@ public class LightUpdater : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-
+        timer2 -= Time.deltaTime;
+        
+        if (timer2 <= 0)
+        {
+            // sync with trainspawner corountine
+            timer2 = _trainSpawnEvent.GetTrainTimer();
+        }
+        
+        // this should be trainTimetoLive var
         if (timer <= -trainSpawnTime / 3) // 30sec -> -10sec
         {
             Light_Green();
-            timer = _trainSpawnEvent.GetTrainTimer();
+            timer = timer2; // update first timer to current coroutine time
         }
         else if (timer <= trainSpawnTime / 10) // 30sec -> 3sec
         {
