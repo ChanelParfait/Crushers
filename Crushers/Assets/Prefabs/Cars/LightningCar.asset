@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
+  m_Name: LightningCar
+  m_EditorClassIdentifier: 
+  carPrefab: {fileID: 4904897293994299215, guid: 9ff9f91baa1271a44a17ec2b60f1ac5d,
+    type: 3}
+  baseMaxSpeed: 90
+  baseMaxReverseSpeed: 45
+  baseAccelerationMultiplier: 2
+  baseMaxSteeringAngle: 27
+  baseSteeringSpeed: 0.5
+  baseBrakeForce: 1000
+  baseDecelerationMultiplier: 2
+  baseHandbrakeDriftMultiplier: 5
+  baseBodyMass: 200
+  baseGravityMultiplier: 200
+  baseDamageMultiplier: 1000
