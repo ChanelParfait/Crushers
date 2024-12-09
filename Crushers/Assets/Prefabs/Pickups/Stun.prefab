@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7518166016316033833}
   - component: {fileID: 2449189947932770919}
   - component: {fileID: 4824544090769700403}
+  - component: {fileID: -6743546278019334082}
   m_Layer: 0
   m_Name: Stun
   m_TagString: Untagged
@@ -4951,3 +4952,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-6743546278019334082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666847585282172510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62ad62085b167f4a99fd5050cb30cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

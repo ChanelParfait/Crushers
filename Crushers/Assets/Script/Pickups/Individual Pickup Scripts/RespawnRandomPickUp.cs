@@ -58,7 +58,5 @@ public class RespawnRandomPickUp : MonoBehaviour
         int Random = UnityEngine.Random.Range(0, listofPickupTypes.Length);
 
         return (listofPickupTypes[Random]);
-        
-        
     }
 }

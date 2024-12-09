@@ -10,8 +10,8 @@ public class PickUpBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Triggered");
             OnPickupCollected?.Invoke();
-            
             Destroy(gameObject);
         }
     }

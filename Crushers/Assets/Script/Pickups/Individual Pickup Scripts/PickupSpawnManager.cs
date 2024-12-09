@@ -21,11 +21,10 @@ public class PickupSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        // Initialize the dictionary to track active pickups
         activePickups = new Dictionary<Transform, GameObject>();
         foreach (var spawnPoint in spawnLocations)
         {
-            activePickups[spawnPoint] = null; // Initialize with no active pickups
+            activePickups[spawnPoint] = null;
         }
 
         if (GetComponent<MeshRenderer>())
@@ -33,18 +32,20 @@ public class PickupSpawnManager : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
         }
 
-        // Spawn initial pickups
         SpawnPickups();
     }
 
     private void SpawnPickups()
     {
-        // Shuffle spawn locations for randomness
+        // Shuffle the spawn locations for randomness
         List<Transform> availableLocations = new List<Transform>(spawnLocations);
         ShuffleList(availableLocations);
 
-        int pickupsToSpawn = Mathf.Min(maxPickupsPerCycle, availableLocations.Count);
+        // Clear previously used pickups
+        ClearInactivePickups();
 
+        // Spawn pickups at randomly chosen locations
+        int pickupsToSpawn = Mathf.Min(maxPickupsPerCycle, availableLocations.Count);
         for (int i = 0; i < pickupsToSpawn; i++)
         {
             Transform spawnPoint = availableLocations[i];
@@ -99,20 +100,34 @@ public class PickupSpawnManager : MonoBehaviour
 
     private void HandlePickupCollected(Transform spawnPoint)
     {
+        Debug.Log($"Pickup collected at {spawnPoint.name}");
         // Remove the collected pickup
         activePickups[spawnPoint] = null;
 
-        // Respawn after a random delay
-        float randomDelay = Random.Range(5f, 10f);
-        StartCoroutine(RespawnPickupAfterDelay(spawnPoint, randomDelay));
+        // Respawn pickups with new random spots after a delay
+        StartCoroutine(RespawnAllPickupsWithDelay());
     }
 
-    private IEnumerator RespawnPickupAfterDelay(Transform spawnPoint, float delay)
+    private IEnumerator RespawnAllPickupsWithDelay()
     {
-        yield return new WaitForSeconds(delay);
+        float randomDelay = Random.Range(5f, 10f);
+        yield return new WaitForSeconds(randomDelay);
 
-        // Respawn the pickup
-        SpawnPickupAtLocation(spawnPoint);
+        // Respawn pickups at new random locations
+        SpawnPickups();
+    }
+
+    private void ClearInactivePickups()
+    {
+        // Destroy inactive pickups and clear their references
+        foreach (var spawnPoint in activePickups.Keys)
+        {
+            if (activePickups[spawnPoint] != null)
+            {
+                Destroy(activePickups[spawnPoint]);
+                activePickups[spawnPoint] = null;
+            }
+        }
     }
 
     private void ShuffleList(List<Transform> list)

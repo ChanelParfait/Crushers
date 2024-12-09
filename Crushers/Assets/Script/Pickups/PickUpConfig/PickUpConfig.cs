@@ -12,7 +12,6 @@ public class PickupConfig : ScriptableObject
     
     public PUtype PUtype;
 
-    // Fields for Pickup (Make changes in PickUpConfigEditor for your needed PUtype)
     // Float variables
     [HideInInspector] public float DmgMultiplier;
     [HideInInspector] public float duration;

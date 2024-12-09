@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6889220925091660665}
   - component: {fileID: 547699603162164014}
   - component: {fileID: 6595144012856313703}
+  - component: {fileID: 2401741770194597275}
   m_Layer: 0
   m_Name: TurretPickup
   m_TagString: Pickup
@@ -69,6 +70,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedPU: 6
+--- !u!114 &2401741770194597275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678682108115785397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62ad62085b167f4a99fd5050cb30cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7260209924985723494
 GameObject:
   m_ObjectHideFlags: 0
