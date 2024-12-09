@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "JumpSpring", menuName = "Abilities/JumpSpring")]
 public class JumpSpring : AbilityBase
 {
+    [Space(10)]
+    [Header("Ability parameters")]
+    [Space(20)]
     [SerializeField] GameObject jumpSpringPrefab;
     [SerializeField] float jumpSpringForce;
     [SerializeField] float activatedTime;

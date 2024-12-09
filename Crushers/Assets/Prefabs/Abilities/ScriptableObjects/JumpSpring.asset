@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba358a2ad5095a947bde73b9fb4bc3e0, type: 3}
   m_Name: JumpSpring
   m_EditorClassIdentifier: 
+  attachmentPos: 1
   title: Jump Spring
   icon: {fileID: 21300000, guid: d351dbcce45a5364d9dd29e56df34543, type: 3}
-  attachmentPos: 1
+  cooldownTime: 10
   jumpSpringPrefab: {fileID: 9103088928918641839, guid: 5aa301ba69bd1b94ebd0feddd82f41af,
     type: 3}
   jumpSpringForce: 10000
