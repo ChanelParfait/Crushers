@@ -18,6 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     [SerializeField] private CarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
+    [SerializeField] private AbilityManager abilityManager;
     [SerializeField] private CameraInputHandler freelookCam; 
 
     private bool canJump = true;
@@ -64,6 +65,10 @@ public class PlayerInputHandler : MonoBehaviour
     public void SetPickupManager(PickUpManager pm){
         // set pickup manager
         pickUpManager = pm; 
+    }
+
+    public void SetAbilityManager(AbilityManager am) {
+        abilityManager = am;
     }
 
     public void SetCameraInputHandler(CameraInputHandler cip){
@@ -150,6 +155,12 @@ public class PlayerInputHandler : MonoBehaviour
         }        
     }
 
+    public void OnUseAbility(CallbackContext context) {
+        if (abilityManager) {
+            abilityManager.UseAbility();
+        }
+    }
+
     public void OnLook(CallbackContext context)
     {
         //Debug.Log("Look");
@@ -168,7 +179,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    public void OnHonk(CallbackContext context) {
+    public void OnHonk() {
         if (carController) {    
             carController.HonkHorn(); 
         }

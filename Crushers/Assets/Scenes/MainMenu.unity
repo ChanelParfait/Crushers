@@ -5441,6 +5441,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 492301079}
     m_Modifications:
+    - target: {fileID: 1936539737265014682, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2744354503348039254, guid: c08fffbb8ba905940abd0e45810e661e,
         type: 3}
       propertyPath: m_Name
@@ -5561,6 +5566,11 @@ PrefabInstance:
       propertyPath: frontRightCollider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
+      propertyPath: abilityCanvas
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6050293167921901555, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 4846683750393290245, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
@@ -5570,6 +5580,9 @@ PrefabInstance:
     - {fileID: 437490329189503080, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 6689289736625996319, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 7953326645806660151, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
+    - {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
+    - {fileID: 4833006699603076388, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
+    - {fileID: 1936539737265014682, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 400561193989995605, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 182478290353849215, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
@@ -6581,6 +6594,11 @@ PrefabInstance:
       propertyPath: frontRightCollider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2059653973944488064, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
+        type: 3}
+      propertyPath: abilityCanvas
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2992259863565596098, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
         type: 3}
       propertyPath: scoreText
@@ -6651,6 +6669,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleSmall
       objectReference: {fileID: 0}
+    - target: {fileID: 8078259187839790173, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4121551066448839732, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 2992259863565596098, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
@@ -6660,6 +6683,9 @@ PrefabInstance:
     - {fileID: 7842458471569537967, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 3896006056306256344, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 332036281214276080, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
+    - {fileID: 2059653973944488064, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
+    - {fileID: 3014610966014414563, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
+    - {fileID: 8078259187839790173, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8019592654875629458, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 7515397576152508600, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
@@ -8990,6 +9016,11 @@ PrefabInstance:
       propertyPath: damageText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: abilityCanvas
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: hornSound
@@ -9040,6 +9071,11 @@ PrefabInstance:
       propertyPath: frontRightCollider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5581503148192929400, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8196380668202205108, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Name
@@ -9054,6 +9090,9 @@ PrefabInstance:
     - {fileID: 5888672055751983498, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     - {fileID: 828559772023116797, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     - {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
+    - {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
+    - {fileID: 1493166302703072454, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
+    - {fileID: 5581503148192929400, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5919303738573188535, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     - {fileID: 6134685691761431197, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
@@ -13555,6 +13594,16 @@ PrefabInstance:
       propertyPath: frontRightCollider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4304258237231949549, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1,
+        type: 3}
+      propertyPath: abilityCanvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283978891037334064, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7781994489799046140, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1,
         type: 3}
       propertyPath: m_Name
@@ -13569,6 +13618,9 @@ PrefabInstance:
     - {fileID: 5474285886055845314, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     - {fileID: 1242981069163798453, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     - {fileID: 2573016993401481117, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
+    - {fileID: 4304258237231949549, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
+    - {fileID: 1078784580328487054, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
+    - {fileID: 6283978891037334064, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5216788395998388735, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     - {fileID: 5720308377230925525, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarRespawn : MonoBehaviour
 {
@@ -19,8 +20,8 @@ public class CarRespawn : MonoBehaviour
 
     //reference to the stats of each car
     private ImpactController impactController;
-
-
+    
+    
     void Start(){
         //save position and rotation for respawn
         startPosition = transform.position;
@@ -28,6 +29,8 @@ public class CarRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
+        
+        
     }
     
     public void Respawn(){
@@ -38,8 +41,8 @@ public class CarRespawn : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         if(impactController.GetLastCollidedVehicle()){
-            impactController.GetLastCollidedVehicle().IncreaseScore(1);
-            Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
+            impactController.GetLastCollidedVehicle().IncreaseScore(impactController.GetDeathType());
+            //Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
         }
         
         impactController.ResetMass();

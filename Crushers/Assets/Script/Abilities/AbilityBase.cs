@@ -4,33 +4,23 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AbilityBase : MonoBehaviour
+public enum AttachmentPos
 {
-    public class MyFloatEvent : UnityEvent<float> { }
-    public MyFloatEvent OnAbilityUse = new MyFloatEvent();
+    Back,
+    Bottom,
+    Left,
+    Right,
+    Top,
+    Front
+}
 
-    [SerializeField] Ability ability;
-    [SerializeField] float cooldownTime;
-    [SerializeField] bool canUse = true;
+public abstract class AbilityBase : ScriptableObject
+{
+    [Header("Ability Info")]
+    [SerializeField] string title;
+    [SerializeField] public Sprite icon;
+    public AttachmentPos attachmentPos;
+    public abstract void Use(GameObject controlledCar); 
 
-    public void UseAbility() {
-        if (canUse)
-        {
-            OnAbilityUse.Invoke(cooldownTime);
-            Ability();
-            StartCooldown();
 
-        }
-    }
-
-    public abstract void Ability();
-
-    public void StartCooldown() {
-        StartCoroutine(Cooldown());
-        IEnumerator Cooldown() {
-            canUse = false;
-            yield return new WaitForSeconds(cooldownTime);
-            canUse = true;
-        }
-    }
 }

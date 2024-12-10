@@ -132,6 +132,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     private IEnumerator DelayScreen(float delay){
+        GetComponent<PlayerInputManager>().DisableJoining();
         loadingScreen.DisplayScreen();
         
         yield return new WaitForSeconds(delay);
@@ -302,6 +303,7 @@ public class PlayerManager : MonoBehaviour
 
         //initialise other input handler components
         pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
+        pi.InputHandler.SetAbilityManager(pi.Input.gameObject.GetComponentInChildren<AbilityManager>());
         pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
         // disable camera shake
         //pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
