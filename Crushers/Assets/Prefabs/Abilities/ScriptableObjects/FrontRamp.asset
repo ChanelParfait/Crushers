@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cbe2bcbcb5ffd4199a003b5c9e4ebf, type: 3}
   m_Name: FrontRamp
   m_EditorClassIdentifier: 
-  attachmentPos: 5
+  attachmentPos: 4
   title: FrontRamp
   icon: {fileID: 21300000, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
   cooldownTime: 10000

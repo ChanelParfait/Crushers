@@ -180,6 +180,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 253828337045818116, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 253828338488097218, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: useUI
@@ -239,6 +249,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.14732365
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806781194314396834, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -319,12 +339,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldGO: {fileID: 0}
   Rocket: {fileID: 3768340816340407569, guid: f5a344c1db949ce479073efacbe3f1e2, type: 3}
+  KamiKazeGo: {fileID: 0}
+  Stun: {fileID: 0}
   Pickup: 0
   State: 0
   ShieldTimer: 0
+  KamiKazeTimer: 10
+  KamiKazeRadius: 0
   useItem: 0
+  DisabledEffect: {fileID: 0}
   pickUpImage: {fileID: 0}
   pickupSprites: []
+  audioSource: {fileID: 0}
+  sfx: []
 --- !u!1 &69268017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,7 +1087,8 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: c71d55c572f0f1c42a7f603e798ae330, type: 2}
   m_sharedMaterial: {fileID: -7923024412700085992, guid: c71d55c572f0f1c42a7f603e798ae330,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -7923024412700085992, guid: c71d55c572f0f1c42a7f603e798ae330, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1705,6 +1733,8 @@ MonoBehaviour:
   - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
   - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  HighValuePickUp: {fileID: 0}
+  percentageofHighPickup: 0
 --- !u!1001 &1038072989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2432,6 +2462,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 253828337045818116, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 253828338488097218, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: useUI
@@ -2511,6 +2551,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.14732365
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806781194314396834, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -2601,12 +2651,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldGO: {fileID: 0}
   Rocket: {fileID: 3768340816340407569, guid: f5a344c1db949ce479073efacbe3f1e2, type: 3}
+  KamiKazeGo: {fileID: 0}
+  Stun: {fileID: 0}
   Pickup: 2
   State: 0
   ShieldTimer: 5
+  KamiKazeTimer: 10
+  KamiKazeRadius: 0
   useItem: 0
+  DisabledEffect: {fileID: 0}
   pickUpImage: {fileID: 0}
   pickupSprites: []
+  audioSource: {fileID: 0}
+  sfx: []
 --- !u!1001 &1630088716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2963,6 +3020,8 @@ MonoBehaviour:
   - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
   - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  HighValuePickUp: {fileID: 0}
+  percentageofHighPickup: 0
 --- !u!65 &1811103692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3156,6 +3215,8 @@ MonoBehaviour:
   - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
   - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  HighValuePickUp: {fileID: 0}
+  percentageofHighPickup: 0
 --- !u!65 &1874602843
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3348,6 +3409,8 @@ MonoBehaviour:
   - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
   - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  HighValuePickUp: {fileID: 0}
+  percentageofHighPickup: 0
 --- !u!65 &1930801155
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3619,6 +3682,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 253828337045818116, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 253828338488097218, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: useUI
@@ -3678,6 +3751,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.14732365
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806781194314396834, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -3764,12 +3847,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldGO: {fileID: 0}
   Rocket: {fileID: 3768340816340407569, guid: f5a344c1db949ce479073efacbe3f1e2, type: 3}
+  KamiKazeGo: {fileID: 0}
+  Stun: {fileID: 0}
   Pickup: 2
   State: 0
   ShieldTimer: 5
+  KamiKazeTimer: 10
+  KamiKazeRadius: 0
   useItem: 0
+  DisabledEffect: {fileID: 0}
   pickUpImage: {fileID: 0}
   pickupSprites: []
+  audioSource: {fileID: 0}
+  sfx: []
 --- !u!1 &1986297895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3808,6 +3898,8 @@ MonoBehaviour:
   - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
   - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  HighValuePickUp: {fileID: 0}
+  percentageofHighPickup: 0
 --- !u!65 &1986297897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3952,6 +4044,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 253828337045818116, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 253828338488097218, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 314256638417223185, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: useUI
@@ -4057,6 +4159,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6084408817758277143, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Enabled
@@ -4156,12 +4268,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldGO: {fileID: 0}
   Rocket: {fileID: 3768340816340407569, guid: f5a344c1db949ce479073efacbe3f1e2, type: 3}
+  KamiKazeGo: {fileID: 0}
+  Stun: {fileID: 0}
   Pickup: 2
   State: 0
   ShieldTimer: 5
+  KamiKazeTimer: 10
+  KamiKazeRadius: 0
   useItem: 0
+  DisabledEffect: {fileID: 0}
   pickUpImage: {fileID: 0}
   pickupSprites: []
+  audioSource: {fileID: 0}
+  sfx: []
 --- !u!1001 &2052203500
 PrefabInstance:
   m_ObjectHideFlags: 0
