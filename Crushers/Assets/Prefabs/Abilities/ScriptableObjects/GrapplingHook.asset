@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentPos: 0
   title: Grappling Hook
   icon: {fileID: 21300072, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
-  cooldownTime: 5
+  cooldownTime: 15
   grapplingHookPrefab: {fileID: 3413506567966036218, guid: 769374524bcce3e4d81a189a2635d8c9,
     type: 3}
   hookSpeed: 200

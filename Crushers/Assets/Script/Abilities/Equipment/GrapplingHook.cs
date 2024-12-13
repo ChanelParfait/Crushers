@@ -8,7 +8,7 @@ using UnityEngine;
 public class GrapplingHook : AbilityBase
 {
     [Space(10)]
-    [Header("Ability parameters")]
+    [Header("Equipment parameters")]
     [Space(20)]
     [SerializeField] private GameObject grapplingHookPrefab;
     [SerializeField] private float hookSpeed = 1f;

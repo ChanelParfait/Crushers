@@ -18,3 +18,4 @@ MonoBehaviour:
   cooldownTime: 10000
   frontRampPrefab: {fileID: 1370421319066620325, guid: b62810a4a35b3ec48b7c64b86968bf16,
     type: 3}
+  positionAdjustmentVector: {x: 0.14, y: -0.65, z: 1}

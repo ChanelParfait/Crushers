@@ -22,6 +22,11 @@ public abstract class AbilityBase : ScriptableObject
     [SerializeField] public string title;
     [SerializeField] public Sprite icon;
     [SerializeField] private int cooldownTime;
+
+    [SerializeField] private ParticleSystem hitVFX;
+
+    [SerializeField] private AudioClip[] launchSFX;
+    [SerializeField] private AudioClip[] hitSFX;
     
     public abstract void Use(GameObject controlledCar);
 

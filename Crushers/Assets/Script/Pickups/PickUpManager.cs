@@ -125,7 +125,7 @@ public class PickUpManager : MonoBehaviour
         newLocation.y = 0f;
         */
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f + transform.forward, transform.rotation);
-            RocketGm.GetComponent<Rocket>().SetFiredBy(this.gameObject.GetComponent<ScoreKeeper>()); 
+            RocketGm.GetComponent<RocketPickup>().SetFiredBy(this.gameObject.GetComponent<ScoreKeeper>()); 
             //RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();

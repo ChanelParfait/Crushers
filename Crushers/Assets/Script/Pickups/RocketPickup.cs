@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Rocket : MonoBehaviour
+public class RocketPickup : MonoBehaviour
 {
     [SerializeField] private float _Speed = 100f;
     [SerializeField] private ScoreKeeper FiredBy;
