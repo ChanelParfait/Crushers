@@ -206,6 +206,9 @@ public class PickUpManager : MonoBehaviour
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, gameObject.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
                     
                     hitCollider.gameObject.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(gameObject.GetComponent<ScoreKeeper>());
+                    
+                    // set death type to rocket
+                    hitCollider.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Rocket);
                 }
             }
         }

@@ -55,10 +55,7 @@ public class ScoreKeeper : MonoBehaviour
                 //num = ?
                 score = score + num;
                 break;
-                                
         }
-
-        
     }
 
     public float GetScore(){
