@@ -16,10 +16,17 @@ public class FlipCollider : MonoBehaviour
 
        // Debug.Log("Trigger");
 
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.name == "RespawnCollider")
+        if (other.gameObject.CompareTag("Ground"))
         {
             //Debug.Log("Ground Hit");
             
+            respawn.Respawn();
+        }
+
+        if (other.gameObject.name == "RespawnCollider")
+        {
+            // set deathtype to void
+            this.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Void);
             respawn.Respawn();
         }
     }
