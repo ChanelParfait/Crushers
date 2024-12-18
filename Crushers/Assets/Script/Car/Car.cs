@@ -23,7 +23,7 @@ public class Car : ScriptableObject
     [SerializeField] private float baseSteeringSpeed = 0.5f;
 
     [Header("Deceleration")]
-    [Range(1000, 2000)] 
+    [Range(2000, 5000)] 
     [SerializeField] private int baseBrakeForce = 350;
     [Range(1, 10)] 
     [SerializeField] private float baseDecelerationMultiplier = 2;

@@ -3756,6 +3756,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 9007109847759549406, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: speedThreshold
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

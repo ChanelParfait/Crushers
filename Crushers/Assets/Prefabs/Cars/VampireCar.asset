@@ -19,7 +19,7 @@ MonoBehaviour:
   baseAccelerationMultiplier: 2
   baseMaxSteeringAngle: 27
   baseSteeringSpeed: 0.5
-  baseBrakeForce: 1000
+  baseBrakeForce: 2000
   baseDecelerationMultiplier: 2
   baseHandbrakeDriftMultiplier: 5
   baseBodyMass: 200
