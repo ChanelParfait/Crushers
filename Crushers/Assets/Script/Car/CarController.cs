@@ -696,14 +696,14 @@ public class CarController : MonoBehaviour
 
     private void LimitDriftAngle()
     {
-        Vector3 localVelocity = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
+        Vector3 localVelocity = transform.InverseTransformDirection(carRigidbody.velocity);
         float driftAngle = Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
 
         if (Mathf.Abs(driftAngle) > activeMaxDriftingAngle)
         {
             float clampedAngle = Mathf.Clamp(driftAngle, -activeMaxDriftingAngle, activeMaxDriftingAngle);
             Vector3 correctedVelocity = Quaternion.Euler(0, clampedAngle - driftAngle, 0) * localVelocity;
-            GetComponent<Rigidbody>().velocity = transform.TransformDirection(correctedVelocity);
+            carRigidbody.velocity = transform.TransformDirection(correctedVelocity);
         }
     }
 
