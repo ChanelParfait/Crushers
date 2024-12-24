@@ -427,6 +427,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 19bad496-1744-402e-8f01-2f4a3bcf08e3
     m_ActionName: Player/UseAbility[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8042942846443331091}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnSwitchNextAbility
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b8c4870f-dcd9-40b9-8d72-65c8ce32feec
+    m_ActionName: Player/SwitchAbility[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8042942846443331091}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnSwitchPrevAbility
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d066b623-4955-44a4-b0e2-7b9df13a3364
+    m_ActionName: Player/SwitchPrevAbility[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -475,8 +507,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.115467854, y: 0.053097013, z: -0.0061812405, w: 0.99187183}
-  m_LocalPosition: {x: -277.57117, y: 990.5723, z: -3305.4841}
+  m_LocalRotation: {x: 0.103228875, y: 0.44757086, z: -0.052103426, w: 0.8867409}
+  m_LocalPosition: {x: 78.60329, y: 14.125992, z: -15.106064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

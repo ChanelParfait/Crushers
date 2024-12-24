@@ -22,7 +22,7 @@ public class AbilityManager : MonoBehaviour
     private GameObject controlledCar; // The player's car
     private List<bool> cooldowns; // Cooldowns for each ability
     private List<Image> abilityImages;
-
+    private bool OnSwitch;
     private void Start()
     {
         if (abilities.Count == 0) return;
@@ -36,24 +36,6 @@ public class AbilityManager : MonoBehaviour
         abilityImages = new List<Image>(abilityCanvas.GetComponentsInChildren<Image>());
         UpdateAllAbilitySprites();
         controlledCar = gameObject;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SwitchAbility(-1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SwitchAbility(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UseAbility();
-        }
     }
 
     public void UseAbility()
@@ -82,10 +64,19 @@ public class AbilityManager : MonoBehaviour
         cooldowns[index] = true;
     }
 
-    private void SwitchAbility(int direction)
+    public void SwitchNextAbility()
     {
         if (abilities.Count == 0) return;
-        selectedIndex = (selectedIndex + direction + abilities.Count) % abilities.Count;
+        selectedIndex = (selectedIndex + 1 + abilities.Count) % abilities.Count;
+        UpdateAllAbilitySprites();
+
+        Debug.Log($"Switched to ability: {abilities[selectedIndex].title}");
+    }
+    
+    public void SwitchPrevAbility()
+    {
+        if (abilities.Count == 0) return;
+        selectedIndex = (selectedIndex - 1 + abilities.Count) % abilities.Count;
         UpdateAllAbilitySprites();
 
         Debug.Log($"Switched to ability: {abilities[selectedIndex].title}");
