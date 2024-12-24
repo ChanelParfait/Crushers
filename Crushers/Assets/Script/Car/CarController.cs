@@ -67,6 +67,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private int activeBrakeForce;
     [SerializeField] private float activeDecelerationMultiplier;
     [SerializeField] private int activeHandbrakeDriftMultiplier;
+    [SerializeField] private int activeMaxDriftingAngle; 
 
     [Space(10)]
     [Header("Deceleration")]
@@ -177,6 +178,7 @@ public class CarController : MonoBehaviour
         activeBrakeForce = car.GetBaseBrakeForce();
         activeDecelerationMultiplier = car.GetBaseDecelerationMultiplier();
         activeHandbrakeDriftMultiplier = car.GetBaseHandbrakeDriftMultiplier();
+        activeMaxDriftingAngle = car.GetMaxDriftingAngle();
         activeBodyMass = car.GetBaseBodyMass();
         activeGravityMultiplier = car.GetBaseGravityMultiplier();
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
@@ -645,10 +647,11 @@ public class CarController : MonoBehaviour
     // it is high, then you could make the car to feel like going on ice.
     public void Handbrake(){
       CancelInvoke("RecoverTraction");
-      // We are going to start losing traction smoothly, there is were our 'driftingAxis' variable takes
-      // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
-      // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
-      driftingAxis = driftingAxis + (Time.deltaTime);
+    // We are going to start losing traction smoothly, there is were our 'driftingAxis' variable takes
+    // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
+    // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
+      driftingAxis += Time.deltaTime;
+      driftingAxis = Mathf.Clamp(driftingAxis, 0f, 1f);
       float secureStartingPoint = driftingAxis * FLWextremumSlip * activeHandbrakeDriftMultiplier;
 
       if(secureStartingPoint < FLWextremumSlip){
@@ -668,24 +671,40 @@ public class CarController : MonoBehaviour
       //value, so, we are going to continue increasing the sideways friction of the wheels until driftingAxis
       // = 1f.
       if(driftingAxis < 1f){
-        FLwheelFriction.extremumSlip = FLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        float factor = activeHandbrakeDriftMultiplier * driftingAxis;
+
+        FLwheelFriction.extremumSlip = FLWextremumSlip * factor;
         frontLeftCollider.sidewaysFriction = FLwheelFriction;
 
-        FRwheelFriction.extremumSlip = FRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        FRwheelFriction.extremumSlip = FRWextremumSlip * factor;
         frontRightCollider.sidewaysFriction = FRwheelFriction;
 
-        RLwheelFriction.extremumSlip = RLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        RLwheelFriction.extremumSlip = RLWextremumSlip * factor;
         rearLeftCollider.sidewaysFriction = RLwheelFriction;
 
-        RRwheelFriction.extremumSlip = RRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        RRwheelFriction.extremumSlip = RRWextremumSlip * factor;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
       }
+        LimitDriftAngle();
 
       // Whenever the player uses the handbrake, it means that the wheels are locked, so we set 'isTractionLocked = true'
       // and, as a consequense, the car starts to emit trails to simulate the wheel skids.
       isTractionLocked = true;
       DriftCarPS();
 
+    }
+
+    private void LimitDriftAngle()
+    {
+        Vector3 localVelocity = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
+        float driftAngle = Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
+
+        if (Mathf.Abs(driftAngle) > activeMaxDriftingAngle)
+        {
+            float clampedAngle = Mathf.Clamp(driftAngle, -activeMaxDriftingAngle, activeMaxDriftingAngle);
+            Vector3 correctedVelocity = Quaternion.Euler(0, clampedAngle - driftAngle, 0) * localVelocity;
+            GetComponent<Rigidbody>().velocity = transform.TransformDirection(correctedVelocity);
+        }
     }
 
     // This function is used to emit both the particle systems of the tires' smoke and the trail renderers of the tire skids

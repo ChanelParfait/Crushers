@@ -18,7 +18,7 @@ MonoBehaviour:
   baseMaxReverseSpeed: 40
   baseAccelerationMultiplier: 15
   baseMaxSteeringAngle: 40
-  baseSteeringSpeed: 2
+  baseSteeringSpeed: 1
   baseBrakeForce: 3000
   baseDecelerationMultiplier: 1
   baseHandbrakeDriftMultiplier: 1
