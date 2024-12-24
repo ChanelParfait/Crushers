@@ -2594,6 +2594,7 @@ GameObject:
   - component: {fileID: 2448720167452322469}
   - component: {fileID: 1493166302703072454}
   - component: {fileID: 5581503148192929400}
+  - component: {fileID: 7345286473890743026}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Player
@@ -2802,7 +2803,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 11400000, guid: fb2c1f56eec8b054db061ef316fcd9d4, type: 2}
-  cooldownTime: 5
   canUse: 1
   abilityCanvas: {fileID: 7148645049306999157}
 --- !u!114 &1493166302703072454
@@ -2886,19 +2886,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4913253049554168334}
-        m_TargetAssemblyTypeName: VehicleUIController, Assembly-CSharp
-        m_MethodName: ShowKillFeed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   scoreText: {fileID: 5970591887534121917}
+--- !u!65 &7345286473890743026
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2371082, y: 3.0073714, z: 5.4151535}
+  m_Center: {x: -0.038571358, y: 1.389394, z: -0.1452446}
 --- !u!1 &9114952474528041427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,18 +3777,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4913253049554168334 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6948429851495561366, guid: 2d1ac2dc27ee11340b483eef11c7082d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2612837372762198680}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38de226a0652cd47af3bfeded21f116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5369755218889901771 stripped
