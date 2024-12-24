@@ -2802,9 +2802,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 11400000, guid: fb2c1f56eec8b054db061ef316fcd9d4, type: 2}
+  - {fileID: 11400000, guid: f344edb6e71f4b34ea109f04e4648a64, type: 2}
+  - {fileID: 11400000, guid: f344edb6e71f4b34ea109f04e4648a64, type: 2}
+  - {fileID: 11400000, guid: f344edb6e71f4b34ea109f04e4648a64, type: 2}
   canUse: 1
   abilityCanvas: {fileID: 0}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1493166302703072454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3735,6 +3739,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034812489992205321, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034812489992205321, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721987697328948143, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -32.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721987697328948143, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 33.8
       objectReference: {fileID: 0}
     - target: {fileID: 7873033967061045720, guid: 2d1ac2dc27ee11340b483eef11c7082d,
         type: 3}
