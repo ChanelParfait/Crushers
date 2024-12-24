@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8026828948466852175}
   - component: {fileID: 200545964397539098}
   - component: {fileID: 4475681290619184382}
+  - component: {fileID: 7954889620251240031}
   m_Layer: 0
   m_Name: Respawning PickUp
   m_TagString: Untagged
@@ -83,3 +84,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7954889620251240031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6226437680082209492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d402771debcb9b74bae38074b7675594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 0
+  TimeUntilRespawnPickups: 10
+  listofPickupTypes:
+  - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
+  - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
+  - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
