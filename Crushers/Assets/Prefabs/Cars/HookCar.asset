@@ -16,12 +16,13 @@ MonoBehaviour:
     type: 3}
   baseMaxSpeed: 90
   baseMaxReverseSpeed: 45
-  baseAccelerationMultiplier: 2
-  baseMaxSteeringAngle: 27
+  baseAccelerationMultiplier: 7
+  baseMaxSteeringAngle: 50
   baseSteeringSpeed: 0.5
-  baseBrakeForce: 1000
-  baseDecelerationMultiplier: 2
-  baseHandbrakeDriftMultiplier: 5
-  baseBodyMass: 200
-  baseGravityMultiplier: 200
-  baseDamageMultiplier: 1000
+  baseBrakeForce: 3000
+  baseDecelerationMultiplier: 1
+  baseHandbrakeDriftMultiplier: 1
+  maxDriftingAngle: 90
+  baseBodyMass: 1000
+  baseGravityMultiplier: 900
+  baseDamageMultiplier: 4000

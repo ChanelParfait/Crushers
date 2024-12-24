@@ -19,9 +19,10 @@ MonoBehaviour:
   baseAccelerationMultiplier: 8
   baseMaxSteeringAngle: 50
   baseSteeringSpeed: 0.75
-  baseBrakeForce: 1000
+  baseBrakeForce: 2000
   baseDecelerationMultiplier: 2
   baseHandbrakeDriftMultiplier: 5
+  maxDriftingAngle: 30
   baseBodyMass: 700
   baseGravityMultiplier: 300
   baseDamageMultiplier: 4000
