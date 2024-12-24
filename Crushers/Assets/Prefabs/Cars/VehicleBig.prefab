@@ -229,8 +229,8 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 94e4e455dee840246a3e284e2f1080fa, type: 2}
     - target: {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
-      propertyPath: abilityCanvas
-      value: 
+      propertyPath: abilities.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2704521858122530633, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}

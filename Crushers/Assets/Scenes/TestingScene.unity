@@ -16330,9 +16330,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
         type: 3}
+      propertyPath: canUse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
       propertyPath: abilityCanvas
       value: 
       objectReference: {fileID: 1955436469}
+    - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
+      propertyPath: abilities.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f344edb6e71f4b34ea109f04e4648a64,
+        type: 2}
+    - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
+      propertyPath: abilities.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c6ca567158d29e45a69ce2b980a1272,
+        type: 2}
+    - target: {fileID: 8525623260426746695, guid: c08fffbb8ba905940abd0e45810e661e,
+        type: 3}
+      propertyPath: abilities.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c692f86a2fa0a3409bf6aa4d009fb24,
+        type: 2}
     - target: {fileID: 8758449994355708169, guid: c08fffbb8ba905940abd0e45810e661e,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -26175,8 +26203,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049226626}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.103228875, y: 0.44757086, z: -0.052103426, w: 0.8867409}
-  m_LocalPosition: {x: 110.273285, y: 11.83, z: 92.67546}
+  m_LocalRotation: {x: 0.115632914, y: 0, z: 0, w: 0.99329203}
+  m_LocalPosition: {x: 0, y: 3.83, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
