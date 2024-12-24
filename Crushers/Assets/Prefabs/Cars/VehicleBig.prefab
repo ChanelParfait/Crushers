@@ -425,6 +425,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.003
       objectReference: {fileID: 0}
+    - target: {fileID: 5888672055751983498, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: pickupSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f1c7e5bf9fb4704a8b55f3e66366f74,
+        type: 3}
     - target: {fileID: 6364864424819101101, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Mesh

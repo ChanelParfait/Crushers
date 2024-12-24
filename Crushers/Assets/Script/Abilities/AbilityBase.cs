@@ -24,7 +24,6 @@ public abstract class AbilityBase : ScriptableObject
     [SerializeField] private int cooldownTime;
 
     [SerializeField] private ParticleSystem hitVFX;
-
     [SerializeField] private AudioClip[] launchSFX;
     [SerializeField] private AudioClip[] hitSFX;
     

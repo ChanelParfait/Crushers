@@ -38,7 +38,7 @@ public class VehicleUIController : MonoBehaviour
     private void Start()
     {
         abilityManager = gameObject.GetComponentInParent<AbilityManager>();
-        abilityResetSlider.maxValue = abilityManager.GetAbilityCooldownTime();
+        //abilityResetSlider.maxValue = abilityManager.GetAbilityCooldownTime();
         abilityResetSlider.value = abilityResetSlider.maxValue;
     }
 
