@@ -94,24 +94,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "SwitchNextAbility",
-                    "type": "Button",
-                    "id": "b8c4870f-dcd9-40b9-8d72-65c8ce32feec",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SwitchPrevAbility",
-                    "type": "Button",
-                    "id": "d066b623-4955-44a4-b0e2-7b9df13a3364",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -272,7 +254,7 @@
                 {
                     "name": "",
                     "id": "dd1bce30-f8c6-44c6-805e-c5874a6f11c7",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -360,7 +342,7 @@
                 {
                     "name": "",
                     "id": "fc79a6a1-9985-4af1-b9ba-57d81e29cbf3",
-                    "path": "<Keyboard>/#(R)",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -376,28 +358,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "UseAbility",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9528cf93-e298-41c7-852a-2f3ddc0ffbe8",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SwitchNextAbility",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0846707d-fd67-432d-895c-5b6e92aa9f4c",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SwitchPrevAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

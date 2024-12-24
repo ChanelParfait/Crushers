@@ -116,24 +116,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchNextAbility"",
-                    ""type"": ""Button"",
-                    ""id"": ""b8c4870f-dcd9-40b9-8d72-65c8ce32feec"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchPrevAbility"",
-                    ""type"": ""Button"",
-                    ""id"": ""d066b623-4955-44a4-b0e2-7b9df13a3364"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -294,7 +276,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dd1bce30-f8c6-44c6-805e-c5874a6f11c7"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -382,7 +364,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fc79a6a1-9985-4af1-b9ba-57d81e29cbf3"",
-                    ""path"": ""<Keyboard>/#(R)"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -398,28 +380,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""UseAbility"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9528cf93-e298-41c7-852a-2f3ddc0ffbe8"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SwitchNextAbility"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0846707d-fd67-432d-895c-5b6e92aa9f4c"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SwitchPrevAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1101,8 +1061,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Honk = m_Player.FindAction("Honk", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_UseAbility = m_Player.FindAction("UseAbility", throwIfNotFound: true);
-        m_Player_SwitchNextAbility = m_Player.FindAction("SwitchNextAbility", throwIfNotFound: true);
-        m_Player_SwitchPrevAbility = m_Player.FindAction("SwitchPrevAbility", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1188,8 +1146,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Honk;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_UseAbility;
-    private readonly InputAction m_Player_SwitchNextAbility;
-    private readonly InputAction m_Player_SwitchPrevAbility;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1204,8 +1160,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Honk => m_Wrapper.m_Player_Honk;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @UseAbility => m_Wrapper.m_Player_UseAbility;
-        public InputAction @SwitchNextAbility => m_Wrapper.m_Player_SwitchNextAbility;
-        public InputAction @SwitchPrevAbility => m_Wrapper.m_Player_SwitchPrevAbility;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1245,12 +1199,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseAbility.started += instance.OnUseAbility;
             @UseAbility.performed += instance.OnUseAbility;
             @UseAbility.canceled += instance.OnUseAbility;
-            @SwitchNextAbility.started += instance.OnSwitchNextAbility;
-            @SwitchNextAbility.performed += instance.OnSwitchNextAbility;
-            @SwitchNextAbility.canceled += instance.OnSwitchNextAbility;
-            @SwitchPrevAbility.started += instance.OnSwitchPrevAbility;
-            @SwitchPrevAbility.performed += instance.OnSwitchPrevAbility;
-            @SwitchPrevAbility.canceled += instance.OnSwitchPrevAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1285,12 +1233,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseAbility.started -= instance.OnUseAbility;
             @UseAbility.performed -= instance.OnUseAbility;
             @UseAbility.canceled -= instance.OnUseAbility;
-            @SwitchNextAbility.started -= instance.OnSwitchNextAbility;
-            @SwitchNextAbility.performed -= instance.OnSwitchNextAbility;
-            @SwitchNextAbility.canceled -= instance.OnSwitchNextAbility;
-            @SwitchPrevAbility.started -= instance.OnSwitchPrevAbility;
-            @SwitchPrevAbility.performed -= instance.OnSwitchPrevAbility;
-            @SwitchPrevAbility.canceled -= instance.OnSwitchPrevAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1499,8 +1441,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnHonk(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnUseAbility(InputAction.CallbackContext context);
-        void OnSwitchNextAbility(InputAction.CallbackContext context);
-        void OnSwitchPrevAbility(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

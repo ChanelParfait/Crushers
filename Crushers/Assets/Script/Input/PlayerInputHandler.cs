@@ -160,20 +160,6 @@ public class PlayerInputHandler : MonoBehaviour
             abilityManager.UseAbility();
         }
     }
-    
-    public void OnSwitchNextAbility(CallbackContext context) {
-        if (abilityManager)
-        {
-            abilityManager.SwitchNextAbility();
-        }
-    }
-    
-    public void OnSwitchPrevAbility(CallbackContext context) {
-        if (abilityManager)
-        {
-            abilityManager.SwitchPrevAbility();
-        }
-    }
 
     public void OnLook(CallbackContext context)
     {
