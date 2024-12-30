@@ -128,6 +128,17 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.14142136
       objectReference: {fileID: 0}
+    - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: car
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e1fd1abe82ef6e40a29ab5f3b0dd048,
+        type: 2}
+    - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: vehiclePitch
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_AnchorMax.x

@@ -16,6 +16,10 @@ public enum VehicleType
     Small,
     Big,
     Police,
+    Lightning,
+    Hook,
+    Surf,
+    Vampire,
     Unknown
 }
 
@@ -281,6 +285,14 @@ public class CarController : MonoBehaviour
             case VehicleType.Big:
                 break;
             case VehicleType.Police:
+                break;
+            case VehicleType.Lightning:
+                break;
+            case VehicleType.Hook:
+                break;
+            case VehicleType.Vampire:
+                break;
+            case VehicleType.Surf:
                 break;
             case VehicleType.Unknown:
                 Debug.LogWarning("Vehicle type unkown, setting as default");

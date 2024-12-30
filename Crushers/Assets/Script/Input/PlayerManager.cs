@@ -114,6 +114,14 @@ public class PlayerManager : MonoBehaviour
                 return VehicleType.Big;
             case "VehiclePolice":
                 return VehicleType.Police;
+            case "VehicleLightning":
+                return VehicleType.Lightning;
+            case "VehicleHook":
+                return VehicleType.Hook;
+            case "VehicleVempire":
+                return VehicleType.Vampire;
+            case "VehicleSurf":
+                return VehicleType.Surf;
             default:
                 return VehicleType.Unknown;
         }
