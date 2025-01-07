@@ -42,7 +42,10 @@ public class MainMenuController : MonoBehaviour
         activeMenuIndex = index; 
         menuPanels[activeMenuIndex].SetActive(true);
         // select default menu button
-        menuButtons[activeMenuIndex].Select();
+        if(menuButtons[activeMenuIndex])
+        {
+            menuButtons[activeMenuIndex].Select();
+        }
 
     }
 

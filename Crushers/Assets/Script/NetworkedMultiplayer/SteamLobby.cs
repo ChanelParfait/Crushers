@@ -97,7 +97,7 @@ public class SteamLobby : MonoBehaviour
 
     void OnGetLobbyList(LobbyMatchList_t result)
     {
-        /*if(LobbiesListManager.instance.listOfLobbies.Count > 0){
+        if(LobbiesListManager.instance.listOfLobbies.Count > 0){
             LobbiesListManager.instance.DestroyLobbies();
         }
         for(int i = 0; i < result.m_nLobbiesMatching; i++)
@@ -105,13 +105,13 @@ public class SteamLobby : MonoBehaviour
             CSteamID lobbyID = SteamMatchmaking.GetLobbyByIndex(i);
             lobbyIDs.Add(lobbyID);
             SteamMatchmaking.RequestLobbyData(lobbyID);
-        }*/
+        }
 
     }
 
     void OnGetLobbyData(LobbyDataUpdate_t result)
     {
-        //LobbiesListManager.instance.DisplayLobbies(lobbyIDs, result);
+        LobbiesListManager.instance.DisplayLobbies(lobbyIDs, result);
     }
 
 }
