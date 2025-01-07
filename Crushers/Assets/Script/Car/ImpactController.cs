@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using Random = UnityEngine.Random;
+using Mirror;
+
 
 public class ImpactController : MonoBehaviour
 {
@@ -77,6 +79,12 @@ public class ImpactController : MonoBehaviour
  
             if (rb != null)
             {
+                // Check that the collided rigidbody doesn't belong to this player
+                NetworkRigidbodyReliable networkRB = collision.gameObject.GetComponentInParent<NetworkRigidbodyReliable>();
+                if (networkRB.isOwned)
+                {
+                    return; 
+                }
                 CheckFrontBumperCollision(collision);
                 PlayHitEffect(collision);
 

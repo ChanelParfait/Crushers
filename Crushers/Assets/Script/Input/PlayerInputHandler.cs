@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,11 +11,15 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
     private InputActionAsset controls; 
     private InputActionMap player; 
+
+    private PlayerInput input;
     private int playerIndex; 
+    public GameObject PlayerModel;
+
 
     [SerializeField] private CarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
@@ -28,9 +33,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Awake(){
         // initialise controls and enable them 
-        PlayerInput input = GetComponent<PlayerInput>();
+        input = GetComponent<PlayerInput>();
         controls = input.actions;
         playerIndex = input.playerIndex;
+        Debug.Log("Owned: " + isOwned);
+
+        
         player = controls.FindActionMap("Player");
         player.Enable();
 
@@ -39,11 +47,34 @@ public class PlayerInputHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!isOwned)
+        {
+            input.enabled = false;
+        }
         // try to find vehicle components
         // only for testing individual vehicles not vehicles in conjuction with player config object
         //carController = GetComponent<PrometeoCarController>();
         //pickUpManager = GetComponent<PickUpManager>();
         //freelookCam = GetComponentInChildren<CameraInputHandler>();
+    }
+
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
+            // when in game scene enable all player visuals and scripts
+            if(PlayerModel.activeSelf == false)
+            {
+                Debug.Log("Set Position");
+                SetPosition();
+                PlayerModel.SetActive(true);
+            }
+            
+        }
+    }
+    
+    // Set player to a Random Position within -5, 0, -5 and 5, 0, 5 
+    public void SetPosition(){
+        transform.position = new Vector3(167,18,77);
     }
 
     public void SetCarController(CarController cc)
@@ -94,12 +125,10 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     public void OnJump(CallbackContext context){
-        if(context.performed){
-            if(canJump && carController != null){
-                canJump = false;
-                carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
-                StartCoroutine(JumpCooldown(5));
-            }
+        if(canJump && carController && isOwned){
+            canJump = false;
+            carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
+            StartCoroutine(JumpCooldown(5));
         }
     }
 
@@ -110,15 +139,18 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        if(carController)  
-        { 
+        Debug.Log("Pressing W");
+        if(carController && isOwned)
+        {
+            Debug.Log("Moving Forward");
+
             carController.isMovingForward = context.ReadValueAsButton();
         }
     }
 
     public void OnReverse(CallbackContext context)
     {
-        if(carController)
+        if(carController && isOwned)
         {
             carController.isReversing = context.ReadValueAsButton();
         }
@@ -126,10 +158,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnTurn(CallbackContext context)
     {
-        Vector2 turn = context.ReadValue<Vector2>();
-
-        if(carController)
+        if(carController && isOwned)
         {
+            Vector2 turn = context.ReadValue<Vector2>();
             carController.SetSteeringAngle(turn);
         }
         
