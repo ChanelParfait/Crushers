@@ -41,16 +41,7 @@ public class PlayerInputHandler : NetworkBehaviour
         // initialise controls and enable them 
         input = GetComponent<PlayerInput>();
         controls = input.actions;
-        if(isOnline)
-        {
-            playerIndex = GetComponent<PlayerObjectController>().playerIDNumber;
-            Debug.Log("Player ID: " + playerIndex);
-
-        } 
-        else 
-        {
-            playerIndex = input.playerIndex;
-        }
+        
         
         player = controls.FindActionMap("Player");
         player.Enable();
@@ -71,6 +62,17 @@ public class PlayerInputHandler : NetworkBehaviour
             carController = PlayerModel.GetComponent<CarController>();
             pickUpManager = PlayerModel.GetComponent<PickUpManager>();
             freelookCam = PlayerModel.GetComponentInChildren<CameraInputHandler>();
+        }
+
+        if(isOnline)
+        {
+            playerIndex = GetComponent<PlayerObjectController>().playerIDNumber;
+            Debug.Log("Player ID: " + playerIndex);
+
+        } 
+        else 
+        {
+            playerIndex = input.playerIndex;
         }
         //carController = GetComponent<PrometeoCarController>();
         //pickUpManager = GetComponent<PickUpManager>();
