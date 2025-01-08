@@ -53,6 +53,12 @@ public class PlayerInputHandler : NetworkBehaviour
         }
         // try to find vehicle components
         // only for testing individual vehicles not vehicles in conjuction with player config object
+        if(PlayerModel)
+        {
+            carController = PlayerModel.GetComponent<CarController>();
+            pickUpManager = PlayerModel.GetComponent<PickUpManager>();
+            freelookCam = PlayerModel.GetComponentInChildren<CameraInputHandler>();
+        }
         //carController = GetComponent<PrometeoCarController>();
         //pickUpManager = GetComponent<PickUpManager>();
         //freelookCam = GetComponentInChildren<CameraInputHandler>();
@@ -73,8 +79,13 @@ public class PlayerInputHandler : NetworkBehaviour
     }
     
     // Set player to a Random Position within -5, 0, -5 and 5, 0, 5 
+    // alter this to request a spawn position from the level manager
     public void SetPosition(){
-        transform.position = new Vector3(167,18,77);
+        LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        Transform spawn =  lvlManager.GetSpawnPos();
+        Debug.Log("Spawn: " + spawn);
+        transform.position = spawn.position;
+        transform.rotation = spawn.rotation;
     }
 
     public void SetCarController(CarController cc)

@@ -48920,7 +48920,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 6097966847353077215, guid: d02510e5bb9d99347a6c0e6ac9d1899f, type: 3}
+  - {fileID: 2449448533462767253, guid: e821818198fb6c5498f3f57a8a8321aa, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -48936,7 +48936,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
-  GamePlayerPrefab: {fileID: 7770314943266133222, guid: d02510e5bb9d99347a6c0e6ac9d1899f,
+  GamePlayerPrefab: {fileID: 2491720458731843053, guid: e821818198fb6c5498f3f57a8a8321aa,
     type: 3}
 --- !u!4 &973037424
 Transform:
@@ -65806,7 +65806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1473254909

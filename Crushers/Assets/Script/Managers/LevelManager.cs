@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class LevelManager : MonoBehaviour
 { 
     [SerializeField] private bool isTesting = false; 
+
+    // level timing // 
     [SerializeField] private int levelDuration; 
     private int startCountdownTimer = 3; 
     private int levelCountdownTimer;
@@ -14,13 +16,17 @@ public class LevelManager : MonoBehaviour
     private bool startCountdownEnded = false; 
     private bool isTimerRunning = false; 
     private AudioSource source; 
+    // Spawning
+    [SerializeField] private List<Transform> spawnPositions = new List<Transform>();
+    private List<Transform> availableSpawnPositions = new List<Transform>();
 
 
     // event when players should gain control 
     public static UnityAction ArenaLevelStarted;
 
+    // event when timer runs out
     public static UnityAction ArenaLevelEnded;
-
+    // event for countdown timers
     public static UnityAction<int> startTimeChanged;
     public static UnityAction<int> levelTimeChanged;
      
@@ -44,6 +50,7 @@ public class LevelManager : MonoBehaviour
     {   
         source = GetComponent<AudioSource>();
         levelCountdownTimer = levelDuration;
+        availableSpawnPositions = spawnPositions;
         startCountdownTimer = 3;
         if(isTesting){
              startCountdownTimer = 0;
@@ -92,6 +99,18 @@ public class LevelManager : MonoBehaviour
             prevTime = totalTime;
         }
 
+    }
+
+    public Transform GetSpawnPos()
+    {
+        Transform spawn = null;
+        // get last available spawn position in list
+        if(availableSpawnPositions.Count > 0){
+            spawn = availableSpawnPositions[availableSpawnPositions.Count - 1];
+            // and remove it 
+            availableSpawnPositions.Remove(spawn);
+        }
+        return spawn;
     }
 
     private void LoadLevel(bool isArena){

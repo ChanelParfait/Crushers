@@ -366,6 +366,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2076987966805777968, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2862711602247294519, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_IncludeLayers.m_Bits
