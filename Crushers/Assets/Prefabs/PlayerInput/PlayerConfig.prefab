@@ -452,6 +452,8 @@ MonoBehaviour:
   pickUpManager: {fileID: 0}
   abilityManager: {fileID: 0}
   freelookCam: {fileID: 0}
+  isOnline: 0
+  playerLayers: []
 --- !u!1 &2992308494568267930
 GameObject:
   m_ObjectHideFlags: 0

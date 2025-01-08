@@ -81,15 +81,19 @@ public class PlayerInputHandler : NetworkBehaviour
 
     private void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
-            // when in game scene enable all player visuals and scripts
-            if(PlayerModel.activeSelf == false)
-            {
-                Debug.Log("Set Position");
-                SetPosition();
-                PlayerModel.SetActive(true);
+        if(isOnline)
+        {
+            if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
+                // when in game scene enable all player visuals and scripts
+                if(PlayerModel.activeSelf == false)
+                {
+                    Debug.Log("Set Position");
+                    PlayerModel.SetActive(true);
+                    SetPosition();
+                    SetPlayerLayers();
+                }
+                
             }
-            
         }
     }
     
@@ -106,6 +110,24 @@ public class PlayerInputHandler : NetworkBehaviour
     private void SetPlayerLayers(){
         // Set the Layer and Culling Mask on this Players Camera 
         // Consider Moving This : Where should these player values be initialised? 
+        int layerToAdd = (int)Mathf.Log(playerLayers[playerIndex - 1], 2);
+        var cullingMask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
+        if(PlayerModel)
+        {
+            PlayerModel.layer = layerToAdd;
+            Camera camera = GetComponentInChildren<Camera>();
+            camera.gameObject.layer = layerToAdd;
+            camera.transform.position = transform.position;
+            camera.transform.rotation = transform.rotation;
+            // add the layer
+            camera.cullingMask = cullingMask;
+            //set the layer
+            CinemachineFreeLook freeLook = PlayerModel.GetComponentInChildren<CinemachineFreeLook>();
+            freeLook.gameObject.layer = layerToAdd;
+            
+
+        }
+        
     }
 
     public void SetCarController(CarController cc)
