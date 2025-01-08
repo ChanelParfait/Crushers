@@ -116,6 +116,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             PlayerModel.layer = layerToAdd;
             Camera camera = GetComponentInChildren<Camera>();
+            camera.enabled = true;
             camera.gameObject.layer = layerToAdd;
             camera.transform.position = transform.position;
             camera.transform.rotation = transform.rotation;
