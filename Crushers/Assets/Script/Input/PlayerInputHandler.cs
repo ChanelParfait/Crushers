@@ -29,15 +29,28 @@ public class PlayerInputHandler : NetworkBehaviour
     private bool canJump = true;
     // Actions
     public static UnityAction<int> Pause; 
+    // Flag for Online / Offline Use
+    public bool isOnline = true; 
+
+    // Temporary 
+    [SerializeField] private List<LayerMask> playerLayers; 
+
 
 
     private void Awake(){
         // initialise controls and enable them 
         input = GetComponent<PlayerInput>();
         controls = input.actions;
-        playerIndex = input.playerIndex;
-        Debug.Log("Owned: " + isOwned);
+        if(isOnline)
+        {
+            playerIndex = GetComponent<PlayerObjectController>().playerIDNumber;
+            Debug.Log("Player ID: " + playerIndex);
 
+        } 
+        else 
+        {
+            playerIndex = input.playerIndex;
+        }
         
         player = controls.FindActionMap("Player");
         player.Enable();
@@ -86,6 +99,11 @@ public class PlayerInputHandler : NetworkBehaviour
         Debug.Log("Spawn: " + spawn);
         transform.position = spawn.position;
         transform.rotation = spawn.rotation;
+    }
+
+    private void SetPlayerLayers(){
+        // Set the Layer and Culling Mask on this Players Camera 
+        // Consider Moving This : Where should these player values be initialised? 
     }
 
     public void SetCarController(CarController cc)
