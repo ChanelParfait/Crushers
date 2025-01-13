@@ -13,10 +13,9 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : NetworkBehaviour
 {
-    private InputActionAsset controls; 
-    private InputActionMap player; 
-
     private PlayerInput input;
+    private InputActionAsset inputAsset; 
+    private InputActionMap player; 
     private int playerIndex; 
     public GameObject PlayerModel;
 
@@ -39,13 +38,57 @@ public class PlayerInputHandler : NetworkBehaviour
 
     private void Awake(){
         // initialise controls and enable them 
-        input = GetComponent<PlayerInput>();
-        controls = input.actions;
-        
-        
-        player = controls.FindActionMap("Player");
-        player.Enable();
+        input = GetComponent<PlayerInput>(); 
+        inputAsset = input.actions;
+        player = inputAsset.FindActionMap("Player");
 
+    }
+    private void OnEnable()
+    {
+        // add listeners to all input actions
+        player.FindAction("Forward").started += OnForward;
+        player.FindAction("Forward").canceled += OnForward;
+        player.FindAction("Reverse").started += OnReverse;
+        player.FindAction("Reverse").canceled += OnReverse;
+        player.FindAction("Turn").started += OnTurn;
+        player.FindAction("Turn").canceled += OnTurn;
+        player.FindAction("Look").started += OnLook;
+        player.FindAction("Look").canceled += OnLook;
+        player.FindAction("Brake").started += OnBrake;
+        player.FindAction("Brake").canceled += OnBrake;
+        player.FindAction("UseItem").started += OnUseItem;
+        player.FindAction("UseItem").canceled += OnUseItem;
+        player.FindAction("Jump").performed += OnJump;
+        player.FindAction("Honk").performed += OnHonk;
+        player.FindAction("Pause").performed += OnPause;
+        
+        player.FindAction("UseAbility").performed += OnUseAbility;
+
+
+
+        player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        player.FindAction("Forward").started -= OnForward;
+        player.FindAction("Forward").canceled -= OnForward;
+        player.FindAction("Reverse").started -= OnReverse;
+        player.FindAction("Reverse").canceled -= OnReverse;
+        player.FindAction("Turn").started -= OnTurn;
+        player.FindAction("Turn").canceled -= OnTurn;
+        player.FindAction("Look").started -= OnLook;
+        player.FindAction("Look").canceled -= OnLook;
+        player.FindAction("Brake").started -= OnBrake;
+        player.FindAction("Brake").canceled -= OnBrake;
+        player.FindAction("UseItem").started -= OnUseItem;
+        player.FindAction("UseItem").canceled -= OnUseItem;
+        player.FindAction("Jump").performed -= OnJump;
+        player.FindAction("Honk").performed -= OnHonk;
+        player.FindAction("Pause").performed -= OnPause;
+
+
+        player.Disable();
     }
 
     // Start is called before the first frame update
@@ -173,7 +216,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnRespawn(CallbackContext context)
     {
-       if(gameObject.GetComponentInChildren<CarRespawn>()){
+       if(gameObject.GetComponentInChildren<CarRespawn>() && isOwned){
             if(context.performed){
                 gameObject.GetComponentInChildren<CarRespawn>().Respawn();
             }
@@ -182,6 +225,8 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnJump(CallbackContext context){
         if(canJump && carController && isOwned){
+            Debug.Log("Jump");
+
             canJump = false;
             carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
             StartCoroutine(JumpCooldown(5));
@@ -225,10 +270,10 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnBrake(CallbackContext context)
     {
 
-        if(carController){
+        if(carController && isOwned){
             carController.isBraking =  context.ReadValueAsButton();
             if(context.canceled){
-                //Debug.Log("RecoverTraction");
+                Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
         }
@@ -237,13 +282,13 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnUseItem(CallbackContext context)
     {
-        if(pickUpManager){
+        if(pickUpManager && isOwned){
             pickUpManager.useItem = context.ReadValueAsButton();
         }        
     }
 
     public void OnUseAbility(CallbackContext context) {
-        if (abilityManager) {
+        if (abilityManager && isOwned) {
             abilityManager.UseAbility();
         }
     }
@@ -253,21 +298,23 @@ public class PlayerInputHandler : NetworkBehaviour
         //Debug.Log("Look");
         // get on look value and pass it to the free look camera
         var read = context.ReadValue<Vector2>();
-        if(freelookCam){
+        if(freelookCam && isOwned){
             freelookCam.horizontal = read;
         }
     }
 
     public void OnPause(CallbackContext context){
-        if(context.performed){
+        if(context.performed && isOwned){
             // invoke a pause event
             Pause?.Invoke(playerIndex);
         }
     }
 
 
-    public void OnHonk() {
-        if (carController) {    
+    public void OnHonk(CallbackContext context) {
+        if (carController && isOwned) {    
+                Debug.Log("Honk");
+
             carController.HonkHorn(); 
         }
     }

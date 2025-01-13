@@ -417,6 +417,8 @@ public class CarController : MonoBehaviour
 
     public void HonkHorn() {
         if (!hornSound.isPlaying) {
+                Debug.Log("Hooooooonk");
+
             hornSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f);
             hornSound.Play();
         }
