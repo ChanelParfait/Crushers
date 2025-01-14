@@ -29,7 +29,7 @@ public class PlayerInputHandler : NetworkBehaviour
     // Actions
     public static UnityAction<int> Pause; 
     // Flag for Online / Offline Use
-    public bool isOnline = true; 
+    public bool isOnline; 
 
     // Temporary 
     [SerializeField] private List<LayerMask> playerLayers; 
@@ -94,10 +94,7 @@ public class PlayerInputHandler : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!isOwned)
-        {
-            input.enabled = false;
-        }
+
         // try to find vehicle components
         // only for testing individual vehicles not vehicles in conjuction with player config object
         if(PlayerModel)
@@ -111,7 +108,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             playerIndex = GetComponent<PlayerObjectController>().playerIDNumber;
             Debug.Log("Player ID: " + playerIndex);
-
+            input.enabled = isOwned;
         } 
         else 
         {
@@ -131,6 +128,7 @@ public class PlayerInputHandler : NetworkBehaviour
                 if(PlayerModel.activeSelf == false)
                 {
                     Debug.Log("Set Position");
+                    player.Enable();
                     PlayerModel.SetActive(true);
                     SetPosition();
                     SetPlayerLayers();
@@ -241,6 +239,7 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnForward(CallbackContext context)
     {
         Debug.Log("Pressing W");
+        Debug.Log("Is Owned: " + isOwned);
         if(carController && isOwned)
         {
             Debug.Log("Moving Forward");

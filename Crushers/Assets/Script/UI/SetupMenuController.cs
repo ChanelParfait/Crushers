@@ -18,6 +18,8 @@ public class SetupMenuController : MonoBehaviour
     // player index and event system
     private int playerIndex;
     private MultiplayerEventSystem eventSystem;
+    
+    InputActionMap UI;
 
     // Events //
     public static UnityAction<int, GameObject> vehicleSelected; 
@@ -38,14 +40,20 @@ public class SetupMenuController : MonoBehaviour
      private bool inputEnabled;
      private bool selectionEnabled;
 
-    void Start()
+    void OnEnable()
     {
+        Debug.Log("Enable UI Controls");
+        
         /// initialise controls and enable them 
         InputActionAsset controls = GetComponentInParent<PlayerInput>().actions;
-        InputActionMap UI = controls.FindActionMap("UI");
+        UI = controls.FindActionMap("UI");
         UI.Enable();
+
+        UI.FindAction("Left").performed += OnLeft;
+        UI.FindAction("Right").performed += OnRight;
    
         // find Player Index
+        // add an is online check here
         playerIndex = GetComponentInParent<PlayerInput>().playerIndex; 
         titleTxt.SetText("Player" + (playerIndex + 1).ToString());
         ignoreInputTime = Time.time + ignoreInputTime;
@@ -56,6 +64,14 @@ public class SetupMenuController : MonoBehaviour
         UpdateVehicleDisplay();
     }
 
+    void OnDisable()
+    {
+        Debug.Log("Disable UI Controls");
+
+        UI.FindAction("Left").performed -= OnLeft;
+        UI.FindAction("Right").performed -= OnRight;
+        UI.Disable();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -67,6 +83,7 @@ public class SetupMenuController : MonoBehaviour
     // UI Navigation for setup menu
     public void OnLeft(CallbackContext context)
     {
+        Debug.Log("Left: " + selectionEnabled);
         if(!selectionEnabled){ return; }
         if(context.performed){
             // select previous vehicle
@@ -79,6 +96,8 @@ public class SetupMenuController : MonoBehaviour
 
     public void OnRight(CallbackContext context)
     {
+        Debug.Log("Right: " + selectionEnabled);
+
         if(!selectionEnabled){ return; }
         if(context.performed){
             // select next vehicle
