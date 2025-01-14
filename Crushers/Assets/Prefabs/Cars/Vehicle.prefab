@@ -2805,6 +2805,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb2c1f56eec8b054db061ef316fcd9d4, type: 2}
   canUse: 1
   abilityCanvas: {fileID: 7148645049306999157}
+  controlledCar: {fileID: 0}
 --- !u!114 &1493166302703072454
 MonoBehaviour:
   m_ObjectHideFlags: 0

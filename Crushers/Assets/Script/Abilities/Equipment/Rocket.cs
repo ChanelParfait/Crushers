@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Rocket", menuName = "Abilities/Rocket")]
@@ -9,16 +10,32 @@ public class Rocket : AbilityBase
     [Header("Equipment parameters")]
     [Space(20)]
     [SerializeField] private GameObject rocketEquipmentPrefab;
-    [SerializeField] private float rocketSpeed = 100f;
+    [SerializeField] private float rocketSpeed = 1000f;
     [SerializeField] private GameObject explosionVFX;
+    [SerializeField] private float hitRadius = 30f;
     public override void Use(GameObject controlledCar)
     {
         Transform attachment = controlledCar.transform.Find("AttachmentsPos/" + attachmentPos.ToString());
         Vector3 spawnPosition = attachment.transform.position;
         Quaternion spawnRotation = Quaternion.Euler(0, -90, 0);
         GameObject rocketInstance = Instantiate(rocketEquipmentPrefab, spawnPosition, spawnRotation);
-        RocketProjectile rocketProjectile = rocketInstance.AddComponent<RocketProjectile>();
-        rocketProjectile.Initialize(rocketSpeed);
+        rocketInstance.GetComponent<RocketProjectile>().Initialize(rocketSpeed, hitRadius, controlledCar);
+        
+        Collider rocketCollider = rocketInstance.GetComponent<Collider>();
+        Collider carCollider = controlledCar.GetComponent<Collider>(); 
+        
+        if (rocketCollider != null && carCollider != null)
+        {
+            Physics.IgnoreCollision(rocketCollider, carCollider);
+        }
+            
+        Collider[] carChildrenColliders = controlledCar.GetComponentsInChildren<Collider>();
+        foreach (var childCollider in carChildrenColliders)
+        {
+            Physics.IgnoreCollision(rocketCollider, childCollider);
+        }
+        
+        
     }
 
 
