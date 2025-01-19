@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be663b48f4a166f42a617547cec55eab, type: 3}
   m_Name: StunGun
   m_EditorClassIdentifier: 
-  attachmentPos: 0
+  attachmentPos: 5
   title: 
   icon: {fileID: 0}
   cooldownTime: 0
   hitVFX: {fileID: 0}
   launchSFX: []
   hitSFX: []
-  stungunPrefab: {fileID: 0}
+  stungunPrefab: {fileID: 6539496847907174499, guid: 045babdd744ee0b4d839e1ab7f1427ec,
+    type: 3}
   positionAdjustmentVector: {x: 0, y: 0, z: 0}

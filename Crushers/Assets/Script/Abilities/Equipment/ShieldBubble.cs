@@ -9,7 +9,7 @@ public class ShieldBubble : AbilityBase
     [Header("Ability parameters")] 
     [Space(20)] 
     [SerializeField] private GameObject shieldPrefab;
-    [SerializeField] private float ShieldTimer = 7f;
+    [SerializeField] private float ShieldTimer;
     [SerializeField] private GameObject shieldInstance;
     public override void Use(GameObject controlledCar)
     {
@@ -17,9 +17,10 @@ public class ShieldBubble : AbilityBase
         Vector3 spawnPosition = attachment.transform.position;
         Quaternion spawnRotation = Quaternion.Euler(0, 0, 0);
         
-        controlledCar.GetComponent<PickUpManager>().State = Shield.IsOn;
+        
         if (!shieldInstance)
         {
+            controlledCar.GetComponent<PickUpManager>().State = Shield.IsOn;
             shieldInstance = Instantiate(shieldPrefab, spawnPosition, spawnRotation);
             shieldInstance.transform.SetParent(attachment);
             shieldInstance.GetComponent<ShieldCollider>().SetPlayer(controlledCar);

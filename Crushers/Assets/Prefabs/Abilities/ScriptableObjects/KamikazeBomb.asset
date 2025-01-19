@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0109e87bad1234faf39f0949add496, type: 3}
   m_Name: KamikazeBomb
   m_EditorClassIdentifier: 
-  attachmentPos: 0
+  attachmentPos: 4
   title: 
   icon: {fileID: 0}
   cooldownTime: 0
   hitVFX: {fileID: 0}
   launchSFX: []
   hitSFX: []
-  kazikazebombPrefab: {fileID: 0}
-  positionAdjustmentVector: {x: 0, y: 0, z: 0}
+  kazikazebombPrefab: {fileID: 3200906645932560837, guid: 5362b490c159099418c5dae9a21e246d,
+    type: 3}
+  kazikazebombTimer: 10
+  kazikazebombRadius: 50
+  kazikazebombInstance: {fileID: 0}

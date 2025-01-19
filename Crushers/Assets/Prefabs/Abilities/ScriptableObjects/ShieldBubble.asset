@@ -21,5 +21,5 @@ MonoBehaviour:
   hitSFX: []
   shieldPrefab: {fileID: 819319926551225665, guid: d072e50cc64b6e34e8d3d14c4a3bbd25,
     type: 3}
-  ShieldTimer: 7
+  ShieldTimer: 10
   shieldInstance: {fileID: 0}
