@@ -10,7 +10,7 @@ public class BasePickUp : MonoBehaviour
     [SerializeField] private PickupType SelectedPU;
 
     public PickupType GetPickupType(){
-
+        Debug.Log(SelectedPU);
         return SelectedPU;
     }
     /*private void OnTriggerEnter(Collider other)

@@ -7,18 +7,16 @@ public class Trap_Generic : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-
-
         if (other.CompareTag("Player"))
         {
             //Debug.Log("Trap Triggered ");
-            
             if (other.gameObject.GetComponentInParent<PickUpManager>().State == Shield.IsOff)
             {
                 var carRespawn = other.gameObject.GetComponentInParent<CarRespawn>();
+                // set death type to spike
+                other.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Spike);
                 carRespawn.Respawn();
             }
-            
         }
     }
 }

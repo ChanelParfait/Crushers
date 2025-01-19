@@ -15,13 +15,14 @@ MonoBehaviour:
   carPrefab: {fileID: 5535384286806951313, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
     type: 3}
   baseMaxSpeed: 200
-  baseMaxReverseSpeed: 120
+  baseMaxReverseSpeed: 50
   baseAccelerationMultiplier: 12
-  baseMaxSteeringAngle: 50
+  baseMaxSteeringAngle: 35
   baseSteeringSpeed: 2
-  baseBrakeForce: 1000
-  baseDecelerationMultiplier: 2
-  baseHandbrakeDriftMultiplier: 5
-  baseBodyMass: 500
+  baseBrakeForce: 4000
+  baseDecelerationMultiplier: 1
+  baseHandbrakeDriftMultiplier: 1
+  maxDriftingAngle: 30
+  baseBodyMass: 600
   baseGravityMultiplier: 800
   baseDamageMultiplier: 2000

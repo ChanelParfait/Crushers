@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Crushers/Assets/Editor.meta
+guid: 28df044f835c4f0419934803f317b2a3
+========
 guid: 0717ce0786968654588c2adb1b670302
+>>>>>>>> VehicleController:Crushers/Assets/StoreAssets/GogoGaga/OptimizedRopesAndCables.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

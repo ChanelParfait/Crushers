@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2,
     type: 3}
-  baseMaxSpeed: 150
-  baseMaxReverseSpeed: 90
-  baseAccelerationMultiplier: 10
-  baseMaxSteeringAngle: 50
+  baseMaxSpeed: 100
+  baseMaxReverseSpeed: 40
+  baseAccelerationMultiplier: 8
+  baseMaxSteeringAngle: 40
   baseSteeringSpeed: 1
-  baseBrakeForce: 1000
-  baseDecelerationMultiplier: 1.5
-  baseHandbrakeDriftMultiplier: 4
-  baseBodyMass: 600
-  baseGravityMultiplier: 300
+  baseBrakeForce: 3000
+  baseDecelerationMultiplier: 1
+  baseHandbrakeDriftMultiplier: 1
+  maxDriftingAngle: 30
+  baseBodyMass: 700
+  baseGravityMultiplier: 900
   baseDamageMultiplier: 3000
