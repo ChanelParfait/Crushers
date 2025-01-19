@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ShieldBubble", menuName = "Abilities/ShieldBubble")]
 public class ShieldBubble : AbilityBase
 {
-    [Space(10)] [Header("Ability parameters")] 
+    [Space(10)] 
+    [Header("Ability parameters")] 
     [Space(20)] 
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float ShieldTimer = 7f;
