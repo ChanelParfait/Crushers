@@ -6,9 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "JumpSpring", menuName = "Abilities/JumpSpring")]
 public class JumpSpring : AbilityBase
 {
+    [Space(10)]
+    [Header("Ability parameters")]
+    [Space(20)]
     [SerializeField] GameObject jumpSpringPrefab;
     [SerializeField] float jumpSpringForce;
-    [SerializeField] float activatedTime;
+    [SerializeField] float activeTime;
 
     public override void Use(GameObject controlledCar)
     {
@@ -28,7 +31,7 @@ public class JumpSpring : AbilityBase
         // Apply force
         carRigidBody.AddForce(Vector3.up * jumpSpringForce, ForceMode.Impulse);
 
-        Destroy(springInstance, activatedTime);
+        Destroy(springInstance, activeTime);
     }
 
 

@@ -86,6 +86,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 98f875134753190419e531fbe3d8f838, type: 2}
+    - target: {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: abilities.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2769992505592573758, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Mesh
@@ -121,6 +126,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.14142136
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: car
+      value: 
+      objectReference: {fileID: 11400000, guid: 8610dc1985bbbfe41849f4bf719a43f8,
+        type: 2}
+    - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: vehiclePitch
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4296754498201174437, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}

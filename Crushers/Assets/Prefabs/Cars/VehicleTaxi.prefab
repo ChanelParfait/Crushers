@@ -123,6 +123,17 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0e891519ee547714f9c75294b798554c, type: 3}
+    - target: {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448720167452322469, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c692f86a2fa0a3409bf6aa4d009fb24,
+        type: 2}
     - target: {fileID: 2812098600804261241, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Camera
