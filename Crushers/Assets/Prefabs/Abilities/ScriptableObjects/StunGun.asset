@@ -21,4 +21,5 @@ MonoBehaviour:
   hitSFX: []
   stungunPrefab: {fileID: 6539496847907174499, guid: 045babdd744ee0b4d839e1ab7f1427ec,
     type: 3}
-  positionAdjustmentVector: {x: 0, y: 0, z: 0}
+  sfx: {fileID: 8300000, guid: d294f9e3560fe3a4380d123689fcc539, type: 3}
+  stungunInstance: {fileID: 0}

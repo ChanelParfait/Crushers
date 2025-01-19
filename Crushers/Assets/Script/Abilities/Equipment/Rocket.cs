@@ -17,9 +17,8 @@ public class Rocket : AbilityBase
     {
         Transform attachment = controlledCar.transform.Find("AttachmentsPos/" + attachmentPos.ToString());
         Vector3 spawnPosition = attachment.transform.position;
-        Quaternion spawnRotation = Quaternion.Euler(0, -90, 0);
         
-        GameObject rocketInstance = Instantiate(rocketEquipmentPrefab, spawnPosition, spawnRotation);
+        GameObject rocketInstance = Instantiate(rocketEquipmentPrefab, spawnPosition, controlledCar.transform.rotation);
         rocketInstance.GetComponent<RocketProjectile>().Initialize(rocketSpeed, hitRadius, controlledCar);
         
         Collider rocketCollider = rocketInstance.GetComponent<Collider>();
