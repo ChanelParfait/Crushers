@@ -175,6 +175,7 @@ public class PickUpManager : MonoBehaviour
         State = Shield.IsOff;
         Destroy(shield);
         shield = null;
+        
     }
 
     private void UseKamiKaze()
