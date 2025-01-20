@@ -17,10 +17,20 @@ public enum AttachmentPos
 public abstract class AbilityBase : ScriptableObject
 {
     [Header("Ability Info")]
-    [SerializeField] string title;
+    [Space(20)]
+    [SerializeField] public AttachmentPos attachmentPos;
+    [SerializeField] public string title;
     [SerializeField] public Sprite icon;
-    public AttachmentPos attachmentPos;
-    public abstract void Use(GameObject controlledCar); 
+    [SerializeField] private int cooldownTime;
 
+    [SerializeField] private ParticleSystem hitVFX;
 
+    [SerializeField] private AudioClip[] launchSFX;
+    [SerializeField] private AudioClip[] hitSFX;
+    
+    public abstract void Use(GameObject controlledCar);
+
+    public int GetCooldownTime() {
+        return cooldownTime;
+    }
 }
