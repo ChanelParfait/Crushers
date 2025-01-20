@@ -53,8 +53,10 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Reverse").started += OnReverse;
         player.FindAction("Reverse").canceled += OnReverse;
         player.FindAction("Turn").started += OnTurn;
+        player.FindAction("Turn").performed += OnTurn;
         player.FindAction("Turn").canceled += OnTurn;
         player.FindAction("Look").started += OnLook;
+        player.FindAction("Look").performed += OnLook;
         player.FindAction("Look").canceled += OnLook;
         player.FindAction("Brake").started += OnBrake;
         player.FindAction("Brake").canceled += OnBrake;
@@ -255,11 +257,11 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        Debug.Log("Pressing W");
-        Debug.Log("Is Owned: " + IsInputValid());
+        //Debug.Log("Pressing W");
+        //Debug.Log("Is Owned: " + IsInputValid());
         if(carController && IsInputValid())
         {
-            Debug.Log("Moving Forward");
+            //Debug.Log("Moving Forward");
 
             carController.isMovingForward = context.ReadValueAsButton();
         }
@@ -275,9 +277,10 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnTurn(CallbackContext context)
     {
+        Vector2 turn = context.ReadValue<Vector2>();
+        //Debug.Log("Turn: " + turn);
         if(carController && IsInputValid())
         {
-            Vector2 turn = context.ReadValue<Vector2>();
             carController.SetSteeringAngle(turn);
         }
         
@@ -289,7 +292,7 @@ public class PlayerInputHandler : NetworkBehaviour
         if(carController && IsInputValid()){
             carController.isBraking =  context.ReadValueAsButton();
             if(context.canceled){
-                Debug.Log("RecoverTraction");
+                //Debug.Log("RecoverTraction");
                 carController.RecoverTraction();
             }
         }
@@ -329,7 +332,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnHonk(CallbackContext context) {
         if (carController && IsInputValid()) {    
-                Debug.Log("Honk");
+            //Debug.Log("Honk");
 
             carController.HonkHorn(); 
         }
