@@ -29,7 +29,8 @@ public class PlayerInputHandler : NetworkBehaviour
     // Actions
     public static UnityAction<int> Pause; 
     // Flag for Online / Offline Use
-    public bool isOnline; 
+    // Set in Prefabs
+    public bool isOnline = false; 
 
     // Temporary 
     [SerializeField] private List<LayerMask> playerLayers; 
@@ -41,6 +42,7 @@ public class PlayerInputHandler : NetworkBehaviour
         input = GetComponent<PlayerInput>(); 
         inputAsset = input.actions;
         player = inputAsset.FindActionMap("Player");
+
 
     }
     private void OnEnable()
@@ -148,6 +150,21 @@ public class PlayerInputHandler : NetworkBehaviour
         transform.rotation = spawn.rotation;
     }
 
+    // Helper Functions
+    private bool IsInputValid()
+    {
+        // if in online mode check if this object belongs to the client
+        if(isOnline)
+        {
+            return isOwned;
+        } 
+        else 
+        {
+            // else return true
+            return true;
+        }
+    }
+
     private void SetPlayerLayers(){
         // Set the Layer and Culling Mask on this Players Camera 
         // Consider Moving This : Where should these player values be initialised? 
@@ -214,7 +231,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnRespawn(CallbackContext context)
     {
-       if(gameObject.GetComponentInChildren<CarRespawn>() && isOwned){
+       if(gameObject.GetComponentInChildren<CarRespawn>() && IsInputValid()){
             if(context.performed){
                 gameObject.GetComponentInChildren<CarRespawn>().Respawn();
             }
@@ -222,7 +239,7 @@ public class PlayerInputHandler : NetworkBehaviour
     }
 
     public void OnJump(CallbackContext context){
-        if(canJump && carController && isOwned){
+        if(canJump && carController && IsInputValid()){
             Debug.Log("Jump");
 
             canJump = false;
@@ -239,8 +256,8 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnForward(CallbackContext context)
     {
         Debug.Log("Pressing W");
-        Debug.Log("Is Owned: " + isOwned);
-        if(carController && isOwned)
+        Debug.Log("Is Owned: " + IsInputValid());
+        if(carController && IsInputValid())
         {
             Debug.Log("Moving Forward");
 
@@ -250,7 +267,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnReverse(CallbackContext context)
     {
-        if(carController && isOwned)
+        if(carController && IsInputValid())
         {
             carController.isReversing = context.ReadValueAsButton();
         }
@@ -258,7 +275,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnTurn(CallbackContext context)
     {
-        if(carController && isOwned)
+        if(carController && IsInputValid())
         {
             Vector2 turn = context.ReadValue<Vector2>();
             carController.SetSteeringAngle(turn);
@@ -269,7 +286,7 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnBrake(CallbackContext context)
     {
 
-        if(carController && isOwned){
+        if(carController && IsInputValid()){
             carController.isBraking =  context.ReadValueAsButton();
             if(context.canceled){
                 Debug.Log("RecoverTraction");
@@ -281,13 +298,13 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnUseItem(CallbackContext context)
     {
-        if(pickUpManager && isOwned){
+        if(pickUpManager && IsInputValid()){
             pickUpManager.useItem = context.ReadValueAsButton();
         }        
     }
 
     public void OnUseAbility(CallbackContext context) {
-        if (abilityManager && isOwned) {
+        if (abilityManager && IsInputValid()) {
             abilityManager.UseAbility();
         }
     }
@@ -297,13 +314,13 @@ public class PlayerInputHandler : NetworkBehaviour
         //Debug.Log("Look");
         // get on look value and pass it to the free look camera
         var read = context.ReadValue<Vector2>();
-        if(freelookCam && isOwned){
+        if(freelookCam && IsInputValid()){
             freelookCam.horizontal = read;
         }
     }
 
     public void OnPause(CallbackContext context){
-        if(context.performed && isOwned){
+        if(context.performed && IsInputValid()){
             // invoke a pause event
             Pause?.Invoke(playerIndex);
         }
@@ -311,7 +328,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
 
     public void OnHonk(CallbackContext context) {
-        if (carController && isOwned) {    
+        if (carController && IsInputValid()) {    
                 Debug.Log("Honk");
 
             carController.HonkHorn(); 
