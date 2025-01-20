@@ -20,7 +20,9 @@ public class AbilityManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateAbilitySprite(abilities[0]);
+        if(abilities != null){
+            UpdateAbilitySprite(abilities[0]);
+        }
         controlledCar = this.gameObject;
     }
     public void UseAbility() {
