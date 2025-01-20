@@ -245,6 +245,8 @@ public class PlayerManager : MonoBehaviour
         }
         
         if(pi.playerIndex == 0){
+            startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
+
             // invoke first player joined event 
             firstPlayerJoined?.Invoke();
         }
