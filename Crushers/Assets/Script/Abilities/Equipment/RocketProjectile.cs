@@ -1,23 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Collider = UnityEngine.Collider;
+using Random = UnityEngine.Random;
 
 public class RocketProjectile : MonoBehaviour
 {
     [SerializeField] private GameObject ExplosionVFX;
     [SerializeField] private ScoreKeeper FiredBy;
-    [SerializeField] private float hitRadius;
     [SerializeField] private AudioClip[] explosionSFX;
 
-    public void Initialize(float speed) {
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Force);
+    [SerializeField] private GameObject carcontroller;
+
+    [SerializeField] private float _Speed;
+    private float _HitRadius;
+    
+    public void Initialize(float speed, float hitRadius, GameObject FiredFrom ) {
+        _Speed = speed;
+        _HitRadius = hitRadius;
+        FiredBy = FiredFrom.GetComponent<ScoreKeeper>();
+        carcontroller = FiredFrom;
     }
 
-    public void SetFiredBy(ScoreKeeper FiredFrom)
+    private void OnEnable()
     {
-        FiredBy = FiredFrom;
+        /*Debug.Log("test1");
+        Collider rocketCollider = this.gameObject.GetComponent<Collider>();
+        Collider carCollider = carcontroller.gameObject.GetComponent<Collider>();
+
+        if (carCollider != null && rocketCollider != null)
+        {
+            Debug.Log("test2");
+            Physics.IgnoreCollision(rocketCollider, carCollider);
+        }
+            
+        Collider[] carChildrenColliders = this.GetComponentsInChildren<Collider>();
+        foreach (var childCollider in carChildrenColliders)
+        {
+            Physics.IgnoreCollision(rocketCollider, childCollider);
+            Debug.Log("test3");
+            Debug.Log(childCollider.gameObject.name + "Collider");
+        }*/
     }
 
+    private void Start()
+    {
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
+    }
     public ScoreKeeper GetFiredBy()
     {
         return FiredBy;
@@ -25,7 +55,8 @@ public class RocketProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ExplosionDamage(this.transform.position, hitRadius);
+        ExplosionDamage(this.transform.position, _HitRadius);
+        Debug.Log(other.name);
         Destroy(this.gameObject);
 
     }

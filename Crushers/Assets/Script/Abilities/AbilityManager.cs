@@ -16,7 +16,7 @@ public class AbilityManager : MonoBehaviour
 
 
     [SerializeField] private Image abilityCanvas;
-    private GameObject controlledCar;
+    [SerializeField] private GameObject controlledCar;
 
     private void Start()
     {

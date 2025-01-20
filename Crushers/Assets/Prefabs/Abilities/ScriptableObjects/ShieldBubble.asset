@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5982daeb27eb62a4bb6abfead8226720, type: 3}
+  m_Name: ShieldBubble
+  m_EditorClassIdentifier: 
+  attachmentPos: 1
+  title: 
+  icon: {fileID: 0}
+  cooldownTime: 0
+  hitVFX: {fileID: 0}
+  launchSFX: []
+  hitSFX: []
+  shieldPrefab: {fileID: 819319926551225665, guid: d072e50cc64b6e34e8d3d14c4a3bbd25,
+    type: 3}
+  ShieldTimer: 10
+  shieldInstance: {fileID: 0}
