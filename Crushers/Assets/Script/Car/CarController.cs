@@ -455,6 +455,10 @@ public class CarController : MonoBehaviour
       //Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * activeMaxSteeringAngle;
+
+/*       if(direction != Vector2.zero){
+            cameraController.MoveCameraLookAtPoint(); 
+       }*/
     }
 
     public void UpdateWheels(){
@@ -695,7 +699,6 @@ public class CarController : MonoBehaviour
         RRwheelFriction.extremumSlip = RRWextremumSlip * factor;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
       }
-        LimitDriftAngle();
 
       // Whenever the player uses the handbrake, it means that the wheels are locked, so we set 'isTractionLocked = true'
       // and, as a consequense, the car starts to emit trails to simulate the wheel skids.

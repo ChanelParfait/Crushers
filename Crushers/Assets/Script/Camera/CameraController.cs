@@ -2,17 +2,19 @@ using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
 
     private CinemachineFreeLook freeLookCamera;
+    private GameObject cameraLookAtPoint;
 
     private void Awake()
     { 
         freeLookCamera = GetComponent<CinemachineFreeLook>();
+        cameraLookAtPoint = transform.parent.gameObject.transform.Find("CameraLookAtPoint").gameObject;
     }
-
 
     public void ShakeCameraOnImpact(CinemachineImpulseSource impulseSource, float impulseForce)
     {
@@ -53,4 +55,10 @@ public class CameraController : MonoBehaviour
 
         //Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
     }
+
+/*    public void MoveCameraLookAtPoint() {
+        Vector3 cameraLookAtPointPos = cameraLookAtPoint.transform.position;
+        cameraLookAtPointPos.x = Mathf.Clamp(cameraLookAtPointPos.x, -1.5f, 1.5f);
+        cameraLookAtPoint.transform.position = cameraLookAtPointPos;
+    }*/
 }

@@ -20,7 +20,6 @@ MonoBehaviour:
   baseBrakeForce: 3000
   baseDecelerationMultiplier: 1
   baseHandbrakeDriftMultiplier: 7
-  maxDriftingAngle: 30
   baseBodyMass: 700
   baseGravityMultiplier: 900
   baseDamageMultiplier: 3000
