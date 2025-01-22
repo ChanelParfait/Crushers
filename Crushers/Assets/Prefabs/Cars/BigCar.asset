@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: BigCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 2744354503348039254, guid: c08fffbb8ba905940abd0e45810e661e,
-    type: 3}
   baseMaxSpeed: 110
   baseMaxReverseSpeed: 80
   baseAccelerationMultiplier: 8
@@ -21,8 +19,8 @@ MonoBehaviour:
   baseSteeringSpeed: 0.75
   baseBrakeForce: 2000
   baseDecelerationMultiplier: 2
-  baseHandbrakeDriftMultiplier: 5
-  maxDriftingAngle: 30
+  baseHandbrakeDriftMultiplier: 4
+  maxDriftingAngle: 90
   baseBodyMass: 700
   baseGravityMultiplier: 300
   baseDamageMultiplier: 4000
