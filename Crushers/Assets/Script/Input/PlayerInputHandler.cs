@@ -110,7 +110,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
         if(isOnline)
         {
-            playerIndex = GetComponent<PlayerObjectController>().playerIDNumber;
+            playerIndex = GetComponent<NetworkPlayerController>().playerIDNumber;
             Debug.Log("Player ID: " + playerIndex);
             input.enabled = isOwned;
         } 

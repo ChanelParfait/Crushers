@@ -5,7 +5,7 @@ using Mirror;
 using Steamworks;
 using Edgegap;
 
-public class PlayerObjectController : NetworkBehaviour
+public class NetworkPlayerController : NetworkBehaviour
 {
     // Player Data
     [SyncVar] public int ConnectionID;

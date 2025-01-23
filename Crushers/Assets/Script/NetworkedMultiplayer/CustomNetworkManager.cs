@@ -8,15 +8,15 @@ using Unity.VisualScripting;
 
 public class CustomNetworkManager : NetworkManager
 {
-    [SerializeField] private PlayerObjectController GamePlayerPrefab;
-    public List<PlayerObjectController> GamePlayers { get; }= new List<PlayerObjectController>();
+    [SerializeField] private NetworkPlayerController GamePlayerPrefab;
+    public List<NetworkPlayerController> GamePlayers { get; }= new List<NetworkPlayerController>();
 
 
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         if(SceneManager.GetActiveScene().name == "Lobby"){
-            PlayerObjectController GamePlayerInstance = Instantiate(GamePlayerPrefab);
+            NetworkPlayerController GamePlayerInstance = Instantiate(GamePlayerPrefab);
             GamePlayerInstance.ConnectionID = conn.connectionId;
             GamePlayerInstance.playerIDNumber = GamePlayers.Count + 1;
             GamePlayerInstance.PlayerSteamID = (ulong)SteamMatchmaking.GetLobbyMemberByIndex((CSteamID)SteamLobby.Instance.CurrentLobbyID, GamePlayers.Count);

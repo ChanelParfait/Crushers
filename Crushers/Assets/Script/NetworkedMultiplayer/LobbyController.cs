@@ -23,7 +23,7 @@ public class LobbyController : MonoBehaviour
     public ulong CurrentLobbyID;
     public bool PlayerItemCreated = false; 
     private List<PlayerListItem> PlayerListItems = new List<PlayerListItem>();
-    public PlayerObjectController LocalPlayerController;
+    public NetworkPlayerController LocalPlayerController;
 
     // Ready Up
      public Button StartGameButton;
@@ -65,7 +65,7 @@ public class LobbyController : MonoBehaviour
 
     public void CheckIfAllReady(){
         bool AllReady = false; 
-        foreach(PlayerObjectController player in Manager.GamePlayers)
+        foreach(NetworkPlayerController player in Manager.GamePlayers)
         {
             if(player.Ready){
                 AllReady = true;
@@ -108,12 +108,12 @@ public class LobbyController : MonoBehaviour
 
     public void FindLocalPlayer(){
         LocalPlayerObject = GameObject.Find("LocalGamePlayer");
-        LocalPlayerController = LocalPlayerObject.GetComponent<PlayerObjectController>();
+        LocalPlayerController = LocalPlayerObject.GetComponent<NetworkPlayerController>();
     }
 
     public void CreateHostPlayerItem()
     {
-        foreach (PlayerObjectController player in Manager.GamePlayers) {
+        foreach (NetworkPlayerController player in Manager.GamePlayers) {
             GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
             PlayerListItem NewPlayerItemScript = NewPlayerItem.GetComponent<PlayerListItem>();
 
@@ -137,7 +137,7 @@ public class LobbyController : MonoBehaviour
 
     public void CreateClientPlayerItem()
     {
-        foreach (PlayerObjectController player in Manager.GamePlayers) {
+        foreach (NetworkPlayerController player in Manager.GamePlayers) {
             // check that this player isn't already in the list
             if(!PlayerListItems.Any(b => b.ConnectionID == player.ConnectionID)) {
                 GameObject NewPlayerItem = Instantiate(PlayerListItemPrefab) as GameObject;
@@ -161,7 +161,7 @@ public class LobbyController : MonoBehaviour
 
     public void UpdatePlayerItem()
     {
-        foreach (PlayerObjectController player in Manager.GamePlayers) 
+        foreach (NetworkPlayerController player in Manager.GamePlayers) 
         {
             foreach(PlayerListItem PlayerListItemScript in PlayerListItems){
                 if(PlayerListItemScript.ConnectionID == player.ConnectionID){
