@@ -80,11 +80,11 @@ public class ImpactController : MonoBehaviour
             if (rb != null)
             {
                 // Check that the collided rigidbody doesn't belong to this player
-                NetworkRigidbodyReliable networkRB = collision.gameObject.GetComponentInParent<NetworkRigidbodyReliable>();
+                /*NetworkRigidbodyReliable networkRB = collision.gameObject.GetComponentInParent<NetworkRigidbodyReliable>();
                 if (networkRB.isOwned)
                 {
                     return; 
-                }
+                }*/
                 CheckFrontBumperCollision(collision);
                 PlayHitEffect(collision);
 

@@ -16,7 +16,7 @@ public class PlayerInputHandler : NetworkBehaviour
     private PlayerInput input;
     private InputActionAsset inputAsset; 
     private InputActionMap player; 
-    private int playerIndex; 
+    // Temporary Testing Value
     public GameObject PlayerModel;
 
 
@@ -27,13 +27,10 @@ public class PlayerInputHandler : NetworkBehaviour
 
     private bool canJump = true;
     // Actions
-    public static UnityAction<int> Pause; 
+    public static UnityAction Pause; 
     // Flag for Online / Offline Use
     // Set in Prefabs
     public bool isOnline = false; 
-
-    // Temporary 
-    [SerializeField] private List<LayerMask> playerLayers; 
 
 
 
@@ -42,9 +39,8 @@ public class PlayerInputHandler : NetworkBehaviour
         input = GetComponent<PlayerInput>(); 
         inputAsset = input.actions;
         player = inputAsset.FindActionMap("Player");
-
-
     }
+
     private void OnEnable()
     {
         // add listeners to all input actions
@@ -65,10 +61,7 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Jump").performed += OnJump;
         player.FindAction("Honk").performed += OnHonk;
         player.FindAction("Pause").performed += OnPause;
-        
         player.FindAction("UseAbility").performed += OnUseAbility;
-
-
 
         player.Enable();
     }
@@ -90,6 +83,8 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Jump").performed -= OnJump;
         player.FindAction("Honk").performed -= OnHonk;
         player.FindAction("Pause").performed -= OnPause;
+        player.FindAction("UseAbility").performed -= OnUseAbility;
+
 
 
         player.Disable();
@@ -98,7 +93,6 @@ public class PlayerInputHandler : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         // try to find vehicle components
         // only for testing individual vehicles not vehicles in conjuction with player config object
         if(PlayerModel)
@@ -107,20 +101,6 @@ public class PlayerInputHandler : NetworkBehaviour
             pickUpManager = PlayerModel.GetComponent<PickUpManager>();
             freelookCam = PlayerModel.GetComponentInChildren<CameraInputHandler>();
         }
-
-        if(isOnline)
-        {
-            playerIndex = GetComponent<NetworkPlayerController>().playerIDNumber;
-            Debug.Log("Player ID: " + playerIndex);
-            input.enabled = isOwned;
-        } 
-        else 
-        {
-            playerIndex = input.playerIndex;
-        }
-        //carController = GetComponent<PrometeoCarController>();
-        //pickUpManager = GetComponent<PickUpManager>();
-        //freelookCam = GetComponentInChildren<CameraInputHandler>();
     }
 
     private void Update()
@@ -131,26 +111,13 @@ public class PlayerInputHandler : NetworkBehaviour
                 // when in game scene enable all player visuals and scripts
                 if(PlayerModel.activeSelf == false)
                 {
-                    Debug.Log("Set Position");
                     player.Enable();
-                    PlayerModel.SetActive(true);
-                    SetPosition();
-                    SetPlayerLayers();
                 }
                 
             }
         }
     }
     
-    // Set player to a Random Position within -5, 0, -5 and 5, 0, 5 
-    // alter this to request a spawn position from the level manager
-    public void SetPosition(){
-        LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        Transform spawn =  lvlManager.GetSpawnPos();
-        Debug.Log("Spawn: " + spawn);
-        transform.position = spawn.position;
-        transform.rotation = spawn.rotation;
-    }
 
     // Helper Functions
     private bool IsInputValid()
@@ -167,31 +134,6 @@ public class PlayerInputHandler : NetworkBehaviour
         }
     }
 
-    private void SetPlayerLayers(){
-        // Set the Layer and Culling Mask on this Players Camera 
-        // Consider Moving This : Where should these player values be initialised? 
-        int layerToAdd = (int)Mathf.Log(playerLayers[playerIndex - 1], 2);
-        var cullingMask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
-        if(PlayerModel)
-        {
-            PlayerModel.layer = layerToAdd;
-            Camera camera = GetComponentInChildren<Camera>();
-            if(isOwned){
-                camera.enabled = true;
-            }
-            camera.gameObject.layer = layerToAdd;
-            camera.transform.position = transform.position;
-            camera.transform.rotation = transform.rotation;
-            // add the layer
-            camera.cullingMask = cullingMask;
-            //set the layer
-            CinemachineFreeLook freeLook = PlayerModel.GetComponentInChildren<CinemachineFreeLook>();
-            freeLook.gameObject.layer = layerToAdd;
-            
-
-        }
-        
-    }
 
     public void SetCarController(CarController cc)
     {
@@ -325,7 +267,7 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnPause(CallbackContext context){
         if(context.performed && IsInputValid()){
             // invoke a pause event
-            Pause?.Invoke(playerIndex);
+            Pause?.Invoke();
         }
     }
 

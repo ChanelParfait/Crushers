@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084420502779646190}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14142136, y: 0, z: 0, w: 0.9899495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2681,6 +2681,7 @@ MonoBehaviour:
   activeBrakeForce: 0
   activeDecelerationMultiplier: 0
   activeHandbrakeDriftMultiplier: 0
+  activeMaxDriftingAngle: 0
   activeBodyMass: 0
   activeGravityMultiplier: 0
   activeDamageMultiplier: 0
@@ -2769,10 +2770,13 @@ MonoBehaviour:
   KamiKazeGo: {fileID: 3565015708328552895, guid: d4bf661927ec37c45932cdfbb1736c81,
     type: 3}
   Stun: {fileID: 8666847585282172510, guid: 150fe28a49a55c1439573e298a495e49, type: 3}
+  Turret: {fileID: 0}
+  Thruster: {fileID: 0}
   Pickup: 0
   State: 0
   ShieldTimer: 10
   KamiKazeTimer: 10
+  machineGunDuration: 10
   KamiKazeRadius: 50
   useItem: 0
   DisabledEffect: {fileID: 4138785285165660041}

@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 658299802029010273}
   - component: {fileID: 8042942846443331091}
   - component: {fileID: 5729871562625361894}
+  - component: {fileID: 2714169161119824947}
   m_Layer: 0
   m_Name: PlayerConfig
   m_TagString: Untagged
@@ -454,7 +455,6 @@ MonoBehaviour:
   abilityManager: {fileID: 0}
   freelookCam: {fileID: 0}
   isOnline: 0
-  playerLayers: []
 --- !u!114 &5729871562625361894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +472,32 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &2714169161119824947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449448533462767253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3cb741feea8e343b45875d5c879744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  PlayerModel: {fileID: 0}
+  isOnline: 0
+  playerLayers:
+  - serializedVersion: 2
+    m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &2992308494568267930
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,8 +525,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.115467854, y: 0.053097013, z: -0.0061812405, w: 0.99187183}
-  m_LocalPosition: {x: -277.57117, y: 990.5723, z: -3305.4841}
+  m_LocalRotation: {x: 0.033532117, y: -0.3544352, z: 0.012719453, w: 0.93439263}
+  m_LocalPosition: {x: 83, y: 70.5, z: 184.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

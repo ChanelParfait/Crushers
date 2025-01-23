@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7030747120131847929}
   - component: {fileID: 2491720458731843053}
+  - component: {fileID: 7371690563157673681}
   - component: {fileID: 658299802029010273}
   - component: {fileID: 8042942846443331091}
   - component: {fileID: 7078103051754742075}
@@ -193,6 +194,32 @@ MonoBehaviour:
   PlayerName: 
   Ready: 0
   PlayerColour: 0
+--- !u!114 &7371690563157673681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449448533462767253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3cb741feea8e343b45875d5c879744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  PlayerModel: {fileID: 2639127046189404066}
+  isOnline: 1
+  playerLayers:
+  - serializedVersion: 2
+    m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &658299802029010273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,15 +504,6 @@ MonoBehaviour:
   abilityManager: {fileID: 0}
   freelookCam: {fileID: 0}
   isOnline: 1
-  playerLayers:
-  - serializedVersion: 2
-    m_Bits: 64
-  - serializedVersion: 2
-    m_Bits: 128
-  - serializedVersion: 2
-    m_Bits: 256
-  - serializedVersion: 2
-    m_Bits: 512
 --- !u!114 &7078103051754742075
 MonoBehaviour:
   m_ObjectHideFlags: 0

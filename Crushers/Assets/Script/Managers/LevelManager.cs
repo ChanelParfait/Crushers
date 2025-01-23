@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {   
         source = GetComponent<AudioSource>();
         levelCountdownTimer = levelDuration;
@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
 
                 if(startCountdownTimer == 0){
                     startCountdownEnded = true;
-                    ArenaLevelStarted.Invoke();
+                    ArenaLevelStarted?.Invoke();
                 }
             } 
             // if level has started, decriment round timer to 0 
@@ -87,7 +87,7 @@ public class LevelManager : MonoBehaviour
                 levelCountdownTimer--;
                 
                 if(levelTimeChanged != null)
-                    levelTimeChanged.Invoke(levelCountdownTimer);
+                    levelTimeChanged?.Invoke(levelCountdownTimer);
 
                 if(levelCountdownTimer == 0){
                     // invoke level ended event
@@ -105,6 +105,7 @@ public class LevelManager : MonoBehaviour
     {
         Transform spawn = null;
         // get last available spawn position in list
+        Debug.Log(availableSpawnPositions);
         if(availableSpawnPositions.Count > 0){
             spawn = availableSpawnPositions[availableSpawnPositions.Count - 1];
             // and remove it 
@@ -117,14 +118,6 @@ public class LevelManager : MonoBehaviour
 
         isTimerRunning = isArena;
         //source.Play();
-    }
-
-    private void DisableSetupComponents(bool isArena){
-        // disable join canvas 
-        if(isArena){
-            GameObject canvas = GameObject.FindGameObjectWithTag("JoinCanvas");
-            if(canvas){ canvas.SetActive(false); }
-        }
     }
 
     
