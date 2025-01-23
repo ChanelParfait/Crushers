@@ -230,6 +230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1119150164144280867, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119150164144280867, guid: 8c8e06cfd4492d8439a25f9ccae2adcb,
+        type: 3}
       propertyPath: m_TagString
       value: LoadingScreen
       objectReference: {fileID: 0}

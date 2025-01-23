@@ -10646,6 +10646,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TAXI
       objectReference: {fileID: 0}
+    - target: {fileID: 6718954936499801108, guid: 260d37bfb77ae5946aba989d29351ecc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7897664144282416950, guid: 260d37bfb77ae5946aba989d29351ecc,
         type: 3}
       propertyPath: m_SortingLayer
@@ -10786,6 +10791,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SWAT
+      objectReference: {fileID: 0}
+    - target: {fileID: 491089315427266306, guid: 0cc28e35a00417b4ab0d8936b057f21d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 980486805381477816, guid: 0cc28e35a00417b4ab0d8936b057f21d,
         type: 3}

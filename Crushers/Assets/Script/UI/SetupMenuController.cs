@@ -134,6 +134,12 @@ public class SetupMenuController : MonoBehaviour
         Select(vehicleList[currentVehicleIndex]);
     }
 
+    private void UpdateGearOnCar()
+    {
+        //Update the selected Gear onto the currently selected Car
+        Debug.Log(vehicleList[currentVehicleIndex].transform.Find("FrontAnchorPoint"));
+    }
+
 
     private void Select(GameObject button){
         if(gameObject.GetComponentInParent<SetupMenuController>().playerIndex == playerIndex){
