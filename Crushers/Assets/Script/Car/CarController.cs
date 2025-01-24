@@ -456,9 +456,10 @@ public class CarController : MonoBehaviour
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * activeMaxSteeringAngle;
 
-/*       if(direction != Vector2.zero){
-            cameraController.MoveCameraLookAtPoint(); 
-       }*/
+        if (direction != Vector2.zero)
+        {
+            cameraController.moveCameraAssist(steeringAngle/10);
+        }
     }
 
     public void UpdateWheels(){
