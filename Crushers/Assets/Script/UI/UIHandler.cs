@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,7 +10,8 @@ public class UIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public float scaleMultiplier = 1.2f; // Scale size when hovered
     public float scaleSpeed = 0.2f; // How fast the scaling happens
 
-    public GameObject HideTarget;
+    public List<GameObject> HideTarget;
+    public List<GameObject> ShowTarget;
     private Vector3 originalScale;
     private Coroutine scaleCoroutine;
 
@@ -59,6 +61,17 @@ public class UIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void HideUI()
     {
-        HideTarget.SetActive(false);
+        for (int i = 0; i < HideTarget.Count; i++)
+        {
+            HideTarget[i].SetActive(false);
+        }
+    }
+    
+    public void ShowUI()
+    {
+        for (int i = 0; i < ShowTarget.Count; i++)
+        {
+            HideTarget[i].SetActive(true);
+        }
     }
 }
