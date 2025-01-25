@@ -3,18 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Scale Settings")]
     public float scaleMultiplier = 1.2f; // Scale size when hovered
     public float scaleSpeed = 0.2f; // How fast the scaling happens
-
-    public List<GameObject> HideTarget;
-    public List<GameObject> ShowTarget;
+    
     private Vector3 originalScale;
     private Coroutine scaleCoroutine;
 
+    public GameObject TargetUI;
+    public GameObject Self;
+    
+    private bool isWaitingForNextClick = false;
+    
+    public void WaitForNextButtonClick()
+    {
+        // Enable the flag to indicate we're waiting for the next button click
+        isWaitingForNextClick = true;
+    }
+
+    public void OnButtonClicked(Button clickedButton)
+    {
+        if (isWaitingForNextClick)
+        {
+            // Copy the clicked button's image to the current button
+            Image clickedImage = clickedButton.GetComponent<Image>();
+            Image currentImage = gameObject.GetComponent<Image>();
+
+            if (clickedImage != null && currentImage != null)
+            {
+                currentImage.sprite = clickedImage.sprite;
+                currentImage.color = clickedImage.color; // Optional: Copy the color as well
+            }
+
+            // Reset the flag
+            isWaitingForNextClick = false;
+        }
+    }
+    
     private void Awake()
     {
         // Save the original scale of the UI element
@@ -23,25 +53,31 @@ public class UIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Calculate the target scale based on the multiplier
-        Vector3 targetScale = originalScale * scaleMultiplier;
-
-        // Start scaling up to the hover size
-        if (scaleCoroutine != null)
+        if (gameObject.activeSelf)
         {
-            StopCoroutine(scaleCoroutine);
+            // Calculate the target scale based on the multiplier
+            Vector3 targetScale = originalScale * scaleMultiplier;
+
+            // Start scaling up to the hover size
+            if (scaleCoroutine != null)
+            {
+                StopCoroutine(scaleCoroutine);
+            }
+            scaleCoroutine = StartCoroutine(ScaleTo(targetScale));
         }
-        scaleCoroutine = StartCoroutine(ScaleTo(targetScale));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Return to the original size
-        if (scaleCoroutine != null)
+        if (gameObject.activeSelf)
         {
-            StopCoroutine(scaleCoroutine);
+            // Return to the original size
+            if (scaleCoroutine != null)
+            {
+                StopCoroutine(scaleCoroutine);
+            }
+            scaleCoroutine = StartCoroutine(ScaleTo(originalScale));
         }
-        scaleCoroutine = StartCoroutine(ScaleTo(originalScale));
     }
 
     private IEnumerator ScaleTo(Vector3 targetScale)
@@ -59,19 +95,18 @@ public class UIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         transform.localScale = targetScale;
     }
 
-    public void HideUI()
+    public void ToggleMenu()
     {
-        for (int i = 0; i < HideTarget.Count; i++)
+        if (TargetUI != null)
         {
-            HideTarget[i].SetActive(false);
+            // Toggle the target UI visibility
+            TargetUI.SetActive(!TargetUI.activeSelf);
         }
-    }
-    
-    public void ShowUI()
-    {
-        for (int i = 0; i < ShowTarget.Count; i++)
+
+        if (Self != null)
         {
-            HideTarget[i].SetActive(true);
+            // Hide the current UI element
+            Self.SetActive(false);
         }
     }
 }

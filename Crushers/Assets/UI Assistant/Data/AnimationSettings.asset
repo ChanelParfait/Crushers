@@ -191,7 +191,7 @@ MonoBehaviour:
   HiddenPositionOffset: {x: 0, y: 0}
   HiddenAngleOffset: 0
   HiddenScale: {x: 0.5, y: 0.5}
-  HiddenAlpha: 0
+  HiddenAlpha: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
