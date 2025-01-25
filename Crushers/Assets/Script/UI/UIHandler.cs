@@ -18,33 +18,6 @@ public class UIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject TargetUI;
     public GameObject Self;
     
-    private bool isWaitingForNextClick = false;
-    
-    public void WaitForNextButtonClick()
-    {
-        // Enable the flag to indicate we're waiting for the next button click
-        isWaitingForNextClick = true;
-    }
-
-    public void OnButtonClicked(Button clickedButton)
-    {
-        if (isWaitingForNextClick)
-        {
-            // Copy the clicked button's image to the current button
-            Image clickedImage = clickedButton.GetComponent<Image>();
-            Image currentImage = gameObject.GetComponent<Image>();
-
-            if (clickedImage != null && currentImage != null)
-            {
-                currentImage.sprite = clickedImage.sprite;
-                currentImage.color = clickedImage.color; // Optional: Copy the color as well
-            }
-
-            // Reset the flag
-            isWaitingForNextClick = false;
-        }
-    }
-    
     private void Awake()
     {
         // Save the original scale of the UI element

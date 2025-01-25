@@ -32,11 +32,13 @@ public class SetupMenuController : MonoBehaviour
     [SerializeField] private GameObject readyPnl; 
     [SerializeField] private GameObject menuPnl; 
     [SerializeField] private Button readyBtn;
-
-
+    
      private float ignoreInputTime = 0.1f;
      private bool inputEnabled;
      private bool selectionEnabled;
+
+     // Parts to preview
+     private Dictionary<string, GearDisplaySO> selectedParts = new Dictionary<string, GearDisplaySO>();
 
     void Start()
     {
@@ -134,18 +136,25 @@ public class SetupMenuController : MonoBehaviour
         Select(vehicleList[currentVehicleIndex]);
     }
 
-    private void UpdateGearOnCar()
+    public void SelectGear(string attachmentPoint, GearDisplaySO gear)
     {
-        //Update the selected Gear onto the currently selected Car
-        Debug.Log(vehicleList[currentVehicleIndex].transform.Find("FrontAnchorPoint"));
+        selectedParts[attachmentPoint] = gear;
+        ApplySelectedGear(attachmentPoint);
     }
 
-
-    private void Select(GameObject button){
-        if(gameObject.GetComponentInParent<SetupMenuController>().playerIndex == playerIndex){
-            eventSystem.SetSelectedGameObject(button);
-            //Debug.Log("Player " + playerIndex + " Selected: " + eventSystem.currentSelectedGameObject); 
+    private void ApplySelectedGear(string attachmentPoint)
+    {
+        if (selectedParts.TryGetValue(attachmentPoint, out GearDisplaySO gear))
+        {
+            gear.Use(vehicleList[currentVehicleIndex], attachmentPoint);
         }
-        
+    }
+
+    private void Select(GameObject button)
+    {
+        if (gameObject.GetComponentInParent<SetupMenuController>().playerIndex == playerIndex)
+        {
+            eventSystem.SetSelectedGameObject(button);
+        }
     }
 }
