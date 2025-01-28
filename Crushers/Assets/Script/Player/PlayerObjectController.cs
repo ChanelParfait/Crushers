@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerObjectController : NetworkBehaviour
 {
-    public GameObject PlayerVehicle { get; set; } 
+    public GameObject PlayerVehicle {get; set;}
     public GameObject PlayerVehiclePrefab {get; set;}
     public PlayerInput Input { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
@@ -26,6 +26,8 @@ public class PlayerObjectController : NetworkBehaviour
 
     public bool IsReady { get; set; }
     public VehicleUIController UIController { get; set; }
+    public GameObject VehicleSelectCanvas;
+
 
     // Is Online Flag 
     public bool isOnline = false; 
@@ -38,7 +40,7 @@ public class PlayerObjectController : NetworkBehaviour
 
        void OnEnable()
     {
-        SetupMenuController.vehicleSelected += SetPlayerVehicle; 
+        SetupMenuController.vehicleSelected += SelectVehicle; 
         LevelManager.ArenaLevelEnded += OnLevelEnded;
         LevelManager.ArenaLevelStarted += EnableVehicleControls;
         SceneManager.sceneLoaded += OnLevelLoaded;
@@ -47,7 +49,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     void OnDisable()
     {
-        SetupMenuController.vehicleSelected -= SetPlayerVehicle;  
+        SetupMenuController.vehicleSelected -= SelectVehicle;  
         LevelManager.ArenaLevelEnded -= OnLevelEnded;
         LevelManager.ArenaLevelStarted -= EnableVehicleControls;    
         SceneManager.sceneLoaded -= OnLevelLoaded;
@@ -59,27 +61,26 @@ public class PlayerObjectController : NetworkBehaviour
     {
         Input = GetComponent<PlayerInput>();
         InputHandler = GetComponent<PlayerInputHandler>();
+
         if(isOnline)
         {
-            PlayerIndex = GetComponent<NetworkPlayerController>().playerIDNumber;
+            // Set Player ID
+            PlayerIndex = GetComponent<NetworkPlayerController>().playerIDNumber - 1;
+            // Enable local players input 
             Input.enabled = isOwned;
-            //Debug.Log("Player ID: " + PlayerIndex);
         } 
         else 
         {
-            PlayerIndex = GetComponent<PlayerInput>().playerIndex;
+            PlayerIndex = GetComponent<PlayerInput>().playerIndex;       
         }
-
-        SetPosition();
-        SetPlayerLayers();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if(isOnline)
-        {
+        {  
             if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
                 // when in game scene enable all player visuals and scripts
                 if(PlayerVehicle.activeSelf == false)
@@ -89,18 +90,30 @@ public class PlayerObjectController : NetworkBehaviour
                     SetPosition();
                     SetPlayerLayers();
                 }
-                
             }
-        }
+        }*/
     }
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
-        if(scene.name == "TestingScene"){
+        if(scene.name == "TestingScene")
+        {
             SpawnVehicle();
         }
-        // if scene index is an arena scene
-        if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
+
+        // when loading into the selection menu
+        if(scene.name == "VehicleSelection")
+        {
+            if(isOnline)
+            {
+                // Enable Selection Menu
+                VehicleSelectCanvas.SetActive(true);
+            }
+            SetPosition();
+            SetPlayerLayers();
+        }
+        // When loading into an arena scene
+        if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4)
+        {
             // spawn player vehicle
-            //SetPosition();
             SpawnVehicle();
         } 
     }
@@ -123,7 +136,7 @@ public class PlayerObjectController : NetworkBehaviour
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
         PlayerVehicle = Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform);
-
+        //if(isOnline) {NetworkServer.Spawn(PlayerVehicle);}
         // get UI controller for each vehicle
         UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
         // disable vehicle controls initially if not testing
@@ -156,7 +169,7 @@ public class PlayerObjectController : NetworkBehaviour
         transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
     }
 
-    public void SetPlayerVehicle(int index, GameObject vehicle)
+    public void SelectVehicle(int index, GameObject vehicle)
     {
         if(index != PlayerIndex) { return; }
         PlayerVehiclePrefab = vehicle;

@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     // Game State
     public bool isTesting = false;
     // Game / Scene Management
-    [SerializeField] private int selectedMapIndex; 
+    [SerializeField] private int selectedMapIndex = 2; 
     private int leaderboardScene = 5; 
     // Menus
     private LoadingScreen loadingScreen;
@@ -47,10 +47,8 @@ public class PlayerManager : MonoBehaviour
    
    void OnEnable()
     {
-        //SetupMenuController.vehicleSelected += SetPlayerVehicle; 
         SetupMenuController.playerReady += CheckIfAllReady; 
         LevelManager.ArenaLevelEnded += LoadLeaderboard;
-        //LevelManager.ArenaLevelStarted += EnableVehicleControls;
         SceneManager.sceneLoaded += OnLevelLoaded;
         MainMenuController.levelSelected += SaveMapSelection; 
         PlayerInputHandler.Pause += OnPause;
@@ -59,10 +57,8 @@ public class PlayerManager : MonoBehaviour
 
     void OnDisable()
     {
-        //SetupMenuController.vehicleSelected -= SetPlayerVehicle; 
         SetupMenuController.playerReady -= CheckIfAllReady;   
-        LevelManager.ArenaLevelEnded -= LoadLeaderboard;
-        //LevelManager.ArenaLevelStarted -= EnableVehicleControls;    
+        LevelManager.ArenaLevelEnded -= LoadLeaderboard; 
         SceneManager.sceneLoaded -= OnLevelLoaded;
         MainMenuController.levelSelected -= SaveMapSelection; 
         PlayerInputHandler.Pause -= OnPause;
@@ -125,6 +121,7 @@ public class PlayerManager : MonoBehaviour
         loadingScreen.DisplayScreen();
         
         yield return new WaitForSeconds(delay);
+
         StartCoroutine(LoadSceneAsync(selectedMapIndex));
     }
 
@@ -172,8 +169,7 @@ public class PlayerManager : MonoBehaviour
 
     // keep track of what level we are currently in
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
-        //Debug.Log("Level Loaded: " + scene);
-        // ensure joining is initially disabled
+        
         GetComponent<PlayerInputManager>().DisableJoining();
 
         if(scene.name == "TestingScene"){
