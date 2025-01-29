@@ -14,6 +14,7 @@ public class HelicopterBlades : AbilityBase
 
     [SerializeField] private float hoverForce = 10f; // Upward force applied to make the car hover
     [SerializeField] private float hoverHeight = 5f; // Desired height for hovering
+    
     public override void Use(GameObject controlledCar)
     {
         Transform attachment = controlledCar.transform.Find("AttachmentsPos/" + attachmentPos.ToString());
@@ -45,6 +46,7 @@ public class HelicopterBlades : AbilityBase
                 float distanceToGround = hit.distance;
                 if (distanceToGround < hoverHeight)
                 {
+                    
                     float forceMagnitude = hoverForce * (hoverHeight - distanceToGround) - carRigidbody.velocity.y;
                     carRigidbody.AddForce(Vector3.up * forceMagnitude, ForceMode.Acceleration);
                     carRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;

@@ -265,6 +265,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
             carController.isMovingForward = context.ReadValueAsButton();
         }
+
     }
 
     public void OnReverse(CallbackContext context)
@@ -273,6 +274,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             carController.isReversing = context.ReadValueAsButton();
         }
+
     }
 
     public void OnTurn(CallbackContext context)

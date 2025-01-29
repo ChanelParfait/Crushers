@@ -14,7 +14,6 @@ public class AbilityManager : MonoBehaviour
 
     [SerializeField] public bool canUse = true;
 
-
     [SerializeField] private Image abilityCanvas;
     [SerializeField] private GameObject controlledCar;
 
