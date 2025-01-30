@@ -76,7 +76,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
     public override void OnStopClient()
     {
-        manager.GamePlayers.Remove(this);
+        Manager.GamePlayers.Remove(this);
         LobbyController.instance.UpdatePlayerList();
     }
 
@@ -109,7 +109,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [Command]
     public void CmdCanStartGame(string SceneName)
     {
-        manager.StartGame(SceneName);
+        Manager.StartGame(SceneName);
     }
 
     // Cosmetics

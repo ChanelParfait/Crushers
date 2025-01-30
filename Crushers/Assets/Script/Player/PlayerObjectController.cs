@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 public class PlayerObjectController : NetworkBehaviour
 {
     public GameObject PlayerVehicle {get; set;}
-    public GameObject PlayerVehiclePrefab {get; set;}
+    public GameObject PlayerVehiclePrefab;
     public PlayerInput Input { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
     public int PlayerIndex {get; set;}
@@ -27,6 +27,17 @@ public class PlayerObjectController : NetworkBehaviour
     public bool IsReady { get; set; }
     public VehicleUIController UIController { get; set; }
     public GameObject VehicleSelectCanvas;
+
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager{
+        get { 
+                if(manager != null){
+                    return manager; 
+                }
+                return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+            }
+    }
 
 
     // Is Online Flag 
@@ -135,8 +146,15 @@ public class PlayerObjectController : NetworkBehaviour
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-        PlayerVehicle = Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform);
-        //if(isOnline) {NetworkServer.Spawn(PlayerVehicle);}
+        if(isOnline) 
+        {
+            PlayerVehicle = Manager.SpawnPlayerVehicle(PlayerVehiclePrefab, Spawn, transform, connectionToClient);
+        }
+        else
+        {
+            PlayerVehicle = Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform);
+        }
+        
         // get UI controller for each vehicle
         UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
         // disable vehicle controls initially if not testing
@@ -148,6 +166,7 @@ public class PlayerObjectController : NetworkBehaviour
 
         //initialise other input handler components
         InputHandler.SetCarController(car);
+        InputHandler.PlayerModel = PlayerVehicle;
         InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
         InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
         InputHandler.SetCameraInputHandler(PlayerVehicle.GetComponentInChildren<CameraInputHandler>());

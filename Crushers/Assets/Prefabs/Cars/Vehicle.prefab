@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084420502779646190}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.14142136, y: 0, z: 0, w: 0.9899495}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2587,14 +2587,17 @@ GameObject:
   m_Component:
   - component: {fileID: 49643463266541418}
   - component: {fileID: 828559772023116797}
+  - component: {fileID: 7345286473890743026}
   - component: {fileID: 4176357864898292693}
   - component: {fileID: 4702013352652804568}
   - component: {fileID: 8741482368120771810}
   - component: {fileID: 5888672055751983498}
   - component: {fileID: 2448720167452322469}
-  - component: {fileID: 1493166302703072454}
   - component: {fileID: 5581503148192929400}
-  - component: {fileID: 7345286473890743026}
+  - component: {fileID: 1493166302703072454}
+  - component: {fileID: 6535792523372053064}
+  - component: {fileID: 4962160138709969190}
+  - component: {fileID: 3768394435134509270}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Player
@@ -2651,6 +2654,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!65 &7345286473890743026
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2371082, y: 3.0073714, z: 5.4151535}
+  m_Center: {x: -0.038571358, y: 1.389394, z: -0.1452446}
 --- !u!114 &4176357864898292693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2810,6 +2834,35 @@ MonoBehaviour:
   canUse: 1
   abilityCanvas: {fileID: 7148645049306999157}
   controlledCar: {fileID: 0}
+--- !u!114 &5581503148192929400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178ea08eee4bcb94594446daf12cc00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  OnPlayerScored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5581503148192929400}
+        m_TargetAssemblyTypeName: ScoreKeeper, Assembly-CSharp
+        m_MethodName: TestInvoke
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  scoreText: {fileID: 5970591887534121917}
 --- !u!114 &1493166302703072454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2863,7 +2916,7 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: -1, y: -1, z: -2}
---- !u!114 &5581503148192929400
+--- !u!114 &6535792523372053064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2872,47 +2925,80 @@ MonoBehaviour:
   m_GameObject: {fileID: 8196380668202205108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178ea08eee4bcb94594446daf12cc00e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  OnPlayerScored:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5581503148192929400}
-        m_TargetAssemblyTypeName: ScoreKeeper, Assembly-CSharp
-        m_MethodName: TestInvoke
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  scoreText: {fileID: 5970591887534121917}
---- !u!65 &7345286473890743026
-BoxCollider:
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 49643463266541418}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &4962160138709969190
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196380668202205108}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2371082, y: 3.0073714, z: 5.4151535}
-  m_Center: {x: -0.038571358, y: 1.389394, z: -0.1452446}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3209862866
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &3768394435134509270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 49643463266541418}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &9114952474528041427
 GameObject:
   m_ObjectHideFlags: 0
