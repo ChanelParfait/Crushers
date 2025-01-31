@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using Steamworks;
 using Edgegap;
+using UnityEditor.SearchService;
 
 public class NetworkPlayerController : NetworkBehaviour
 {
@@ -13,6 +14,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [SyncVar] public ulong PlayerSteamID;
     [SyncVar (hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar (hook = nameof(PlayerReadyUpdate))] public bool Ready; 
+    [SyncVar (hook = nameof(VehicleConfirmedUpdate))] public bool VehicleConfirmed; 
     [SyncVar (hook = nameof(SendPlayerColour))] public int PlayerColour; 
 
     private CustomNetworkManager manager;
@@ -29,6 +31,29 @@ public class NetworkPlayerController : NetworkBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public override void OnStartAuthority()
+    {
+        CmdSetPlayerName(SteamFriends.GetPersonaName().ToString());
+        gameObject.name = "LocalGamePlayer";
+        LobbyController.instance.FindLocalPlayer();
+        PlayerManager.instance.FindLocalPlayer();
+        LobbyController.instance.UpdateLobbyName();
+
+    }
+
+    public override void OnStartClient()
+    {
+        Manager.GamePlayers.Add(this);
+        LobbyController.instance.UpdateLobbyName();
+        LobbyController.instance.UpdatePlayerList();
+    }
+
+    public override void OnStopClient()
+    {
+        Manager.GamePlayers.Remove(this);
+        LobbyController.instance.UpdatePlayerList();
     }
 
     private void PlayerReadyUpdate(bool oldValue, bool newValue){
@@ -58,26 +83,36 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    public override void OnStartAuthority()
-    {
-        CmdSetPlayerName(SteamFriends.GetPersonaName().ToString());
-        gameObject.name = "LocalGamePlayer";
-        LobbyController.instance.FindLocalPlayer();
-        LobbyController.instance.UpdateLobbyName();
-
+    private void VehicleConfirmedUpdate(bool oldValue, bool newValue){
+        if(isServer)
+        {
+            this.VehicleConfirmed = newValue;
+        
+        }
+        if(isClient)
+        {
+            UpdateVehicleConfirmed(newValue);
+            PlayerManager.instance.CheckIfAllConfimed();
+        }
     }
 
-    public override void OnStartClient()
+    [Command]
+    private void CMDSetVehicleConfirmed()
     {
-        Manager.GamePlayers.Add(this);
-        LobbyController.instance.UpdateLobbyName();
-        LobbyController.instance.UpdatePlayerList();
+        Debug.Log("Change Vehicle Confirmed: " + this.VehicleConfirmed);
+
+        this.VehicleConfirmedUpdate(this.VehicleConfirmed, !this.VehicleConfirmed);
     }
 
-    public override void OnStopClient()
+    public void ChangeVehicleConfirmed(){
+        //Debug.Log("Check Auth: " + authority);
+        if(isOwned){
+            CMDSetVehicleConfirmed();
+        }
+    }
+    void UpdateVehicleConfirmed(bool message)
     {
-        Manager.GamePlayers.Remove(this);
-        LobbyController.instance.UpdatePlayerList();
+        VehicleConfirmed = message;
     }
 
     [Command]
@@ -99,17 +134,17 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
     // Start Game
-    public void CanStartGame(string SceneName)
+    public void CanLoadScene(string SceneName)
     {
         if(isOwned){
-            CmdCanStartGame(SceneName);
+            CmdCanLoadScene(SceneName);
         }
     }
 
     [Command]
-    public void CmdCanStartGame(string SceneName)
+    public void CmdCanLoadScene(string SceneName)
     {
-        Manager.StartGame(SceneName);
+        Manager.ChangeScene(SceneName);
     }
 
     // Cosmetics

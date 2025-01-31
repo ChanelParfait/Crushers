@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 
-
+// This class controls the player initialisation and determines behaviour between online and offline gameplay
 public class PlayerObjectController : NetworkBehaviour
 {
     public GameObject PlayerVehicle {get; set;}
@@ -24,7 +24,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     public Camera PlayerCam {get; set;}
 
-    public bool IsReady { get; set; }
+    public bool VehicleConfirmed { get; set; }
     public VehicleUIController UIController { get; set; }
     public GameObject VehicleSelectCanvas;
 
@@ -44,6 +44,8 @@ public class PlayerObjectController : NetworkBehaviour
     public bool isOnline = false; 
     // is Testing Flag
     public bool isTesting = false; 
+    // Events 
+    public static UnityAction vehicleConfirmed;
 
     // Player Setup Values
     [SerializeField] private List<LayerMask> playerLayers; 
@@ -86,24 +88,6 @@ public class PlayerObjectController : NetworkBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        if(isOnline)
-        {  
-            if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
-                // when in game scene enable all player visuals and scripts
-                if(PlayerVehicle.activeSelf == false)
-                {
-                    Debug.Log("Set Position");
-                    PlayerVehicle.SetActive(true);
-                    SetPosition();
-                    SetPlayerLayers();
-                }
-            }
-        }*/
-    }
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
         if(scene.name == "TestingScene")
         {
@@ -191,6 +175,7 @@ public class PlayerObjectController : NetworkBehaviour
     public void SelectVehicle(int index, GameObject vehicle)
     {
         if(index != PlayerIndex) { return; }
+
         PlayerVehiclePrefab = vehicle;
         // Set the vehicle type based on the vehicle name
         CarController carController = PlayerVehiclePrefab.GetComponent<CarController>();
@@ -204,6 +189,21 @@ public class PlayerObjectController : NetworkBehaviour
             else{
                 Debug.LogWarning("Unknown vehicle type: " + vehicle.name);
             }
+        }
+    }
+
+    public void SetVehicleConfirmed()
+    {
+        Debug.Log("Set Vehicle Confirmed ");
+
+        if(isOnline){
+            GetComponent<NetworkPlayerController>().ChangeVehicleConfirmed();
+        } 
+        else 
+        {
+            VehicleConfirmed = true;
+            vehicleConfirmed?.Invoke();
+
         }
     }
 

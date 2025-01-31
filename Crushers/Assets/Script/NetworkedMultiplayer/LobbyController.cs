@@ -64,6 +64,8 @@ public class LobbyController : MonoBehaviour
     }
 
     public void CheckIfAllReady(){
+        Debug.Log("Lobby Controller Check If All Ready");
+        
         bool AllReady = false; 
         foreach(NetworkPlayerController player in Manager.GamePlayers)
         {
@@ -203,6 +205,6 @@ public class LobbyController : MonoBehaviour
 
 
     public void StartGame(string SceneName){
-        LocalPlayerController.CanStartGame(SceneName);
+        LocalPlayerController.CanLoadScene(SceneName);
     }
 }

@@ -10,16 +10,20 @@ using Unity.VisualScripting;
 using System;
 using Random = UnityEngine.Random;
 using UnityEditor;
+using Unity.Collections.LowLevel.Unsafe;
 
+// The Player Event Manager controls Player Input Events
+// As 
 public class PlayerManager : MonoBehaviour
 {
-    private static PlayerManager instance;
+    public static PlayerManager instance;
     private List<PlayerObjectController> PlayerObjects;
 
     // Player Initialising Values
     [SerializeField] private GameObject defaultVehiclePrefab; 
     // Game State
     public bool isTesting = false;
+    private bool isOnline = true;
     // Game / Scene Management
     [SerializeField] private int selectedMapIndex = 2; 
     private int leaderboardScene = 5; 
@@ -31,6 +35,19 @@ public class PlayerManager : MonoBehaviour
     // Events
     public static UnityAction<bool> ArenaLevelLoaded; 
     public static UnityAction firstPlayerJoined; 
+
+    // Networking
+    public NetworkPlayerController LocalPlayerController;
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager{
+        get { 
+                if(manager != null){
+                    return manager; 
+                }
+                return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+            }
+    }
 
     
     private void Awake()
@@ -47,7 +64,7 @@ public class PlayerManager : MonoBehaviour
    
    void OnEnable()
     {
-        SetupMenuController.playerReady += CheckIfAllReady; 
+        PlayerObjectController.vehicleConfirmed += CheckIfAllConfimed; 
         LevelManager.ArenaLevelEnded += LoadLeaderboard;
         SceneManager.sceneLoaded += OnLevelLoaded;
         MainMenuController.levelSelected += SaveMapSelection; 
@@ -57,7 +74,7 @@ public class PlayerManager : MonoBehaviour
 
     void OnDisable()
     {
-        SetupMenuController.playerReady -= CheckIfAllReady;   
+        PlayerObjectController.vehicleConfirmed -= CheckIfAllConfimed;   
         LevelManager.ArenaLevelEnded -= LoadLeaderboard; 
         SceneManager.sceneLoaded -= OnLevelLoaded;
         MainMenuController.levelSelected -= SaveMapSelection; 
@@ -68,6 +85,17 @@ public class PlayerManager : MonoBehaviour
     public List<PlayerObjectController> GetPlayerObjects()
     {
         return PlayerObjects;
+    }
+
+    // Create an Event when selecting Online / Local Buttons to Set isOnline Value
+    public void SetIsOnline(bool value)
+    {
+        isOnline = value;
+    }
+
+    public void FindLocalPlayer()
+    {
+        LocalPlayerController = GameObject.Find("LocalGamePlayer").GetComponent<NetworkPlayerController>();
     }
         
     // Event for a Player Joining 
@@ -104,15 +132,40 @@ public class PlayerManager : MonoBehaviour
 
 
     // Create Check if All Ready Function here
-    public void CheckIfAllReady(int index)
+    //If online 
+    public void CheckIfAllConfimed()
     {
-        PlayerObjects[index].IsReady = true; 
-
-        if( PlayerObjects.All(p => p.IsReady == true))
+        if(isOnline)
         {
-            // load selected level
-            StartCoroutine(DelayScreen(2));
-        }   
+            bool AllReady = false; 
+            foreach(NetworkPlayerController player in Manager.GamePlayers)
+            {
+                if(player.VehicleConfirmed){
+                    AllReady = true;
+                } 
+                else 
+                {
+                    AllReady = false;
+                    break; 
+                }
+            }
+            Debug.Log("PlayerManager Check If All Ready: " + AllReady);
+
+            if(AllReady)
+            {   
+                // Write script to get scene name from build index
+                LocalPlayerController.CanLoadScene("ArenaScene");
+            }
+        }
+        else
+        {
+            if( PlayerObjects.All(p => p.VehicleConfirmed == true))
+            {
+                // load selected level
+                StartCoroutine(DelayScreen(selectedMapIndex));
+            }   
+        }
+
     }
 
     // Loading Screen Functionality //

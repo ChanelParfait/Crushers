@@ -18,12 +18,12 @@ public class SetupMenuController : MonoBehaviour
     // player index and event system
     private int playerIndex;
     private MultiplayerEventSystem eventSystem;
+    private PlayerObjectController playerObjectController;
     
     InputActionMap UI;
 
     // Events //
     public static UnityAction<int, GameObject> vehicleSelected; 
-    public static UnityAction<int> playerReady;
 
      //List of vehicles to choose from
      [SerializeField] private GameObject[] vehicleList;
@@ -53,8 +53,8 @@ public class SetupMenuController : MonoBehaviour
         UI.FindAction("Right").performed += OnRight;
    
         // find Player Index
-        // add an is online check here
-        playerIndex = GetComponentInParent<PlayerInput>().playerIndex; 
+        playerObjectController = GetComponentInParent<PlayerObjectController>(); 
+        playerIndex = playerObjectController.PlayerIndex; 
         titleTxt.SetText("Player" + (playerIndex + 1).ToString());
         ignoreInputTime = Time.time + ignoreInputTime;
         
@@ -137,12 +137,13 @@ public class SetupMenuController : MonoBehaviour
         UpdateVehicleDisplay();
     }
 
-    public void ReadyPlayer(){
+    public void ConfirmVehicle(){
         if(!inputEnabled){ return; }
         // hide ready button
-        readyBtn.gameObject.SetActive(false);
+        //readyBtn.gameObject.SetActive(false);
         // ready up player
-        playerReady?.Invoke(playerIndex);
+        //playerReady?.Invoke(playerIndex);
+        GetComponentInParent<PlayerObjectController>().SetVehicleConfirmed();
     }
 
 
