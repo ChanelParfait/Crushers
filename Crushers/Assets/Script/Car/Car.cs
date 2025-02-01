@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Car", menuName = "Cars/Make New Car", order = 0)]
 public class Car : ScriptableObject
 {
     [SerializeField] GameObject carPrefab = null;
-
     [Header("Car Setup")]
 
 

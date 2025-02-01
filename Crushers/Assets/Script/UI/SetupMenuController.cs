@@ -22,11 +22,13 @@ public class SetupMenuController : MonoBehaviour
     // Events //
     public static UnityAction<int, GameObject> vehicleSelected; 
     public static UnityAction<int> playerReady;
-
+    public static SetupMenuController instance;
+    
      //List of vehicles to choose from
      [SerializeField] private GameObject[] vehicleList;
      private int currentVehicleIndex = 0;
-
+     private GameObject currentPreview;
+     
      /// UI Gameobjects //
     [SerializeField] private TextMeshProUGUI titleTxt; 
     [SerializeField] private GameObject readyPnl; 
@@ -37,10 +39,12 @@ public class SetupMenuController : MonoBehaviour
      private bool inputEnabled;
      private bool selectionEnabled;
 
-     // Parts to preview
-     private Dictionary<string, GearDisplaySO> selectedParts = new Dictionary<string, GearDisplaySO>();
+     private void Awake()
+     {
+         instance = this;
+     }
 
-    void Start()
+     void Start()
     {
         /// initialise controls and enable them 
         InputActionAsset controls = GetComponentInParent<PlayerInput>().actions;
@@ -56,6 +60,7 @@ public class SetupMenuController : MonoBehaviour
 
         selectionEnabled = true;
         UpdateVehicleDisplay();
+        FindAttachmentPoints();
     }
 
     // Update is called once per frame
@@ -131,23 +136,15 @@ public class SetupMenuController : MonoBehaviour
 
     private void UpdateVehicleDisplay()
     {
+        // Clear previous preview if switching vehicles
+        if (currentPreview != null)
+        {
+            Destroy(currentPreview);
+        }
+
         // display selected vehicle
         vehicleList[currentVehicleIndex].SetActive(true);
         Select(vehicleList[currentVehicleIndex]);
-    }
-
-    public void SelectGear(string attachmentPoint, GearDisplaySO gear)
-    {
-        selectedParts[attachmentPoint] = gear;
-        ApplySelectedGear(attachmentPoint);
-    }
-
-    private void ApplySelectedGear(string attachmentPoint)
-    {
-        if (selectedParts.TryGetValue(attachmentPoint, out GearDisplaySO gear))
-        {
-            gear.Use(vehicleList[currentVehicleIndex], attachmentPoint);
-        }
     }
 
     private void Select(GameObject button)
@@ -155,6 +152,31 @@ public class SetupMenuController : MonoBehaviour
         if (gameObject.GetComponentInParent<SetupMenuController>().playerIndex == playerIndex)
         {
             eventSystem.SetSelectedGameObject(button);
+        }
+    }
+
+    private void FindAttachmentPoints()
+    {
+         Debug.Log(transform.Find("VehicleMenu/StandardVehicleBtn/TAXI/AttachmentsPos/" + "Front"));
+    }
+
+    public void UpdateGearPreview(Gear gear)
+    {
+        if (currentPreview != null)
+        {
+            Destroy(currentPreview);
+        }
+        if (gear.Model != null)
+        {
+            Transform attachment = transform
+                .Find("VehicleMenu/StandardVehicleBtn/TAXI/AttachmentsPos/" + gear.GearID);
+            if (attachment == null)
+            {
+                Debug.LogError("Attachment point not found for Gear ID: " + gear.GearID);
+                return;
+            }
+            currentPreview = Instantiate(gear.Model, attachment);
+            currentPreview.transform.parent = attachment;
         }
     }
 }
