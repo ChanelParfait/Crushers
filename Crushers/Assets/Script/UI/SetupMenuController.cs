@@ -1,15 +1,9 @@
-using ShapesFX;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -27,7 +21,12 @@ public class SetupMenuController : MonoBehaviour
      //List of vehicles to choose from
      [SerializeField] private GameObject[] vehicleList;
      private int currentVehicleIndex = 0;
+     
+     //Gears
      private GameObject currentPreview;
+     private List<Gear> equippedGears = new List<Gear>();
+     private List<GameObject> currentPreviews = new List<GameObject>(); // Stores instantiated gear models
+
      
      /// UI Gameobjects //
     [SerializeField] private TextMeshProUGUI titleTxt; 
@@ -136,16 +135,35 @@ public class SetupMenuController : MonoBehaviour
 
     private void UpdateVehicleDisplay()
     {
-        // Clear previous preview if switching vehicles
-        if (currentPreview != null)
+        // Destroy previous gear previews safely
+        for (int i = currentPreviews.Count - 1; i >= 0; i--)
         {
-            Destroy(currentPreview);
+            Destroy(currentPreviews[i]);
+        }
+        currentPreviews.Clear(); // Clear after destroying
+
+        // Deactivate all vehicles
+        foreach (var vehicle in vehicleList)
+        {
+            vehicle.SetActive(false);
         }
 
-        // display selected vehicle
+        // Activate the newly selected vehicle
         vehicleList[currentVehicleIndex].SetActive(true);
         Select(vehicleList[currentVehicleIndex]);
+
+        // Reapply all previously equipped gears safely
+        List<Gear> gearsToReapply = new List<Gear>(equippedGears); // Make a copy to avoid modifying while iterating
+        equippedGears.Clear(); // Clear old list so we only add valid ones
+
+        foreach (var gear in gearsToReapply)
+        {
+            UpdateGearPreview(gear);
+        }
     }
+
+
+
 
     private void Select(GameObject button)
     {
@@ -157,26 +175,76 @@ public class SetupMenuController : MonoBehaviour
 
     private void FindAttachmentPoints()
     {
-         Debug.Log(transform.Find("VehicleMenu/StandardVehicleBtn/TAXI/AttachmentsPos/" + "Front"));
+        Debug.Log(vehicleList[currentVehicleIndex].transform.Find("TAXI"));
     }
 
     public void UpdateGearPreview(Gear gear)
     {
-        if (currentPreview != null)
+        if (gear == null || gear.Model == null)
         {
-            Destroy(currentPreview);
+            Debug.LogError("Invalid gear provided.");
+            return;
         }
-        if (gear.Model != null)
+
+        // Remove any previously attached version of this gear type
+        RemoveGearPreview(gear.GearID);
+
+        // Store the equipped gear
+        equippedGears.Add(gear);
+
+        // Get the currently active vehicle
+        GameObject activeVehicle = vehicleList[currentVehicleIndex];
+
+        // Find the first child of the vehicle (the unique child before AttachmentsPos)
+        if (activeVehicle.transform.childCount == 0)
         {
-            Transform attachment = transform
-                .Find("VehicleMenu/StandardVehicleBtn/TAXI/AttachmentsPos/" + gear.GearID);
-            if (attachment == null)
+            Debug.LogError("No child found in " + activeVehicle.name);
+            return;
+        }
+
+        Transform vehicleRoot = activeVehicle.transform.GetChild(0); // First unique child
+        Transform attachmentParent = vehicleRoot.Find("AttachmentsPos");
+
+        if (attachmentParent == null)
+        {
+            Debug.LogError("AttachmentsPos not found in " + vehicleRoot.name);
+            return;
+        }
+
+        // Find the specific attachment point for the gear
+        Transform attachmentPoint = attachmentParent.Find(gear.GearID);
+
+        if (attachmentPoint == null)
+        {
+            Debug.LogError("Attachment point not found for Gear ID: " + gear.GearID + " in " + vehicleRoot.name);
+            return;
+        }
+
+        // Instantiate and store the preview
+        GameObject newPreview = Instantiate(gear.Model, attachmentPoint);
+        newPreview.transform.SetParent(attachmentPoint);
+        currentPreviews.Add(newPreview);
+    }
+
+
+    private void RemoveGearPreview(string gearID)
+    {
+        for (int i = equippedGears.Count - 1; i >= 0; i--) // Iterate backwards
+        {
+            if (equippedGears[i].GearID == gearID)
             {
-                Debug.LogError("Attachment point not found for Gear ID: " + gear.GearID);
-                return;
+                // Ensure index exists in both lists
+                if (i < currentPreviews.Count)
+                {
+                    Destroy(currentPreviews[i]); // Destroy the instantiated preview
+                    currentPreviews.RemoveAt(i); // Remove from the preview list
+                }
+
+                equippedGears.RemoveAt(i); // Remove from the equipped gear list
             }
-            currentPreview = Instantiate(gear.Model, attachment);
-            currentPreview.transform.parent = attachment;
         }
     }
+
+
+
 }
