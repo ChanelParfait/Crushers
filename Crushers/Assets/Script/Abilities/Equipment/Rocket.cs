@@ -18,7 +18,7 @@ public class Rocket : AbilityBase
         Transform attachment = controlledCar.transform.Find("AttachmentsPos/" + attachmentPos.ToString());
         Vector3 spawnPosition = attachment.transform.position;
         
-        GameObject rocketInstance = Instantiate(rocketEquipmentPrefab, spawnPosition, controlledCar.transform.rotation);
+        GameObject rocketInstance = Instantiate(rocketEquipmentPrefab, controlledCar.transform.position + controlledCar.transform.up * 2f, controlledCar.transform.rotation);
         rocketInstance.GetComponent<RocketProjectile>().Initialize(rocketSpeed, hitRadius, controlledCar);
         
         Collider rocketCollider = rocketInstance.GetComponent<Collider>();

@@ -56,7 +56,7 @@ public class RocketProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ExplosionDamage(this.transform.position, _HitRadius);
-        Debug.Log(other.name);
+        Debug.Log(other.name + " Exploded On");
         Destroy(this.gameObject);
 
     }
