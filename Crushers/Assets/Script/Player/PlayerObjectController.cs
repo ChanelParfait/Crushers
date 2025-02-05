@@ -130,9 +130,9 @@ public class PlayerObjectController : NetworkBehaviour
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-        if(isOnline) 
+        if(isOnline && isServer) 
         {
-            PlayerVehicle = Manager.SpawnPlayerVehicle(PlayerVehiclePrefab, Spawn, transform, connectionToClient);
+            CmdSpawnVehicle(PlayerVehiclePrefab, Spawn, transform, connectionToClient);
         }
         else
         {
@@ -163,6 +163,19 @@ public class PlayerObjectController : NetworkBehaviour
 
         PlayerVehicle.GetComponentInChildren<Canvas>().worldCamera = PlayerCam;
         SetPlayerLayers(); 
+    }
+
+
+    [Command]
+    public void CmdSpawnVehicle(GameObject prefab, Transform spawn, Transform parent, NetworkConnectionToClient conn)
+    { 
+        Debug.Log("Spawn Vehicle" + parent.gameObject.name);
+        if(isServer)
+        {
+            PlayerVehicle = Instantiate(prefab, spawn.position, spawn.rotation, parent);
+            NetworkServer.Spawn(PlayerVehicle, conn);
+        }
+
     }
 
     private void SetPosition(){
