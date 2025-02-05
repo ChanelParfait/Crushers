@@ -48926,6 +48926,11 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 2449448533462767253, guid: e821818198fb6c5498f3f57a8a8321aa, type: 3}
+  - {fileID: 8196380668202205108, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
+  - {fileID: 2744354503348039254, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
+  - {fileID: 5535384286806951313, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
+  - {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2, type: 3}
+  - {fileID: 7781994489799046140, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2

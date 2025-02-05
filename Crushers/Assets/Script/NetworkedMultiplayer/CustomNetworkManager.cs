@@ -32,7 +32,7 @@ public class CustomNetworkManager : NetworkManager
 
     public GameObject SpawnPlayerVehicle(GameObject prefab, Transform spawn, Transform parent, NetworkConnectionToClient conn)
     {
-        NetworkClient.RegisterPrefab(prefab);
+        //NetworkClient.RegisterPrefab(prefab);
         GameObject PlayerVehicle = Instantiate(prefab, spawn.position, spawn.rotation, parent);
         NetworkServer.Spawn(PlayerVehicle, conn);
         return PlayerVehicle;
