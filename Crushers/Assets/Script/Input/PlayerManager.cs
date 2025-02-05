@@ -231,8 +231,12 @@ public class PlayerManager : MonoBehaviour
         }
     
         if(scene.buildIndex == 1){
-            // Enable joining in vehicle selection level
-            GetComponent<PlayerInputManager>().EnableJoining();
+            // Enable joining in vehicle selection level in offline mode
+            // create a custom joining behaviour to only spawn the player in offline mode
+            if(!isOnline)
+            { 
+                GetComponent<PlayerInputManager>().EnableJoining();
+            }
             // find the loading screen game object
             loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
         }
