@@ -89,6 +89,9 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
+        Debug.Log("Level Loaded");
+        
+
         if(scene.name == "TestingScene")
         {
             SpawnVehicle();
@@ -113,6 +116,7 @@ public class PlayerObjectController : NetworkBehaviour
         } 
     }
 
+
     private void OnLevelEnded()
     {
         Score = (int)GetComponentInChildren<ScoreKeeper>().GetScore();
@@ -124,18 +128,22 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void SpawnVehicle()
     {
-       // Destroy Unneeded components
+        // Destroy Unneeded components
         Destroy(GetComponentInChildren<Canvas>().gameObject);
 
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-        if(isOnline && isOwned) 
+        if(isOnline && isServer) 
         {
+            Debug.Log("Spawn Vehicle Online: " + gameObject.name);
+            
             PlayerVehicle = Manager.SpawnPlayerVehicle(PlayerVehiclePrefab, Spawn, transform, connectionToClient);
         }
         else
         {
+            //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
+
             PlayerVehicle = Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform);
         }
         

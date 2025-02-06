@@ -192,6 +192,7 @@ MonoBehaviour:
   PlayerSteamID: 0
   PlayerName: 
   Ready: 0
+  VehicleConfirmed: 0
   PlayerColour: 0
 --- !u!114 &7371690563157673681
 MonoBehaviour:

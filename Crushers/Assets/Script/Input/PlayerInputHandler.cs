@@ -184,7 +184,7 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnJump(CallbackContext context){
         if(canJump && carController && IsInputValid()){
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
 
             canJump = false;
             carController.gameObject.transform.position += carController.gameObject.transform.up * 5;

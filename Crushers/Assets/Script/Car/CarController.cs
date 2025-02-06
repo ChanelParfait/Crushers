@@ -437,7 +437,7 @@ public class CarController : MonoBehaviour
 
     public void HonkHorn() {
         if (!hornSound.isPlaying) {
-                Debug.Log("Hooooooonk");
+                //Debug.Log("Hooooooonk");
 
             hornSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f);
             hornSound.Play();
@@ -446,7 +446,7 @@ public class CarController : MonoBehaviour
 
     // JUMP to get unstuck
     public void Jump(){
-      Debug.Log("Jump");
+      //Debug.Log("Jump");
       carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
     }
 
@@ -456,7 +456,7 @@ public class CarController : MonoBehaviour
 
     public void SetSteeringAngle(Vector2 direction){
 
-      //Debug.Log("Wheel Direction: " + direction);
+      ////Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * activeMaxSteeringAngle;
     }
@@ -550,7 +550,7 @@ public class CarController : MonoBehaviour
 
     // This method apply negative torque to the wheels in order to go backwards.
     public void GoReverse(){
-        Debug.Log("Is going reverse");
+        //Debug.Log("Is going reverse");
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
@@ -607,7 +607,7 @@ public class CarController : MonoBehaviour
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
     public void DecelerateCar(){
       isDecelerating = true;
-      Debug.Log("Decelerating");
+      //Debug.Log("Decelerating");
       if(Mathf.Abs(localVelocityX) > 2.5f){
         isDrifting = true;
         DriftCarPS();
@@ -816,7 +816,7 @@ public class CarController : MonoBehaviour
       WheelHit hit;
       bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
       if(!isGrounded && newIsGrounded){
-        //Debug.Log("Wheels Hit Ground");
+        ////Debug.Log("Wheels Hit Ground");
         hitGround?.Invoke();
       }
         isGrounded = newIsGrounded;
@@ -828,7 +828,7 @@ public class CarController : MonoBehaviour
         {
             float airGravityModifier = (-1 * activeGravityMultiplier) * Time.deltaTime;
             carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
-            //Debug.Log("Current Gravity Applied: " + airGravityModifier);
+            ////Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
 
