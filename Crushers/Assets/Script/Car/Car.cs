@@ -24,8 +24,6 @@ public class Car : ScriptableObject
     [SerializeField] private float baseDecelerationMultiplier = 2;
     [Range(1, 10)] 
     [SerializeField] private int baseHandbrakeDriftMultiplier = 5;
-    [Range(0, 90)]
-    [SerializeField] private int maxDriftingAngle = 30;
 
     [Header("Mass and Physics")]
 
@@ -78,11 +76,6 @@ public class Car : ScriptableObject
     public int GetBaseHandbrakeDriftMultiplier()
     {
         return baseHandbrakeDriftMultiplier;
-    }
-
-    public int GetMaxDriftingAngle() 
-    {
-        return maxDriftingAngle;
     }
 
     public int GetBaseBodyMass()

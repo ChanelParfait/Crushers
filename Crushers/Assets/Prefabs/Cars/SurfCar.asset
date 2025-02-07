@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: SurfCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 7595547328105732432, guid: 7ce0c66d120c24146a1687a661732883,
-    type: 3}
   baseMaxSpeed: 100
   baseMaxReverseSpeed: 40
-  baseAccelerationMultiplier: 8
+  baseAccelerationMultiplier: 9
   baseMaxSteeringAngle: 50
   baseSteeringSpeed: 0.5
   baseBrakeForce: 3000
   baseDecelerationMultiplier: 1
-  baseHandbrakeDriftMultiplier: 1
-  maxDriftingAngle: 90
+  baseHandbrakeDriftMultiplier: 5
   baseBodyMass: 1000
   baseGravityMultiplier: 900
   baseDamageMultiplier: 4000
