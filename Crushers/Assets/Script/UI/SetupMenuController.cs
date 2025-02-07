@@ -115,7 +115,6 @@ public class SetupMenuController : MonoBehaviour
 
     public void SetVehicle(GameObject vehicle){
         if(!inputEnabled){ return; }
-
         // display ready menu
         menuPnl.SetActive(false);
         readyPnl.SetActive(true);

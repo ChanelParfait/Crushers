@@ -487,8 +487,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  PlayerModel: {fileID: 0}
+  PlayerVehiclePrefab: {fileID: 0}
+  VehicleSelectCanvas: {fileID: 608979669385013195}
   isOnline: 0
+  isTesting: 0
   playerLayers:
   - serializedVersion: 2
     m_Bits: 64
@@ -706,6 +708,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSetupMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1424724720390429031, guid: 6027ea41d6186bb469aa2b68505fba76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2734659750398909137, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}
       propertyPath: m_Pivot.x
@@ -842,6 +849,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4035557358371007830}
   m_SourcePrefab: {fileID: 100100000, guid: 6027ea41d6186bb469aa2b68505fba76, type: 3}
+--- !u!1 &608979669385013195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424724720390429031, guid: 6027ea41d6186bb469aa2b68505fba76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1996823470003338924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2133235875601647132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 444979932954441904, guid: 6027ea41d6186bb469aa2b68505fba76,
@@ -930,7 +943,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1996823470003338924}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 608979669385013195}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43f993ce4f2c48e4cb93ee947daa1057, type: 3}

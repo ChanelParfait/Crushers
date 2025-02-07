@@ -30,6 +30,7 @@ public class CustomNetworkManager : NetworkManager
         ServerChangeScene(SceneName);
     }
 
+
     public GameObject SpawnPlayerVehicle(GameObject prefab, Transform spawn, Transform parent, NetworkConnectionToClient conn)
     {
         //NetworkClient.RegisterPrefab(prefab);
@@ -37,4 +38,5 @@ public class CustomNetworkManager : NetworkManager
         NetworkServer.Spawn(PlayerVehicle, conn);
         return PlayerVehicle;
     }
+
 }

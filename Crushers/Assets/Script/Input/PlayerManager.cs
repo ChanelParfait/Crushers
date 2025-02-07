@@ -120,7 +120,7 @@ public class PlayerManager : MonoBehaviour
         {
             // Add Player to List
             PlayerObjectController playerConfig = pi.GetComponent<PlayerObjectController>();
-            //playerConfig.SetPosition();
+            playerConfig.SetPosition();
             PlayerObjects.Add(playerConfig);
             DontDestroyOnLoad(playerConfig.gameObject);
         }

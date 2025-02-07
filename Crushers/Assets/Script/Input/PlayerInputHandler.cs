@@ -109,10 +109,10 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
                 // when in game scene enable all player visuals and scripts
-                if(PlayerModel.activeSelf == false)
+                /*if(PlayerModel.activeSelf == false)
                 {
                     player.Enable();
-                }
+                }*/
                 
             }
         }
