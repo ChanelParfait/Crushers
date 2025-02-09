@@ -2681,6 +2681,7 @@ MonoBehaviour:
   activeBrakeForce: 0
   activeDecelerationMultiplier: 0
   activeHandbrakeDriftMultiplier: 0
+  activeMaxDriftingAngle: 0
   activeBodyMass: 0
   activeGravityMultiplier: 0
   activeDamageMultiplier: 0
@@ -2769,10 +2770,13 @@ MonoBehaviour:
   KamiKazeGo: {fileID: 3565015708328552895, guid: d4bf661927ec37c45932cdfbb1736c81,
     type: 3}
   Stun: {fileID: 8666847585282172510, guid: 150fe28a49a55c1439573e298a495e49, type: 3}
+  Turret: {fileID: 0}
+  Thruster: {fileID: 0}
   Pickup: 0
   State: 0
   ShieldTimer: 10
   KamiKazeTimer: 10
+  machineGunDuration: 10
   KamiKazeRadius: 50
   useItem: 0
   DisabledEffect: {fileID: 4138785285165660041}
@@ -2877,7 +2881,19 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5581503148192929400}
         m_TargetAssemblyTypeName: ScoreKeeper, Assembly-CSharp
-        m_MethodName: TestInvoke
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4913253049554168334}
+        m_TargetAssemblyTypeName: VehicleUIController, Assembly-CSharp
+        m_MethodName: ShowKillFeed
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3783,6 +3799,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4913253049554168334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6948429851495561366, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2612837372762198680}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38de226a0652cd47af3bfeded21f116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5369755218889901771 stripped
