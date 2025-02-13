@@ -3748,11 +3748,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -291
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229554650389798413, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5149795201007975405, guid: 2d1ac2dc27ee11340b483eef11c7082d,
         type: 3}
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6948429851495561366, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: killfeedSpawn
+      value: 
+      objectReference: {fileID: 785694549619790302}
     - target: {fileID: 6948429851495561366, guid: 2d1ac2dc27ee11340b483eef11c7082d,
         type: 3}
       propertyPath: abilityResetSlider
@@ -3779,10 +3829,17 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2860995728140484201, guid: 2d1ac2dc27ee11340b483eef11c7082d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1ac2dc27ee11340b483eef11c7082d, type: 3}
+--- !u!224 &785694549619790302 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3361357374116283206, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2612837372762198680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4326497937542387540 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1749762034904827340, guid: 2d1ac2dc27ee11340b483eef11c7082d,

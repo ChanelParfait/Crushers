@@ -39,6 +39,7 @@ public class VehicleUIController : MonoBehaviour
         
         AbilityManager.OnAbilityUse.AddListener(StartCooldownUI);
         
+        ScoreKeeper.OnGlobalPlayerScored.AddListener(ShowKillFeed);
       
     }
 
@@ -49,7 +50,7 @@ public class VehicleUIController : MonoBehaviour
 
         AbilityManager.OnAbilityUse.RemoveListener(StartCooldownUI);
         
-       
+        ScoreKeeper.OnGlobalPlayerScored.RemoveListener(ShowKillFeed);
     }
 
     private void Start()
@@ -130,8 +131,10 @@ public class VehicleUIController : MonoBehaviour
     public void ShowKillFeed(GameObject ScoringPlayer, GameObject DefeatedPlayer, TypeOfDeath Death)
     {
         Debug.Log("Showing kill feed");
-        GameObject k = Instantiate(killFeed, killfeedSpawn.position, killfeedSpawn.rotation);
-        k.transform.SetParent(killfeedSpawn);
+        GameObject k = Instantiate(killFeed, killfeedSpawn.position, killfeedSpawn.rotation );
+        k.transform.SetParent(killfeedSpawn, false);
+        k.transform.localPosition = Vector3.zero;
+        k.transform.localRotation = Quaternion.identity;
 
         string scoringPlayerLayerName = LayerMask.LayerToName(ScoringPlayer.layer);
         string defeatedPlayerLayerName = LayerMask.LayerToName(DefeatedPlayer.layer);
@@ -155,7 +158,7 @@ public class VehicleUIController : MonoBehaviour
             }
         }
         
-        Destroy(k, 2f);
+        Destroy(k, 5f);
         
     }
 
