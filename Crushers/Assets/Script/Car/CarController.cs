@@ -71,7 +71,6 @@ public class CarController : MonoBehaviour
     [SerializeField] private int activeBrakeForce;
     [SerializeField] private float activeDecelerationMultiplier;
     [SerializeField] private int activeHandbrakeDriftMultiplier;
-    [SerializeField] private int activeMaxDriftingAngle; 
 
     [Space(10)]
     [Header("Deceleration")]
@@ -182,7 +181,6 @@ public class CarController : MonoBehaviour
         activeBrakeForce = car.GetBaseBrakeForce();
         activeDecelerationMultiplier = car.GetBaseDecelerationMultiplier();
         activeHandbrakeDriftMultiplier = car.GetBaseHandbrakeDriftMultiplier();
-        activeMaxDriftingAngle = car.GetMaxDriftingAngle();
         activeBodyMass = car.GetBaseBodyMass();
         activeGravityMultiplier = car.GetBaseGravityMultiplier();
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
@@ -437,6 +435,8 @@ public class CarController : MonoBehaviour
 
     public void HonkHorn() {
         if (!hornSound.isPlaying) {
+                //Debug.Log("Hooooooonk");
+
             hornSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f);
             hornSound.Play();
         }
@@ -444,7 +444,7 @@ public class CarController : MonoBehaviour
 
     // JUMP to get unstuck
     public void Jump(){
-      Debug.Log("Jump");
+      //Debug.Log("Jump");
       carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
     }
 
@@ -454,9 +454,14 @@ public class CarController : MonoBehaviour
 
     public void SetSteeringAngle(Vector2 direction){
 
-      //Debug.Log("Wheel Direction: " + direction);
+      ////Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * activeMaxSteeringAngle;
+
+        if (direction != Vector2.zero)
+        {
+            cameraController.moveCameraAssist(steeringAngle/10);
+        }
     }
 
     public void UpdateWheels(){
@@ -548,7 +553,7 @@ public class CarController : MonoBehaviour
 
     // This method apply negative torque to the wheels in order to go backwards.
     public void GoReverse(){
-        Debug.Log("Is going reverse");
+        //Debug.Log("Is going reverse");
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
@@ -605,7 +610,7 @@ public class CarController : MonoBehaviour
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
     public void DecelerateCar(){
       isDecelerating = true;
-      Debug.Log("Decelerating");
+      //Debug.Log("Decelerating");
       if(Mathf.Abs(localVelocityX) > 2.5f){
         isDrifting = true;
         DriftCarPS();
@@ -665,7 +670,7 @@ public class CarController : MonoBehaviour
       driftingAxis += Time.deltaTime;
       driftingAxis = Mathf.Clamp(driftingAxis, 0f, 1f);
       float secureStartingPoint = driftingAxis * FLWextremumSlip * activeHandbrakeDriftMultiplier;
-
+    
       if(secureStartingPoint < FLWextremumSlip){
         driftingAxis = FLWextremumSlip / (FLWextremumSlip * activeHandbrakeDriftMultiplier);
       }
@@ -697,26 +702,12 @@ public class CarController : MonoBehaviour
         RRwheelFriction.extremumSlip = RRWextremumSlip * factor;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
       }
-        LimitDriftAngle();
 
       // Whenever the player uses the handbrake, it means that the wheels are locked, so we set 'isTractionLocked = true'
       // and, as a consequense, the car starts to emit trails to simulate the wheel skids.
       isTractionLocked = true;
       DriftCarPS();
 
-    }
-
-    private void LimitDriftAngle()
-    {
-        Vector3 localVelocity = transform.InverseTransformDirection(carRigidbody.velocity);
-        float driftAngle = Mathf.Atan2(localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
-
-        if (Mathf.Abs(driftAngle) > activeMaxDriftingAngle)
-        {
-            float clampedAngle = Mathf.Clamp(driftAngle, -activeMaxDriftingAngle, activeMaxDriftingAngle);
-            Vector3 correctedVelocity = Quaternion.Euler(0, clampedAngle - driftAngle, 0) * localVelocity;
-            carRigidbody.velocity = transform.TransformDirection(correctedVelocity);
-        }
     }
 
     // This function is used to emit both the particle systems of the tires' smoke and the trail renderers of the tire skids
@@ -767,11 +758,10 @@ public class CarController : MonoBehaviour
     // This function is used to recover the traction of the car when the user has stopped using the car's handbrake.
     public void RecoverTraction(){
       isTractionLocked = false;
-      driftingAxis = driftingAxis - (Time.deltaTime / 1.5f);
+      driftingAxis = driftingAxis - (Time.deltaTime );
       if(driftingAxis < 0f){
         driftingAxis = 0f;
       }
-
       //If the 'driftingAxis' value is not 0f, it means that the wheels have not recovered their traction.
       //We are going to continue decreasing the sideways friction of the wheels until we reach the initial
       // car's grip.
@@ -814,7 +804,7 @@ public class CarController : MonoBehaviour
       WheelHit hit;
       bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
       if(!isGrounded && newIsGrounded){
-        //Debug.Log("Wheels Hit Ground");
+        ////Debug.Log("Wheels Hit Ground");
         hitGround?.Invoke();
       }
         isGrounded = newIsGrounded;
@@ -823,10 +813,10 @@ public class CarController : MonoBehaviour
     public void GravityModifier()
     {
         if (!isGrounded)
-        {
+        { 
             float airGravityModifier = (-1 * activeGravityMultiplier) * Time.deltaTime;
             carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
-            //Debug.Log("Current Gravity Applied: " + airGravityModifier);
+            ////Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
 

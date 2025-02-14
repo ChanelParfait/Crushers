@@ -21,6 +21,7 @@ MonoBehaviour:
   hitSFX: []
   rocketEquipmentPrefab: {fileID: 5472621316116780464, guid: 50bfc6c5fbaaefe4face6ab034a7ff34,
     type: 3}
-  rocketSpeed: 1000
+  rocketSpeed: 10000
   explosionVFX: {fileID: 8151073103637540511, guid: b71a59d9199ad244195c26cd25993954,
     type: 3}
+  hitRadius: 30

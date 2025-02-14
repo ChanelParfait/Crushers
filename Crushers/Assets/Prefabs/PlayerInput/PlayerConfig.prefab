@@ -145,6 +145,8 @@ GameObject:
   - component: {fileID: 7030747120131847929}
   - component: {fileID: 658299802029010273}
   - component: {fileID: 8042942846443331091}
+  - component: {fileID: 5729871562625361894}
+  - component: {fileID: 2714169161119824947}
   m_Layer: 0
   m_Name: PlayerConfig
   m_TagString: Untagged
@@ -161,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 2449448533462767253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.86961, y: 176.99753, z: 37.41945}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -183,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 075957c27cceb5046b95bcfbb2987f60,
     type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 8921227787678869445}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -444,10 +446,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0c047129c941b41984066fc90941f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  PlayerModel: {fileID: 0}
   carController: {fileID: 0}
   pickUpManager: {fileID: 0}
   abilityManager: {fileID: 0}
   freelookCam: {fileID: 0}
+  isOnline: 0
+--- !u!114 &5729871562625361894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449448533462767253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 794084653
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &2714169161119824947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449448533462767253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3cb741feea8e343b45875d5c879744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  PlayerVehiclePrefab: {fileID: 0}
+  VehicleSelectCanvas: {fileID: 608979669385013195}
+  isOnline: 0
+  isTesting: 0
+  playerLayers:
+  - serializedVersion: 2
+    m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &2992308494568267930
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,8 +527,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.115467854, y: 0.053097013, z: -0.0061812405, w: 0.99187183}
-  m_LocalPosition: {x: -277.57117, y: 990.5723, z: -3305.4841}
+  m_LocalRotation: {x: 0.033532117, y: -0.3544352, z: 0.012719453, w: 0.93439263}
+  m_LocalPosition: {x: 83, y: 70.5, z: 184.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -513,11 +565,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 55
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 38
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -635,8 +687,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7819963422870577061}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 78.53961, y: -179.29352, z: 70.362076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -655,6 +707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerSetupMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424724720390429031, guid: 6027ea41d6186bb469aa2b68505fba76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2734659750398909137, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}
@@ -792,6 +849,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4035557358371007830}
   m_SourcePrefab: {fileID: 100100000, guid: 6027ea41d6186bb469aa2b68505fba76, type: 3}
+--- !u!1 &608979669385013195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424724720390429031, guid: 6027ea41d6186bb469aa2b68505fba76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1996823470003338924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2133235875601647132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 444979932954441904, guid: 6027ea41d6186bb469aa2b68505fba76,
@@ -880,7 +943,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1996823470003338924}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 608979669385013195}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43f993ce4f2c48e4cb93ee947daa1057, type: 3}

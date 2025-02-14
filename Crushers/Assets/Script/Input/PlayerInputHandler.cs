@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,11 +11,14 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
-    private InputActionAsset controls; 
+    private PlayerInput input;
+    private InputActionAsset inputAsset; 
     private InputActionMap player; 
-    private int playerIndex; 
+    // Temporary Testing Value
+    public GameObject PlayerModel;
+
 
     [SerializeField] private CarController carController; 
     [SerializeField] private PickUpManager pickUpManager;
@@ -23,17 +27,67 @@ public class PlayerInputHandler : MonoBehaviour
 
     private bool canJump = true;
     // Actions
-    public static UnityAction<int> Pause; 
+    public static UnityAction Pause; 
+    // Flag for Online / Offline Use
+    // Set in Prefabs
+    public bool isOnline = false; 
+
 
 
     private void Awake(){
         // initialise controls and enable them 
-        PlayerInput input = GetComponent<PlayerInput>();
-        controls = input.actions;
-        playerIndex = input.playerIndex;
-        player = controls.FindActionMap("Player");
-        player.Enable();
+        input = GetComponent<PlayerInput>(); 
+        inputAsset = input.actions;
+        player = inputAsset.FindActionMap("Player");
+    }
 
+    private void OnEnable()
+    {
+        // add listeners to all input actions
+        player.FindAction("Forward").started += OnForward;
+        player.FindAction("Forward").canceled += OnForward;
+        player.FindAction("Reverse").started += OnReverse;
+        player.FindAction("Reverse").canceled += OnReverse;
+        player.FindAction("Turn").started += OnTurn;
+        player.FindAction("Turn").performed += OnTurn;
+        player.FindAction("Turn").canceled += OnTurn;
+        player.FindAction("Look").started += OnLook;
+        player.FindAction("Look").performed += OnLook;
+        player.FindAction("Look").canceled += OnLook;
+        player.FindAction("Brake").started += OnBrake;
+        player.FindAction("Brake").canceled += OnBrake;
+        player.FindAction("UseItem").started += OnUseItem;
+        player.FindAction("UseItem").canceled += OnUseItem;
+        player.FindAction("Jump").performed += OnJump;
+        player.FindAction("Honk").performed += OnHonk;
+        player.FindAction("Pause").performed += OnPause;
+        player.FindAction("UseAbility").performed += OnUseAbility;
+
+        player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        player.FindAction("Forward").started -= OnForward;
+        player.FindAction("Forward").canceled -= OnForward;
+        player.FindAction("Reverse").started -= OnReverse;
+        player.FindAction("Reverse").canceled -= OnReverse;
+        player.FindAction("Turn").started -= OnTurn;
+        player.FindAction("Turn").canceled -= OnTurn;
+        player.FindAction("Look").started -= OnLook;
+        player.FindAction("Look").canceled -= OnLook;
+        player.FindAction("Brake").started -= OnBrake;
+        player.FindAction("Brake").canceled -= OnBrake;
+        player.FindAction("UseItem").started -= OnUseItem;
+        player.FindAction("UseItem").canceled -= OnUseItem;
+        player.FindAction("Jump").performed -= OnJump;
+        player.FindAction("Honk").performed -= OnHonk;
+        player.FindAction("Pause").performed -= OnPause;
+        player.FindAction("UseAbility").performed -= OnUseAbility;
+
+
+
+        player.Disable();
     }
 
     // Start is called before the first frame update
@@ -41,10 +95,45 @@ public class PlayerInputHandler : MonoBehaviour
     {
         // try to find vehicle components
         // only for testing individual vehicles not vehicles in conjuction with player config object
-        //carController = GetComponent<PrometeoCarController>();
-        //pickUpManager = GetComponent<PickUpManager>();
-        //freelookCam = GetComponentInChildren<CameraInputHandler>();
+        if(PlayerModel)
+        {
+            carController = PlayerModel.GetComponent<CarController>();
+            pickUpManager = PlayerModel.GetComponent<PickUpManager>();
+            freelookCam = PlayerModel.GetComponentInChildren<CameraInputHandler>();
+        }
     }
+
+    private void Update()
+    {
+        if(isOnline)
+        {
+            if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
+                // when in game scene enable all player visuals and scripts
+                /*if(PlayerModel.activeSelf == false)
+                {
+                    player.Enable();
+                }*/
+                
+            }
+        }
+    }
+    
+
+    // Helper Functions
+    private bool IsInputValid()
+    {
+        // if in online mode check if this object belongs to the client
+        if(isOnline)
+        {
+            return isOwned;
+        } 
+        else 
+        {
+            // else return true
+            return true;
+        }
+    }
+
 
     public void SetCarController(CarController cc)
     {
@@ -86,7 +175,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnRespawn(CallbackContext context)
     {
-       if(gameObject.GetComponentInChildren<CarRespawn>()){
+       if(gameObject.GetComponentInChildren<CarRespawn>() && IsInputValid()){
             if(context.performed){
                 gameObject.GetComponentInChildren<CarRespawn>().Respawn();
             }
@@ -94,12 +183,12 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     public void OnJump(CallbackContext context){
-        if(context.performed){
-            if(canJump && carController != null){
-                canJump = false;
-                carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
-                StartCoroutine(JumpCooldown(5));
-            }
+        if(canJump && carController && IsInputValid()){
+            //Debug.Log("Jump");
+
+            canJump = false;
+            carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
+            StartCoroutine(JumpCooldown(5));
         }
     }
 
@@ -110,15 +199,19 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        if(carController)  
-        { 
+        //Debug.Log("Pressing W");
+        //Debug.Log("Is Owned: " + IsInputValid());
+        if(carController && IsInputValid())
+        {
+            //Debug.Log("Moving Forward");
+
             carController.isMovingForward = context.ReadValueAsButton();
         }
     }
 
     public void OnReverse(CallbackContext context)
     {
-        if(carController)
+        if(carController && IsInputValid())
         {
             carController.isReversing = context.ReadValueAsButton();
         }
@@ -127,8 +220,8 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnTurn(CallbackContext context)
     {
         Vector2 turn = context.ReadValue<Vector2>();
-
-        if(carController)
+        //Debug.Log("Turn: " + turn);
+        if(carController && IsInputValid())
         {
             carController.SetSteeringAngle(turn);
         }
@@ -138,7 +231,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnBrake(CallbackContext context)
     {
 
-        if(carController){
+        if(carController && IsInputValid()){
             carController.isBraking =  context.ReadValueAsButton();
             if(context.canceled){
                 //Debug.Log("RecoverTraction");
@@ -150,13 +243,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnUseItem(CallbackContext context)
     {
-        if(pickUpManager){
+        if(pickUpManager && IsInputValid()){
             pickUpManager.useItem = context.ReadValueAsButton();
         }        
     }
 
     public void OnUseAbility(CallbackContext context) {
-        if (abilityManager) {
+        if (abilityManager && IsInputValid()) {
             abilityManager.UseAbility();
         }
     }
@@ -166,21 +259,23 @@ public class PlayerInputHandler : MonoBehaviour
         //Debug.Log("Look");
         // get on look value and pass it to the free look camera
         var read = context.ReadValue<Vector2>();
-        if(freelookCam){
+        if(freelookCam && IsInputValid()){
             freelookCam.horizontal = read;
         }
     }
 
     public void OnPause(CallbackContext context){
-        if(context.performed){
+        if(context.performed && IsInputValid()){
             // invoke a pause event
-            Pause?.Invoke(playerIndex);
+            Pause?.Invoke();
         }
     }
 
 
-    public void OnHonk() {
-        if (carController) {    
+    public void OnHonk(CallbackContext context) {
+        if (carController && IsInputValid()) {    
+            //Debug.Log("Honk");
+
             carController.HonkHorn(); 
         }
     }

@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: LightningCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 4904897293994299215, guid: 9ff9f91baa1271a44a17ec2b60f1ac5d,
-    type: 3}
   baseMaxSpeed: 200
   baseMaxReverseSpeed: 45
   baseAccelerationMultiplier: 15
@@ -21,7 +19,7 @@ MonoBehaviour:
   baseSteeringSpeed: 0.5
   baseBrakeForce: 4000
   baseDecelerationMultiplier: 1
-  baseHandbrakeDriftMultiplier: 1
+  baseHandbrakeDriftMultiplier: 6
   maxDriftingAngle: 30
   baseBodyMass: 600
   baseGravityMultiplier: 800

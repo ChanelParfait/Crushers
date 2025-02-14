@@ -193,6 +193,7 @@ public class PickUpManager : MonoBehaviour
         State = Shield.IsOff;
         Destroy(shield);
         shield = null;
+        
     }
 
     private void UseKamiKaze()
@@ -304,7 +305,7 @@ public class PickUpManager : MonoBehaviour
         }
     }
     
-    private void PlayAudio(AudioClip clip){
+    public void PlayAudio(AudioClip clip){
         audioSource.clip = clip;
         audioSource.Play();
     }

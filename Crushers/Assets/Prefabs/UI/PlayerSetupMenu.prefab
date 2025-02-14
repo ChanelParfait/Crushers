@@ -9982,7 +9982,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5769238813976952134}
         m_TargetAssemblyTypeName: SetupMenuController, Assembly-CSharp
-        m_MethodName: ReadyPlayer
+        m_MethodName: ConfirmVehicle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

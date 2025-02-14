@@ -13,7 +13,10 @@ public class ScoreKeeper : MonoBehaviour
     //NEED TO CREATE A SCORE MANAGER 
     [SerializeField] private float score;
 
-    public UnityEvent<GameObject, GameObject, TypeOfDeath> OnPlayerScored ;
+    //public UnityEvent<GameObject, GameObject, TypeOfDeath> OnPlayerScored ;
+    
+    public static UnityEvent<GameObject, GameObject, TypeOfDeath> OnGlobalPlayerScored = new UnityEvent<GameObject, GameObject, TypeOfDeath>();
+
     
     [Header("----------UI Elements-----------")]
 
@@ -30,8 +33,9 @@ public class ScoreKeeper : MonoBehaviour
     {
         //New IncreaseScore is based off DeathType and can be increase/decrease.
         
-        OnPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject, DeathType);
-
+        //OnPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject, DeathType);
+        
+        OnGlobalPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject, DeathType);
         int num = 1;
         switch (DeathType)
         {
@@ -80,3 +84,4 @@ public class ScoreKeeper : MonoBehaviour
         Debug.Log(scoringPlayerLayerName + " Has Scored Against " + defeatedPlayerLayerName + " By " + Death.ToString());
     }
 }
+

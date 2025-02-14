@@ -132,7 +132,7 @@ PrefabInstance:
         type: 3}
       propertyPath: abilities.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 1c692f86a2fa0a3409bf6aa4d009fb24,
+      objectReference: {fileID: 11400000, guid: 7245f095296897c4585efdd189fbc7ba,
         type: 2}
     - target: {fileID: 2812098600804261241, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -268,6 +268,21 @@ PrefabInstance:
         type: 3}
       propertyPath: vehiclePitch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962160138709969190, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: _assetId
+      value: 1632168643
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5888672055751983498, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -439,7 +454,7 @@ PrefabInstance:
     - target: {fileID: 8196380668202205108, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Name
-      value: VehicleStandard
+      value: VehicleTaxi
       objectReference: {fileID: 0}
     - target: {fileID: 8741482368120771810, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}

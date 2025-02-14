@@ -16,11 +16,13 @@ public class AbilityManager : MonoBehaviour
 
 
     [SerializeField] private Image abilityCanvas;
-    private GameObject controlledCar;
+    [SerializeField] private GameObject controlledCar;
 
     private void Start()
     {
-        UpdateAbilitySprite(abilities[0]);
+        if(abilities != null){
+            UpdateAbilitySprite(abilities[0]);
+        }
         controlledCar = this.gameObject;
     }
     public void UseAbility() {

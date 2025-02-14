@@ -28918,6 +28918,31 @@ PrefabInstance:
       propertyPath: levelDuration
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 1290446663417807755, guid: ed69f62502b74734e81c31342ed4d022,
+        type: 3}
+      propertyPath: spawnPositions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290446663417807755, guid: ed69f62502b74734e81c31342ed4d022,
+        type: 3}
+      propertyPath: spawnPositions.Array.data[0]
+      value: 
+      objectReference: {fileID: 2000610420}
+    - target: {fileID: 1290446663417807755, guid: ed69f62502b74734e81c31342ed4d022,
+        type: 3}
+      propertyPath: spawnPositions.Array.data[1]
+      value: 
+      objectReference: {fileID: 1119481106}
+    - target: {fileID: 1290446663417807755, guid: ed69f62502b74734e81c31342ed4d022,
+        type: 3}
+      propertyPath: spawnPositions.Array.data[2]
+      value: 
+      objectReference: {fileID: 1246578287}
+    - target: {fileID: 1290446663417807755, guid: ed69f62502b74734e81c31342ed4d022,
+        type: 3}
+      propertyPath: spawnPositions.Array.data[3]
+      value: 
+      objectReference: {fileID: 2010041730}
     - target: {fileID: 4302443255420835171, guid: ed69f62502b74734e81c31342ed4d022,
         type: 3}
       propertyPath: m_LocalPosition.x

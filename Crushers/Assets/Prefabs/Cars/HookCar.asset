@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: HookCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 853187664785709616, guid: 864617055eb594e439a5ec29ca56625c,
-    type: 3}
   baseMaxSpeed: 90
   baseMaxReverseSpeed: 45
-  baseAccelerationMultiplier: 7
+  baseAccelerationMultiplier: 9
   baseMaxSteeringAngle: 50
   baseSteeringSpeed: 0.5
   baseBrakeForce: 3000
   baseDecelerationMultiplier: 1
-  baseHandbrakeDriftMultiplier: 1
-  maxDriftingAngle: 90
+  baseHandbrakeDriftMultiplier: 4
   baseBodyMass: 1000
   baseGravityMultiplier: 900
   baseDamageMultiplier: 4000

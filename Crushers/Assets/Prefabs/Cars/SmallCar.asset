@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: SmallCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 5535384286806951313, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
-    type: 3}
   baseMaxSpeed: 200
   baseMaxReverseSpeed: 50
   baseAccelerationMultiplier: 12
@@ -21,7 +19,7 @@ MonoBehaviour:
   baseSteeringSpeed: 2
   baseBrakeForce: 4000
   baseDecelerationMultiplier: 1
-  baseHandbrakeDriftMultiplier: 1
+  baseHandbrakeDriftMultiplier: 7
   maxDriftingAngle: 30
   baseBodyMass: 600
   baseGravityMultiplier: 800
