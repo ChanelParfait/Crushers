@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject defaultVehiclePrefab; 
     // Game State
     public bool isTesting = false;
-    private bool isOnline = true;
+    private bool isOnline = false;
     // Game / Scene Management
     [SerializeField] private int selectedMapIndex = 2; 
     private int leaderboardScene = 5; 
