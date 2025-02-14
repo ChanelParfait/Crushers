@@ -21,7 +21,7 @@ public class StunGun : AbilityBase
         if (!stungunInstance)
         {
             controlledCar.GetComponent<PickUpManager>().PlayAudio(sfx);
-            stungunInstance = Instantiate(stungunPrefab,spawnPosition, controlledCar.transform.rotation);
+            stungunInstance = Instantiate(stungunPrefab,controlledCar.transform.position + controlledCar.transform.up * 2f, controlledCar.transform.rotation);
             stungunInstance .GetComponent<Stun>().SetFiredBy(controlledCar.GetComponent<ScoreKeeper>()); 
         
             Collider rocketCollider =  stungunInstance.GetComponent<Collider>();

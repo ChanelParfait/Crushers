@@ -56,7 +56,7 @@ public class RocketProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ExplosionDamage(this.transform.position, _HitRadius);
-        Debug.Log(other.name);
+        Debug.Log(other.name + " Exploded On");
         Destroy(this.gameObject);
 
     }
@@ -85,6 +85,8 @@ public class RocketProjectile : MonoBehaviour
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
                     // set last collided vehicle of player
                     hitCollider.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(FiredBy);
+                    //set last collided vehicle death type to rocket
+                    hitCollider.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Rocket);
                 }
             }
             if (ExplosionVFX)
