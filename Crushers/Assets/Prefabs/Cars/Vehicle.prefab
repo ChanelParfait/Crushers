@@ -153,7 +153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398145989190666036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11832055, y: -0.0000010460866, z: 0.00000012464913, w: 0.99297553}
+  m_LocalRotation: {x: 0.1183207, y: 0, z: 0, w: 0.9929755}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084420502779646190}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14142135, y: -0, z: -0, w: 0.9899495}
+  m_LocalRotation: {x: 0.14142136, y: 0, z: 0, w: 0.9899495}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1912,7 +1912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551508954751697602}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09525611, y: -0, z: -0, w: 0.9954528}
+  m_LocalRotation: {x: 0.09525611, y: 0, z: 0, w: 0.9954528}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2836,8 +2836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a396ad7c3e32a41a22d1f976e72a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: fb2c1f56eec8b054db061ef316fcd9d4, type: 2}
+  abilities: []
   canUse: 1
   abilityCanvas: {fileID: 7148645049306999157}
   controlledCar: {fileID: 0}
