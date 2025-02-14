@@ -365,8 +365,8 @@ public class CarController : MonoBehaviour
 
         }
 
-        // update wheels
-        UpdateWheels();
+      // update wheels
+      UpdateWheels();
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
@@ -389,7 +389,6 @@ public class CarController : MonoBehaviour
             Debug.LogWarning(ex);
           }
       }
-
     }
 
     // This method controls the car sounds. For example, the car engine will sound slow when the car speed is low because the
@@ -710,35 +709,50 @@ public class CarController : MonoBehaviour
 
     }
 
+
     // This function is used to emit both the particle systems of the tires' smoke and the trail renderers of the tire skids
     // depending on the value of the bool variables 'isDrifting' and 'isTractionLocked'.
     public void DriftCarPS(){
 
       if(useEffects){
-        try{
-          if(isDrifting){
-            RLWParticleSystem.Play();
-            RRWParticleSystem.Play();
-          }else if(!isDrifting){
-            RLWParticleSystem.Stop();
-            RRWParticleSystem.Stop();
-          }
-        }catch(Exception ex){
-          Debug.LogWarning(ex);
-        }
+            try{
+                if (isGrounded){
+                    if (isDrifting){
+                        RLWParticleSystem.Play();
+                        RRWParticleSystem.Play();
+                    }
 
-        try{
-          if((isTractionLocked || Mathf.Abs(localVelocityX) > 5f) && Mathf.Abs(carSpeed) > 12f){
-            RLWTireSkid.emitting = true;
-            RRWTireSkid.emitting = true;
-          }else {
-            RLWTireSkid.emitting = false;
-            RRWTireSkid.emitting = false;
-          }
-        }catch(Exception ex){
-          Debug.LogWarning(ex);
+                    else{
+                        RLWParticleSystem.Stop();
+                        RRWParticleSystem.Stop();
+                    }
+                }
+                else{
+                    RLWParticleSystem.Stop();
+                    RRWParticleSystem.Stop();
+                }
+
+            }
+              catch(Exception ex){
+              Debug.LogWarning(ex);
+            }
+
+            try{
+                if(isGrounded && (isTractionLocked || Mathf.Abs(localVelocityX) > 5f) && Mathf.Abs(carSpeed) > 12f){
+
+                    RLWTireSkid.emitting = true;
+                    RRWTireSkid.emitting = true;
+                }
+                else{
+                    RLWTireSkid.emitting = false;
+                    RRWTireSkid.emitting = false;
+                }
+            }
+            catch(Exception ex){
+                Debug.LogWarning(ex);
+            }
         }
-      }else if(!useEffects){
+        else if(!useEffects){
         if(RLWParticleSystem != null){
           RLWParticleSystem.Stop();
         }
@@ -804,7 +818,6 @@ public class CarController : MonoBehaviour
       WheelHit hit;
       bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
       if(!isGrounded && newIsGrounded){
-        ////Debug.Log("Wheels Hit Ground");
         hitGround?.Invoke();
       }
         isGrounded = newIsGrounded;
