@@ -65,6 +65,7 @@ public class CameraController : MonoBehaviour
         //Debug.Log("Camera shake: " + cinemachineBasicMultiChannelPerlin.m_AmplitudeGain);
     }
 
+    //lerp needs to be run in update 
     public void moveCameraAssist(float cameraSpeed)
     {
         float currentPos;
