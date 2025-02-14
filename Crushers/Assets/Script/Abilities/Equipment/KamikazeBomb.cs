@@ -46,11 +46,13 @@ public class KamikazeBomb : AbilityBase
                     // Apply explosion force to the player
                     
                     hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(200000, controlledCar.transform.position + Vector3.back * 2f , 30f, 5, ForceMode.Force);
-                    
-                    hitCollider.gameObject.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(controlledCar.GetComponent<ScoreKeeper>());
-                    
-                    // set last collided player death type to rocket
-                    hitCollider.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Rocket);
+
+                    if (hitCollider.GetComponentInParent<ScoreKeeper>() != controlledCar.GetComponent<ScoreKeeper>())
+                    {
+                        hitCollider.gameObject.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(controlledCar.GetComponent<ScoreKeeper>());
+                        
+                        hitCollider.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Rocket);
+                    }
                 }
             }
         }
