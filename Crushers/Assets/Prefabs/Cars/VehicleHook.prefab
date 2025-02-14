@@ -139,6 +139,11 @@ PrefabInstance:
       propertyPath: vehiclePitch
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 4962160138709969190, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: _assetId
+      value: 1730984515
+      objectReference: {fileID: 0}
     - target: {fileID: 5260216533687796544, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_AnchorMax.x

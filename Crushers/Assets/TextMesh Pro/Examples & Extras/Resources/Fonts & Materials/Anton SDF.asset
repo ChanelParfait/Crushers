@@ -218,6 +218,42 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 895
     m_Height: 1023
+  - m_X: 246
+    m_Y: 85
+    m_Width: 84
+    m_Height: 938
+  - m_X: 246
+    m_Y: 90
+    m_Width: 777
+    m_Height: 933
+  - m_X: 113
+    m_Y: 30
+    m_Width: 15
+    m_Height: 59
+  - m_X: 149
+    m_Y: 172
+    m_Width: 874
+    m_Height: 851
+  - m_X: 149
+    m_Y: 89
+    m_Width: 37
+    m_Height: 934
+  - m_X: 40
+    m_Y: 120
+    m_Width: 19
+    m_Height: 2
+  - m_X: 40
+    m_Y: 208
+    m_Width: 983
+    m_Height: 815
+  - m_X: 99
+    m_Y: 186
+    m_Width: 924
+    m_Height: 837
+  - m_X: 99
+    m_Y: 122
+    m_Width: 14
+    m_Height: 901
   m_fontInfo:
     Name: Anton
     PointSize: 73

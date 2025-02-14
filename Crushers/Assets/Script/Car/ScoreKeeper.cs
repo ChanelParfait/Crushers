@@ -84,3 +84,4 @@ public class ScoreKeeper : MonoBehaviour
         Debug.Log(scoringPlayerLayerName + " Has Scored Against " + defeatedPlayerLayerName + " By " + Death.ToString());
     }
 }
+

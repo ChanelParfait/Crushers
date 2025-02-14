@@ -12,17 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: VampireCar
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 5845797340442997648, guid: 979d1dfb3ed343743917cd710fa47f1e,
-    type: 3}
   baseMaxSpeed: 120
   baseMaxReverseSpeed: 45
-  baseAccelerationMultiplier: 9
+  baseAccelerationMultiplier: 10
   baseMaxSteeringAngle: 40
   baseSteeringSpeed: 1
   baseBrakeForce: 3000
   baseDecelerationMultiplier: 1
-  baseHandbrakeDriftMultiplier: 1
-  maxDriftingAngle: 20
+  baseHandbrakeDriftMultiplier: 6
   baseBodyMass: 800
   baseGravityMultiplier: 900
   baseDamageMultiplier: 3500

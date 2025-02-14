@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class LevelManager : MonoBehaviour
 { 
     [SerializeField] private bool isTesting = false; 
+
+    // level timing // 
     [SerializeField] private int levelDuration; 
     private int startCountdownTimer = 3; 
     private int levelCountdownTimer;
@@ -14,13 +16,17 @@ public class LevelManager : MonoBehaviour
     private bool startCountdownEnded = false; 
     private bool isTimerRunning = false; 
     private AudioSource source; 
+    // Spawning
+    [SerializeField] private List<Transform> spawnPositions = new List<Transform>();
+    private List<Transform> availableSpawnPositions = new List<Transform>();
 
 
     // event when players should gain control 
     public static UnityAction ArenaLevelStarted;
 
+    // event when timer runs out
     public static UnityAction ArenaLevelEnded;
-
+    // event for countdown timers
     public static UnityAction<int> startTimeChanged;
     public static UnityAction<int> levelTimeChanged;
      
@@ -40,10 +46,11 @@ public class LevelManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {   
         source = GetComponent<AudioSource>();
         levelCountdownTimer = levelDuration;
+        availableSpawnPositions = spawnPositions;
         startCountdownTimer = 3;
         if(isTesting){
              startCountdownTimer = 0;
@@ -72,7 +79,7 @@ public class LevelManager : MonoBehaviour
 
                 if(startCountdownTimer == 0){
                     startCountdownEnded = true;
-                    ArenaLevelStarted.Invoke();
+                    ArenaLevelStarted?.Invoke();
                 }
             } 
             // if level has started, decriment round timer to 0 
@@ -80,7 +87,7 @@ public class LevelManager : MonoBehaviour
                 levelCountdownTimer--;
                 
                 if(levelTimeChanged != null)
-                    levelTimeChanged.Invoke(levelCountdownTimer);
+                    levelTimeChanged?.Invoke(levelCountdownTimer);
 
                 if(levelCountdownTimer == 0){
                     // invoke level ended event
@@ -94,18 +101,23 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public Transform GetSpawnPos()
+    {
+        Transform spawn = null;
+        // get last available spawn position in list
+        Debug.Log(availableSpawnPositions);
+        if(availableSpawnPositions.Count > 0){
+            spawn = availableSpawnPositions[availableSpawnPositions.Count - 1];
+            // and remove it 
+            availableSpawnPositions.Remove(spawn);
+        }
+        return spawn;
+    }
+
     private void LoadLevel(bool isArena){
 
         isTimerRunning = isArena;
         //source.Play();
-    }
-
-    private void DisableSetupComponents(bool isArena){
-        // disable join canvas 
-        if(isArena){
-            GameObject canvas = GameObject.FindGameObjectWithTag("JoinCanvas");
-            if(canvas){ canvas.SetActive(false); }
-        }
     }
 
     
