@@ -14091,6 +14091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318718941}
+  - component: {fileID: 318718942}
   m_Layer: 0
   m_Name: Pickups
   m_TagString: Untagged
@@ -14118,6 +14119,29 @@ Transform:
   - {fileID: 450701270}
   m_Father: {fileID: 1472137062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &318718942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318718940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23104b82258ee894ca67c309c24d93d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSceneSpecificList: 0
+  globalPickupList:
+  - {fileID: 6819396208930859311, guid: d8d37c4fc12998c4c88481f5f4ce92b8, type: 3}
+  - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
+  - {fileID: 5933485014121273202, guid: e93e3f3f38c04a64aa0b5dc2ae6f165e, type: 3}
+  - {fileID: 3804074624569312723, guid: d707ccf3c1b2d414091fd606b91bc321, type: 3}
+  sceneSpecificPickupList: []
+  highValuePickup: {fileID: 919132149155446097, guid: b32d75b8c81954341b0429369f6404b6,
+    type: 3}
+  percentageOfHighPickup: 10
+  maxPickupsPerCycle: 3
 --- !u!43 &331379303
 Mesh:
   m_ObjectHideFlags: 0
@@ -17053,6 +17077,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_Common 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226437680082209492, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
@@ -21118,6 +21147,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_Common 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226437680082209492, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
@@ -27740,6 +27774,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_Common 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226437680082209492, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
@@ -53976,6 +54015,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup_Common 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6226437680082209492, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
       propertyPath: TimeUntilRespawnPickups
@@ -54000,7 +54044,7 @@ PrefabInstance:
     - target: {fileID: 8026828948466852175, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 8026828948466852175, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}

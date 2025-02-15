@@ -14,14 +14,19 @@ public class PickupSpawnManager : MonoBehaviour
     [SerializeField] private float percentageOfHighPickup = 10f;
     [SerializeField] private int maxPickupsPerCycle = 3;
 
-    [Header("Spawn Locations")]
-    [SerializeField] private List<Transform> spawnLocations;
+    private List<Transform> spawnLocations = new List<Transform>();
 
     private Dictionary<Transform, GameObject> activePickups; // Tracks active pickups at spawn locations
 
     private void Start()
     {
+        // Initialize the dictionary
         activePickups = new Dictionary<Transform, GameObject>();
+
+        // Get all spawn locations first
+        GetAllSpawningLocations();
+
+        // Initialize dictionary with spawn locations
         foreach (var spawnPoint in spawnLocations)
         {
             activePickups[spawnPoint] = null;
@@ -32,8 +37,10 @@ public class PickupSpawnManager : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
         }
 
+        // Spawn pickups
         SpawnPickups();
     }
+
 
     private void SpawnPickups()
     {
@@ -55,13 +62,17 @@ public class PickupSpawnManager : MonoBehaviour
 
     private void SpawnPickupAtLocation(Transform spawnPoint)
     {
-        // Check if the location is valid for spawning
+        if (!activePickups.ContainsKey(spawnPoint))
+        {
+            Debug.LogWarning($"Spawn point {spawnPoint.name} is not in the activePickups dictionary.");
+            return;
+        }
+
         if (activePickups[spawnPoint] == null)
         {
             GameObject newPickup = Instantiate(GetRandomPickup(), spawnPoint.position, spawnPoint.rotation, transform);
             activePickups[spawnPoint] = newPickup;
 
-            // Add a callback for when the pickup is collected
             var pickupBehavior = newPickup.GetComponent<PickUpBehavior>();
             if (pickupBehavior != null)
             {
@@ -69,21 +80,22 @@ public class PickupSpawnManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Pickup prefab is missing the PickUpBehavior script.");
+                Debug.LogWarning($"Pickup prefab {newPickup.name} is missing the PickUpBehavior script.");
             }
-        }
-        else
-        {
-            Debug.LogWarning($"Spawn point {spawnPoint.name} is already occupied.");
         }
     }
 
+
     private GameObject GetRandomPickup()
     {
-        // Determine which pickup list to use
         GameObject[] selectedList = useSceneSpecificList ? sceneSpecificPickupList : globalPickupList;
 
-        // Check for high-value pickup chance
+        if (selectedList == null || selectedList.Length == 0)
+        {
+            Debug.LogError("No pickups available in the selected list.");
+            return null;
+        }
+
         if (highValuePickup)
         {
             float randomValue = Random.Range(0f, 100f);
@@ -93,10 +105,10 @@ public class PickupSpawnManager : MonoBehaviour
             }
         }
 
-        // Select random pickup from the chosen list
         int randomIndex = Random.Range(0, selectedList.Length);
         return selectedList[randomIndex];
     }
+
 
     private void HandlePickupCollected(Transform spawnPoint)
     {
@@ -113,22 +125,29 @@ public class PickupSpawnManager : MonoBehaviour
         float randomDelay = Random.Range(5f, 10f);
         yield return new WaitForSeconds(randomDelay);
 
-        // Respawn pickups at new random locations
+        ShuffleList(spawnLocations); // Ensure new random locations
         SpawnPickups();
     }
 
+
     private void ClearInactivePickups()
     {
-        // Destroy inactive pickups and clear their references
+        StartCoroutine(DestroyAllPickups());
+    }
+
+    private IEnumerator DestroyAllPickups()
+    {
         foreach (var spawnPoint in activePickups.Keys)
         {
             if (activePickups[spawnPoint] != null)
             {
                 Destroy(activePickups[spawnPoint]);
+                yield return null; // Wait a frame to ensure proper destruction
                 activePickups[spawnPoint] = null;
             }
         }
     }
+
 
     private void ShuffleList(List<Transform> list)
     {
@@ -138,4 +157,15 @@ public class PickupSpawnManager : MonoBehaviour
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
+
+    private void GetAllSpawningLocations()
+    {
+        spawnLocations.Clear();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            spawnLocations.Add(transform.GetChild(i));
+        }
+    }
+
 }

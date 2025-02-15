@@ -239,14 +239,7 @@ public class PickUpManager : MonoBehaviour
     {
         if (mountedMachineGun == null)
         {
-            // Attach the machine gun to the mount point
-            Transform gunMountPoint = transform.Find("GunMountPoint");
-            if (gunMountPoint == null)
-            {
-                Debug.LogError("GunMountPoint not found!");
-                return;
-            }
-            mountedMachineGun = Instantiate(Turret, gunMountPoint.position, gunMountPoint.rotation, gunMountPoint);
+            mountedMachineGun = Instantiate(Turret, gameObject.transform.position + new Vector3(0, 4, 0.25f), transform.rotation, transform);
 
             // Countdown
             StartCoroutine(DisableMachineGunAfterTime(machineGunDuration));

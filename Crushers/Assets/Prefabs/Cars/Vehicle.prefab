@@ -2801,8 +2801,9 @@ MonoBehaviour:
   KamiKazeGo: {fileID: 3565015708328552895, guid: d4bf661927ec37c45932cdfbb1736c81,
     type: 3}
   Stun: {fileID: 8666847585282172510, guid: 150fe28a49a55c1439573e298a495e49, type: 3}
-  Turret: {fileID: 0}
-  Thruster: {fileID: 0}
+  Turret: {fileID: 3226583421603586234, guid: 027d3d2e3059a8a4497ef9f01a9ac5cc, type: 3}
+  Thruster: {fileID: 5933485014121273202, guid: e93e3f3f38c04a64aa0b5dc2ae6f165e,
+    type: 3}
   Pickup: 0
   State: 0
   ShieldTimer: 10
