@@ -162,7 +162,7 @@ public class PlayerManager : MonoBehaviour
             if( PlayerObjects.All(p => p.VehicleConfirmed == true))
             {
                 // load selected level
-                StartCoroutine(DelayScreen(selectedMapIndex));
+                StartCoroutine(DelayScreen(3));
             }   
         }
 
