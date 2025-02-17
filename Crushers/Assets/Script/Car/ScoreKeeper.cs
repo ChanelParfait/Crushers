@@ -13,7 +13,10 @@ public class ScoreKeeper : MonoBehaviour
     //NEED TO CREATE A SCORE MANAGER 
     [SerializeField] private float score;
 
-    public UnityEvent<GameObject, GameObject, TypeOfDeath> OnPlayerScored ;
+    //public UnityEvent<GameObject, GameObject, TypeOfDeath> OnPlayerScored ;
+    
+    public static UnityEvent<GameObject, GameObject, TypeOfDeath> OnGlobalPlayerScored = new UnityEvent<GameObject, GameObject, TypeOfDeath>();
+
     
     [Header("----------UI Elements-----------")]
 
@@ -26,9 +29,37 @@ public class ScoreKeeper : MonoBehaviour
         DisplayScore();
     }
 
-    public void IncreaseScore(float num){
-        score = score + num;
-        OnPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject,GetComponent<ImpactController>().GetDeathType() );
+    public void IncreaseScore(TypeOfDeath DeathType)
+    {
+        //New IncreaseScore is based off DeathType and can be increase/decrease.
+        
+        //OnPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject, DeathType);
+        
+        OnGlobalPlayerScored.Invoke(this.gameObject, GetComponent<ImpactController>().GetLastCollidedVehicle().gameObject, DeathType);
+        int num = 1;
+        switch (DeathType)
+        {
+            case TypeOfDeath.Flip:
+                //num = ?
+                score = score + num;
+                break;
+            case TypeOfDeath.Spike:
+                //num = ?
+                score = score + num;
+                break;
+            case TypeOfDeath.Explosion:
+                //num = ?
+                score = score + num;
+                break;
+            case TypeOfDeath.Rocket:
+                //num = ?
+                score = score + num;
+                break;
+            case TypeOfDeath.Void:
+                //num = ?
+                score = score + num;
+                break;
+        }
     }
 
     public float GetScore(){
@@ -43,7 +74,6 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
-   
 
     public void TestInvoke(GameObject ScoringPlayer, GameObject DefeatedPlayer, TypeOfDeath Death)
     {
@@ -51,7 +81,7 @@ public class ScoreKeeper : MonoBehaviour
         string scoringPlayerLayerName = LayerMask.LayerToName(ScoringPlayer.layer);
         string defeatedPlayerLayerName = LayerMask.LayerToName(DefeatedPlayer.layer);
         
-        
-        Debug.Log(scoringPlayerLayerName + " Has Scored A Point Against " + defeatedPlayerLayerName + " By " + Death.ToString());
+        Debug.Log(scoringPlayerLayerName + " Has Scored Against " + defeatedPlayerLayerName + " By " + Death.ToString());
     }
 }
+

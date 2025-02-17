@@ -3,11 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Car", menuName = "Cars/Make New Car", order = 0)]
 public class Car : ScriptableObject
 {
-    [SerializeField] GameObject carPrefab = null;
-
-    [Header("Car Setup")]
-
-
     [Header("Acceleration")]
     [Range(20, 250)]
     [SerializeField] private int baseMaxSpeed = 90;
@@ -23,7 +18,7 @@ public class Car : ScriptableObject
     [SerializeField] private float baseSteeringSpeed = 0.5f;
 
     [Header("Deceleration")]
-    [Range(1000, 2000)] 
+    [Range(2000, 5000)] 
     [SerializeField] private int baseBrakeForce = 350;
     [Range(1, 10)] 
     [SerializeField] private float baseDecelerationMultiplier = 2;
@@ -43,11 +38,6 @@ public class Car : ScriptableObject
 
 
     // Getter Methods
-    public GameObject GetCarPrefab()
-    {
-        return carPrefab;
-    }
-
     public int GetBaseMaxSpeed()
     {
         return baseMaxSpeed;

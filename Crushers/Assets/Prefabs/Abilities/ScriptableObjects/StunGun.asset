@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be663b48f4a166f42a617547cec55eab, type: 3}
+  m_Name: StunGun
+  m_EditorClassIdentifier: 
+  attachmentPos: 5
+  title: 
+  icon: {fileID: 0}
+  cooldownTime: 0
+  hitVFX: {fileID: 0}
+  launchSFX: []
+  hitSFX: []
+  stungunPrefab: {fileID: 6539496847907174499, guid: 045babdd744ee0b4d839e1ab7f1427ec,
+    type: 3}
+  sfx: {fileID: 8300000, guid: d294f9e3560fe3a4380d123689fcc539, type: 3}
+  stungunInstance: {fileID: 0}

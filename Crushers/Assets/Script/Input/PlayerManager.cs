@@ -10,23 +10,22 @@ using Unity.VisualScripting;
 using System;
 using Random = UnityEngine.Random;
 using UnityEditor;
+using Unity.Collections.LowLevel.Unsafe;
 
+// The Player Event Manager controls Player Input Events
+// As 
 public class PlayerManager : MonoBehaviour
 {
-    private static PlayerManager instance;
-    private List<PlayerConfiguration> playerConfigs;
+    public static PlayerManager instance;
+    private List<PlayerObjectController> PlayerObjects;
 
     // Player Initialising Values
-    [SerializeField] private Transform[] startingPoints; 
-    [SerializeField] private List<LayerMask> playerLayers; 
     [SerializeField] private GameObject defaultVehiclePrefab; 
     // Game State
-    private bool isPaused; 
-
-    private int currentScene = 0;
     public bool isTesting = false;
+    private bool isOnline = false;
     // Game / Scene Management
-    [SerializeField] private int selectedMapIndex; 
+    [SerializeField] private int selectedMapIndex = 2; 
     private int leaderboardScene = 5; 
     // Menus
     private LoadingScreen loadingScreen;
@@ -37,6 +36,19 @@ public class PlayerManager : MonoBehaviour
     public static UnityAction<bool> ArenaLevelLoaded; 
     public static UnityAction firstPlayerJoined; 
 
+    // Networking
+    public NetworkPlayerController LocalPlayerController;
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager{
+        get { 
+                if(manager != null){
+                    return manager; 
+                }
+                return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+            }
+    }
+
     
     private void Awake()
     {
@@ -46,19 +58,14 @@ public class PlayerManager : MonoBehaviour
         } else {
             instance = this;
             DontDestroyOnLoad(this);
-            playerConfigs = new List<PlayerConfiguration>();
-            startingPoints = null;
+            PlayerObjects = new List<PlayerObjectController>();
         }        
-
-        //Debug.Log(this);
     }
    
    void OnEnable()
     {
-        SetupMenuController.vehicleSelected += SetPlayerVehicle; 
-        SetupMenuController.playerReady += ReadyPlayer; 
+        PlayerObjectController.vehicleConfirmed += CheckIfAllConfimed; 
         LevelManager.ArenaLevelEnded += LoadLeaderboard;
-        LevelManager.ArenaLevelStarted += EnableVehicleControls;
         SceneManager.sceneLoaded += OnLevelLoaded;
         MainMenuController.levelSelected += SaveMapSelection; 
         PlayerInputHandler.Pause += OnPause;
@@ -67,77 +74,108 @@ public class PlayerManager : MonoBehaviour
 
     void OnDisable()
     {
-        SetupMenuController.vehicleSelected -= SetPlayerVehicle; 
-        SetupMenuController.playerReady -= ReadyPlayer;   
-        LevelManager.ArenaLevelEnded -= LoadLeaderboard;
-        LevelManager.ArenaLevelStarted -= EnableVehicleControls;    
+        PlayerObjectController.vehicleConfirmed -= CheckIfAllConfimed;   
+        LevelManager.ArenaLevelEnded -= LoadLeaderboard; 
         SceneManager.sceneLoaded -= OnLevelLoaded;
         MainMenuController.levelSelected -= SaveMapSelection; 
         PlayerInputHandler.Pause -= OnPause;
 
     }
 
-    public List<PlayerConfiguration> GetPlayerConfigs()
+    public List<PlayerObjectController> GetPlayerObjects()
     {
-        return playerConfigs;
+        return PlayerObjects;
     }
 
-    // UI Functions // 
-    public void SetPlayerVehicle(int index, GameObject vehicle)
+    // Create an Event when selecting Online / Local Buttons to Set isOnline Value
+    public void SetIsOnline(bool value)
     {
-        //Debug.Log("index: " + index + " :" + vehicle);
-        playerConfigs[index].vehiclePrefab = vehicle;
+        isOnline = value;
+    }
 
-        // Set the vehicle type based on the vehicle name
-        CarController carController = vehicle.GetComponent<CarController>();
-        if (carController != null){
-            VehicleType vehicleType = GetVehicleType(vehicle.name);
-            
-            if (vehicle.name != null) {
-                carController.SetVehicleType(vehicleType); // Set the vehicle type
-            }
-
-            else{
-                Debug.LogWarning("Unknown vehicle type: " + vehicle.name);
-            }
+    public void FindLocalPlayer()
+    {
+        LocalPlayerController = GameObject.Find("LocalGamePlayer").GetComponent<NetworkPlayerController>();
+    }
+        
+    // Event for a Player Joining 
+    // Needs checks between online and offline functionality
+    public void HandlePlayerJoin(PlayerInput pi)
+    {
+        if(isTesting){
+            // create configuration object for player 
+            PlayerObjectController playerConfig = pi.GetComponent<PlayerObjectController>();
+            PlayerObjects.Add(playerConfig);
+            GetComponent<PlayerInputManager>().DisableJoining();
+            SetupArena();
         }
-    }
-
-    private VehicleType GetVehicleType(string vehicleName)
-    {
-        switch (vehicleName){
-            case "VehicleStandard":
-                return VehicleType.Standard;
-            case "VehicleSmall":
-                return VehicleType.Small;
-            case "VehicleBig":
-                return VehicleType.Big;
-            case "VehiclePolice":
-                return VehicleType.Police;
-            default:
-                return VehicleType.Unknown;
+        
+        if(pi.playerIndex == 0){
+            //startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
+            // invoke first player joined event 
+            firstPlayerJoined?.Invoke();
         }
-    }
 
-
-    public void ReadyPlayer(int index)
-    {
-        playerConfigs[index].isReady = true; 
-
-        if( playerConfigs.All(p => p.isReady == true))
+        if(!PlayerObjects.Any(p => p.PlayerIndex == pi.playerIndex))
         {
-            // load selected level
-            StartCoroutine(DelayScreen(2));
-        }   
+            // Add Player to List
+            PlayerObjectController playerConfig = pi.GetComponent<PlayerObjectController>();
+            playerConfig.SetPosition();
+            PlayerObjects.Add(playerConfig);
+            DontDestroyOnLoad(playerConfig.gameObject);
+        }
     }
 
+    public void OnPlayerLeft(PlayerInput pi){
+        //Debug.Log("Player " + pi.playerIndex + " Left");
+    }
+
+
+    // Create Check if All Ready Function here
+    //If online 
+    public void CheckIfAllConfimed()
+    {
+        if(isOnline)
+        {
+            bool AllReady = false; 
+            foreach(NetworkPlayerController player in Manager.GamePlayers)
+            {
+                if(player.VehicleConfirmed){
+                    AllReady = true;
+                } 
+                else 
+                {
+                    AllReady = false;
+                    break; 
+                }
+            }
+            Debug.Log("PlayerManager Check If All Ready: " + AllReady);
+
+            if(AllReady)
+            {   
+                // Write script to get scene name from build index
+                LocalPlayerController.CanLoadScene("ArenaScene");
+            }
+        }
+        else
+        {
+            if( PlayerObjects.All(p => p.VehicleConfirmed == true))
+            {
+                // load selected level
+                StartCoroutine(DelayScreen(selectedMapIndex));
+            }   
+        }
+
+    }
+
+    // Loading Screen Functionality //
     private IEnumerator DelayScreen(float delay){
+        GetComponent<PlayerInputManager>().DisableJoining();
         loadingScreen.DisplayScreen();
         
         yield return new WaitForSeconds(delay);
+
         StartCoroutine(LoadSceneAsync(selectedMapIndex));
-
-
     }
 
     private IEnumerator LoadSceneAsync(int buildIndex){
@@ -149,42 +187,42 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
     }
-
     
-    private void OnPause(int playerIndex){
-        // display a pause menu and give the player who paused control
-        if(currentScene == 2 || currentScene == 3 || currentScene == 4){
+    // Pausing Funcctionality // 
+    // Will need adjustment between online and offline functionality
+    private void OnPause(){
+        // display a pause menu
+        if(SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4){
             if(pauseMenu){
-                if(!isPaused){
-                    Debug.Log("Pause: " + playerIndex);
-                    Time.timeScale = 0;  
-                    isPaused = true;
+                if(Time.timeScale != 0){
+                    //Debug.Log("Pause: " + playerIndex);
+                    Time.timeScale = 0;
                     pauseMenu.SetActive(true);
                 } else {
-                    Debug.Log("Unpause: " + playerIndex);
+                    //Debug.Log("Unpause: " + playerIndex);
                     Time.timeScale = 1; 
-                    isPaused = false;
                     pauseMenu.SetActive(false);
-
                 }
-                
             }
         }
     }
 
-    
-    private void SaveMapSelection(int index){
-        //Debug.Log("Level Selected: " + index);
-        selectedMapIndex = index;
+    // Needs altering to suit new class structure
+    private void SetupArena()
+    {
+        //Debug.Log("Arena initialising...");
+        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenuController>();
+
+        // invoke arena level loaded event 
+        // Check if all Players are Loaded here
+        ArenaLevelLoaded?.Invoke(true);
     }
 
     // Level / Player Management 
 
     // keep track of what level we are currently in
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
-        //Debug.Log("Level Loaded: " + scene);
-        currentScene = scene.buildIndex;
-        // ensure joining is initially disabled
+        
         GetComponent<PlayerInputManager>().DisableJoining();
 
         if(scene.name == "TestingScene"){
@@ -192,16 +230,19 @@ public class PlayerManager : MonoBehaviour
             SetupArena();
         }
     
-        if(currentScene == 1){
-            // allow joining in vehicle selection level
-            GetComponent<PlayerInputManager>().EnableJoining();
+        if(scene.buildIndex == 1){
+            // Enable joining in vehicle selection level in offline mode
+            // create a custom joining behaviour to only spawn the player in offline mode
+            if(!isOnline)
+            { 
+                GetComponent<PlayerInputManager>().EnableJoining();
+            }
             // find the loading screen game object
             loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen").GetComponent<LoadingScreen>();
-            //Debug.Log("Loading Screen" + loadingScreen.gameObject.name);
         }
         
         // if scene index is an arena scene
-        if(currentScene == 2 || currentScene == 3 || currentScene == 4){
+        if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4){
             // initialise players with vehicles
             SetupArena();
         } else {
@@ -209,229 +250,55 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void DestroyConfigs(){
-        if(playerConfigs != null){
-            foreach(PlayerConfiguration player in playerConfigs){
-                Destroy(player.Input.gameObject);
-            }
-        }
-        playerConfigs = new List<PlayerConfiguration>();
-    }
-
-
-    public void HandlePlayerJoin(PlayerInput pi)
-    {
-        if(isTesting){
-            // create configuration object for player 
-            PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
-            SetupPlayerLayers(playerConfig); 
-            playerConfigs.Add(playerConfig);
-            pi.transform.SetParent(transform);
-            pi.transform.position = new Vector3(0,0,0);
-            GetComponent<PlayerInputManager>().DisableJoining();
-            // create default vehicle
-            SetPlayerVehicle(0, defaultVehiclePrefab);
-            SetupArena();
-
-        }
-        
-        if(pi.playerIndex == 0){
-            startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
-
-            // invoke first player joined event 
-            firstPlayerJoined?.Invoke();
-        }
-
-        if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
-        {
-            // Setup Player
-            //Debug.Log("Player Joined: " + pi.playerIndex);
-            // create configuration object for player 
-            PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
-            SetupPlayerLayers(playerConfig); 
-            playerConfigs.Add(playerConfig);
-            pi.transform.SetParent(transform);
-            pi.transform.position = new Vector3(0,0,0);
-        }
-    }
-
-    public void OnPlayerLeft(PlayerInput pi){
-        //Debug.Log("Player " + pi.playerIndex + " Left");
-    }
-
-    private void SetupArena(){
-        //Debug.Log("Arena initialising...");
-        // find starting points
-        startingPoints = GameObject.FindGameObjectWithTag("Spawns").GetComponentsInChildren<Transform>();
-        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenuController>();
-
-        // add vehicle for each player
-        foreach(PlayerConfiguration playerConfig in playerConfigs){
-            AddVehicle(playerConfig);
-        }
-        // invoke arena level loaded event 
-
-        ArenaLevelLoaded?.Invoke(true);
-
-    }
-
-    // Level Initialisation // 
-    private void AddVehicle(PlayerConfiguration pi)
-    {
-        //Debug.Log("Setup Player Vehicle: " + pi.playerIndex);
-        // destroy setup menu
-        // later setup menu may be in a separate level
-        // move this to set up menu controller? 
-        Destroy(pi.Input.gameObject.GetComponentInChildren<Canvas>().gameObject);
-        
-        // spawn vehicle from player config as child of player config
-        pi.vehicleObject = Instantiate(pi.vehiclePrefab, startingPoints[pi.playerIndex + 1].position, startingPoints[pi.playerIndex + 1].rotation, pi.Input.gameObject.transform);
-        
-
-
-        // get UI controller for each vehicle
-        pi.UIController = pi.vehicleObject.GetComponentInChildren<VehicleUIController>();
-
-        // find car controller, pickup manager and camera input handler and hand them to the player input handler
-        CarController car = pi.Input.gameObject.GetComponentInChildren<CarController>();
-        pi.InputHandler.SetCarController(car);
-        // disable vehicle controls initially if not testing
-        car.enabled = isTesting;
-        pi.UIController.startTimer.SetActive(!isTesting);
-    
-
-        //initialise other input handler components
-        pi.InputHandler.SetPickupManager(pi.Input.gameObject.GetComponentInChildren<PickUpManager>());
-        pi.InputHandler.SetAbilityManager(pi.Input.gameObject.GetComponentInChildren<AbilityManager>());
-        pi.InputHandler.SetCameraInputHandler(pi.Input.gameObject.GetComponentInChildren<CameraInputHandler>());
-        // disable camera shake
-        //pi.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
-        
-        // set vehicle canvas to apply to player camera 
-        pi.vehicleObject.GetComponentInChildren<Canvas>().worldCamera = pi.playerCam;
-        SetupPlayerLayers(pi); 
-        
-    }
-    
-    private void SetupPlayerLayers(PlayerConfiguration pi){
-
-        int layerToAdd = (int)Mathf.Log(playerLayers[pi.playerIndex], 2);
-        var cullingMask = (1 << layerToAdd) | (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5) | (1 << 10);
-        var impulseMask = 1 << pi.playerIndex;
-        var colliderMask = 1 << layerToAdd;
-        if(pi.playerCam == null){
-            // get camera component
-            pi.playerCam = pi.Input.gameObject.GetComponentInChildren<Camera>();
-            pi.playerCam.transform.position = startingPoints[pi.playerIndex + 1].position;
-            pi.playerCam.transform.rotation = startingPoints[pi.playerIndex + 1].rotation;
-
-            
-
-            // set the layer
-            pi.Input.gameObject.layer = layerToAdd;
-            pi.playerCam.gameObject.layer = layerToAdd;
-            // add the layer
-            pi.playerCam.cullingMask = cullingMask;
-        }
-        // put vehicle and free look camera on player layer 
-        if(pi.vehicleObject != null){
-            pi.vehicleObject.layer = layerToAdd;
-            BoxCollider[] colliders = pi.vehicleObject.GetComponentsInChildren<BoxCollider>();
-            foreach(BoxCollider collider in colliders){
-                if(collider.gameObject.tag == "Player"){
-                    collider.gameObject.layer = layerToAdd;
-                    collider.excludeLayers = colliderMask;
-                }
-            }
-
-            //set the layer
-            CinemachineFreeLook freeLook = pi.vehicleObject.GetComponentInChildren<CinemachineFreeLook>();
-            freeLook.gameObject.layer = layerToAdd;
-
-            CinemachineImpulseSource source = pi.vehicleObject.GetComponent<CinemachineImpulseSource>();
-            source.m_ImpulseDefinition.m_ImpulseChannel = impulseMask;
-            CinemachineImpulseListener listener = freeLook.gameObject.GetComponent<CinemachineImpulseListener>();
-            listener.m_ChannelMask = impulseMask;
-
-            // find speed lines and put them on the player layer
-            pi.vehicleObject.GetComponentInChildren<SpeedLines>().gameObject.layer = layerToAdd;
-        }
-
-    }
-
     // Level End Event // 
     private void LoadLeaderboard()
     {
         Debug.Log("Level Complete");
         SceneManager.LoadScene(leaderboardScene);
-        SavePlayerScores();
-        DestroyVehicles();
-        DisableCameras();
-        // send player configs to leaderboard controller 
     }
 
-    // Helper Functions
-    private void SavePlayerScores(){
-        foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.score = (int) playerConfig.Input.gameObject.GetComponentInChildren<ScoreKeeper>().GetScore();
+    public void DestroyConfigs()
+    {
+        if(PlayerObjects != null){
+            foreach(PlayerObjectController player in PlayerObjects){
+                Destroy(player.gameObject);
+            }
         }
-    }
-    
-    private void EnableVehicleControls(){
-        foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.InputHandler.GetCarController().enabled = true;
-            //playerConfig.InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = true;
-        }
+        PlayerObjects = new List<PlayerObjectController>();
     }
 
-    private void DisableCameras(){
-        foreach(PlayerConfiguration playerConfig in playerConfigs){
-            playerConfig.playerCam.enabled = false;
-        }
+    private void SaveMapSelection(int index)
+    {
+        //Debug.Log("Level Selected: " + index);
+        selectedMapIndex = index;
     }
-
-    private void SetMaterial(PlayerConfiguration pi){
-        //MeshRenderer[] materials =  pi.vehicleObject.
-        //foreach(Material material in materials){
-            
-        //}
-    }
-
-    private void DestroyVehicles(){
-        foreach(PlayerConfiguration playerConfig in playerConfigs){
-            if(playerConfig.vehicleObject){
-                Destroy(playerConfig.vehicleObject);
-                playerConfig.vehicleObject = null;  
-                playerConfig.UIController = null;  
-            }       
-        }
-    }
-}
-
-
-public class PlayerConfiguration
-{
-    public PlayerInput Input { get; set; }
-    public PlayerInputHandler InputHandler { get; set; }
-
-
-    public int playerIndex {get; set;}
-    public int score {get; set;}
-
-    public Camera playerCam {get; set;}
-
-    // can store configuration values here 
-    public bool isReady { get; set; }
-    public GameObject vehiclePrefab {get; set;}
-    //public Material material {get; set;}
-    public GameObject vehicleObject {get; set;}
-    public VehicleUIController UIController { get; set; }
 
     
-    public PlayerConfiguration(PlayerInput pi){
-        playerIndex = pi.playerIndex;
-        Input = pi;
-        InputHandler = Input.GetComponent<PlayerInputHandler>();
+
+     private VehicleType GetVehicleType(string vehicleName)
+    {
+        switch (vehicleName){
+            case "VehicleStandard":
+                return VehicleType.Standard;
+            case "VehicleSmall":
+                return VehicleType.Small;
+            case "VehicleBig":
+                return VehicleType.Big;
+            case "VehiclePolice":
+                return VehicleType.Police;
+            case "VehicleLightning":
+                return VehicleType.Lightning;
+            case "VehicleHook":
+                return VehicleType.Hook;
+            case "VehicleVempire":
+                return VehicleType.Vampire;
+            case "VehicleSurf":
+                return VehicleType.Surf;
+            default:
+                return VehicleType.Unknown;
+        }
     }
 
+
 }
+

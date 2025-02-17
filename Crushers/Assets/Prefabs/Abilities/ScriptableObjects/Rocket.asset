@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6610cff155504ce499405ef8df6690f3, type: 3}
+  m_Name: Rocket
+  m_EditorClassIdentifier: 
+  attachmentPos: 5
+  title: Rocket
+  icon: {fileID: 21300000, guid: bdf049843ecff4f4c8f6a294eb95a5ca, type: 3}
+  cooldownTime: 5
+  hitVFX: {fileID: 0}
+  launchSFX: []
+  hitSFX: []
+  rocketEquipmentPrefab: {fileID: 5472621316116780464, guid: 50bfc6c5fbaaefe4face6ab034a7ff34,
+    type: 3}
+  rocketSpeed: 10000
+  explosionVFX: {fileID: 8151073103637540511, guid: b71a59d9199ad244195c26cd25993954,
+    type: 3}
+  hitRadius: 30

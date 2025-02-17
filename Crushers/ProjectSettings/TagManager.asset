@@ -14,6 +14,7 @@ TagManager:
   - Projectile
   - LoadingScreen
   - PauseMenu
+  - LevelManager
   layers:
   - Default
   - TransparentFX

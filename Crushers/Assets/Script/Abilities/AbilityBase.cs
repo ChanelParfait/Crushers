@@ -4,13 +4,33 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum AttachmentPos
+{
+    Back,
+    Bottom,
+    Left,
+    Right,
+    Top,
+    Front
+}
+
 public abstract class AbilityBase : ScriptableObject
 {
     [Header("Ability Info")]
-    [SerializeField] string title;
+    [Space(20)]
+    [SerializeField] public AttachmentPos attachmentPos;
+    [SerializeField] public string title;
     [SerializeField] public Sprite icon;
+    [SerializeField] private int cooldownTime;
 
-    public abstract void Use(GameObject controlledCar); 
+    [SerializeField] private ParticleSystem hitVFX;
 
+    [SerializeField] private AudioClip[] launchSFX;
+    [SerializeField] private AudioClip[] hitSFX;
+    
+    public abstract void Use(GameObject controlledCar);
 
+    public int GetCooldownTime() {
+        return cooldownTime;
+    }
 }

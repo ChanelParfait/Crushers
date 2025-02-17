@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using Random = UnityEngine.Random;
+using Mirror;
+
 
 public class ImpactController : MonoBehaviour
 {
@@ -77,6 +79,12 @@ public class ImpactController : MonoBehaviour
  
             if (rb != null)
             {
+                // Check that the collided rigidbody doesn't belong to this player
+                /*NetworkRigidbodyReliable networkRB = collision.gameObject.GetComponentInParent<NetworkRigidbodyReliable>();
+                if (networkRB.isOwned)
+                {
+                    return; 
+                }*/
                 CheckFrontBumperCollision(collision);
                 PlayHitEffect(collision);
 
@@ -104,6 +112,11 @@ public class ImpactController : MonoBehaviour
         {
             // Set this vehicles last collided to the collided player
             SetLastCollidedVehicle(collidedVehicle);
+
+            if (collidedVehicle.GetComponentInParent<ImpactController>().GetDeathType() != TypeOfDeath.Flip)
+            {
+                collidedVehicle.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Flip);
+            }
         }
 
     }
@@ -117,10 +130,10 @@ public class ImpactController : MonoBehaviour
         if (lastCollided)
         {
             //Debug.Log("Set last Collided");
-            StopCoroutine(ClearLastCollided(5f));
+            StopCoroutine(ClearLastCollided(10f));
             lastCollidedVehicle = lastCollided;
             // Start coroutine to clear the last collided player after 5 seconds
-            StartCoroutine(ClearLastCollided(5f));
+            StartCoroutine(ClearLastCollided(10f));
         }
 
     }
@@ -175,6 +188,20 @@ public class ImpactController : MonoBehaviour
     {
         return DeathType;
     }
+
+    public void SetDeathType(TypeOfDeath setDeathType)
+    {
+        StopCoroutine(ClearSetDeathType(10f));
+        DeathType = setDeathType;
+        StartCoroutine(ClearSetDeathType(10f));
+    }
+    
+    private IEnumerator ClearSetDeathType(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DeathType = TypeOfDeath.Flip;
+    }
+    
 
     
 }

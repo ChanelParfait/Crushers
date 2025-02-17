@@ -16,6 +16,10 @@ public enum VehicleType
     Small,
     Big,
     Police,
+    Lightning,
+    Hook,
+    Surf,
+    Vampire,
     Unknown
 }
 
@@ -280,6 +284,14 @@ public class CarController : MonoBehaviour
                 break;
             case VehicleType.Police:
                 break;
+            case VehicleType.Lightning:
+                break;
+            case VehicleType.Hook:
+                break;
+            case VehicleType.Vampire:
+                break;
+            case VehicleType.Surf:
+                break;
             case VehicleType.Unknown:
                 Debug.LogWarning("Vehicle type unkown, setting as default");
                 break;
@@ -309,44 +321,50 @@ public class CarController : MonoBehaviour
         // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
         localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
-      //CAR PHYSICS
+        //CAR PHYSICS
 
-      /*
-      The next part is regarding to the car controller. First, it checks if the user wants to use touch controls (for
-      mobile devices) or analog input controls (WASD + Space).
+        /*
+        The next part is regarding to the car controller. First, it checks if the user wants to use touch controls (for
+        mobile devices) or analog input controls (WASD + Space).
 
-      The following methods are called whenever a certain key is pressed. For example, in the first 'if' we call the
-      method GoForward() if the user has pressed W.
+        The following methods are called whenever a certain key is pressed. For example, in the first 'if' we call the
+        method GoForward() if the user has pressed W.
 
-      In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
-      A (turn left), D (turn right) or Space bar (handbrake).
-      */
+        In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
+        A (turn left), D (turn right) or Space bar (handbrake).
+        */
 
-      
-        if(isMovingForward){
-          CancelInvoke("DecelerateCar");
-          isDecelerating = false;
-          GoForward();
+
+        if (isMovingForward && !isReversing)
+        {
+            CancelInvoke("DecelerateCar");
+            isDecelerating = false;
+            GoForward();
         }
-        if(isReversing){
-          CancelInvoke("DecelerateCar");
-          isDecelerating = false;
-          GoReverse();
-        }
-
-        if(isBraking){
-          CancelInvoke("DecelerateCar");
-          isDecelerating = false;
-          Handbrake();
+        if (isReversing)
+        {
+            CancelInvoke("DecelerateCar");
+            isDecelerating = false;
+            GoReverse();
         }
 
-        if(!isReversing && !isMovingForward){
-          ThrottleOff();
+        if (isBraking)
+        {
+            CancelInvoke("DecelerateCar");
+            isDecelerating = false;
+            Handbrake();
         }
-        if(!isReversing && !isMovingForward && !isBraking && !isDecelerating){
-          InvokeRepeating("DecelerateCar", 0f, 0.1f);
-          
+
+        if (!isReversing && !isMovingForward)
+        {
+            ThrottleOff();
         }
+        if (!isReversing && !isMovingForward && !isBraking && !isDecelerating)
+        {
+            InvokeRepeating("DecelerateCar", 0f, 0.2f);
+
+        }
+
       // update wheels
       UpdateWheels();
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
@@ -371,7 +389,6 @@ public class CarController : MonoBehaviour
             Debug.LogWarning(ex);
           }
       }
-
     }
 
     // This method controls the car sounds. For example, the car engine will sound slow when the car speed is low because the
@@ -417,6 +434,8 @@ public class CarController : MonoBehaviour
 
     public void HonkHorn() {
         if (!hornSound.isPlaying) {
+                //Debug.Log("Hooooooonk");
+
             hornSound.pitch = UnityEngine.Random.Range(vehiclePitch - 0.2f, vehiclePitch + 0.2f);
             hornSound.Play();
         }
@@ -424,7 +443,7 @@ public class CarController : MonoBehaviour
 
     // JUMP to get unstuck
     public void Jump(){
-      Debug.Log("Jump");
+      //Debug.Log("Jump");
       carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
     }
 
@@ -434,9 +453,14 @@ public class CarController : MonoBehaviour
 
     public void SetSteeringAngle(Vector2 direction){
 
-      //Debug.Log("Wheel Direction: " + direction);
+      ////Debug.Log("Wheel Direction: " + direction);
       steeringAxis = direction.x;
       steeringAngle = steeringAxis * activeMaxSteeringAngle;
+
+        if (direction != Vector2.zero)
+        {
+            cameraController.moveCameraAssist(steeringAngle/10);
+        }
     }
 
     public void UpdateWheels(){
@@ -528,6 +552,7 @@ public class CarController : MonoBehaviour
 
     // This method apply negative torque to the wheels in order to go backwards.
     public void GoReverse(){
+        //Debug.Log("Is going reverse");
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
       if(Mathf.Abs(localVelocityX) > 2.5f){
@@ -603,15 +628,16 @@ public class CarController : MonoBehaviour
           throttleAxis = 0f;
         }
       }
+
       carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * activeDecelerationMultiplier)));
       // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
       frontLeftCollider.motorTorque = 0;
       frontRightCollider.motorTorque = 0;
       rearLeftCollider.motorTorque = 0;
       rearRightCollider.motorTorque = 0;
-      // If the magnitude of the car's velocity is less than 0.25f (very slow velocity), then stop the car completely and
+      // If the car speed is less than 15f (very slow velocity), then stop the car completely and
       // also cancel the invoke of this method.
-      if(carRigidbody.velocity.magnitude < 0.25f){
+      if(carSpeed < 15f){
         carRigidbody.velocity = Vector3.zero;
         CancelInvoke("DecelerateCar");
       }
@@ -623,6 +649,13 @@ public class CarController : MonoBehaviour
       frontRightCollider.brakeTorque = activeBrakeForce;
       rearLeftCollider.brakeTorque = activeBrakeForce;
       rearRightCollider.brakeTorque = activeBrakeForce;
+
+        //If the vehicle is still going forward, apply reverse speed to the ridigbody to stop vehicle faster
+        if (localVelocityZ>1f)
+        {
+            Vector3 reverseForce = -transform.forward * activeBrakeForce * 100 * Time.deltaTime;
+            carRigidbody.AddForce(reverseForce, ForceMode.Force);
+        }
     }
 
     // This function is used to make the car lose traction. By using this, the car will start drifting. The amount of traction lost
@@ -630,12 +663,13 @@ public class CarController : MonoBehaviour
     // it is high, then you could make the car to feel like going on ice.
     public void Handbrake(){
       CancelInvoke("RecoverTraction");
-      // We are going to start losing traction smoothly, there is were our 'driftingAxis' variable takes
-      // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
-      // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
-      driftingAxis = driftingAxis + (Time.deltaTime);
+    // We are going to start losing traction smoothly, there is were our 'driftingAxis' variable takes
+    // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
+    // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
+      driftingAxis += Time.deltaTime;
+      driftingAxis = Mathf.Clamp(driftingAxis, 0f, 1f);
       float secureStartingPoint = driftingAxis * FLWextremumSlip * activeHandbrakeDriftMultiplier;
-
+    
       if(secureStartingPoint < FLWextremumSlip){
         driftingAxis = FLWextremumSlip / (FLWextremumSlip * activeHandbrakeDriftMultiplier);
       }
@@ -653,16 +687,18 @@ public class CarController : MonoBehaviour
       //value, so, we are going to continue increasing the sideways friction of the wheels until driftingAxis
       // = 1f.
       if(driftingAxis < 1f){
-        FLwheelFriction.extremumSlip = FLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        float factor = activeHandbrakeDriftMultiplier * driftingAxis;
+
+        FLwheelFriction.extremumSlip = FLWextremumSlip * factor;
         frontLeftCollider.sidewaysFriction = FLwheelFriction;
 
-        FRwheelFriction.extremumSlip = FRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        FRwheelFriction.extremumSlip = FRWextremumSlip * factor;
         frontRightCollider.sidewaysFriction = FRwheelFriction;
 
-        RLwheelFriction.extremumSlip = RLWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        RLwheelFriction.extremumSlip = RLWextremumSlip * factor;
         rearLeftCollider.sidewaysFriction = RLwheelFriction;
 
-        RRwheelFriction.extremumSlip = RRWextremumSlip * activeHandbrakeDriftMultiplier * driftingAxis;
+        RRwheelFriction.extremumSlip = RRWextremumSlip * factor;
         rearRightCollider.sidewaysFriction = RRwheelFriction;
       }
 
@@ -673,35 +709,50 @@ public class CarController : MonoBehaviour
 
     }
 
+
     // This function is used to emit both the particle systems of the tires' smoke and the trail renderers of the tire skids
     // depending on the value of the bool variables 'isDrifting' and 'isTractionLocked'.
     public void DriftCarPS(){
 
       if(useEffects){
-        try{
-          if(isDrifting){
-            RLWParticleSystem.Play();
-            RRWParticleSystem.Play();
-          }else if(!isDrifting){
-            RLWParticleSystem.Stop();
-            RRWParticleSystem.Stop();
-          }
-        }catch(Exception ex){
-          Debug.LogWarning(ex);
-        }
+            try{
+                if (isGrounded){
+                    if (isDrifting){
+                        RLWParticleSystem.Play();
+                        RRWParticleSystem.Play();
+                    }
 
-        try{
-          if((isTractionLocked || Mathf.Abs(localVelocityX) > 5f) && Mathf.Abs(carSpeed) > 12f){
-            RLWTireSkid.emitting = true;
-            RRWTireSkid.emitting = true;
-          }else {
-            RLWTireSkid.emitting = false;
-            RRWTireSkid.emitting = false;
-          }
-        }catch(Exception ex){
-          Debug.LogWarning(ex);
+                    else{
+                        RLWParticleSystem.Stop();
+                        RRWParticleSystem.Stop();
+                    }
+                }
+                else{
+                    RLWParticleSystem.Stop();
+                    RRWParticleSystem.Stop();
+                }
+
+            }
+              catch(Exception ex){
+              Debug.LogWarning(ex);
+            }
+
+            try{
+                if(isGrounded && (isTractionLocked || Mathf.Abs(localVelocityX) > 5f) && Mathf.Abs(carSpeed) > 12f){
+
+                    RLWTireSkid.emitting = true;
+                    RRWTireSkid.emitting = true;
+                }
+                else{
+                    RLWTireSkid.emitting = false;
+                    RRWTireSkid.emitting = false;
+                }
+            }
+            catch(Exception ex){
+                Debug.LogWarning(ex);
+            }
         }
-      }else if(!useEffects){
+        else if(!useEffects){
         if(RLWParticleSystem != null){
           RLWParticleSystem.Stop();
         }
@@ -721,11 +772,10 @@ public class CarController : MonoBehaviour
     // This function is used to recover the traction of the car when the user has stopped using the car's handbrake.
     public void RecoverTraction(){
       isTractionLocked = false;
-      driftingAxis = driftingAxis - (Time.deltaTime / 1.5f);
+      driftingAxis = driftingAxis - (Time.deltaTime );
       if(driftingAxis < 0f){
         driftingAxis = 0f;
       }
-
       //If the 'driftingAxis' value is not 0f, it means that the wheels have not recovered their traction.
       //We are going to continue decreasing the sideways friction of the wheels until we reach the initial
       // car's grip.
@@ -768,7 +818,6 @@ public class CarController : MonoBehaviour
       WheelHit hit;
       bool newIsGrounded = frontLeftCollider.GetGroundHit(out hit) || frontRightCollider.GetGroundHit(out hit) || rearLeftCollider.GetGroundHit(out hit) || rearRightCollider.GetGroundHit(out hit); 
       if(!isGrounded && newIsGrounded){
-        //Debug.Log("Wheels Hit Ground");
         hitGround?.Invoke();
       }
         isGrounded = newIsGrounded;
@@ -777,10 +826,10 @@ public class CarController : MonoBehaviour
     public void GravityModifier()
     {
         if (!isGrounded)
-        {
+        { 
             float airGravityModifier = (-1 * activeGravityMultiplier) * Time.deltaTime;
             carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
-            //Debug.Log("Current Gravity Applied: " + airGravityModifier);
+            ////Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
 

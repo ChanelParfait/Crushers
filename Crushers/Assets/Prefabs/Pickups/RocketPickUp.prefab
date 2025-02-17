@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5835967292835509149}
   - component: {fileID: 7582326055271585436}
   - component: {fileID: 443469894949617432}
+  - component: {fileID: -4805126725703455875}
   m_Layer: 0
   m_Name: RocketPickUp
   m_TagString: Pickup
@@ -68,6 +69,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedPU: 2
+--- !u!114 &-4805126725703455875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421771561973306205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62ad62085b167f4a99fd5050cb30cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3997624001135791133
 PrefabInstance:
   m_ObjectHideFlags: 0

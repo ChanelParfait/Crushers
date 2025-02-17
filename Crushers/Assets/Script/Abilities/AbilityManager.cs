@@ -11,16 +11,18 @@ public class AbilityManager : MonoBehaviour
 
     [SerializeField] private List<AbilityBase> abilities;
 
-    [SerializeField] private float cooldownTime = 5;
+
     [SerializeField] public bool canUse = true;
 
 
     [SerializeField] private Image abilityCanvas;
-    private GameObject controlledCar;
+    [SerializeField] private GameObject controlledCar;
 
     private void Start()
     {
-        UpdateAbilitySprite(abilities[0]);
+        if(abilities != null){
+            UpdateAbilitySprite(abilities[0]);
+        }
         controlledCar = this.gameObject;
     }
     public void UseAbility() {
@@ -28,7 +30,7 @@ public class AbilityManager : MonoBehaviour
         {
             if (abilities != null)
             {
-                OnAbilityUse.Invoke(cooldownTime);
+                OnAbilityUse.Invoke(abilities[0].GetCooldownTime());
                 var ability = abilities[0];
                 ability.Use(controlledCar);
                 StartCooldown();
@@ -42,7 +44,7 @@ public class AbilityManager : MonoBehaviour
         IEnumerator Cooldown()
         {
             canUse = false;
-            yield return new WaitForSeconds(cooldownTime);
+            yield return new WaitForSeconds(abilities[0].GetCooldownTime());
             canUse = true;
         }
     }
@@ -52,6 +54,6 @@ public class AbilityManager : MonoBehaviour
     }
 
     public float GetAbilityCooldownTime() {
-        return cooldownTime;
+        return abilities[0].GetCooldownTime();
     }
 }
