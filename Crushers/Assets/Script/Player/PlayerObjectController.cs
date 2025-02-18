@@ -213,8 +213,8 @@ public class PlayerObjectController : NetworkBehaviour
         // Remove the previous player object that's now been replaced
         // Delay is required to allow replacement to complete.
         Destroy(oldPlayer, 0.1f);
-    }
-    */
+    }*/
+    
 
     public void SetPosition(){
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();

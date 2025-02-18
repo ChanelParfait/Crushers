@@ -162,20 +162,20 @@ public class PlayerManager : MonoBehaviour
             if( PlayerObjects.All(p => p.VehicleConfirmed == true))
             {
                 // load selected level
-                StartCoroutine(DelayScreen(3));
+                DelayScreen(3);
             }   
         }
 
     }
 
     // Loading Screen Functionality //
-    private IEnumerator DelayScreen(float delay){
+    private void DelayScreen(float delay){
         GetComponent<PlayerInputManager>().DisableJoining();
-        loadingScreen.DisplayScreen();
+        loadingScreen.DisplayScreen(selectedMapIndex);
         
-        yield return new WaitForSeconds(delay);
+        //yield return new WaitForSeconds(delay);
 
-        StartCoroutine(LoadSceneAsync(selectedMapIndex));
+        //StartCoroutine(LoadSceneAsync(selectedMapIndex));
     }
 
     private IEnumerator LoadSceneAsync(int buildIndex){
