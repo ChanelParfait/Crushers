@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,5 +25,17 @@ public class Trap_Train : MonoBehaviour
     {
         yield return new WaitForSeconds(timeToLive);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            ContactPoint contact = other.GetContact(0);
+            Vector3 position = contact.point;
+            other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(
+                25000f, position, 3f, 4f, ForceMode.Impulse);
+            //Debug.Log("Created explosion at " + position + " !");
+        }
     }
 }
