@@ -1076,15 +1076,16 @@ MonoBehaviour:
   startTimerTxt: {fileID: 1503045894212252366}
   abilityResetSlider: {fileID: 0}
   abilityManager: {fileID: 0}
+  controlsPnl: {fileID: 0}
   killFeed: {fileID: 6527753077311031645, guid: 731f8db04f79fa74fbe0b3f0529de46f,
     type: 3}
   killfeedSpawn: {fileID: 3361357374116283206}
   allDeathTypeSprites:
-  - {fileID: 21300000, guid: 9ddc34c9b398e744caff4826abb99c18, type: 3}
-  - {fileID: 21300000, guid: c0654ab3113951548a2b2a63c5be311e, type: 3}
-  - {fileID: 21300000, guid: bdf049843ecff4f4c8f6a294eb95a5ca, type: 3}
-  - {fileID: 21300000, guid: ec8f4f61fa01e80448d82c6049347405, type: 3}
-  - {fileID: 21300000, guid: a39bd100f5ae3134f9f387a3b0798de6, type: 3}
+  - {fileID: 21300000, guid: f7f1b886d74b01142823d94f13ebe550, type: 3}
+  - {fileID: 21300000, guid: 134c3ca594b10d04fabefc63efa0884a, type: 3}
+  - {fileID: 21300000, guid: 1ec6b3119b5729d4a92c643b5bd17cb1, type: 3}
+  - {fileID: 21300000, guid: 13d17417b67fb5b48a94206bf4413cb8, type: 3}
+  - {fileID: 21300000, guid: 533a327256fd97f48917cb1c60be6a91, type: 3}
 --- !u!1 &8193768536543177909
 GameObject:
   m_ObjectHideFlags: 0
