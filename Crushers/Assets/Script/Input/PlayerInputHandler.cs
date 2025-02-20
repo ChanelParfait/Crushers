@@ -24,6 +24,7 @@ public class PlayerInputHandler : NetworkBehaviour
     [SerializeField] private PickUpManager pickUpManager;
     [SerializeField] private AbilityManager abilityManager;
     [SerializeField] private CameraInputHandler freelookCam; 
+    [SerializeField] private VehicleUIController vehicleUIController; 
 
     private bool canJump = true;
     // Actions
@@ -61,6 +62,7 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Jump").performed += OnJump;
         player.FindAction("Honk").performed += OnHonk;
         player.FindAction("Pause").performed += OnPause;
+        player.FindAction("ToggleControls").performed += OnToggleUI;
         player.FindAction("UseAbility").performed += OnUseAbility;
 
         player.Enable();
@@ -83,6 +85,7 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Jump").performed -= OnJump;
         player.FindAction("Honk").performed -= OnHonk;
         player.FindAction("Pause").performed -= OnPause;
+        player.FindAction("ToggleControls").performed -= OnToggleUI;
         player.FindAction("UseAbility").performed -= OnUseAbility;
 
 
@@ -163,6 +166,11 @@ public class PlayerInputHandler : NetworkBehaviour
     public void SetCameraInputHandler(CameraInputHandler cip){
         // set camera input handler
         freelookCam = cip; 
+    }
+
+    public void SetVehicleUIController(VehicleUIController ui){
+        // set camera input handler
+        vehicleUIController = ui;
     }
 
     // Input Events
@@ -268,6 +276,13 @@ public class PlayerInputHandler : NetworkBehaviour
         if(context.performed && IsInputValid()){
             // invoke a pause event
             Pause?.Invoke();
+        }
+    }
+
+    public void OnToggleUI(CallbackContext context){
+        if(context.performed && IsInputValid()){
+            //Debug.Log("Toggle UI"); 
+            vehicleUIController.ToggleControlsPnl();
         }
     }
 

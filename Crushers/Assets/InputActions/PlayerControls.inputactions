@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleControlsUI",
+                    "name": "ToggleControls",
                     "type": "Button",
                     "id": "e44f643d-fbfa-409d-8f32-453ceeab2df2",
                     "expectedControlType": "Button",
@@ -377,7 +377,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleControlsUI",
+                    "action": "ToggleControls",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -388,7 +388,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleControlsUI",
+                    "action": "ToggleControls",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -3757,6 +3757,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6948429851495561366, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: controlsPnl
+      value: 
+      objectReference: {fileID: 5880289042744596161}
     - target: {fileID: 7873033967061045720, guid: 2d1ac2dc27ee11340b483eef11c7082d,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3800,6 +3805,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5880289042744596161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8491627282898797657, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2612837372762198680}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5970591887534121917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8545971785245913381, guid: 2d1ac2dc27ee11340b483eef11c7082d,

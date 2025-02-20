@@ -188,6 +188,7 @@ public class PlayerObjectController : NetworkBehaviour
             InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
             InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
             InputHandler.SetCameraInputHandler(PlayerVehicle.GetComponentInChildren<CameraInputHandler>());
+            InputHandler.SetVehicleUIController(PlayerVehicle.GetComponentInChildren<VehicleUIController>());
             // disable camera shake
             //InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
             
