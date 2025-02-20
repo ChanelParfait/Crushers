@@ -14091,6 +14091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318718941}
+  - component: {fileID: 318718942}
   m_Layer: 0
   m_Name: Pickups
   m_TagString: Untagged
@@ -14118,6 +14119,25 @@ Transform:
   - {fileID: 450701270}
   m_Father: {fileID: 1472137062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &318718942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318718940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23104b82258ee894ca67c309c24d93d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useSceneSpecificList: 0
+  globalPickupList:
+  - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  sceneSpecificPickupList: []
+  highValuePickup: {fileID: 0}
+  percentageOfHighPickup: 10
+  maxPickupsPerCycle: 3
 --- !u!43 &331379303
 Mesh:
   m_ObjectHideFlags: 0

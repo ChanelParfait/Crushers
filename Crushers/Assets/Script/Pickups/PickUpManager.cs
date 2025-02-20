@@ -118,11 +118,11 @@ public class PickUpManager : MonoBehaviour
         newLocation.y = 0f;
         */
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f + transform.forward, transform.rotation);
-            RocketGm.GetComponent<RocketPickup>().SetFiredBy(this.gameObject.GetComponent<ScoreKeeper>()); 
+            RocketGm.GetComponent<RocketPickup>().SetFiredBy(gameObject.GetComponent<ScoreKeeper>()); 
             //RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
-            Collider spawnerCollider = this.GetComponent<Collider>();
+            Collider spawnerCollider = GetComponent<Collider>();
 
             if (spawnerCollider != null && rocketCollider != null)
             {
@@ -135,8 +135,6 @@ public class PickUpManager : MonoBehaviour
                 Physics.IgnoreCollision(rocketCollider, childCollider);
             }
             Pickup = PickupType.None; 
-            
-            
     }
 
     private void UseShield()

@@ -14138,9 +14138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useSceneSpecificList: 0
   globalPickupList:
-  - {fileID: 6819396208930859311, guid: d8d37c4fc12998c4c88481f5f4ce92b8, type: 3}
-  - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
-  - {fileID: 3804074624569312723, guid: d707ccf3c1b2d414091fd606b91bc321, type: 3}
+  - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
   sceneSpecificPickupList: []
   highValuePickup: {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e,
     type: 3}
@@ -17264,12 +17262,17 @@ PrefabInstance:
     - target: {fileID: 4475681290619184382, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6226437680082209492, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
       propertyPath: m_Name
       value: Pickup_Rocket 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226437680082209492, guid: ea1ac7b3b82636f4da33e88a017da407,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7954889620251240031, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}

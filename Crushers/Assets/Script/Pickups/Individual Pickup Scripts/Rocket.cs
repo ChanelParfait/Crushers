@@ -6,24 +6,16 @@ using Random = UnityEngine.Random;
 
 public class RocketPickup : MonoBehaviour
 {
-    [SerializeField] private PickupConfig PickUp;
     [SerializeField] private ScoreKeeper FiredBy;
     [SerializeField] private GameObject ExplosionVFX;
     [SerializeField] private AudioClip[] explosionSFX;
     
-    private float _Speed;
-    private float Radius;
-    
-    
-    private void Awake()
-    {
-        _Speed = PickUp.GetSpeedMultiplier();
-        Radius = PickUp.GetRadius();
-    }
+    private float _Speed = 100f;
+    private float Radius = 10f;
 
     private void Start()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Impulse);
     }
 
     public void SetFiredBy(ScoreKeeper FiredFrom)
