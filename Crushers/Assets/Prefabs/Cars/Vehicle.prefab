@@ -2908,7 +2908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 3691944287138357371}
 --- !u!65 &7345286473890743026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3798,6 +3798,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5018434728043073886}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3691944287138357371 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8545971785245913381, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5018434728043073886}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4132793061314699904 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9007109847759549406, guid: 2d1ac2dc27ee11340b483eef11c7082d,
