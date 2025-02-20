@@ -459,7 +459,7 @@ public class CarController : MonoBehaviour
 
         if (direction != Vector2.zero)
         {
-            cameraController.moveCameraAssist(steeringAngle/10);
+            //cameraController.moveCameraAssist(steeringAngle/10);
         }
     }
 
