@@ -116,6 +116,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleControls"",
+                    ""type"": ""Button"",
+                    ""id"": ""e44f643d-fbfa-409d-8f32-453ceeab2df2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -380,6 +389,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""UseAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""975e1235-f15c-42c3-ba13-df7445e53f52"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76162576-0378-4c5b-8200-e44bdfabde95"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleControls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1061,6 +1092,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Honk = m_Player.FindAction("Honk", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_UseAbility = m_Player.FindAction("UseAbility", throwIfNotFound: true);
+        m_Player_ToggleControls = m_Player.FindAction("ToggleControls", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1146,6 +1178,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Honk;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_UseAbility;
+    private readonly InputAction m_Player_ToggleControls;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -1160,6 +1193,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Honk => m_Wrapper.m_Player_Honk;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @UseAbility => m_Wrapper.m_Player_UseAbility;
+        public InputAction @ToggleControls => m_Wrapper.m_Player_ToggleControls;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1199,6 +1233,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseAbility.started += instance.OnUseAbility;
             @UseAbility.performed += instance.OnUseAbility;
             @UseAbility.canceled += instance.OnUseAbility;
+            @ToggleControls.started += instance.OnToggleControls;
+            @ToggleControls.performed += instance.OnToggleControls;
+            @ToggleControls.canceled += instance.OnToggleControls;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1233,6 +1270,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseAbility.started -= instance.OnUseAbility;
             @UseAbility.performed -= instance.OnUseAbility;
             @UseAbility.canceled -= instance.OnUseAbility;
+            @ToggleControls.started -= instance.OnToggleControls;
+            @ToggleControls.performed -= instance.OnToggleControls;
+            @ToggleControls.canceled -= instance.OnToggleControls;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1441,6 +1481,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnHonk(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnUseAbility(InputAction.CallbackContext context);
+        void OnToggleControls(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

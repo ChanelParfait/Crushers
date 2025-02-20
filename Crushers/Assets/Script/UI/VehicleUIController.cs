@@ -20,6 +20,7 @@ public class VehicleUIController : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Slider abilityResetSlider;
 
     [SerializeField] private AbilityManager abilityManager;
+    [SerializeField] private GameObject controlsPnl; 
 
     private ScoreKeeper _scoreKeeper;
 
@@ -59,11 +60,12 @@ public class VehicleUIController : MonoBehaviour
         if(abilityManager){
             abilityResetSlider.maxValue = abilityManager.GetAbilityCooldownTime();
             abilityResetSlider.value = abilityResetSlider.maxValue;
-        }
-        
+        }  
+    }
 
-        
-        
+    public void ToggleControlsPnl()
+    {
+        controlsPnl.SetActive(!controlsPnl.activeSelf);
     }
 
     private void StartCooldownUI(float cooldownTime)

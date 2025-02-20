@@ -188,6 +188,7 @@ public class PlayerObjectController : NetworkBehaviour
             InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
             InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
             InputHandler.SetCameraInputHandler(PlayerVehicle.GetComponentInChildren<CameraInputHandler>());
+            InputHandler.SetVehicleUIController(PlayerVehicle.GetComponentInChildren<VehicleUIController>());
             // disable camera shake
             //InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
             
@@ -213,8 +214,8 @@ public class PlayerObjectController : NetworkBehaviour
         // Remove the previous player object that's now been replaced
         // Delay is required to allow replacement to complete.
         Destroy(oldPlayer, 0.1f);
-    }
-    */
+    }*/
+    
 
     public void SetPosition(){
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();

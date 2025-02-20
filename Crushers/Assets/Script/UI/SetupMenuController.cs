@@ -87,11 +87,15 @@ public class SetupMenuController : MonoBehaviour
         if(!selectionEnabled){ return; }
         if(context.performed){
             // select previous vehicle
-            vehicleList[currentVehicleIndex].SetActive(false);
-            currentVehicleIndex = (currentVehicleIndex - 1 + vehicleList.Length) % vehicleList.Length;
-            UpdateVehicleDisplay();
+            PrevVehicle();
         }
+    }
 
+    public void PrevVehicle()
+    {
+        vehicleList[currentVehicleIndex].SetActive(false);
+        currentVehicleIndex = (currentVehicleIndex - 1 + vehicleList.Length) % vehicleList.Length;
+        UpdateVehicleDisplay();
     }
 
     public void OnRight(CallbackContext context)
@@ -101,11 +105,16 @@ public class SetupMenuController : MonoBehaviour
         if(!selectionEnabled){ return; }
         if(context.performed){
             // select next vehicle
-            vehicleList[currentVehicleIndex].SetActive(false);
-            currentVehicleIndex = (currentVehicleIndex + 1) % vehicleList.Length;
-            UpdateVehicleDisplay();
+            NextVehicle();
         }
 
+    }
+
+    public void NextVehicle()
+    {
+        vehicleList[currentVehicleIndex].SetActive(false);
+        currentVehicleIndex = (currentVehicleIndex + 1) % vehicleList.Length;
+        UpdateVehicleDisplay();
     }
 
     public void Click(AudioSource buttonAudio){
@@ -139,7 +148,7 @@ public class SetupMenuController : MonoBehaviour
     public void ConfirmVehicle(){
         if(!inputEnabled){ return; }
         // hide ready button
-        //readyBtn.gameObject.SetActive(false);
+        readyBtn.gameObject.SetActive(false);
         // ready up player
         //playerReady?.Invoke(playerIndex);
         GetComponentInParent<PlayerObjectController>().SetVehicleConfirmed();
