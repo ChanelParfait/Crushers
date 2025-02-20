@@ -63,7 +63,7 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Honk").performed += OnHonk;
         player.FindAction("Pause").performed += OnPause;
         player.FindAction("ToggleControls").performed += OnToggleUI;
-        player.FindAction("UseAbility").performed += OnUseAbility;
+        //player.FindAction("UseAbility").performed += OnUseAbility;
 
         player.Enable();
     }
@@ -86,7 +86,7 @@ public class PlayerInputHandler : NetworkBehaviour
         player.FindAction("Honk").performed -= OnHonk;
         player.FindAction("Pause").performed -= OnPause;
         player.FindAction("ToggleControls").performed -= OnToggleUI;
-        player.FindAction("UseAbility").performed -= OnUseAbility;
+        //player.FindAction("UseAbility").performed -= OnUseAbility;
 
 
 

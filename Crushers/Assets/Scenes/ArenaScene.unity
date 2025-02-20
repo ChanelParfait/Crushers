@@ -14140,10 +14140,9 @@ MonoBehaviour:
   globalPickupList:
   - {fileID: 6819396208930859311, guid: d8d37c4fc12998c4c88481f5f4ce92b8, type: 3}
   - {fileID: 8219824272078487759, guid: 92bf3fdd24661aa4fa2680bd144efb13, type: 3}
-  - {fileID: 5933485014121273202, guid: e93e3f3f38c04a64aa0b5dc2ae6f165e, type: 3}
   - {fileID: 3804074624569312723, guid: d707ccf3c1b2d414091fd606b91bc321, type: 3}
   sceneSpecificPickupList: []
-  highValuePickup: {fileID: 919132149155446097, guid: b32d75b8c81954341b0429369f6404b6,
+  highValuePickup: {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e,
     type: 3}
   percentageOfHighPickup: 10
   maxPickupsPerCycle: 5

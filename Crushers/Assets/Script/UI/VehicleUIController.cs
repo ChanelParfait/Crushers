@@ -38,7 +38,7 @@ public class VehicleUIController : MonoBehaviour
         LevelManager.startTimeChanged +=  UpdateStartTimer;
         
         
-        AbilityManager.OnAbilityUse.AddListener(StartCooldownUI);
+        //AbilityManager.OnAbilityUse.AddListener(StartCooldownUI);
         
         ScoreKeeper.OnGlobalPlayerScored.AddListener(ShowKillFeed);
       
@@ -49,18 +49,19 @@ public class VehicleUIController : MonoBehaviour
         LevelManager.levelTimeChanged -=  UpdateLevelTimer;
         LevelManager.startTimeChanged -=  UpdateStartTimer;
 
-        AbilityManager.OnAbilityUse.RemoveListener(StartCooldownUI);
+        //AbilityManager.OnAbilityUse.RemoveListener(StartCooldownUI);
         
         ScoreKeeper.OnGlobalPlayerScored.RemoveListener(ShowKillFeed);
     }
 
     private void Start()
     {
+        /*
         abilityManager = gameObject.GetComponentInParent<AbilityManager>();
         if(abilityManager){
             abilityResetSlider.maxValue = abilityManager.GetAbilityCooldownTime();
             abilityResetSlider.value = abilityResetSlider.maxValue;
-        }  
+        }  */
     }
 
     public void ToggleControlsPnl()
