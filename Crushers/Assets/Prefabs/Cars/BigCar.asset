@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxSpeed: 110
   baseMaxReverseSpeed: 80
-  baseAccelerationMultiplier: 9
-  baseMaxSteeringAngle: 50
+  baseAccelerationMultiplier: 10
+  baseMaxSteeringAngle: 40
   baseSteeringSpeed: 0.75
   baseBrakeForce: 2000
   baseDecelerationMultiplier: 2

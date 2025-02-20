@@ -130,10 +130,10 @@ public class ImpactController : MonoBehaviour
         if (lastCollided)
         {
             //Debug.Log("Set last Collided");
-            StopCoroutine(ClearLastCollided(10f));
+            StopCoroutine(ClearLastCollided(5f));
             lastCollidedVehicle = lastCollided;
             // Start coroutine to clear the last collided player after 5 seconds
-            StartCoroutine(ClearLastCollided(10f));
+            StartCoroutine(ClearLastCollided(5f));
         }
 
     }
@@ -191,9 +191,9 @@ public class ImpactController : MonoBehaviour
 
     public void SetDeathType(TypeOfDeath setDeathType)
     {
-        StopCoroutine(ClearSetDeathType(10f));
+        StopCoroutine(ClearSetDeathType(5f));
         DeathType = setDeathType;
-        StartCoroutine(ClearSetDeathType(10f));
+        StartCoroutine(ClearSetDeathType(5f));
     }
     
     private IEnumerator ClearSetDeathType(float delay)
