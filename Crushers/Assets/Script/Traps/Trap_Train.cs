@@ -34,7 +34,7 @@ public class Trap_Train : MonoBehaviour
             ContactPoint contact = other.GetContact(0);
             Vector3 position = contact.point;
             other.gameObject.GetComponent<Rigidbody>().AddExplosionForce(
-                25000f, position, 3f, 2f, ForceMode.Impulse);
+                25000f, position, 3f, 4f, ForceMode.Impulse);
             //Debug.Log("Created explosion at " + position + " !");
         }
     }
