@@ -16,6 +16,7 @@ public class ImpactController : MonoBehaviour
     private CameraController cameraController;
 
     private Vector3 centerOfMassY;
+    [SerializeField] private float lastCollidedVehicleTimer = 7f;
     [SerializeField] private ScoreKeeper lastCollidedVehicle;
 
     [SerializeField] private TypeOfDeath DeathType;
@@ -130,10 +131,10 @@ public class ImpactController : MonoBehaviour
         if (lastCollided)
         {
             //Debug.Log("Set last Collided");
-            StopCoroutine(ClearLastCollided(5f));
+            StopCoroutine(ClearLastCollided(lastCollidedVehicleTimer));
             lastCollidedVehicle = lastCollided;
-            // Start coroutine to clear the last collided player after 5 seconds
-            StartCoroutine(ClearLastCollided(5f));
+            // Start coroutine to clear the last collided player after n seconds
+            StartCoroutine(ClearLastCollided(lastCollidedVehicleTimer));
         }
 
     }
@@ -191,9 +192,9 @@ public class ImpactController : MonoBehaviour
 
     public void SetDeathType(TypeOfDeath setDeathType)
     {
-        StopCoroutine(ClearSetDeathType(5f));
+        StopCoroutine(ClearSetDeathType(lastCollidedVehicleTimer));
         DeathType = setDeathType;
-        StartCoroutine(ClearSetDeathType(5f));
+        StartCoroutine(ClearSetDeathType(lastCollidedVehicleTimer));
     }
     
     private IEnumerator ClearSetDeathType(float delay)

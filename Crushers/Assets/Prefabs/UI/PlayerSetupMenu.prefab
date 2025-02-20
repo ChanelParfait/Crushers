@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Top Speed: 160 km/h'
+  m_text: 'Top Speed: 140 km/h'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Handling: 1 / 4'
+  m_text: 'Handling: 4 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1218,7 +1218,7 @@ GameObject:
   - component: {fileID: 5248498698550759456}
   - component: {fileID: 478116713182694469}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1271,7 +1271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 600kg'
+  m_text: 'Damage: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Acceleration: 4 / 4'
+  m_text: 'Acceleration: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1809,7 +1809,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Handling: 1 / 4'
+  m_text: 'Handling: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Acceleration: 4 / 4'
+  m_text: 'Acceleration: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2077,7 +2077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Handling: 1 / 4'
+  m_text: 'Handling: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2582,7 +2582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Acceleration: 3 / 4'
+  m_text: 'Acceleration: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2716,7 +2716,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Top Speed: 200km/h'
+  m_text: 'Top Speed: 120km/h'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Handling: 4 / 4'
+  m_text: 'Handling: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3093,7 +3093,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Acceleration: 4 / 4'
+  m_text: 'Acceleration: 1 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4381,7 +4381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Top Speed: 200km/h'
+  m_text: 'Top Speed: 90km/h'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4820,7 +4820,7 @@ GameObject:
   - component: {fileID: 2695360575025880167}
   - component: {fileID: 1329683808483974418}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4873,7 +4873,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 600kg'
+  m_text: 'Damage: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5007,7 +5007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Handling: 1 / 4'
+  m_text: 'Handling: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5141,7 +5141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Acceleration: 1 / 4'
+  m_text: 'Acceleration: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5378,7 +5378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Handling: 1 / 4'
+  m_text: 'Handling: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5916,7 +5916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Acceleration: 4 / 4'
+  m_text: 'Acceleration: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6560,7 +6560,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Top Speed: 150km/h'
+  m_text: 'Top Speed: 100km/h'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6641,7 +6641,7 @@ GameObject:
   - component: {fileID: 4817980105403235927}
   - component: {fileID: 1011614897375886357}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6694,7 +6694,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 500kg'
+  m_text: 'Damage: 4 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6775,7 +6775,7 @@ GameObject:
   - component: {fileID: 6577532349913144301}
   - component: {fileID: 5082480039859944167}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6828,7 +6828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 500kg'
+  m_text: 'Damage: 4 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7096,7 +7096,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Top Speed: 200km/h'
+  m_text: 'Top Speed: 100km/h'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7177,7 +7177,7 @@ GameObject:
   - component: {fileID: 6079191747627352058}
   - component: {fileID: 7191410988213440114}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7230,7 +7230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 500kg'
+  m_text: 'Damage: 1 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8311,7 +8311,7 @@ GameObject:
   - component: {fileID: 2055261476861977078}
   - component: {fileID: 8861343640514619836}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8364,7 +8364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 500kg'
+  m_text: 'Damage: 2 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8445,7 +8445,7 @@ GameObject:
   - component: {fileID: 1331395876030743127}
   - component: {fileID: 2426993818735942598}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8498,7 +8498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 700kg'
+  m_text: 'Damage: 4 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8719,7 +8719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1016695481249077427
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8983,7 +8983,7 @@ GameObject:
   - component: {fileID: 8713979882512312856}
   - component: {fileID: 5511110432289405490}
   m_Layer: 0
-  m_Name: WeightTxt
+  m_Name: DamageTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9036,7 +9036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weight: 500kg'
+  m_text: 'Damage: 3 / 4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10097,8 +10097,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 91942537411586254, guid: 3833069e6c67c594885afb5ea140f9ae,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9125691743821074291}
   m_SourcePrefab: {fileID: 100100000, guid: 3833069e6c67c594885afb5ea140f9ae, type: 3}
+--- !u!1 &444979932954441904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 91942537411586254, guid: 3833069e6c67c594885afb5ea140f9ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 534318275929526398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9125691743821074291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444979932954441904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4c7e612e98fa54ca7b7dc2ef9eb107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
 --- !u!4 &965795932754764298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 724364774512145012, guid: 3833069e6c67c594885afb5ea140f9ae,
@@ -10181,13 +10204,36 @@ PrefabInstance:
     - target: {fileID: 2902983956777312499, guid: 669cc397b3dfb4a46bfee567daf2aa47,
         type: 3}
       propertyPath: m_Name
-      value: SVehicle15
+      value: Vampire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2902983956777312499, guid: 669cc397b3dfb4a46bfee567daf2aa47,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5946176572394902067}
   m_SourcePrefab: {fileID: 100100000, guid: 669cc397b3dfb4a46bfee567daf2aa47, type: 3}
+--- !u!1 &2796910816567431240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2902983956777312499, guid: 669cc397b3dfb4a46bfee567daf2aa47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1052126071885770939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5946176572394902067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2796910816567431240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4c7e612e98fa54ca7b7dc2ef9eb107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
 --- !u!4 &3286307477368556274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2522763646987074121, guid: 669cc397b3dfb4a46bfee567daf2aa47,
@@ -10275,7 +10321,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4361526918571079103, guid: 8edf19af6c04913459049210b6d0e6a0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5903968586016335810}
   m_SourcePrefab: {fileID: 100100000, guid: 8edf19af6c04913459049210b6d0e6a0, type: 3}
 --- !u!4 &2694752133564952639 stripped
 Transform:
@@ -10283,6 +10333,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1344676310610779962}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3327736147541305989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4361526918571079103, guid: 8edf19af6c04913459049210b6d0e6a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1344676310610779962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5903968586016335810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327736147541305989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4c7e612e98fa54ca7b7dc2ef9eb107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
 --- !u!1001 &2502278313183809998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10790,7 +10859,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7380702054783398070, guid: 078b6019a381cf843b5e384d5377bf60,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2823324802383754611}
   m_SourcePrefab: {fileID: 100100000, guid: 078b6019a381cf843b5e384d5377bf60, type: 3}
 --- !u!4 &2853240791754537354 stripped
 Transform:
@@ -10798,6 +10871,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5386000197056893830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3230048290751816496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7380702054783398070, guid: 078b6019a381cf843b5e384d5377bf60,
+    type: 3}
+  m_PrefabInstance: {fileID: 5386000197056893830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2823324802383754611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230048290751816496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4c7e612e98fa54ca7b7dc2ef9eb107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
 --- !u!1001 &6518953942970682615
 PrefabInstance:
   m_ObjectHideFlags: 0

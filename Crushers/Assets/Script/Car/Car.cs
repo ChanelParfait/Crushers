@@ -27,7 +27,7 @@ public class Car : ScriptableObject
 
     [Header("Mass and Physics")]
 
-    [Range(200, 1000)]
+    [Range(600, 1000)]
     [SerializeField] private int baseBodyMass;
     [Range(200,1000)]
     [SerializeField] private int baseGravityMultiplier;
