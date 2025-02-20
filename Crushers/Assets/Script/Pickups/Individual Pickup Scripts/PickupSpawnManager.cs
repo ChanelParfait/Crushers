@@ -113,10 +113,8 @@ public class PickupSpawnManager : MonoBehaviour
     private void HandlePickupCollected(Transform spawnPoint)
     {
         Debug.Log($"Pickup collected at {spawnPoint.name}");
-        // Remove the collected pickup
         activePickups[spawnPoint] = null;
-
-        // Respawn pickups with new random spots after a delay
+        
         StartCoroutine(RespawnAllPickupsWithDelay());
     }
 
@@ -125,7 +123,7 @@ public class PickupSpawnManager : MonoBehaviour
         float randomDelay = Random.Range(5f, 10f);
         yield return new WaitForSeconds(randomDelay);
 
-        ShuffleList(spawnLocations); // Ensure new random locations
+        ShuffleList(spawnLocations);
         SpawnPickups();
     }
 
@@ -147,6 +145,7 @@ public class PickupSpawnManager : MonoBehaviour
             }
         }
     }
+
 
 
     private void ShuffleList(List<Transform> list)

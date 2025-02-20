@@ -118,7 +118,7 @@ public class PickUpManager : MonoBehaviour
         newLocation.y = 0f;
         */
             GameObject RocketGm = Instantiate(Rocket,transform.position + transform.up * 2f + transform.forward, transform.rotation);
-            RocketGm.GetComponent<RocketPickup>().SetFiredBy(gameObject.GetComponent<ScoreKeeper>()); 
+            RocketGm.GetComponent<RocketProjectile>().GetFiredBy(); 
             //RocketGm.transform.rotation = Quaternion.LookRotation(newLocation);
             
             Collider rocketCollider = RocketGm.GetComponent<Collider>();
@@ -158,7 +158,7 @@ public class PickUpManager : MonoBehaviour
         PlayAudio(sfx[1]);
         this.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 10000f, ForceMode.Impulse);
 
-        Transform thrusterMountPoint = transform.Find("ThrusterMountPoint");
+        Transform thrusterMountPoint = transform.Find("Body/ThrusterMountPoint");
         if (thrusterMountPoint == null)
         {
             Debug.LogError("thrusterMountPoint not found!");

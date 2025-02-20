@@ -14138,7 +14138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useSceneSpecificList: 0
   globalPickupList:
-  - {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e, type: 3}
+  - {fileID: 1461281338123696930, guid: e504892d5e10fff43927d9bae774d801, type: 3}
   sceneSpecificPickupList: []
   highValuePickup: {fileID: 5421771561973306205, guid: 30a0a7c3bbae0b34e84d9fa8dd9f1e2e,
     type: 3}

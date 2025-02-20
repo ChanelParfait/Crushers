@@ -13,11 +13,10 @@ public class RocketProjectile : MonoBehaviour
 
     [SerializeField] private GameObject carcontroller;
 
-    [SerializeField] private float _Speed;
-    private float _HitRadius;
+    private float _Speed = 100f;
+    private float _HitRadius = 300f;
     
     public void Initialize(float speed, float hitRadius, GameObject FiredFrom ) {
-        _Speed = speed;
         _HitRadius = hitRadius;
         FiredBy = FiredFrom.GetComponent<ScoreKeeper>();
         carcontroller = FiredFrom;
@@ -46,7 +45,7 @@ public class RocketProjectile : MonoBehaviour
 
     private void Start()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Force);
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * _Speed, ForceMode.Impulse);
     }
     public ScoreKeeper GetFiredBy()
     {
