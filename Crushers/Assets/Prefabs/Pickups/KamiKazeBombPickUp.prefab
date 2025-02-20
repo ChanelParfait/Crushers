@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: KamiKazeBombPickUp
       objectReference: {fileID: 0}
+    - target: {fileID: 4619868507876446764, guid: 5362b490c159099418c5dae9a21e246d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
