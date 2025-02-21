@@ -709,6 +709,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSetupMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1424724720390429031, guid: 6027ea41d6186bb469aa2b68505fba76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2734659750398909137, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}
       propertyPath: m_Pivot.x

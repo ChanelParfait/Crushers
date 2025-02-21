@@ -26,6 +26,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     public bool VehicleConfirmed { get; set; }
     public VehicleUIController UIController { get; set; }
+    // Vehicle Canvas Should be Disabled on Start
     public GameObject VehicleSelectCanvas;
 
     private CustomNetworkManager manager;
