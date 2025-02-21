@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2803152166231245807}
   - component: {fileID: 6536872711409601245}
   - component: {fileID: 1523102095568285515}
+  - component: {fileID: 8567057094746309842}
   - component: {fileID: 3671099933716223068}
   - component: {fileID: -552091363406059293}
-  - component: {fileID: 8567057094746309842}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Projectile
@@ -85,6 +85,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8567057094746309842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768340816340407569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0747b1f9e56794f98c7f34d7bceda7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplosionVFX: {fileID: 8151073103637540511, guid: b71a59d9199ad244195c26cd25993954,
+    type: 3}
+  FiredBy: {fileID: 0}
+  explosionSFX:
+  - {fileID: 8300000, guid: 51a0fd218b54bbd4691583a37185bea0, type: 3}
+  - {fileID: 8300000, guid: 509198f3735c1564bb7d51d4a9d084ce, type: 3}
+  - {fileID: 8300000, guid: b37a42f5e495de945bbdc6a0539d71d2, type: 3}
+  - {fileID: 8300000, guid: 2efdf7b84d4a24e4e84242385e02a866, type: 3}
+  - {fileID: 8300000, guid: 590f6fdd45920db448d33a0967e91b22, type: 3}
+  carcontroller: {fileID: 0}
+  _ExplosionForce: 9000
 --- !u!82 &3671099933716223068
 AudioSource:
   m_ObjectHideFlags: 0
@@ -201,28 +224,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b37a42f5e495de945bbdc6a0539d71d2, type: 3}
   - {fileID: 8300000, guid: 2efdf7b84d4a24e4e84242385e02a866, type: 3}
   - {fileID: 8300000, guid: 590f6fdd45920db448d33a0967e91b22, type: 3}
---- !u!114 &8567057094746309842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3768340816340407569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0747b1f9e56794f98c7f34d7bceda7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExplosionVFX: {fileID: 8151073103637540511, guid: b71a59d9199ad244195c26cd25993954,
-    type: 3}
-  FiredBy: {fileID: 0}
-  explosionSFX:
-  - {fileID: 8300000, guid: 51a0fd218b54bbd4691583a37185bea0, type: 3}
-  - {fileID: 8300000, guid: 509198f3735c1564bb7d51d4a9d084ce, type: 3}
-  - {fileID: 8300000, guid: b37a42f5e495de945bbdc6a0539d71d2, type: 3}
-  - {fileID: 8300000, guid: 2efdf7b84d4a24e4e84242385e02a866, type: 3}
-  - {fileID: 8300000, guid: 590f6fdd45920db448d33a0967e91b22, type: 3}
-  carcontroller: {fileID: 0}
+  ExplosionForce: 100000
 --- !u!1001 &305837087231789428
 PrefabInstance:
   m_ObjectHideFlags: 0

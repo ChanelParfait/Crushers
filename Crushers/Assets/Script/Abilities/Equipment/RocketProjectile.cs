@@ -15,6 +15,7 @@ public class RocketProjectile : MonoBehaviour
 
     private float _Speed = 100f;
     private float _HitRadius = 300f;
+    [SerializeField] private float _ExplosionForce = 100000;
     
     public void Initialize(float speed, float hitRadius, GameObject FiredFrom ) {
         _HitRadius = hitRadius;
@@ -81,7 +82,7 @@ public class RocketProjectile : MonoBehaviour
                 if (hitCollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
                 {
                     // Apply explosion force to the player
-                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position, radius, 10, ForceMode.Force);
+                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(_ExplosionForce, gameObject.transform.position, radius, 10, ForceMode.Force);
                     // set last collided vehicle of player
                     if (hitCollider.GetComponentInParent<ScoreKeeper>() != FiredBy)
                     {

@@ -12,6 +12,7 @@ public class RocketPickup : MonoBehaviour
     
     private float _Speed = 100f;
     private float Radius = 10f;
+    [SerializeField] private float ExplosionForce = 100000;
 
     private void Start()
     {
@@ -72,7 +73,7 @@ public class RocketPickup : MonoBehaviour
                 if (hitCollider.GetComponentInParent<PickUpManager>().State != Shield.IsOn)
                 {
                     // Apply explosion force to the player
-                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(100000, gameObject.transform.position , radius, 10, ForceMode.Force);
+                    hitCollider.GetComponentInParent<Rigidbody>().AddExplosionForce(ExplosionForce, gameObject.transform.position , radius, 10, ForceMode.Force);
                     // set last collided vehicle of player
                     hitCollider.GetComponentInParent<ImpactController>().SetLastCollidedVehicle(FiredBy);
                     // set death type to rocket

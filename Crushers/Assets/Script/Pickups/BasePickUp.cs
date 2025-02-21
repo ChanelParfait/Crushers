@@ -8,21 +8,24 @@ using UnityEngine.UIElements;
 public class BasePickUp : MonoBehaviour
 {
     [SerializeField] private PickupType SelectedPU;
+    
+    // Event triggered when the pickup is collected
+    public event Action OnPickupCollected;
 
     public PickupType GetPickupType(){
         Debug.Log(SelectedPU);
         return SelectedPU;
     }
-    /*private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerEnter(Collider other)
     {
-       
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Picked Up by" + other.gameObject.name);
-            other.gameObject.transform.root.GetComponentInChildren<PickUpManager>().SetPickup(SelectedPU);
-            Destroy(this.gameObject);
+            Debug.Log("Triggered");
+            OnPickupCollected?.Invoke();
+            Destroy(gameObject);
         }
-    }*/
+    }
     
     
 }

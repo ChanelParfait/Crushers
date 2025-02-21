@@ -12,79 +12,56 @@ public class PickupSpawnManager : MonoBehaviour
     [Header("Pickup Settings")]
     [SerializeField] private GameObject highValuePickup;
     [SerializeField] private float percentageOfHighPickup = 10f;
-    [SerializeField] private int maxPickupsPerCycle = 3;
+    [SerializeField] private int MaxPickups = 0;
+    private List<Transform> TotalSpawnLocations = new List<Transform>();
+    private List<Transform> AvailableSpawnLocations = new List<Transform>();
 
-    private List<Transform> spawnLocations = new List<Transform>();
-
-    private Dictionary<Transform, GameObject> activePickups; // Tracks active pickups at spawn locations
+    //private Dictionary<Transform, GameObject> activePickups; // Tracks active pickups at spawn locations
 
     private void Start()
     {
-        // Initialize the dictionary
-        activePickups = new Dictionary<Transform, GameObject>();
-
         // Get all spawn locations first
         GetAllSpawningLocations();
-
-        // Initialize dictionary with spawn locations
-        foreach (var spawnPoint in spawnLocations)
-        {
-            activePickups[spawnPoint] = null;
-        }
-
-        if (GetComponent<MeshRenderer>())
-        {
-            GetComponent<MeshRenderer>().enabled = false;
-        }
+        AvailableSpawnLocations = TotalSpawnLocations;
 
         // Spawn pickups
-        SpawnPickups();
+        SpawnAllPickups();
     }
 
 
-    private void SpawnPickups()
+    private void SpawnAllPickups()
     {
-        // Shuffle the spawn locations for randomness
-        List<Transform> availableLocations = new List<Transform>(spawnLocations);
-        ShuffleList(availableLocations);
-
-        // Clear previously used pickups
-        ClearInactivePickups();
-
         // Spawn pickups at randomly chosen locations
-        int pickupsToSpawn = Mathf.Min(maxPickupsPerCycle, availableLocations.Count);
+        int pickupsToSpawn = Mathf.Min(MaxPickups, AvailableSpawnLocations.Count);
         for (int i = 0; i < pickupsToSpawn; i++)
         {
-            Transform spawnPoint = availableLocations[i];
-            SpawnPickupAtLocation(spawnPoint);
+            // Select a Random Spawn Point from available locations
+            Transform spawn = AvailableSpawnLocations[Random.Range(0, AvailableSpawnLocations.Count - 1)]; 
+            SpawnPickup(GetRandomPickup(), spawn);
+            // Remove Spawn Point from Available Locations
+            AvailableSpawnLocations.Remove(spawn);
         }
     }
 
-    private void SpawnPickupAtLocation(Transform spawnPoint)
+    private void SpawnPickup(GameObject pickup, Transform spawn)
     {
-        if (!activePickups.ContainsKey(spawnPoint))
+        if (!AvailableSpawnLocations.Contains(spawn))
         {
-            Debug.LogWarning($"Spawn point {spawnPoint.name} is not in the activePickups dictionary.");
+            Debug.LogWarning($"Spawn point {spawn.name} is not available");
             return;
         }
+        GameObject newPickup = Instantiate(pickup, spawn.position, spawn.rotation, transform);
 
-        if (activePickups[spawnPoint] == null)
+        BasePickUp pickupBehavior = newPickup.GetComponent<BasePickUp>();
+        if (pickupBehavior)
         {
-            GameObject newPickup = Instantiate(GetRandomPickup(), spawnPoint.position, spawnPoint.rotation, transform);
-            activePickups[spawnPoint] = newPickup;
-
-            var pickupBehavior = newPickup.GetComponent<PickUpBehavior>();
-            if (pickupBehavior != null)
-            {
-                pickupBehavior.OnPickupCollected += () => HandlePickupCollected(spawnPoint);
-            }
-            else
-            {
-                Debug.LogWarning($"Pickup prefab {newPickup.name} is missing the PickUpBehavior script.");
-            }
+            pickupBehavior.OnPickupCollected += () => HandlePickupCollected(spawn);
+        }
+        else
+        {
+            Debug.LogWarning($"Prefab {newPickup.name} is missing the PickUpBehavior script.");
         }
     }
-
 
     private GameObject GetRandomPickup()
     {
@@ -113,58 +90,31 @@ public class PickupSpawnManager : MonoBehaviour
     private void HandlePickupCollected(Transform spawnPoint)
     {
         Debug.Log($"Pickup collected at {spawnPoint.name}");
-        activePickups[spawnPoint] = null;
+        AvailableSpawnLocations.Add(spawnPoint);
         
-        StartCoroutine(RespawnAllPickupsWithDelay());
+        StartCoroutine(SpawnPickupWithDelay());
     }
 
-    private IEnumerator RespawnAllPickupsWithDelay()
+    private IEnumerator SpawnPickupWithDelay()
     {
-        float randomDelay = Random.Range(5f, 10f);
+        Debug.Log("Respawn Pickup");
+        float randomDelay = Random.Range(3f, 18f);
         yield return new WaitForSeconds(randomDelay);
 
-        ShuffleList(spawnLocations);
-        SpawnPickups();
+        Transform spawn = AvailableSpawnLocations[Random.Range(0, AvailableSpawnLocations.Count - 1)]; 
+        SpawnPickup(GetRandomPickup(), spawn);
     }
 
-
-    private void ClearInactivePickups()
-    {
-        StartCoroutine(DestroyAllPickups());
-    }
-
-    private IEnumerator DestroyAllPickups()
-    {
-        foreach (var spawnPoint in activePickups.Keys)
-        {
-            if (activePickups[spawnPoint] != null)
-            {
-                Destroy(activePickups[spawnPoint]);
-                yield return null; // Wait a frame to ensure proper destruction
-                activePickups[spawnPoint] = null;
-            }
-        }
-    }
-
-
-
-    private void ShuffleList(List<Transform> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int randomIndex = Random.Range(0, i + 1);
-            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
-        }
-    }
 
     private void GetAllSpawningLocations()
     {
-        spawnLocations.Clear();
+        TotalSpawnLocations.Clear();
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            spawnLocations.Add(transform.GetChild(i));
+            TotalSpawnLocations.Add(transform.GetChild(i));
         }
+        
     }
 
 }
