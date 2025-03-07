@@ -96,8 +96,8 @@ public class ImpactController : MonoBehaviour
                 newCenterOfMass.y = Mathf.Max(newCenterOfMass.y, 0f); 
 
                 rb.centerOfMass = newCenterOfMass;
-                Debug.Log("New center of mass on Y: " + newCenterOfMass);
-                Debug.Log("hitforce: " + hitForce);
+                //Debug.Log("New center of mass on Y: " + newCenterOfMass);
+                //Debug.Log("hitforce: " + hitForce);
                 rb.AddForce(forceDirection * hitForce, ForceMode.Impulse);
             }
         }

@@ -149,7 +149,7 @@ public class PlayerManager : MonoBehaviour
                     break; 
                 }
             }
-            Debug.Log("PlayerManager Check If All Ready: " + AllReady);
+            //Debug.Log("PlayerManager Check If All Ready: " + AllReady);
 
             if(AllReady)
             {   
@@ -253,7 +253,7 @@ public class PlayerManager : MonoBehaviour
     // Level End Event // 
     private void LoadLeaderboard()
     {
-        Debug.Log("Level Complete");
+        //Debug.Log("Level Complete");
         SceneManager.LoadScene(leaderboardScene);
     }
 

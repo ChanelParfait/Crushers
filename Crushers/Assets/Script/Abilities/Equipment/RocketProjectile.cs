@@ -14,7 +14,7 @@ public class RocketProjectile : MonoBehaviour
     [SerializeField] private GameObject carcontroller;
 
     private float _Speed = 100f;
-    private float _HitRadius = 300f;
+    private float _HitRadius = 30f;
     [SerializeField] private float _ExplosionForce = 100000;
     
     public void Initialize(float speed, float hitRadius, GameObject FiredFrom ) {

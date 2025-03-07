@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Steamworks;
-using Edgegap;
-using UnityEditor.SearchService;
+
 
 public class NetworkPlayerController : NetworkBehaviour
 {

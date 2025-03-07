@@ -13,7 +13,7 @@ public class BasePickUp : MonoBehaviour
     public event Action OnPickupCollected;
 
     public PickupType GetPickupType(){
-        Debug.Log(SelectedPU);
+        //Debug.Log(SelectedPU);
         return SelectedPU;
     }
     
@@ -21,7 +21,7 @@ public class BasePickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Triggered");
+            //Debug.Log("Triggered");
             OnPickupCollected?.Invoke();
             Destroy(gameObject);
         }

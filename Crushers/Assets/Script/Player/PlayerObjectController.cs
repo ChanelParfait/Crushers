@@ -86,7 +86,7 @@ public class PlayerObjectController : NetworkBehaviour
         else 
         {
             PlayerIndex = GetComponent<PlayerInput>().playerIndex;  
-            Debug.Log("Player Index: " +  PlayerIndex);
+            //Debug.Log("Player Index: " +  PlayerIndex);
             VehicleSelectCanvas.SetActive(true);
         }
     }
@@ -97,7 +97,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
-        Debug.Log("Level Loaded");
+        //Debug.Log("Level Loaded");
         if(isOnline)
         {
             connectionToClient.isReady = true;
@@ -123,7 +123,7 @@ public class PlayerObjectController : NetworkBehaviour
         // When loading into an arena scene
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4)
         {
-            Debug.Log("Arena Level Loaded");
+            //Debug.Log("Arena Level Loaded");
 
             // spawn player vehicle
             SpawnVehicle();
@@ -194,8 +194,8 @@ public class PlayerObjectController : NetworkBehaviour
             //InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
             
             // set vehicle canvas to apply to player camera 
-            Debug.Log("Canvas: " + PlayerVehicle.GetComponentInChildren<Canvas>());
-            Debug.Log("Camera: " + PlayerCam);
+            //Debug.Log("Canvas: " + PlayerVehicle.GetComponentInChildren<Canvas>());
+            //Debug.Log("Camera: " + PlayerCam);
 
             PlayerVehicle.GetComponentInChildren<Canvas>().worldCamera = GetComponentInChildren<Camera>();
             SetPlayerLayers(); 
@@ -221,14 +221,14 @@ public class PlayerObjectController : NetworkBehaviour
     public void SetPosition(){
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-        Debug.Log("Spawn: " + Spawn);
+        //Debug.Log("Spawn: " + Spawn);
         transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
     }
 
     public void SelectVehicle(int index, GameObject vehicle)
     {
         if(index != PlayerIndex) { return; }
-        Debug.Log("Select Vehicle");
+        //Debug.Log("Select Vehicle");
 
         PlayerVehiclePrefab = vehicle;
         // Set the vehicle type based on the vehicle name
@@ -248,7 +248,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     public void SetVehicleConfirmed()
     {
-        Debug.Log("Set Vehicle Confirmed ");
+        //Debug.Log("Set Vehicle Confirmed ");
 
         if(isOnline){
             GetComponent<NetworkPlayerController>().ChangeVehicleConfirmed();

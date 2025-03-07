@@ -92,7 +92,7 @@ public class CameraController : MonoBehaviour
         if ((freeLookCamera.transform.localPosition.x > 2 
             || freeLookCamera.transform.localPosition.x < -2)
             && (cameraLookAtPointPos.x > 0.0001f || cameraLookAtPointPos.x < -0.0001f)) {
-            Debug.Log("centering");
+            //Debug.Log("centering");
             cameraLookAtPointPos.x = Mathf.Lerp(cameraLookAtPointPos.x, 0, 5f * Time.deltaTime);
             cameraLookAtPoint.transform.localPosition = cameraLookAtPointPos;
         }

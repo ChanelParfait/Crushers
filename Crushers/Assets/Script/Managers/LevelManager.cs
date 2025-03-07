@@ -105,7 +105,7 @@ public class LevelManager : MonoBehaviour
     {
         Transform spawn = null;
         // get last available spawn position in list
-        Debug.Log(availableSpawnPositions);
+        //Debug.Log(availableSpawnPositions);
         if(availableSpawnPositions.Count > 0){
             spawn = availableSpawnPositions[availableSpawnPositions.Count - 1];
             // and remove it 

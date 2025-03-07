@@ -42,7 +42,7 @@ public class SetupMenuController : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("Enable UI Controls");
+        //Debug.Log("Enable UI Controls");
         
         /// initialise controls and enable them 
         InputActionAsset controls = GetComponentInParent<PlayerInput>().actions;
@@ -66,7 +66,7 @@ public class SetupMenuController : MonoBehaviour
 
     void OnDisable()
     {
-        Debug.Log("Disable UI Controls");
+        //Debug.Log("Disable UI Controls");
 
         UI.FindAction("Left").performed -= OnLeft;
         UI.FindAction("Right").performed -= OnRight;
@@ -83,7 +83,7 @@ public class SetupMenuController : MonoBehaviour
     // UI Navigation for setup menu
     public void OnLeft(CallbackContext context)
     {
-        Debug.Log("Left: " + selectionEnabled);
+        //Debug.Log("Left: " + selectionEnabled);
         if(!selectionEnabled){ return; }
         if(context.performed){
             // select previous vehicle
@@ -100,7 +100,7 @@ public class SetupMenuController : MonoBehaviour
 
     public void OnRight(CallbackContext context)
     {
-        Debug.Log("Right: " + selectionEnabled);
+        //Debug.Log("Right: " + selectionEnabled);
 
         if(!selectionEnabled){ return; }
         if(context.performed){

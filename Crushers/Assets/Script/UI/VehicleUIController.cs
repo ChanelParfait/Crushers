@@ -133,7 +133,7 @@ public class VehicleUIController : MonoBehaviour
 
     public void ShowKillFeed(GameObject ScoringPlayer, GameObject DefeatedPlayer, TypeOfDeath Death)
     {
-        Debug.Log("Showing kill feed");
+        //Debug.Log("Showing kill feed");
         GameObject k = Instantiate(killFeed, killfeedSpawn.position, killfeedSpawn.rotation );
         k.transform.SetParent(killfeedSpawn, false);
         k.transform.localPosition = Vector3.zero;

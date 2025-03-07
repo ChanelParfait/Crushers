@@ -51,6 +51,8 @@ public class PickupSpawnManager : MonoBehaviour
             return;
         }
         GameObject newPickup = Instantiate(pickup, spawn.position, spawn.rotation, transform);
+        AvailableSpawnLocations.Remove(spawn);
+
 
         BasePickUp pickupBehavior = newPickup.GetComponent<BasePickUp>();
         if (pickupBehavior)
@@ -89,7 +91,7 @@ public class PickupSpawnManager : MonoBehaviour
 
     private void HandlePickupCollected(Transform spawnPoint)
     {
-        Debug.Log($"Pickup collected at {spawnPoint.name}");
+        //Debug.Log($"Pickup collected at {spawnPoint.name}");
         AvailableSpawnLocations.Add(spawnPoint);
         
         StartCoroutine(SpawnPickupWithDelay());
@@ -97,7 +99,7 @@ public class PickupSpawnManager : MonoBehaviour
 
     private IEnumerator SpawnPickupWithDelay()
     {
-        Debug.Log("Respawn Pickup");
+        //Debug.Log("Respawn Pickup");
         float randomDelay = Random.Range(3f, 18f);
         yield return new WaitForSeconds(randomDelay);
 

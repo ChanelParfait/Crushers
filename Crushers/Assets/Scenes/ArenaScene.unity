@@ -14147,7 +14147,6 @@ MonoBehaviour:
     type: 3}
   percentageOfHighPickup: 20
   MaxPickups: 4
-  TotalSpawnLocations: []
 --- !u!43 &331379303
 Mesh:
   m_ObjectHideFlags: 0
@@ -17318,7 +17317,7 @@ PrefabInstance:
     - target: {fileID: 8026828948466852175, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.79999924
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8026828948466852175, guid: ea1ac7b3b82636f4da33e88a017da407,
         type: 3}

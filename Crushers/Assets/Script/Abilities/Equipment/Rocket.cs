@@ -12,7 +12,7 @@ public class Rocket : AbilityBase
     [SerializeField] private GameObject rocketEquipmentPrefab;
     [SerializeField] private float rocketSpeed = 1000f;
     [SerializeField] private GameObject explosionVFX;
-    [SerializeField] private float hitRadius = 30f;
+    [SerializeField] private float hitRadius = 10f;
     public override void Use(GameObject controlledCar)
     {
         Transform attachment = controlledCar.transform.Find("AttachmentsPos/" + attachmentPos.ToString());
