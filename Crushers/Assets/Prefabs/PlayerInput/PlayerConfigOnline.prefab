@@ -506,6 +506,7 @@ MonoBehaviour:
   pickUpManager: {fileID: 0}
   abilityManager: {fileID: 0}
   freelookCam: {fileID: 0}
+  vehicleUIController: {fileID: 0}
   isOnline: 1
 --- !u!114 &7078103051754742075
 MonoBehaviour:
@@ -876,7 +877,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 2449448533462767253, guid: c161b22b9c059ae48a2cf91ee546d164,
+      objectReference: {fileID: 6680170060424688024, guid: 792059e8412c0b449a64a2560d9d3d30,
         type: 3}
     - target: {fileID: 6697803428010945754, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}

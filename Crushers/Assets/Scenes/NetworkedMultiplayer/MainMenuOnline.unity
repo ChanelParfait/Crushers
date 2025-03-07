@@ -48950,7 +48950,7 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 2449448533462767253, guid: e821818198fb6c5498f3f57a8a8321aa, type: 3}
-  - {fileID: 2449448533462767253, guid: c161b22b9c059ae48a2cf91ee546d164, type: 3}
+  - {fileID: 6680170060424688024, guid: 792059e8412c0b449a64a2560d9d3d30, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2

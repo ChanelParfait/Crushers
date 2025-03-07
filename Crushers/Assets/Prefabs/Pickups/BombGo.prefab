@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1721261155722601631}
   - component: {fileID: 3866203018188440981}
-  - component: {fileID: 1399159782071261282}
   m_Layer: 0
   m_Name: BombGo
   m_TagString: Untagged
@@ -57,18 +56,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b37a42f5e495de945bbdc6a0539d71d2, type: 3}
   - {fileID: 8300000, guid: 2efdf7b84d4a24e4e84242385e02a866, type: 3}
   - {fileID: 8300000, guid: 590f6fdd45920db448d33a0967e91b22, type: 3}
---- !u!114 &1399159782071261282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3565015708328552895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e62ad62085b167f4a99fd5050cb30cf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3662228194857164631
 PrefabInstance:
   m_ObjectHideFlags: 0

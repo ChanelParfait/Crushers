@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Cinemachine;
 using Mirror;
 using Mirror.BouncyCastle.Security;
@@ -15,7 +16,7 @@ using UnityEngine.SceneManagement;
 // This class controls the player initialisation and determines behaviour between online and offline gameplay
 public class PlayerObjectController : NetworkBehaviour
 {
-    public GameObject PlayerVehicle {get; set;}
+    public GameObject PlayerVehicle;
     public GameObject PlayerVehiclePrefab;
     public PlayerInput Input { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
@@ -43,6 +44,8 @@ public class PlayerObjectController : NetworkBehaviour
 
     // Is Online Flag 
     public bool isOnline = false; 
+    // Has the player vehicle been spawned 
+    public bool playerInitialised = false;
     // is Testing Flag
     public bool isTesting = false; 
     // Events 
@@ -92,8 +95,19 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     void Update()
-    {
-        //Debug.Log("Client Ready: " + connectionToClient.isReady);
+    {   
+        
+        if(isOnline){
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+            if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
+                if(NetworkClient.ready && !playerInitialised)
+                {
+                    SpawnVehicle();
+                    playerInitialised = true; 
+                }
+            }
+        }
+    
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
@@ -123,10 +137,10 @@ public class PlayerObjectController : NetworkBehaviour
         // When loading into an arena scene
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4)
         {
-            //Debug.Log("Arena Level Loaded");
-
-            // spawn player vehicle
-            SpawnVehicle();
+            // only use on scene loaded for offline spawning
+            if(!isOnline){
+                SpawnVehicle();
+            }
         } 
     }
 
@@ -140,82 +154,74 @@ public class PlayerObjectController : NetworkBehaviour
 
     }
 
-    /*
-    private IEnumerator WaitTillReady()
-    {
-        while (!connectionToClient.isReady) {
-            yield return new WaitForSeconds(0.25f);
-        }
-        CmdSpawnVehicle(PlayerVehiclePrefab, Spawn, transform, connectionToClient);
-    }
-    */
 
     private void SpawnVehicle()
     {
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
+        Destroy(GetComponentInChildren<Canvas>().gameObject);
+
         if(isOnline) 
         {
-            /*Debug.Log("Spawn Vehicle Online: " + gameObject.name);
-            if(connectionToClient.isReady)
-            {
-                CmdSpawnVehicle(PlayerVehiclePrefab, Spawn, transform, connectionToClient);
-            } else {
-                StartCoroutine(WaitTillReady());
-            }*/
+            transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+            SpawnVehicleOnline();
         }
         else
         {
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
-            Destroy(GetComponentInChildren<Canvas>().gameObject);
-
-            PlayerVehicle = Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform);
-        
-            //PlayerVehicle = GetComponentInChildren<CarController>().gameObject;
-            
-            // get UI controller for each vehicle
-            UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
-            // disable vehicle controls initially if not testing
-            UIController.startTimer.SetActive(!isTesting);
-
-            // find car controller, pickup manager and camera input handler and hand them to the player input handler
-            CarController car = PlayerVehicle.GetComponent<CarController>();
-            car.enabled = isTesting;
-
-            //initialise other input handler components
-            InputHandler.SetCarController(car);
-            InputHandler.PlayerModel = PlayerVehicle;
-            InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
-            InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
-            InputHandler.SetCameraInputHandler(PlayerVehicle.GetComponentInChildren<CameraInputHandler>());
-            InputHandler.SetVehicleUIController(PlayerVehicle.GetComponentInChildren<VehicleUIController>());
-            // disable camera shake
-            //InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
-            
-            // set vehicle canvas to apply to player camera 
-            //Debug.Log("Canvas: " + PlayerVehicle.GetComponentInChildren<Canvas>());
-            //Debug.Log("Camera: " + PlayerCam);
-
-            PlayerVehicle.GetComponentInChildren<Canvas>().worldCamera = GetComponentInChildren<Camera>();
-            SetPlayerLayers(); 
+            InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform));
         }
     }
-    /*
-    [Command]
-    private void CmdSpawnVehicle(GameObject prefab, Transform spawn, Transform parent, NetworkConnectionToClient conn)
-    {
-        GameObject oldPlayer = conn.identity.gameObject;
+
+    private void InitialiseVehicle(GameObject playerVehicle){
+        if(!PlayerVehicle) {    PlayerVehicle = playerVehicle;  }
+        // get UI controller for each vehicle
+        UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
+        // disable vehicle controls initially if not testing
+        UIController.startTimer.SetActive(!isTesting);
+
+        // find car controller, pickup manager and camera input handler and hand them to the player input handler
+        CarController car = PlayerVehicle.GetComponent<CarController>();
+        car.enabled = isTesting;
+
+        //initialise other input handler components
+        InputHandler.SetCarController(car);
+        InputHandler.PlayerModel = PlayerVehicle;
+        InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
+        InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
+        InputHandler.SetCameraInputHandler(PlayerVehicle.GetComponentInChildren<CameraInputHandler>());
+        InputHandler.SetVehicleUIController(PlayerVehicle.GetComponentInChildren<VehicleUIController>());
+        // disable camera shake
+        //InputHandler.GetFreelook().GetComponent<CinemachineImpulseListener>().enabled = false;
         
-        // Instantiate the new player object and broadcast to clients
-        // Include true for keepAuthority paramater to prevent ownership change
-        GameObject player = Instantiate(prefab, spawn.position, spawn.rotation, parent);
-        NetworkServer.ReplacePlayerForConnection(conn, player, true);
-        player.GetComponent<PlayerObjectController>().PlayerVehicle = player;
-        // Remove the previous player object that's now been replaced
-        // Delay is required to allow replacement to complete.
-        Destroy(oldPlayer, 0.1f);
-    }*/
+        // set vehicle canvas to apply to player camera 
+        PlayerVehicle.GetComponentInChildren<Canvas>().worldCamera = GetComponentInChildren<Camera>();
+        SetPlayerLayers(); 
+    }
+
+
+    private void SpawnVehicleOnline(){
+        if(isClient)
+        {
+            CmdSpawnVehicle();
+        }
+    }
+    
+
+    // move these commands and rpcs to network player controller
+    [Command]
+    private void CmdSpawnVehicle()
+    {
+        GameObject playerObject = Instantiate(PlayerVehiclePrefab, this.transform.position, this.transform.rotation, this.transform);
+        NetworkServer.Spawn(playerObject, connectionToClient);
+        RpcSpawnVehicle(playerObject);
+    }
+
+    [ClientRpc]
+    private void RpcSpawnVehicle(GameObject playerVehicle){
+        InitialiseVehicle(playerVehicle);
+    }
     
 
     public void SetPosition(){
@@ -262,7 +268,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     private void EnableVehicleControls(){
-        if(isOnline){ return; }
+        //if(isOnline){ return; }
         PlayerVehicle.GetComponent<CarController>().enabled = true;
     }
 
