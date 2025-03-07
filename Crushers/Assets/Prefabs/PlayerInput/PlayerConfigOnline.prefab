@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 658299802029010273}
   - component: {fileID: 8042942846443331091}
   - component: {fileID: 7078103051754742075}
+  - component: {fileID: 8280562438110903214}
   m_Layer: 0
   m_Name: PlayerConfigOnline
   m_TagString: Untagged
@@ -209,10 +210,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  PlayerVehicle: {fileID: 0}
   PlayerVehiclePrefab: {fileID: 6680170060424688024, guid: 0dcff461494fd104a8e18e6f68eccd12,
     type: 3}
+  SelectedVehicleIndex: 0
+  PlayerCam: {fileID: 0}
   VehicleSelectCanvas: {fileID: 1247682565825070303}
   isOnline: 1
+  playerInitialised: 0
   isTesting: 0
   playerLayers:
   - serializedVersion: 2
@@ -506,6 +511,7 @@ MonoBehaviour:
   pickUpManager: {fileID: 0}
   abilityManager: {fileID: 0}
   freelookCam: {fileID: 0}
+  vehicleUIController: {fileID: 0}
   isOnline: 1
 --- !u!114 &7078103051754742075
 MonoBehaviour:
@@ -524,6 +530,39 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &8280562438110903214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449448533462767253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 7030747120131847929}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &2992308494568267930
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +604,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -876,7 +915,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 2449448533462767253, guid: c161b22b9c059ae48a2cf91ee546d164,
+      objectReference: {fileID: 6680170060424688024, guid: 792059e8412c0b449a64a2560d9d3d30,
         type: 3}
     - target: {fileID: 6697803428010945754, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}
@@ -901,7 +940,7 @@ PrefabInstance:
     - target: {fileID: 7787799874494901794, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9181028400679246515, guid: 6027ea41d6186bb469aa2b68505fba76,
         type: 3}

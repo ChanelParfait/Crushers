@@ -488,9 +488,11 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  PlayerVehicle: {fileID: 0}
   PlayerVehiclePrefab: {fileID: 0}
   VehicleSelectCanvas: {fileID: 608979669385013195}
   isOnline: 0
+  playerInitialised: 0
   isTesting: 0
   playerLayers:
   - serializedVersion: 2
@@ -528,8 +530,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.033532117, y: -0.3544352, z: 0.012719453, w: 0.93439263}
-  m_LocalPosition: {x: 83, y: 70.5, z: 184.6}
+  m_LocalRotation: {x: 0.026841128, y: -0.6627921, z: 0.023785314, w: 0.74794424}
+  m_LocalPosition: {x: -60.311474, y: 70.5, z: 193.20633}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -814,6 +816,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5979226084268747325, guid: 6027ea41d6186bb469aa2b68505fba76,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 6680170060424688024, guid: 36020e77e00371f4c93132947e358cb2,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

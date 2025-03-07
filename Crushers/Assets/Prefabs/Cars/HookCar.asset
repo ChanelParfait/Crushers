@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1e3932f80385044a92bfa89c3001ab, type: 3}
   m_Name: HookCar
   m_EditorClassIdentifier: 
+  vehicleIndex: 5
   baseMaxSpeed: 90
   baseMaxReverseSpeed: 45
   baseAccelerationMultiplier: 9

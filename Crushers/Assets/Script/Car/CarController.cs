@@ -28,6 +28,8 @@ public class CarController : MonoBehaviour
     private VehicleType vehicleType;
 
     [SerializeField] private Car car;
+    // create public getter for car in order to retrive the cars index
+    public Car GetCar() { return car; }
 
     [SerializeField] private int playerIndex;
 
@@ -184,6 +186,11 @@ public class CarController : MonoBehaviour
         activeBodyMass = car.GetBaseBodyMass();
         activeGravityMultiplier = car.GetBaseGravityMultiplier();
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("Destroying Vehicle");
     }
 
     // Start is called before the first frame update
@@ -370,7 +377,7 @@ public class CarController : MonoBehaviour
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
-      speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
+      //speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
     }
 
     private void FixedUpdate()

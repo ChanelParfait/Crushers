@@ -2651,6 +2651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 49643463266541418}
   - component: {fileID: 828559772023116797}
+  - component: {fileID: 7345286473890743026}
   - component: {fileID: 4176357864898292693}
   - component: {fileID: 4702013352652804568}
   - component: {fileID: 8741482368120771810}
@@ -2658,7 +2659,9 @@ GameObject:
   - component: {fileID: 2448720167452322469}
   - component: {fileID: 1493166302703072454}
   - component: {fileID: 5581503148192929400}
-  - component: {fileID: 7345286473890743026}
+  - component: {fileID: 5081786098261287848}
+  - component: {fileID: 6702720192296149843}
+  - component: {fileID: 7536001390613639216}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Player
@@ -2715,6 +2718,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!65 &7345286473890743026
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2371082, y: 3.0073714, z: 5.4151535}
+  m_Center: {x: -0.038571358, y: 1.389394, z: -0.1452446}
 --- !u!114 &4176357864898292693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2784,6 +2808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: -30
+  startPosition: {x: 0, y: 0, z: 0}
   flipCollider: {fileID: 7606835715646217555}
 --- !u!114 &8741482368120771810
 MonoBehaviour:
@@ -2865,7 +2890,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196380668202205108}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08a396ad7c3e32a41a22d1f976e72a4d, type: 3}
   m_Name: 
@@ -2942,27 +2967,89 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   scoreText: {fileID: 3691944287138357371}
---- !u!65 &7345286473890743026
-BoxCollider:
+--- !u!114 &5081786098261287848
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196380668202205108}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2371082, y: 3.0073714, z: 5.4151535}
-  m_Center: {x: -0.038571358, y: 1.389394, z: -0.1452446}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3209862866
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &6702720192296149843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 49643463266541418}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &7536001390613639216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196380668202205108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 49643463266541418}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &9114952474528041427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,11 +3883,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleCanvas_Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 9007109847759549406, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: speedLines
+      value: 
+      objectReference: {fileID: 192232366030929803}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1ac2dc27ee11340b483eef11c7082d, type: 3}
+--- !u!198 &192232366030929803 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5120590140802526933, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5018434728043073886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1278392489941599105 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6059818671046578911, guid: 2d1ac2dc27ee11340b483eef11c7082d,
