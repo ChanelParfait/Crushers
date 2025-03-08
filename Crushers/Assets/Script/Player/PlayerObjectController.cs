@@ -114,8 +114,10 @@ public class PlayerObjectController : NetworkBehaviour
         //Debug.Log("Level Loaded");
         if(isOnline)
         {
-            connectionToClient.isReady = true;
-            NetworkClient.Ready();
+            //connectionToClient.isReady = true;
+            if(!NetworkClient.ready){
+                connectionToClient.isReady = true;;
+            }
         }
         
         if(scene.name == "TestingScene")
@@ -126,10 +128,10 @@ public class PlayerObjectController : NetworkBehaviour
         // when loading into the selection menu
         if(scene.name == "VehicleSelection")
         {
-            if(isOnline)
+            if(isOnline && isClient)
             {
                 // Enable Selection Menu
-                VehicleSelectCanvas.SetActive(true);
+                EnableVehicleSelectCanvas();
             }
             SetPosition();
             SetPlayerLayers();
@@ -142,6 +144,21 @@ public class PlayerObjectController : NetworkBehaviour
                 SpawnVehicle();
             }
         } 
+    }
+
+
+    private void EnableVehicleSelectCanvas(){
+        if(isServer){
+            VehicleSelectCanvas.SetActive(true);
+        }
+        if(isClient){
+            RPC_EnableVehicleSelectCanvas();
+        }
+    }
+
+    [ClientRpc]
+    private void RPC_EnableVehicleSelectCanvas(){
+        VehicleSelectCanvas.SetActive(true);
     }
 
 
