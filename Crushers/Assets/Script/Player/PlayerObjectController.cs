@@ -128,7 +128,7 @@ public class PlayerObjectController : NetworkBehaviour
         // when loading into the selection menu
         if(scene.name == "VehicleSelection")
         {
-            if(isOnline && isClient)
+            if(isOnline && isOwned)
             {
                 // Enable Selection Menu
                 EnableVehicleSelectCanvas();
@@ -152,13 +152,13 @@ public class PlayerObjectController : NetworkBehaviour
             VehicleSelectCanvas.SetActive(true);
         }
         if(isClient){
-            RPC_EnableVehicleSelectCanvas();
+            RPC_EnableVehicleSelectCanvas(VehicleSelectCanvas);
         }
     }
 
     [ClientRpc]
-    private void RPC_EnableVehicleSelectCanvas(){
-        VehicleSelectCanvas.SetActive(true);
+    private void RPC_EnableVehicleSelectCanvas(GameObject canvas){
+        canvas.SetActive(true);
     }
 
 
