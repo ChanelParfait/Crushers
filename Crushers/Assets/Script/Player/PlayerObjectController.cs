@@ -131,7 +131,7 @@ public class PlayerObjectController : NetworkBehaviour
             if(isOnline && isOwned)
             {
                 // Enable Selection Menu
-                EnableVehicleSelectCanvas();
+                VehicleSelectCanvas.SetActive(true);
             }
             SetPosition();
             SetPlayerLayers();
