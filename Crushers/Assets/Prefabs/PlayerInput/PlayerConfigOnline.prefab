@@ -209,10 +209,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  PlayerVehicle: {fileID: 0}
   PlayerVehiclePrefab: {fileID: 6680170060424688024, guid: 0dcff461494fd104a8e18e6f68eccd12,
     type: 3}
   VehicleSelectCanvas: {fileID: 1247682565825070303}
   isOnline: 1
+  playerInitialised: 0
   isTesting: 0
   playerLayers:
   - serializedVersion: 2
@@ -566,7 +568,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992308494568267930}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

@@ -116,7 +116,7 @@ public class PlayerObjectController : NetworkBehaviour
         {
             //connectionToClient.isReady = true;
             if(!NetworkClient.ready){
-                connectionToClient.isReady = true;;
+                NetworkClient.Ready();
             }
         }
         
@@ -131,11 +131,13 @@ public class PlayerObjectController : NetworkBehaviour
             if(isOnline && isOwned)
             {
                 // Enable Selection Menu
-                EnableVehicleSelectCanvas();
+                VehicleSelectCanvas.SetActive(true);
+                //EnableVehicleSelectCanvas();
             }
             SetPosition();
             SetPlayerLayers();
         }
+        
         // When loading into an arena scene
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4)
         {
