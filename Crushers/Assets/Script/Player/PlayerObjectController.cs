@@ -116,7 +116,7 @@ public class PlayerObjectController : NetworkBehaviour
         {
             //connectionToClient.isReady = true;
             if(!NetworkClient.ready){
-                NetworkClient.Ready();
+                NetworkClient.Ready(); 
             }
         }
         
@@ -131,13 +131,11 @@ public class PlayerObjectController : NetworkBehaviour
             if(isOnline && isOwned)
             {
                 // Enable Selection Menu
-                VehicleSelectCanvas.SetActive(true);
-                //EnableVehicleSelectCanvas();
+                EnableVehicleSelectCanvas();
             }
             SetPosition();
             SetPlayerLayers();
         }
-        
         // When loading into an arena scene
         if(scene.buildIndex == 2 || scene.buildIndex == 3 || scene.buildIndex == 4)
         {
@@ -181,7 +179,7 @@ public class PlayerObjectController : NetworkBehaviour
         Spawn =  lvlManager.GetSpawnPos();
         Destroy(GetComponentInChildren<Canvas>().gameObject);
 
-        if(isOnline) 
+        if(isOnline && isOwned) 
         {
             transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
