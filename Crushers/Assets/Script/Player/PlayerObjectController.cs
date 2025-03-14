@@ -17,7 +17,7 @@ using UnityEngine.SceneManagement;
 public class PlayerObjectController : NetworkBehaviour
 {
     public GameObject PlayerVehicle;
-    public GameObject PlayerVehiclePrefab;
+    [SyncVar] public GameObject PlayerVehiclePrefab;
     public PlayerInput Input { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
     public int PlayerIndex {get; set;}
