@@ -50056,11 +50056,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleBig
       objectReference: {fileID: 0}
-    - target: {fileID: 3622354296816980752, guid: c08fffbb8ba905940abd0e45810e661e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4846683750393290245, guid: c08fffbb8ba905940abd0e45810e661e,
         type: 3}
       propertyPath: scoreText
@@ -50198,7 +50193,6 @@ PrefabInstance:
     - {fileID: 943873042191307690, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 1237542822253326922, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 769653378127622833, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
-    - {fileID: 3622354296816980752, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 400561193989995605, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
     - {fileID: 182478290353849215, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
@@ -53326,7 +53320,6 @@ PrefabInstance:
     - {fileID: 4680254481523805696, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     - {fileID: 6685162102744100832, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     - {fileID: 5135386207025409819, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
-    - {fileID: 9200824536271654586, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5216788395998388735, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
     - {fileID: 5720308377230925525, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
@@ -63608,11 +63601,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleSmall
       objectReference: {fileID: 0}
-    - target: {fileID: 6377507487817873623, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8078259187839790173, guid: 12e64fa5b3954e44a829a7e3ecd4d30b,
         type: 3}
       propertyPath: scoreText
@@ -63645,7 +63633,6 @@ PrefabInstance:
     - {fileID: 7484150013145430125, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 8928641265971206541, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 6947399341264607606, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
-    - {fileID: 6377507487817873623, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8019592654875629458, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
     - {fileID: 7515397576152508600, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
@@ -65125,11 +65112,6 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7345286473890743026, guid: 05744578e8ef73841af5a41a5fc606d3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8196380668202205108, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Name
@@ -65152,7 +65134,6 @@ PrefabInstance:
     - {fileID: 6535792523372053064, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     - {fileID: 5081786098261287848, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     - {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
-    - {fileID: 7345286473890743026, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5919303738573188535, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
     - {fileID: 6134685691761431197, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
