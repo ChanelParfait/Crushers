@@ -102,7 +102,7 @@ public class PlayerObjectController : NetworkBehaviour
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
                 if(NetworkClient.ready && !playerInitialised)
                 {
-                    SpawnVehicle();
+                    //SpawnVehicle();
                     playerInitialised = true; 
                 }
             }
