@@ -179,11 +179,13 @@ public class PlayerObjectController : NetworkBehaviour
         Spawn =  lvlManager.GetSpawnPos();
         
 
-
+        GameObject canvas  =GetComponentInChildren<Canvas>().gameObject; 
 
         if(isOnline && isOwned) 
         {
-            Destroy(GetComponentInChildren<Canvas>().gameObject);
+            if(canvas){
+                Destroy(GetComponentInChildren<Canvas>().gameObject);
+            }
             transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
         }
