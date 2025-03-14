@@ -187,7 +187,7 @@ public class PlayerObjectController : NetworkBehaviour
             transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
         }
-        else
+        else if(!isOnline)
         {
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
             Destroy(GetComponentInChildren<Canvas>().gameObject);
