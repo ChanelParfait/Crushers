@@ -176,6 +176,7 @@ public class PlayerObjectController : NetworkBehaviour
                 Destroy(canvas.gameObject);
             }
             transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+            //transform.SetPositionAndRotation(new Vector3(0, 0, 0), Spawn.localRotation);
             SpawnVehicleOnline();
         }
         else if(!isOnline)
@@ -226,14 +227,17 @@ public class PlayerObjectController : NetworkBehaviour
     private void CmdSpawnVehicle(Transform playerTransform)
     {
         Debug.Log("Selected Vehicle Index: " + SelectedVehicleIndex);
-        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, this.transform);
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation);
         NetworkServer.Spawn(playerObject, connectionToClient);
+        //playerObject.transform.position = new Vector3(0, 0, 0);
+
         RpcSpawnVehicle(playerObject);
     }
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle){
-        playerVehicle.transform.SetParent(transform);
+        //playerVehicle.transform.SetParent(transform);
+        //playerVehicle.transform.position = new Vector3(0, 0, 0);
         InitialiseVehicle(playerVehicle);
     }
     
