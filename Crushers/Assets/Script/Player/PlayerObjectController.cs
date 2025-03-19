@@ -25,7 +25,7 @@ public class PlayerObjectController : NetworkBehaviour
     public int PlayerIndex {get; set;}
     public int Score {get; set;}
 
-    public Camera PlayerCam {get; set;}
+    public Camera PlayerCam;
 
     public bool VehicleConfirmed { get; set; }
     public VehicleUIController UIController { get; set; }
@@ -132,6 +132,7 @@ public class PlayerObjectController : NetworkBehaviour
         {
             if(isOnline && isOwned)
             {
+                Debug.Log("Enable Vehicle Canvas: " + gameObject.name);
                 // Enable Selection Menu
                 EnableVehicleSelectCanvas();
             }
@@ -343,6 +344,8 @@ public class PlayerObjectController : NetworkBehaviour
             // Add Camera to Player Layer
             PlayerCam = GetComponentInChildren<Camera>();
             if(isOwned){
+                Debug.Log("Enable Camera: " + gameObject.name);
+
                 PlayerCam.enabled = true;
             }
             PlayerCam.gameObject.layer = layerToAdd;
