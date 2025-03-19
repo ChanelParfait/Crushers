@@ -116,7 +116,7 @@ public class PlayerObjectController : NetworkBehaviour
         //Debug.Log("Level Loaded");
         if(isOnline)
         {
-            if(!NetworkClient.ready && isOwned){
+            if(!NetworkClient.ready && isServer){
                 //NetworkClient.Ready(); 
                 connectionToClient.isReady = true;
             }
