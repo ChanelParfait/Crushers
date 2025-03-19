@@ -233,6 +233,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle){
+        playerVehicle.transform.SetParent(transform);
         InitialiseVehicle(playerVehicle);
     }
     
