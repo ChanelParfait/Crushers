@@ -116,8 +116,7 @@ public class PlayerObjectController : NetworkBehaviour
         //Debug.Log("Level Loaded");
         if(isOnline)
         {
-            //connectionToClient.isReady = true;
-            if(!NetworkClient.ready){
+            if(!NetworkClient.ready && isOwned){
                 //NetworkClient.Ready(); 
                 connectionToClient.isReady = true;
             }
@@ -134,7 +133,7 @@ public class PlayerObjectController : NetworkBehaviour
             if(isOnline && isOwned)
             {
                 // Enable Selection Menu
-                VehicleSelectCanvas.SetActive(true);
+                EnableVehicleSelectCanvas();
             }
             SetPosition();
             SetPlayerLayers();
@@ -152,16 +151,16 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void EnableVehicleSelectCanvas(){
         if(isServer){
-            VehicleSelectCanvas.SetActive(true);
+           VehicleSelectCanvas.SetActive(true);
         }
         if(isClient){
-            RPC_EnableVehicleSelectCanvas(VehicleSelectCanvas);
+            RPC_EnableVehicleSelectCanvas();
         }
     }
 
     [ClientRpc]
-    private void RPC_EnableVehicleSelectCanvas(GameObject canvas){
-        canvas.SetActive(true);
+    private void RPC_EnableVehicleSelectCanvas(){
+        VehicleSelectCanvas.SetActive(true);
     }
 
 
