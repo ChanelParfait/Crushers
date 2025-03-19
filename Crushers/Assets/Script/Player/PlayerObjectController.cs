@@ -150,20 +150,6 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
 
-    private void EnableVehicleSelectCanvas(){
-        if(isServer){
-           VehicleSelectCanvas.SetActive(true);
-        }
-        if(isClient){
-            //RPC_EnableVehicleSelectCanvas();
-        }
-    }
-
-    [ClientRpc]
-    private void RPC_EnableVehicleSelectCanvas(){
-        VehicleSelectCanvas.SetActive(true);
-    }
-
 
     private void OnLevelEnded()
     {
@@ -230,17 +216,17 @@ public class PlayerObjectController : NetworkBehaviour
     private void SpawnVehicleOnline(){
         if(isClient)
         {
-            CmdSpawnVehicle();
+            CmdSpawnVehicle(transform);
         }
     }
     
 
     // move these commands and rpcs to network player controller
     [Command]
-    private void CmdSpawnVehicle()
+    private void CmdSpawnVehicle(Transform playerTransform)
     {
         Debug.Log("Selected Vehicle Index: " + SelectedVehicleIndex);
-        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], this.transform.position, this.transform.rotation, this.transform);
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, this.transform);
         NetworkServer.Spawn(playerObject, connectionToClient);
         RpcSpawnVehicle(playerObject);
     }
