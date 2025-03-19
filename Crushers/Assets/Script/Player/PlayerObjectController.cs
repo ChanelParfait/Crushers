@@ -55,7 +55,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     // Player Setup Values
     [SerializeField] private List<LayerMask> playerLayers; 
-    private Transform Spawn;
+    [SyncVar] private Transform Spawn;
 
        void OnEnable()
     {
@@ -175,8 +175,8 @@ public class PlayerObjectController : NetworkBehaviour
             if(canvas){
                 Destroy(canvas.gameObject);
             }
-            transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
-            //transform.SetPositionAndRotation(new Vector3(0, 0, 0), Spawn.localRotation);
+            //transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+            transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
             SpawnVehicleOnline();
         }
         else if(!isOnline)
@@ -217,27 +217,23 @@ public class PlayerObjectController : NetworkBehaviour
     private void SpawnVehicleOnline(){
         if(isClient)
         {
-            CmdSpawnVehicle(transform);
+            CmdSpawnVehicle(Spawn);
         }
     }
     
 
     // move these commands and rpcs to network player controller
     [Command]
-    private void CmdSpawnVehicle(Transform playerTransform)
+    private void CmdSpawnVehicle(Transform spawn)
     {
         Debug.Log("Selected Vehicle Index: " + SelectedVehicleIndex);
-        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation);
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], spawn.position, spawn.rotation);
         NetworkServer.Spawn(playerObject, connectionToClient);
-        //playerObject.transform.position = new Vector3(0, 0, 0);
-
         RpcSpawnVehicle(playerObject);
     }
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle){
-        //playerVehicle.transform.SetParent(transform);
-        //playerVehicle.transform.position = new Vector3(0, 0, 0);
         InitialiseVehicle(playerVehicle);
     }
     
