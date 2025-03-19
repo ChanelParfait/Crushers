@@ -55,7 +55,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     // Player Setup Values
     [SerializeField] private List<LayerMask> playerLayers; 
-    [SyncVar] private Transform Spawn;
+    private Transform Spawn;
 
        void OnEnable()
     {
@@ -175,8 +175,8 @@ public class PlayerObjectController : NetworkBehaviour
             if(canvas){
                 Destroy(canvas.gameObject);
             }
-            transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
-            //transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
+            //transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+            transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.identity);
             SpawnVehicleOnline();
         }
         else if(!isOnline)
@@ -227,9 +227,11 @@ public class PlayerObjectController : NetworkBehaviour
     [Command]
     private void CmdSpawnVehicle()
     {
-
+        Vector3 spawnPos = new Vector3(0f, 0f, 0f); 
         Debug.Log("Index: " + PlayerIndex);
-        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], transform.position, transform.rotation);
+        if(PlayerIndex == 0){ spawnPos = new Vector3(75.9f,17.9f,166.8f); }
+        else if(PlayerIndex == 1){ spawnPos = new Vector3(-14.8f,18.0f,76.8f); }
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], spawnPos, transform.rotation);
         NetworkServer.Spawn(playerObject, connectionToClient);
         RpcSpawnVehicle(playerObject);
     }
