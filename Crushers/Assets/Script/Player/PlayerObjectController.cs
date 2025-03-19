@@ -134,7 +134,7 @@ public class PlayerObjectController : NetworkBehaviour
             {
                 Debug.Log("Enable Vehicle Canvas: " + gameObject.name);
                 // Enable Selection Menu
-                EnableVehicleSelectCanvas();
+                VehicleSelectCanvas.SetActive(true);
             }
             SetPosition();
             SetPlayerLayers();
@@ -155,7 +155,7 @@ public class PlayerObjectController : NetworkBehaviour
            VehicleSelectCanvas.SetActive(true);
         }
         if(isClient){
-            RPC_EnableVehicleSelectCanvas();
+            //RPC_EnableVehicleSelectCanvas();
         }
     }
 
