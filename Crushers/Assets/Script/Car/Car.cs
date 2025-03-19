@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Car", menuName = "Cars/Make New Car", order = 0)]
 public class Car : ScriptableObject
 {
+    [Header("ID")]
+    [Range(1, 8)]
+    [SerializeField] private int vehicleIndex = 1;
+
     [Header("Acceleration")]
     [Range(20, 250)]
     [SerializeField] private int baseMaxSpeed = 90;
@@ -38,6 +42,13 @@ public class Car : ScriptableObject
 
 
     // Getter Methods
+
+    
+    public int GetVehicleIndex()
+    {
+        return vehicleIndex;
+    }
+
     public int GetBaseMaxSpeed()
     {
         return baseMaxSpeed;

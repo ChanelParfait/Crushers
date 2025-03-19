@@ -7,6 +7,7 @@ using Mirror;
 using Mirror.BouncyCastle.Security;
 using Mirror.Examples.Basic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -17,7 +18,8 @@ using UnityEngine.SceneManagement;
 public class PlayerObjectController : NetworkBehaviour
 {
     public GameObject PlayerVehicle;
-    [SyncVar] public GameObject PlayerVehiclePrefab;
+    public GameObject PlayerVehiclePrefab;
+    [SyncVar (hook = nameof(UpdateSelectedVehicleIndex))] public int SelectedVehicleIndex;
     public PlayerInput Input { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
     public int PlayerIndex {get; set;}
@@ -116,7 +118,8 @@ public class PlayerObjectController : NetworkBehaviour
         {
             //connectionToClient.isReady = true;
             if(!NetworkClient.ready){
-                NetworkClient.Ready(); 
+                //NetworkClient.Ready(); 
+                connectionToClient.isReady = true;
             }
         }
         
@@ -192,7 +195,7 @@ public class PlayerObjectController : NetworkBehaviour
         else if(!isOnline)
         {
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
-            Destroy(GetComponentInChildren<Canvas>().gameObject);
+            Destroy(canvas.gameObject);
             InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform));
         }
     }
@@ -236,7 +239,8 @@ public class PlayerObjectController : NetworkBehaviour
     [Command]
     private void CmdSpawnVehicle()
     {
-        GameObject playerObject = Instantiate(PlayerVehiclePrefab, this.transform.position, this.transform.rotation, this.transform);
+        Debug.Log("Selected Vehicle Index: " + SelectedVehicleIndex);
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], this.transform.position, this.transform.rotation, this.transform);
         NetworkServer.Spawn(playerObject, connectionToClient);
         RpcSpawnVehicle(playerObject);
     }
@@ -254,26 +258,57 @@ public class PlayerObjectController : NetworkBehaviour
         transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
     }
 
+
+    [Command]
+    private void CmdSelectVehicle(int index){
+        Debug.Log("Command Select Vehicle");
+    
+        this.UpdateSelectedVehicleIndex(this.SelectedVehicleIndex, index);
+
+    }
+
+    public void UpdateSelectedVehicleIndex(int oldValue, int newValue){
+        Debug.Log("Update Selected Vehicle");
+        if(isServer)
+        {
+            this.SelectedVehicleIndex = newValue;
+        }
+    }
+
     public void SelectVehicle(int index, GameObject vehicle)
     {
         if(index != PlayerIndex) { return; }
-        //Debug.Log("Select Vehicle");
-
+        Debug.Log("Select Vehicle: " + vehicle.name);
+        //Debug.Log("Get Vehicle from Manager: " + Manager.spawnPrefabs[1]);
         PlayerVehiclePrefab = vehicle;
-        // Set the vehicle type based on the vehicle name
-        CarController carController = PlayerVehiclePrefab.GetComponent<CarController>();
-        if (carController != null){
-            VehicleType vehicleType = GetVehicleType(vehicle.name);
-            
-            if (vehicle.name != null) {
-                carController.SetVehicleType(vehicleType); // Set the vehicle type
-            }
+        
+        // if online pass an index to retrieve the selected vehicle from the 
+        // registered spawnable prefabs list
+        if(isOnline && isOwned){
+            // *** TEMPORARY HARDCODING FOR INDEX *** //
+            // needs to be changed in params and editor
+            CmdSelectVehicle(vehicle.GetComponent<CarController>().GetCar().GetVehicleIndex());
+        }
+        else if (!isOnline){
+            // Vehicle Type currently isn't used for anything and seems unnecessary 
+            // Set the vehicle type based on the vehicle name
+            CarController carController = PlayerVehiclePrefab.GetComponent<CarController>();
+            if (carController != null){
+                VehicleType vehicleType = GetVehicleType(vehicle.name);
+                
+                if (vehicle.name != null) {
+                    carController.SetVehicleType(vehicleType); // Set the vehicle type
+                }
 
-            else{
-                Debug.LogWarning("Unknown vehicle type: " + vehicle.name);
+                else{
+                    Debug.LogWarning("Unknown vehicle type: " + vehicle.name);
+                }
             }
         }
+        
+        
     }
+
 
     public void SetVehicleConfirmed()
     {

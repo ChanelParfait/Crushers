@@ -28,6 +28,8 @@ public class CarController : MonoBehaviour
     private VehicleType vehicleType;
 
     [SerializeField] private Car car;
+    // create public getter for car in order to retrive the cars index
+    public Car GetCar() { return car; }
 
     [SerializeField] private int playerIndex;
 
