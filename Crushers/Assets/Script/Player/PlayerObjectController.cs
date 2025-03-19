@@ -189,8 +189,8 @@ public class PlayerObjectController : NetworkBehaviour
             if(canvas){
                 Destroy(canvas.gameObject);
             }
-            //transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
-            transform.SetPositionAndRotation(new Vector3(0,0,0), Quaternion.identity);
+            transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+            //transform.SetPositionAndRotation(new Vector3(0,0,0), Quaternion.identity);
             SpawnVehicleOnline();
         }
         else if(!isOnline)
