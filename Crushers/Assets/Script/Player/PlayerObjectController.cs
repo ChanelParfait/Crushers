@@ -222,7 +222,7 @@ public class PlayerObjectController : NetworkBehaviour
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
         CarController car = PlayerVehicle.GetComponent<CarController>();
-        //car.enabled = isTesting;
+        car.enabled = isTesting;
 
         //initialise other input handler components
         InputHandler.SetCarController(car);
@@ -262,8 +262,8 @@ public class PlayerObjectController : NetworkBehaviour
     private void RpcSpawnVehicle(GameObject playerVehicle, Transform playerTransform){
         Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
         Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
-        InitialiseVehicle(playerVehicle);
         playerVehicle.transform.SetParent(playerTransform);
+        InitialiseVehicle(playerVehicle);
         playerVehicle.GetComponent<CarController>().enabled = true;
 
     }
