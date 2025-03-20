@@ -129,9 +129,9 @@ public class PlayerObjectController : NetworkBehaviour
         //Debug.Log("Level Loaded");
         if(isOnline)
         {
-            if(!NetworkClient.ready && isServer){
-                //NetworkClient.Ready(); 
-                connectionToClient.isReady = true;
+            if(!NetworkClient.ready){
+                NetworkClient.Ready(); 
+                //connectionToClient.isReady = true;
             }
         }
         
@@ -243,25 +243,25 @@ public class PlayerObjectController : NetworkBehaviour
     private void SpawnVehicleOnline(){
         if(isClient)
         {
-            CmdSpawnVehicle();
+            CmdSpawnVehicle(transform, connectionToClient);
         }
     }
     
 
     // move these commands and rpcs to network player controller
     [Command]
-    private void CmdSpawnVehicle()
+    private void CmdSpawnVehicle(Transform playerTransform, NetworkConnectionToClient conn)
     {
         Debug.Log("Player " + PlayerIndex +  " Selected Vehicle Index: " + SelectedVehicleIndex);
-        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], this.transform.position, this.transform.rotation);
-        NetworkServer.Spawn(playerObject);
-        RpcSpawnVehicle(playerObject);
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
+        NetworkServer.Spawn(playerObject, conn);
+        RpcSpawnVehicle(playerObject, playerTransform);
     }
 
     [ClientRpc]
-    private void RpcSpawnVehicle(GameObject playerVehicle){
+    private void RpcSpawnVehicle(GameObject playerVehicle, Transform playerTransform){
         InitialiseVehicle(playerVehicle);
-        //playerVehicle.transform.SetParent(this.transform);
+        playerVehicle.transform.SetParent(playerTransform);
         playerVehicle.GetComponent<CarController>().enabled = true;
 
     }
