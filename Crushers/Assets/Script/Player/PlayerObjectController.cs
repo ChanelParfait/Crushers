@@ -102,7 +102,8 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOnline){
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
-                if(NetworkClient.ready && !playerInitialised)
+                // Once all players have loaded spawn their vehicles 
+                if(NetworkClient.ready && !playerInitialised && CheckAllReady())
                 {
                     SpawnVehicle();
                     playerInitialised = true; 
@@ -110,6 +111,16 @@ public class PlayerObjectController : NetworkBehaviour
             }
         }
     
+    }
+
+    private bool CheckAllReady(){
+        bool allReady = true;
+        foreach(NetworkPlayerController player in Manager.GamePlayers){
+            if(!player.connectionToClient.isReady){
+                allReady = false;
+            }
+        }
+        return allReady;
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
@@ -239,18 +250,16 @@ public class PlayerObjectController : NetworkBehaviour
     [Command]
     private void CmdSpawnVehicle()
     {
-        Debug.Log("Selected Vehicle Index: " + SelectedVehicleIndex);
-       // Vector3 position = new Vector3(0, 0, 0);
-        //if(PlayerIndex == 0){ position = new Vector3(75.9f,17.9f,166.8f); }
-        //else if(PlayerIndex == 1){ position = new Vector3(-14.8f,18.0f,76.8f); }
+        Debug.Log("Player " + PlayerIndex +  " Selected Vehicle Index: " + SelectedVehicleIndex);
         GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], this.transform.position, this.transform.rotation);
-        NetworkServer.Spawn(playerObject, connectionToClient);
+        NetworkServer.Spawn(playerObject);
         RpcSpawnVehicle(playerObject);
     }
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle){
         InitialiseVehicle(playerVehicle);
+        //playerVehicle.transform.SetParent(this.transform);
         playerVehicle.GetComponent<CarController>().enabled = true;
 
     }
