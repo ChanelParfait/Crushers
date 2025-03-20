@@ -114,6 +114,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     private bool CheckAllReady(){
+        if(!isServer){ return false; }
         bool allReady = true;
         foreach(NetworkPlayerController player in Manager.GamePlayers){
             if(!player.connectionToClient.isReady){
