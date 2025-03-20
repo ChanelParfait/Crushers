@@ -260,6 +260,8 @@ public class PlayerObjectController : NetworkBehaviour
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle, Transform playerTransform){
+        Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
+        Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
         InitialiseVehicle(playerVehicle);
         playerVehicle.transform.SetParent(playerTransform);
         playerVehicle.GetComponent<CarController>().enabled = true;
