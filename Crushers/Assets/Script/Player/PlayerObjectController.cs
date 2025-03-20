@@ -197,7 +197,7 @@ public class PlayerObjectController : NetworkBehaviour
 
         Canvas canvas  = GetComponentInChildren<Canvas>(); 
 
-        if(isOnline && isOwned) 
+        if(isOnline) 
         {
             if(canvas){
                 Destroy(canvas.gameObject);
@@ -205,7 +205,7 @@ public class PlayerObjectController : NetworkBehaviour
             transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
         }
-        else if(!isOnline)
+        else
         {
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
             Destroy(canvas.gameObject);
