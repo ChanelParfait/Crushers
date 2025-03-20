@@ -222,7 +222,7 @@ public class PlayerObjectController : NetworkBehaviour
 
         // find car controller, pickup manager and camera input handler and hand them to the player input handler
         CarController car = PlayerVehicle.GetComponent<CarController>();
-        car.enabled = isTesting;
+        //car.enabled = isTesting;
 
         //initialise other input handler components
         InputHandler.SetCarController(car);
