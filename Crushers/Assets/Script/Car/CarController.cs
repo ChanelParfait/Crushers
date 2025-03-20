@@ -188,6 +188,11 @@ public class CarController : MonoBehaviour
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
     }
 
+    void OnDestroy()
+    {
+        Debug.Log("Destroying Vehicle");
+    }
+
     // Start is called before the first frame update
     void Start()
     {

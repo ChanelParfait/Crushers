@@ -105,6 +105,7 @@ public class PlayerObjectController : NetworkBehaviour
                 // Once all players have loaded spawn their vehicles 
                 if(NetworkClient.ready && !playerInitialised && CheckAllReady())
                 {
+                    Debug.Log("Spawn Vehicle for " + PlayerIndex);
                     SpawnVehicle();
                     playerInitialised = true; 
                 }
