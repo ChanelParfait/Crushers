@@ -103,7 +103,7 @@ public class PlayerObjectController : NetworkBehaviour
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
                 // Once all players have loaded spawn their vehicles 
-                if(NetworkClient.ready && !playerInitialised && CheckAllReady())
+                if(NetworkClient.ready && !playerInitialised)
                 {
                     Debug.Log("Spawn Vehicle for " + PlayerIndex);
                     SpawnVehicle();
