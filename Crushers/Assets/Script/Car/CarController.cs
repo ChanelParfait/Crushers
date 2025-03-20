@@ -188,7 +188,7 @@ public class CarController : MonoBehaviour
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         Debug.Log("Destroying Vehicle");
     }
