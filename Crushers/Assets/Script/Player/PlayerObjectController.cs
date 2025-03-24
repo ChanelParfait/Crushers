@@ -253,7 +253,7 @@ public class PlayerObjectController : NetworkBehaviour
     private void CmdSpawnVehicle(Transform playerTransform, NetworkConnectionToClient conn)
     {
         Debug.Log("Player " + PlayerIndex +  " Selected Vehicle Index: " + SelectedVehicleIndex);
-        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
+        GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], new Vector3(0,0,0), playerTransform.rotation, playerTransform);
         NetworkServer.Spawn(playerObject, conn);
         RpcSpawnVehicle(playerObject, playerTransform);
     }

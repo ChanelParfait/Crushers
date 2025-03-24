@@ -29,7 +29,7 @@ public class CarRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
-        
+        Debug.Log("Start Position: " + startPosition);
         
     }
     
