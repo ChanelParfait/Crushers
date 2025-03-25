@@ -215,6 +215,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void InitialiseVehicle(GameObject playerVehicle){
         if(!PlayerVehicle) {    PlayerVehicle = playerVehicle;  }
+        PlayerVehicle.GetComponent<CarRespawn>().SetRespawn(PlayerVehicle.transform);
         // get UI controller for each vehicle
         UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
         // disable vehicle controls initially if not testing

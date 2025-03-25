@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedLines : MonoBehaviour
 {
-    private ParticleSystem speedLines;
+    [SerializeField] private ParticleSystem speedLines;
     private ParticleSystem.EmissionModule emissionModule;
 
     [SerializeField] private float speedThreshold = 50f;
@@ -33,9 +33,10 @@ public class SpeedLines : MonoBehaviour
             {
                 emissionModule.rateOverTime = 0f;
             }
-        } else {
+        } 
+        /*else {
             speedLines = gameObject.GetComponent<ParticleSystem>();
-        }
+        }*/
 
     }
 }

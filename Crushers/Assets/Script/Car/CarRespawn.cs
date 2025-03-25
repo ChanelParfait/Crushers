@@ -9,8 +9,9 @@ public class CarRespawn : MonoBehaviour
     public float threshold;
 
     //Starting positions and rotation 
-    private Vector3 startPosition;
-    private Quaternion startRotation;
+    private Transform respawn; 
+    //private Vector3 startPosition;
+    //private Quaternion startRotation;
     private Rigidbody rb;
 
 
@@ -24,19 +25,23 @@ public class CarRespawn : MonoBehaviour
     
     void Start(){
         //save position and rotation for respawn
-        startPosition = transform.position;
-        startRotation = transform.rotation;
+        respawn.position = transform.position;
+        respawn.rotation = transform.rotation;
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
-        Debug.Log("Start Position: " + startPosition);
+        //Debug.Log("Start Position: " + startPosition);
         
+    }
+
+    public void SetRespawn(Transform location){
+        respawn = location;
     }
     
     public void Respawn(){
         // reset position, velocity and damage
-        transform.position = startPosition;
-        transform.rotation = startRotation;
+        transform.position = respawn.position;
+        transform.rotation = respawn.rotation;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 

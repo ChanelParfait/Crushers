@@ -3848,11 +3848,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: VehicleCanvas_Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 9007109847759549406, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+        type: 3}
+      propertyPath: speedLines
+      value: 
+      objectReference: {fileID: 192232366030929803}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1ac2dc27ee11340b483eef11c7082d, type: 3}
+--- !u!198 &192232366030929803 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5120590140802526933, guid: 2d1ac2dc27ee11340b483eef11c7082d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5018434728043073886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1278392489941599105 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6059818671046578911, guid: 2d1ac2dc27ee11340b483eef11c7082d,
