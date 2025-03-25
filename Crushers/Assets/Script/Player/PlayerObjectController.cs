@@ -266,6 +266,7 @@ public class PlayerObjectController : NetworkBehaviour
         CarController car = playerVehicle.GetComponent<CarController>();
         InputHandler.SetCarController(car);
         car.enabled = true;
+        playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
     }
     
 
