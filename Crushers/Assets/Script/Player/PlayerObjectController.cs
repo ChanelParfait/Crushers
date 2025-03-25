@@ -224,8 +224,8 @@ public class PlayerObjectController : NetworkBehaviour
         //initialise other input handler components
         InputHandler.SetCarController(car);
         InputHandler.PlayerModel = PlayerVehicle;
-        InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
-        InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
+        //InputHandler.SetPickupManager(PlayerVehicle.GetComponent<PickUpManager>());
+        //InputHandler.SetAbilityManager(PlayerVehicle.GetComponent<AbilityManager>());
         InputHandler.SetCameraInputHandler(PlayerVehicle.GetComponentInChildren<CameraInputHandler>());
         InputHandler.SetVehicleUIController(PlayerVehicle.GetComponentInChildren<VehicleUIController>());
         // disable camera shake
