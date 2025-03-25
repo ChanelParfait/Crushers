@@ -188,6 +188,11 @@ public class CarController : MonoBehaviour
         activeDamageMultiplier = car.GetBaseDamageMultiplier();
     }
 
+    void OnDisable()
+    {
+        Debug.Log("Destroying Vehicle");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -372,7 +377,7 @@ public class CarController : MonoBehaviour
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
-      speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
+      //speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
     }
 
     private void FixedUpdate()

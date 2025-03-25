@@ -9,7 +9,8 @@ public class CarRespawn : MonoBehaviour
     public float threshold;
 
     //Starting positions and rotation 
-    private Vector3 startPosition;
+    
+    [SerializeField] private Vector3 startPosition;
     private Quaternion startRotation;
     private Rigidbody rb;
 
@@ -29,8 +30,13 @@ public class CarRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
+        //Debug.Log("Start Position: " + startPosition);
         
-        
+    }
+
+    public void SetRespawn(Vector3 pos, Quaternion rot){
+        startPosition = pos;
+        startRotation = rot;
     }
     
     public void Respawn(){
