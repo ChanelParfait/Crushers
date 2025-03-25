@@ -193,9 +193,6 @@ public class PlayerObjectController : NetworkBehaviour
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-        
-
-        
 
         if(isOnline) 
         {
@@ -214,7 +211,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void InitialiseVehicle(GameObject playerVehicle){
         if(!PlayerVehicle) {    PlayerVehicle = playerVehicle;  }
-        PlayerVehicle.GetComponent<CarRespawn>().SetRespawn(PlayerVehicle.transform);
+        PlayerVehicle.GetComponent<CarRespawn>().SetRespawn(PlayerVehicle.transform.position, PlayerVehicle.transform.rotation);
         // get UI controller for each vehicle
         UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
         // disable vehicle controls initially if not testing
@@ -244,7 +241,7 @@ public class PlayerObjectController : NetworkBehaviour
         if(isClient && isOwned)
         {
             Canvas canvas  = GetComponentInChildren<Canvas>(); 
-            if(canvas){ Destroy(canvas);}
+            if(canvas){ Destroy(canvas.gameObject);}
             CmdSpawnVehicle(transform, connectionToClient);
         }
     }
