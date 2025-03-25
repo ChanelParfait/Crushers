@@ -195,19 +195,18 @@ public class PlayerObjectController : NetworkBehaviour
         Spawn =  lvlManager.GetSpawnPos();
         
 
-        Canvas canvas  = GetComponentInChildren<Canvas>(); 
+        
 
         if(isOnline) 
         {
-            if(canvas){
-                Destroy(canvas.gameObject);
-            }
+            
             transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
         }
         else
         {
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
+            Canvas canvas  = GetComponentInChildren<Canvas>(); 
             Destroy(canvas.gameObject);
             InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform));
         }
@@ -244,6 +243,8 @@ public class PlayerObjectController : NetworkBehaviour
     private void SpawnVehicleOnline(){
         if(isClient && isOwned)
         {
+            Canvas canvas  = GetComponentInChildren<Canvas>(); 
+            if(canvas){ Destroy(canvas);}
             CmdSpawnVehicle(transform, connectionToClient);
         }
     }
