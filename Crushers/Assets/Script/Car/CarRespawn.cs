@@ -46,6 +46,8 @@ public class CarRespawn : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
+        /// Temporarily Disabled ///
+        /*
         if(impactController.GetLastCollidedVehicle() && impactController.GetLastCollidedVehicle() != this.gameObject.GetComponent<ScoreKeeper>()){
             impactController.GetLastCollidedVehicle().IncreaseScore(impactController.GetDeathType());
             //Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
@@ -55,6 +57,8 @@ public class CarRespawn : MonoBehaviour
         //Debug.Log("Respawning");
         //Debug.Log("Your score is: " + carStats.getScore());
         //Debug.Log("Your damage is: " + carStats.getDamage());
+
+        */
     }
 
 }

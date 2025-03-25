@@ -268,7 +268,8 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOwned){
             car.enabled = true;
             playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
-            playerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
+            playerVehicle.GetComponent<CarRespawn>().enabled = true;
+            //playerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
             SetPlayerLayers(); 
         }
         
