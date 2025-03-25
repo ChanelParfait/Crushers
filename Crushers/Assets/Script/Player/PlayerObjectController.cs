@@ -262,9 +262,10 @@ public class PlayerObjectController : NetworkBehaviour
         Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
         Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
         playerVehicle.transform.SetParent(playerTransform);
-        InitialiseVehicle(playerVehicle);
-        playerVehicle.GetComponent<CarController>().enabled = true;
-
+        //InitialiseVehicle(playerVehicle);
+        CarController car = playerVehicle.GetComponent<CarController>();
+        InputHandler.SetCarController(car);
+        car.enabled = true;
     }
     
 
