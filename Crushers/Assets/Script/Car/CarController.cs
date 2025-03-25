@@ -377,7 +377,7 @@ public class CarController : MonoBehaviour
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
-      speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
+      //speedLines.scaleSpeedLinesOnAcceleration(carSpeed);
     }
 
     private void FixedUpdate()

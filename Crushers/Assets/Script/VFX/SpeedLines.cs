@@ -34,9 +34,9 @@ public class SpeedLines : MonoBehaviour
                 emissionModule.rateOverTime = 0f;
             }
         } 
-        /*else {
+        else {
             speedLines = gameObject.GetComponent<ParticleSystem>();
-        }*/
+        }
 
     }
 }

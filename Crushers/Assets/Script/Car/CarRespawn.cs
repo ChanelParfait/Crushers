@@ -10,7 +10,7 @@ public class CarRespawn : MonoBehaviour
 
     //Starting positions and rotation 
     
-    private Vector3 startPosition;
+    [SerializeField] private Vector3 startPosition;
     private Quaternion startRotation;
     private Rigidbody rb;
 
