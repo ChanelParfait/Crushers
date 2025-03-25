@@ -193,11 +193,9 @@ public class PlayerObjectController : NetworkBehaviour
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-
+        transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
         if(isOnline) 
         {
-            
-            transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
         }
         else
@@ -205,7 +203,7 @@ public class PlayerObjectController : NetworkBehaviour
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
             Canvas canvas  = GetComponentInChildren<Canvas>(); 
             Destroy(canvas.gameObject);
-            InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform));
+            InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Vector3.zero, Quaternion.identity, transform));
         }
     }
 

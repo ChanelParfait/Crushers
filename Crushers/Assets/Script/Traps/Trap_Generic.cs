@@ -10,6 +10,7 @@ public class Trap_Generic : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //Debug.Log("Trap Triggered ");
+            /*
             if (other.gameObject.GetComponentInParent<PickUpManager>().State == Shield.IsOff)
             {
                 var carRespawn = other.gameObject.GetComponentInParent<CarRespawn>();
@@ -17,6 +18,11 @@ public class Trap_Generic : MonoBehaviour
                 other.gameObject.GetComponentInParent<ImpactController>().SetDeathType(TypeOfDeath.Spike);
                 carRespawn.Respawn();
             }
+
+            */
+            /// Temp Testing ///
+            var carRespawn = other.gameObject.GetComponentInParent<CarRespawn>();
+            carRespawn.Respawn();
         }
     }
 }
