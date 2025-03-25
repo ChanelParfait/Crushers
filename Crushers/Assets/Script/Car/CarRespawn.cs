@@ -16,7 +16,7 @@ public class CarRespawn : MonoBehaviour
 
 
     //setting up flip detection
-    [SerializeField] private Collider flipCollider;
+    //[SerializeField] private Collider flipCollider;
 
 
     //reference to the stats of each car

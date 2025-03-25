@@ -211,7 +211,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     private void InitialiseVehicle(GameObject playerVehicle){
         if(!PlayerVehicle) {    PlayerVehicle = playerVehicle;  }
-        PlayerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
+        
         // get UI controller for each vehicle
         UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
         // disable vehicle controls initially if not testing
@@ -268,6 +268,8 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOwned){
             car.enabled = true;
             playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
+            PlayerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
+            SetPlayerLayers(); 
         }
         
         
