@@ -43483,7 +43483,7 @@ PrefabInstance:
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
       propertyPath: m_SplitScreen
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
@@ -43493,7 +43493,7 @@ PrefabInstance:
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
       propertyPath: m_JoinBehavior
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
