@@ -55,7 +55,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     // Player Setup Values
     [SerializeField] private List<LayerMask> playerLayers; 
-    private Transform Spawn;
+    [SyncVar] private Transform Spawn;
 
        void OnEnable()
     {
