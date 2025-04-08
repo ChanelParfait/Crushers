@@ -163,20 +163,6 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
 
-    private void EnableVehicleSelectCanvas(){
-        if(isServer){
-           VehicleSelectCanvas.SetActive(true);
-        }
-        if(isClient){
-            //RPC_EnableVehicleSelectCanvas();
-        }
-    }
-
-    [ClientRpc]
-    private void RPC_EnableVehicleSelectCanvas(){
-        VehicleSelectCanvas.SetActive(true);
-    }
-
 
     private void OnLevelEnded()
     {
