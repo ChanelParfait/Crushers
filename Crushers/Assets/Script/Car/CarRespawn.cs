@@ -16,7 +16,7 @@ public class CarRespawn : MonoBehaviour
 
 
     //setting up flip detection
-    [SerializeField] private Collider flipCollider;
+    //[SerializeField] private Collider flipCollider;
 
 
     //reference to the stats of each car
@@ -25,8 +25,8 @@ public class CarRespawn : MonoBehaviour
     
     void Start(){
         //save position and rotation for respawn
-        startPosition = transform.position;
-        startRotation = transform.rotation;
+        //startPosition = transform.localPosition;
+        //startRotation = transform.localRotation;
         rb = GetComponent<Rigidbody>();
 
         impactController = GetComponent<ImpactController>();
@@ -41,11 +41,16 @@ public class CarRespawn : MonoBehaviour
     
     public void Respawn(){
         // reset position, velocity and damage
-        transform.position = startPosition;
-        transform.rotation = startRotation;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        if(rb){
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        
 
+        /// Temporarily Disabled ///
+        /*
         if(impactController.GetLastCollidedVehicle() && impactController.GetLastCollidedVehicle() != this.gameObject.GetComponent<ScoreKeeper>()){
             impactController.GetLastCollidedVehicle().IncreaseScore(impactController.GetDeathType());
             //Debug.Log("Awarded 1 points to " + impactController.GetLastCollidedVehicle().gameObject.name);
@@ -55,6 +60,8 @@ public class CarRespawn : MonoBehaviour
         //Debug.Log("Respawning");
         //Debug.Log("Your score is: " + carStats.getScore());
         //Debug.Log("Your damage is: " + carStats.getDamage());
+
+        */
     }
 
 }

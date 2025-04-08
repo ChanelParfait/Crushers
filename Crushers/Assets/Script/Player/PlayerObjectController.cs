@@ -179,11 +179,9 @@ public class PlayerObjectController : NetworkBehaviour
         // spawn vehicle from player config as child of player config
         LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         Spawn =  lvlManager.GetSpawnPos();
-
+        transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
         if(isOnline) 
         {
-            
-            transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
             SpawnVehicleOnline();
         }
         else
@@ -191,13 +189,13 @@ public class PlayerObjectController : NetworkBehaviour
             //Debug.Log("Spawn Vehicle Offline: " + gameObject.name);
             Canvas canvas  = GetComponentInChildren<Canvas>(); 
             Destroy(canvas.gameObject);
-            InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Spawn.position, Spawn.rotation, transform));
+            InitialiseVehicle(Instantiate(PlayerVehiclePrefab, Vector3.zero, Quaternion.identity, transform));
         }
     }
 
     private void InitialiseVehicle(GameObject playerVehicle){
         if(!PlayerVehicle) {    PlayerVehicle = playerVehicle;  }
-        PlayerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
+        
         // get UI controller for each vehicle
         UIController = PlayerVehicle.GetComponentInChildren<VehicleUIController>();
         // disable vehicle controls initially if not testing
@@ -254,6 +252,9 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOwned){
             car.enabled = true;
             playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
+            playerVehicle.GetComponent<CarRespawn>().enabled = true;
+            //playerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
+            SetPlayerLayers(); 
         }
         
         

@@ -43483,7 +43483,7 @@ PrefabInstance:
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
       propertyPath: m_SplitScreen
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
@@ -43493,7 +43493,7 @@ PrefabInstance:
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
       propertyPath: m_JoinBehavior
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6748408230172533325, guid: 971ffdfba4c038649a3f60c2f57b6995,
         type: 3}
@@ -48961,7 +48961,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 2449448533462767253, guid: e821818198fb6c5498f3f57a8a8321aa, type: 3}
   - {fileID: 6680170060424688024, guid: 792059e8412c0b449a64a2560d9d3d30, type: 3}
-  - {fileID: 2744354503348039254, guid: c08fffbb8ba905940abd0e45810e661e, type: 3}
+  - {fileID: 2744354503348039254, guid: a8c9e9e2cc3f79345bfaa175286e2f7e, type: 3}
   - {fileID: 7781994489799046140, guid: fbcc1c8ebebe66943a0e00d0efdfd0c1, type: 3}
   - {fileID: 5535384286806951313, guid: 12e64fa5b3954e44a829a7e3ecd4d30b, type: 3}
   - {fileID: 853187664785709616, guid: 864617055eb594e439a5ec29ca56625c, type: 3}
