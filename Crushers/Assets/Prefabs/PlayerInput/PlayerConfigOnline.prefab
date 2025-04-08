@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 658299802029010273}
   - component: {fileID: 8042942846443331091}
   - component: {fileID: 7078103051754742075}
-  - component: {fileID: 5651353871338052719}
+  - component: {fileID: 8280562438110903214}
   m_Layer: 0
   m_Name: PlayerConfigOnline
   m_TagString: Untagged
@@ -530,7 +530,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &5651353871338052719
+--- !u!114 &8280562438110903214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
