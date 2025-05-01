@@ -212,11 +212,12 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if(isOnline && isOwned){
                 Debug.Log("Moving Forward");
-                Forward_Online(carController.gameObject, context.ReadValueAsButton());
+                //Forward_Online(carController.gameObject, context.ReadValueAsButton());
+                carController.isMovingForward = context.ReadValueAsButton();   
             }
-            // else if (!isOnline){
-            //     carController.isMovingForward = context.ReadValueAsButton();   
-            // }
+            else if (!isOnline){
+                carController.isMovingForward = context.ReadValueAsButton();   
+            }
         }
     }
 
@@ -232,7 +233,9 @@ public class PlayerInputHandler : NetworkBehaviour
         if(carController)
         {
             if(isOnline && isOwned){
-                Reverse_Online(carController.gameObject, context.ReadValueAsButton());
+                //Reverse_Online(carController.gameObject, context.ReadValueAsButton());
+                carController.isReversing = context.ReadValueAsButton();   
+
             }
             else if (!isOnline){
                 carController.isReversing = context.ReadValueAsButton();   
@@ -253,7 +256,8 @@ public class PlayerInputHandler : NetworkBehaviour
         if(carController)
         {
             if(isOnline && isOwned){
-                Turn_Online(carController.gameObject, turn);
+                //Turn_Online(carController.gameObject, turn);
+                carController.SetSteeringAngle(turn);   
             }
             else if (!isOnline){
                 carController.SetSteeringAngle(turn);   

@@ -339,7 +339,7 @@ PrefabInstance:
     - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4176357864898292693, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -349,7 +349,7 @@ PrefabInstance:
     - target: {fileID: 4702013352652804568, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4962160138709969190, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -401,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: syncDirection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6746124027010312172, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -456,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 7536001390613639216, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: syncDirection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7546639555313590966, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 3245933750965636652}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6680170060424688024}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6d2c43c5cfbf8c4bb0b40a7adff301d, type: 3}
   m_Name: 
