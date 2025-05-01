@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Mirror;
-using Mirror.BouncyCastle.Asn1.Cmp;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -209,23 +206,25 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        //Debug.Log("Pressing W");
+        Debug.Log("Pressing W");
         //Debug.Log("Is Owned: " + IsInputValid());
         if(carController)
         {
             if(isOnline && isOwned){
+                Debug.Log("Moving Forward");
                 Forward_Online(carController.gameObject, context.ReadValueAsButton());
             }
-            else if (!isOnline){
-                carController.isMovingForward = context.ReadValueAsButton();   
-            }
-            //Debug.Log("Moving Forward");
+            // else if (!isOnline){
+            //     carController.isMovingForward = context.ReadValueAsButton();   
+            // }
         }
     }
 
     [Command]
     private void Forward_Online(GameObject car, bool isMovingForward){
-        car.GetComponent<CarController>().isMovingForward = isMovingForward;
+        CarController carController = car.GetComponent<CarController>(); 
+        Debug.Log(carController);
+        carController.isMovingForward = isMovingForward;
     }
 
     public void OnReverse(CallbackContext context)
