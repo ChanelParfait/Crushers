@@ -237,7 +237,8 @@ public class PlayerObjectController : NetworkBehaviour
     {
         Debug.Log("Player " + PlayerIndex +  " Selected Vehicle Index: " + SelectedVehicleIndex);
         GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
-        NetworkServer.Spawn(playerObject, conn);
+        //NetworkServer.Spawn(playerObject, conn);
+        NetworkServer.Spawn(playerObject);
         RpcSpawnVehicle(playerObject, playerTransform);
     }
 
@@ -256,8 +257,6 @@ public class PlayerObjectController : NetworkBehaviour
             //playerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
             SetPlayerLayers(); 
         }
-        
-        
     }
     
 

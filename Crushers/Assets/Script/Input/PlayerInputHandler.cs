@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Mirror;
+using Mirror.BouncyCastle.Asn1.Cmp;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -209,36 +211,66 @@ public class PlayerInputHandler : NetworkBehaviour
     {
         //Debug.Log("Pressing W");
         //Debug.Log("Is Owned: " + IsInputValid());
-        if(carController && IsInputValid())
+        if(carController)
         {
+            if(isOnline && isOwned){
+                Forward_Online(carController.gameObject, context.ReadValueAsButton());
+            }
+            else if (!isOnline){
+                carController.isMovingForward = context.ReadValueAsButton();   
+            }
             //Debug.Log("Moving Forward");
-
-            carController.isMovingForward = context.ReadValueAsButton();
         }
+    }
+
+    [Command]
+    private void Forward_Online(GameObject car, bool isMovingForward){
+        car.GetComponent<CarController>().isMovingForward = isMovingForward;
     }
 
     public void OnReverse(CallbackContext context)
     {
-        if(carController && IsInputValid())
+        if(carController)
         {
-            carController.isReversing = context.ReadValueAsButton();
+            if(isOnline && isOwned){
+                Reverse_Online(carController.gameObject, context.ReadValueAsButton());
+            }
+            else if (!isOnline){
+                carController.isReversing = context.ReadValueAsButton();   
+            }
+            //Debug.Log("Moving Forward");
         }
+    }
+
+    [Command]
+    private void Reverse_Online(GameObject car, bool isReversing){
+        car.GetComponent<CarController>().isReversing = isReversing;
     }
 
     public void OnTurn(CallbackContext context)
     {
         Vector2 turn = context.ReadValue<Vector2>();
         //Debug.Log("Turn: " + turn);
-        if(carController && IsInputValid())
+        if(carController)
         {
-            carController.SetSteeringAngle(turn);
+            if(isOnline && isOwned){
+                Turn_Online(carController.gameObject, turn);
+            }
+            else if (!isOnline){
+                carController.SetSteeringAngle(turn);   
+            }
         }
         
     }
 
+    [Command]
+    private void Turn_Online(GameObject car, Vector2 turn){
+        car.GetComponent<CarController>().SetSteeringAngle(turn);
+    }
+
+
     public void OnBrake(CallbackContext context)
     {
-
         if(carController && IsInputValid()){
             carController.isBraking =  context.ReadValueAsButton();
             if(context.canceled){

@@ -398,6 +398,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: syncDirection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6746124027010312172, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_FollowOffset.y
@@ -446,6 +451,11 @@ PrefabInstance:
     - target: {fileID: 7143413791458459392, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536001390613639216, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: syncDirection
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546639555313590966, guid: 05744578e8ef73841af5a41a5fc606d3,
