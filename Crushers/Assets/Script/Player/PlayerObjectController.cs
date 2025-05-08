@@ -103,23 +103,25 @@ public class PlayerObjectController : NetworkBehaviour
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
                 // Once all players have loaded spawn their vehicles 
-                if(NetworkClient.ready && !playerInitialised)
+                if(CheckAllReady() && !playerInitialised)
                 {
                     Debug.Log("Spawn Vehicle for " + PlayerIndex);
                     SpawnVehicle();
                     playerInitialised = true; 
                 }
+                time += Time.deltaTime;
+                Debug.Log("Time: " + time);
+                Debug.Log("All Ready: " + CheckAllReady());
             }
         }
 
-        time += Time.deltaTime;
-        Debug.Log("Time: " + time);
+        
 
     
     }
 
     private bool CheckAllReady(){
-        if(!isServer){ return false; }
+        //if(!isServer){ return false; }
         bool allReady = true;
         foreach(NetworkPlayerController player in Manager.GamePlayers){
             if(!player.connectionToClient.isReady){
