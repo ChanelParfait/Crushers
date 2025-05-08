@@ -97,9 +97,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     void Update()
-    {   
-        Debug.Log("Is Client Ready " + NetworkClient.ready);
-        
+    {           
         if(isOnline){
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
@@ -238,9 +236,7 @@ public class PlayerObjectController : NetworkBehaviour
     {
         Debug.Log("Player " + PlayerIndex +  " Selected Vehicle Index: " + SelectedVehicleIndex);
         GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
-        NetworkServer.Spawn(playerObject, conn);
-        Debug.Log("Player Object: " + playerObject);
-        
+        NetworkServer.Spawn(playerObject, conn); 
         RpcSpawnVehicle(playerObject, playerTransform);
     }
 
@@ -256,7 +252,6 @@ public class PlayerObjectController : NetworkBehaviour
             car.enabled = true;
             playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
             playerVehicle.GetComponent<CarRespawn>().enabled = true;
-            //playerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
             SetPlayerLayers(); 
         }
         
@@ -299,7 +294,6 @@ public class PlayerObjectController : NetworkBehaviour
         // registered spawnable prefabs list
         if(isOnline && isOwned){
             CmdSelectVehicle(vehicle.GetComponent<CarController>().GetCar().GetVehicleIndex());
-
         }
         else if (!isOnline){
             // Vehicle Type currently isn't used for anything and seems unnecessary 
