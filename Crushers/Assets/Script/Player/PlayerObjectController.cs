@@ -222,7 +222,7 @@ public class PlayerObjectController : NetworkBehaviour
 
 
     private void SpawnVehicleOnline(){
-        if(isClient)
+        if(isClient && isOwned)
         {
             Canvas canvas  = GetComponentInChildren<Canvas>(); 
             if(canvas){ Destroy(canvas.gameObject);}
@@ -240,13 +240,11 @@ public class PlayerObjectController : NetworkBehaviour
         NetworkServer.Spawn(playerObject, conn);
         RpcSpawnVehicle(playerObject, playerTransform);
     }
-    
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle, Transform playerTransform){
         Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
         Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
-        Debug.Log("Player Transform: " + playerTransform);
         playerVehicle.transform.SetParent(playerTransform);
         //InitialiseVehicle(playerVehicle);
         CarController car = playerVehicle.GetComponent<CarController>();
@@ -258,6 +256,8 @@ public class PlayerObjectController : NetworkBehaviour
             //playerVehicle.GetComponent<CarRespawn>().SetRespawn(new Vector3(0,0,0), Quaternion.identity);
             SetPlayerLayers(); 
         }
+        
+        
     }
     
 
