@@ -294,10 +294,19 @@ public class PlayerObjectController : NetworkBehaviour
             GameObject playerObject = Instantiate(Manager.spawnPrefabs[selectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
             
             NetworkServer.Spawn(playerObject, player.connectionToClient);
-            RpcSpawnVehicle(playerObject, playerTransform);
+            RpcTest();
         }
 
     }
+
+    [ClientRpc]
+    private void RpcTest(){
+        Debug.Log("Testing RPC");
+        
+        
+        
+    }
+    
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle, Transform playerTransform){
