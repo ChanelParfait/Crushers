@@ -56,6 +56,7 @@ public class PlayerObjectController : NetworkBehaviour
     // Player Setup Values
     [SerializeField] private List<LayerMask> playerLayers; 
     private Transform Spawn;
+    private float time = 0;
 
        void OnEnable()
     {
@@ -110,6 +111,10 @@ public class PlayerObjectController : NetworkBehaviour
                 }
             }
         }
+
+        time += Time.deltaTime;
+        Debug.Log("Time: " + time);
+
     
     }
 
