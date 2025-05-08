@@ -122,7 +122,7 @@ public class PlayerObjectController : NetworkBehaviour
                     SetIsLoaded();
                     playerInitialised = true; 
                 }
-                else if( isServer)
+                else if( isServer && isLocalPlayer)
                 {
                     // Once all players have loaded spawn their vehicles 
                     if(CheckIfAllLoaded() && !playersSpawned)
@@ -130,8 +130,8 @@ public class PlayerObjectController : NetworkBehaviour
                         // if all players are ready, spawn a vehicle for each
                         // player on the server
                         //Debug.Log("Spawn Vehicle for " + PlayerIndex);
-                        Server_SpawnVehicles();
                         playersSpawned = true; 
+                        Server_SpawnVehicles();
                     }
                 }
                 
