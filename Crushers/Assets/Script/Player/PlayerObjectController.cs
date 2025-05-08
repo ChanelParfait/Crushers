@@ -129,7 +129,8 @@ public class PlayerObjectController : NetworkBehaviour
                         // player on the server
                         //Debug.Log("Spawn Vehicle for " + PlayerIndex);
                         playersSpawned = true; 
-                        DelaySpawn(3);
+                        StartCoroutine(DelaySpawn(3)); 
+
                     }
                 }
                 
@@ -142,7 +143,7 @@ public class PlayerObjectController : NetworkBehaviour
     }
 
     
-    private IEnumerable DelaySpawn(int delay){
+    private IEnumerator DelaySpawn(int delay){
         yield return new WaitForSeconds(delay);
         Server_SpawnVehicles();
     }
