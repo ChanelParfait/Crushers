@@ -103,7 +103,12 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOnline){
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
-                if(isClient && !playerInitialised && NetworkClient.ready)
+
+                // if(NetworkClient.ready && !playerInitialised){
+                //     SpawnVehicle();
+                //     playerInitialised = true; 
+                // }
+                if(!playerInitialised && NetworkClient.ready)
                 {   
                     // initialise player 
                     if(isOwned){
@@ -274,12 +279,20 @@ public class PlayerObjectController : NetworkBehaviour
     [Server]
     private void Server_SpawnVehicles()
     {
+        Debug.Log("Spawn All Vehicles");
+        Debug.Log("Player List Length: "  + Manager.GamePlayers.Count);
+
         // Spawn a vehicle for each player 
         foreach(NetworkPlayerController player in Manager.GamePlayers)
         {
+            Debug.Log("Player " + player.netId);
+            
             int selectedVehicleIndex = player.GetComponent<PlayerObjectController>().SelectedVehicleIndex; 
+            Debug.Log("Selected Vehicle " + selectedVehicleIndex);
+
             Transform playerTransform = player.gameObject.transform; 
             GameObject playerObject = Instantiate(Manager.spawnPrefabs[selectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
+            
             NetworkServer.Spawn(playerObject, player.connectionToClient);
             RpcSpawnVehicle(playerObject, playerTransform);
         }
