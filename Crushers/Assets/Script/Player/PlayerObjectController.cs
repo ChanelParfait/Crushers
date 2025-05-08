@@ -98,6 +98,7 @@ public class PlayerObjectController : NetworkBehaviour
 
     void Update()
     {   
+        Debug.Log("Is Client Ready " + NetworkClient.ready);
         
         if(isOnline){
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
@@ -238,6 +239,8 @@ public class PlayerObjectController : NetworkBehaviour
         Debug.Log("Player " + PlayerIndex +  " Selected Vehicle Index: " + SelectedVehicleIndex);
         GameObject playerObject = Instantiate(Manager.spawnPrefabs[SelectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
         NetworkServer.Spawn(playerObject, conn);
+        Debug.Log("Player Object: " + playerObject);
+        
         RpcSpawnVehicle(playerObject, playerTransform);
     }
 
@@ -295,9 +298,8 @@ public class PlayerObjectController : NetworkBehaviour
         // if online pass an index to retrieve the selected vehicle from the 
         // registered spawnable prefabs list
         if(isOnline && isOwned){
-            // *** TEMPORARY HARDCODING FOR INDEX *** //
-            // needs to be changed in params and editor
             CmdSelectVehicle(vehicle.GetComponent<CarController>().GetCar().GetVehicleIndex());
+
         }
         else if (!isOnline){
             // Vehicle Type currently isn't used for anything and seems unnecessary 
