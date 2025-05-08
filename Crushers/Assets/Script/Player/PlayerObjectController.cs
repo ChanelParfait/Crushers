@@ -103,7 +103,7 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOnline){
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
-                if(isClient && !playerInitialised)
+                if(isClient && !playerInitialised && connectionToClient.isReady)
                 {   
                     // initialise player 
                     if(isOwned){
