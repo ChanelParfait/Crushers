@@ -48,6 +48,7 @@ public class PlayerObjectController : NetworkBehaviour
     public bool isOnline = false; 
     // Has the player vehicle been spawned 
     public bool playerInitialised = false;
+    public bool playersSpawned = false;
     // is Testing Flag
     public bool isTesting = false; 
     // Events 
@@ -102,16 +103,36 @@ public class PlayerObjectController : NetworkBehaviour
         if(isOnline){
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if(buildIndex == 2 || buildIndex == 3 || buildIndex == 4 ){
-                // Once all players have loaded spawn their vehicles 
-                if(CheckAllReady() && !playerInitialised)
-                {
-                    Debug.Log("Spawn Vehicle for " + PlayerIndex);
-                    SpawnVehicle();
+                if(isClient && !playerInitialised)
+                {   
+                    // initialise player 
+                    if(isOwned){
+                        Canvas canvas  = GetComponentInChildren<Canvas>(); 
+                        if(canvas){ Destroy(canvas.gameObject);}
+                        LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+                        Spawn =  lvlManager.GetSpawnPos();
+                        transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+                    }
+                    // set the is loaded flag 
+                    SetIsLoaded();
                     playerInitialised = true; 
                 }
-                time += Time.deltaTime;
-                Debug.Log("Time: " + time);
-                Debug.Log("All Ready: " + CheckAllReady());
+                else if( isServer)
+                {
+                    // Once all players have loaded spawn their vehicles 
+                    if(CheckIfAllLoaded() && !playersSpawned)
+                    {
+                        // if all players are ready, spawn a vehicle for each
+                        // player on the server
+                        //Debug.Log("Spawn Vehicle for " + PlayerIndex);
+                        Server_SpawnVehicles();
+                        playersSpawned = true; 
+                    }
+                }
+                
+                // time += Time.deltaTime;
+                // Debug.Log("Time: " + time);
+                // Debug.Log("All Ready: " + CheckAllReady());
             }
         }
 
@@ -119,16 +140,16 @@ public class PlayerObjectController : NetworkBehaviour
 
     
     }
-
-    private bool CheckAllReady(){
-        //if(!isServer){ return false; }
-        bool allReady = true;
-        foreach(NetworkPlayerController player in Manager.GamePlayers){
-            if(!player.connectionToClient.isReady){
-                allReady = false;
-            }
+    public bool CheckIfAllLoaded()
+    {
+        bool allLoaded = true; 
+        foreach(NetworkPlayerController player in Manager.GamePlayers)
+        {
+            if(!player.Loaded){
+                allLoaded = false;
+            } 
         }
-        return allReady;
+        return allLoaded;
     }
 
     private void OnLevelLoaded(Scene scene, LoadSceneMode mode){
@@ -234,6 +255,7 @@ public class PlayerObjectController : NetworkBehaviour
             if(canvas){ Destroy(canvas.gameObject);}
             CmdSpawnVehicle(transform, connectionToClient);
         }
+   
     }
     
 
@@ -246,6 +268,22 @@ public class PlayerObjectController : NetworkBehaviour
         NetworkServer.Spawn(playerObject, conn);
         Debug.Log("Player Object: " + playerObject);
         RpcSpawnVehicle(playerObject, playerTransform);
+    }
+
+    // move these commands and rpcs to network player controller
+    [Server]
+    private void Server_SpawnVehicles()
+    {
+        // Spawn a vehicle for each player 
+        foreach(NetworkPlayerController player in Manager.GamePlayers)
+        {
+            int selectedVehicleIndex = player.GetComponent<PlayerObjectController>().SelectedVehicleIndex; 
+            Transform playerTransform = player.gameObject.transform; 
+            GameObject playerObject = Instantiate(Manager.spawnPrefabs[selectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
+            NetworkServer.Spawn(playerObject, player.connectionToClient);
+            RpcSpawnVehicle(playerObject, playerTransform);
+        }
+
     }
 
     [ClientRpc]
@@ -321,6 +359,10 @@ public class PlayerObjectController : NetworkBehaviour
         }
         
         
+    }
+
+    public void SetIsLoaded(){
+        GetComponent<NetworkPlayerController>().ChangePlayerLoaded();
     }
 
 

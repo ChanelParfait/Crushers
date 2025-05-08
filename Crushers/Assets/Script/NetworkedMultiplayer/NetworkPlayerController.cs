@@ -14,6 +14,7 @@ public class NetworkPlayerController : NetworkBehaviour
     [SyncVar (hook = nameof(PlayerNameUpdate))] public string PlayerName;
     [SyncVar (hook = nameof(PlayerReadyUpdate))] public bool Ready; 
     [SyncVar (hook = nameof(VehicleConfirmedUpdate))] public bool VehicleConfirmed; 
+    [SyncVar (hook = nameof(PlayerLoadedUpdate))] public bool Loaded; 
     [SyncVar (hook = nameof(SendPlayerColour))] public int PlayerColour; 
 
     private CustomNetworkManager manager;
@@ -112,6 +113,36 @@ public class NetworkPlayerController : NetworkBehaviour
     void UpdateVehicleConfirmed(bool message)
     {
         VehicleConfirmed = message;
+    }
+
+
+    private void PlayerLoadedUpdate(bool oldValue, bool newValue){
+        if(isServer)
+        {
+            this.Loaded = newValue;
+        }
+        if(isClient)
+        {
+            UpdatePlayerLoaded(newValue);
+            PlayerManager.instance.CheckIfAllConfimed();
+        }
+    }
+
+    [Command]
+    private void CMDSetPlayerLoaded()
+    {
+        //Debug.Log("Change Loaded: " + this.Loaded);
+        this.PlayerLoadedUpdate(this.Loaded, !this.Loaded);
+    }
+
+    public void ChangePlayerLoaded(){
+        if(isOwned){
+            CMDSetPlayerLoaded();
+        }
+    }
+    void UpdatePlayerLoaded(bool message)
+    {
+        Loaded = message;
     }
 
     [Command]
