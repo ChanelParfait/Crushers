@@ -138,12 +138,6 @@ public class PlayerObjectController : NetworkBehaviour
 
                     }
                 }
-
-                if(vehicleReady && isLocalPlayer){
-                    vehicleReady = false;
-                    PlayerVehicle = GetComponentInChildren<CarController>().gameObject;
-                    SetupVehicle(PlayerVehicle);
-                }
                 
                 // time += Time.deltaTime;
                 // Debug.Log("Time: " + time);
@@ -335,22 +329,13 @@ public class PlayerObjectController : NetworkBehaviour
 
     [ClientRpc]
     private void RpcSpawnVehicle(GameObject playerVehicle, Transform playerTransform){
-        Debug.Log("Client ID: " + this.transform.GetComponent<NetworkIdentity>().netId);
-        Debug.Log("Is Owned: " + isOwned);
+        Debug.Log("Client ID: " + playerTransform.GetComponent<NetworkIdentity>().netId);
 
-        //Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
-        Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
         playerVehicle.transform.SetParent(playerTransform);
-        vehicleReady = true;
-        // InitialiseVehicle(playerVehicle);
-        // CarController car = playerVehicle.GetComponent<CarController>();
-        // InputHandler.SetCarController(car);
-        // if(isOwned){
-        //     car.enabled = true;
-        //     playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
-        //     playerVehicle.GetComponent<CarRespawn>().enabled = true;
-        //   SetPlayerLayers(); 
-        // }
+        
+        if(playerTransform.GetComponent<NetworkIdentity>().isOwned){
+            SetupVehicle(playerVehicle);
+         }
     }
 
 
