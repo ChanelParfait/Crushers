@@ -110,6 +110,7 @@ public class PlayerObjectController : NetworkBehaviour
                 // }
                 if(!playerInitialised && NetworkClient.ready)
                 {   
+                    // Set Player Position 
                     LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
                     Spawn =  lvlManager.GetSpawnPos();
                     transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
@@ -294,17 +295,15 @@ public class PlayerObjectController : NetworkBehaviour
         foreach(NetworkPlayerController player in Manager.GamePlayers)
         {
             Debug.Log("Player " + player.netId);
-            
-
             int selectedVehicleIndex = player.GetComponent<PlayerObjectController>().SelectedVehicleIndex; 
             Debug.Log("Selected Vehicle " + selectedVehicleIndex);
 
             Transform playerTransform = player.gameObject.transform; 
-
             GameObject playerObject = Instantiate(Manager.spawnPrefabs[selectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
             
             NetworkServer.Spawn(playerObject);
             RpcTest();
+            RpcSpawnVehicle(playerObject, playerTransform); 
         }
 
     }
@@ -312,9 +311,6 @@ public class PlayerObjectController : NetworkBehaviour
     [ClientRpc]
     private void RpcTest(){
         Debug.Log("Testing RPC");
-        
-        
-        
     }
     
 
