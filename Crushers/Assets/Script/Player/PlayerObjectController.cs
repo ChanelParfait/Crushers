@@ -138,6 +138,12 @@ public class PlayerObjectController : NetworkBehaviour
 
                     }
                 }
+
+                if(vehicleReady && isLocalPlayer){
+                    vehicleReady = false;
+                    PlayerVehicle = GetComponentInChildren<CarController>().gameObject;
+                    SetupVehicle(PlayerVehicle);
+                }
                 
                 // time += Time.deltaTime;
                 // Debug.Log("Time: " + time);
@@ -312,7 +318,7 @@ public class PlayerObjectController : NetworkBehaviour
     [ClientRpc]
     private void RpcTest(){
         Debug.Log("Testing RPC");
-        if(isLocalPlayer){
+        if(this.isLocalPlayer){
             Debug.Log("Client is Local: " + PlayerIndex);
         }
     }
@@ -339,6 +345,8 @@ public class PlayerObjectController : NetworkBehaviour
 
     // Temporary Basic version of Initialise Vehicle Function 
     private void SetupVehicle(GameObject playerVehicle){
+        Debug.Log("Setup Vehicle For: " + PlayerIndex);
+
         CarController car = playerVehicle.GetComponent<CarController>();
         InputHandler.SetCarController(car);
         car.enabled = true;
