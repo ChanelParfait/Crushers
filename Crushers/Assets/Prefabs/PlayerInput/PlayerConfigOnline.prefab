@@ -194,6 +194,7 @@ MonoBehaviour:
   PlayerName: 
   Ready: 0
   VehicleConfirmed: 0
+  Loaded: 0
   PlayerColour: 0
 --- !u!114 &7371690563157673681
 MonoBehaviour:
@@ -218,6 +219,8 @@ MonoBehaviour:
   VehicleSelectCanvas: {fileID: 1247682565825070303}
   isOnline: 1
   playerInitialised: 0
+  vehiclesSpawned: 0
+  vehicleReady: 0
   isTesting: 0
   playerLayers:
   - serializedVersion: 2
@@ -542,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 1
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0
   target: {fileID: 7030747120131847929}
