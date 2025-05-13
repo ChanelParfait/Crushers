@@ -112,9 +112,9 @@ public class PlayerObjectController : NetworkBehaviour
                 if(!playerInitialised && NetworkClient.ready)
                 {   
                     // Set Player Position 
-                    LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-                    Spawn =  lvlManager.GetSpawnPos();
-                    transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+                    // LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+                    // Spawn =  lvlManager.GetSpawnPos();
+                    // transform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
                     // initialise player 
                     if(isClient && isOwned){
                         Canvas canvas  = GetComponentInChildren<Canvas>(); 
@@ -296,6 +296,8 @@ public class PlayerObjectController : NetworkBehaviour
     {
         Debug.Log("Spawn All Vehicles");
         Debug.Log("Player List Length: "  + Manager.GamePlayers.Count); 
+        LevelManager lvlManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        
                         
         // Spawn a vehicle for each player 
         foreach(NetworkPlayerController player in Manager.GamePlayers)
@@ -304,7 +306,10 @@ public class PlayerObjectController : NetworkBehaviour
             int selectedVehicleIndex = player.GetComponent<PlayerObjectController>().SelectedVehicleIndex; 
             Debug.Log("Selected Vehicle " + selectedVehicleIndex);
 
+            Spawn =  lvlManager.GetSpawnPos();
             Transform playerTransform = player.gameObject.transform; 
+            playerTransform.SetPositionAndRotation(Spawn.position, Spawn.rotation);
+
             GameObject playerObject = Instantiate(Manager.spawnPrefabs[selectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
             
             NetworkServer.Spawn(playerObject, connectionToClient);
