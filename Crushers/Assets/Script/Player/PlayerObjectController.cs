@@ -311,6 +311,9 @@ public class PlayerObjectController : NetworkBehaviour
     [ClientRpc]
     private void RpcTest(){
         Debug.Log("Testing RPC");
+        if(isOwned){
+            Debug.Log("Client is Owned: " + PlayerIndex);
+        }
     }
     
 
@@ -319,15 +322,16 @@ public class PlayerObjectController : NetworkBehaviour
         Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
         Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
         playerVehicle.transform.SetParent(playerTransform);
-        //InitialiseVehicle(playerVehicle);
-        CarController car = playerVehicle.GetComponent<CarController>();
-        InputHandler.SetCarController(car);
-        if(isOwned){
-            car.enabled = true;
-            playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
-            playerVehicle.GetComponent<CarRespawn>().enabled = true;
-            SetPlayerLayers(); 
-        }
+        // //InitialiseVehicle(playerVehicle);
+        // CarController car = playerVehicle.GetComponent<CarController>();
+        // InputHandler.SetCarController(car);
+        // if(isOwned){
+
+        //     car.enabled = true;
+        //     playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
+        //     playerVehicle.GetComponent<CarRespawn>().enabled = true;
+        //     SetPlayerLayers(); 
+        // }
         
         
     }
