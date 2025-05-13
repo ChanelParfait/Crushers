@@ -48,7 +48,8 @@ public class PlayerObjectController : NetworkBehaviour
     public bool isOnline = false; 
     // Has the player vehicle been spawned 
     public bool playerInitialised = false;
-    public bool playersSpawned = false;
+    public bool vehiclesSpawned = false;
+    public bool vehicleReady = false;
     // is Testing Flag
     public bool isTesting = false; 
     // Events 
@@ -126,13 +127,13 @@ public class PlayerObjectController : NetworkBehaviour
                 else if( isServer && isLocalPlayer)
                 {
                     // Once all players have loaded spawn their vehicles 
-                    if(CheckIfAllLoaded() && !playersSpawned)
+                    if(CheckIfAllLoaded() && !vehiclesSpawned)
                     {
                         
                         // if all players are ready, spawn a vehicle for each
                         // player on the server
                         //Debug.Log("Spawn Vehicle for " + PlayerIndex);
-                        playersSpawned = true; 
+                        vehiclesSpawned = true; 
                         StartCoroutine(DelaySpawn(3)); 
 
                     }
@@ -288,8 +289,7 @@ public class PlayerObjectController : NetworkBehaviour
     private void Server_SpawnVehicles()
     {
         Debug.Log("Spawn All Vehicles");
-        Debug.Log("Player List Length: "  + Manager.GamePlayers.Count);
-                        
+        Debug.Log("Player List Length: "  + Manager.GamePlayers.Count); 
                         
         // Spawn a vehicle for each player 
         foreach(NetworkPlayerController player in Manager.GamePlayers)
@@ -301,18 +301,19 @@ public class PlayerObjectController : NetworkBehaviour
             Transform playerTransform = player.gameObject.transform; 
             GameObject playerObject = Instantiate(Manager.spawnPrefabs[selectedVehicleIndex], playerTransform.position, playerTransform.rotation, playerTransform);
             
-            NetworkServer.Spawn(playerObject, player.connectionToClient);
+            NetworkServer.Spawn(playerObject);
             RpcTest();
             RpcSpawnVehicle(playerObject, playerTransform); 
         }
+
 
     }
 
     [ClientRpc]
     private void RpcTest(){
         Debug.Log("Testing RPC");
-        if(isOwned){
-            Debug.Log("Client is Owned: " + PlayerIndex);
+        if(isLocalPlayer){
+            Debug.Log("Client is Local: " + PlayerIndex);
         }
     }
     
@@ -322,7 +323,8 @@ public class PlayerObjectController : NetworkBehaviour
         Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
         Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
         playerVehicle.transform.SetParent(playerTransform);
-        // //InitialiseVehicle(playerVehicle);
+        this.vehicleReady = true;
+        // InitialiseVehicle(playerVehicle);
         // CarController car = playerVehicle.GetComponent<CarController>();
         // InputHandler.SetCarController(car);
         // if(isOwned){
@@ -330,10 +332,18 @@ public class PlayerObjectController : NetworkBehaviour
         //     car.enabled = true;
         //     playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
         //     playerVehicle.GetComponent<CarRespawn>().enabled = true;
-        //     SetPlayerLayers(); 
+        //   SetPlayerLayers(); 
         // }
-        
-        
+    }
+
+
+    // Temporary Basic version of Initialise Vehicle Function 
+    private void SetupVehicle(GameObject playerVehicle){
+        CarController car = playerVehicle.GetComponent<CarController>();
+        InputHandler.SetCarController(car);
+        car.enabled = true;
+        playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
+        playerVehicle.GetComponent<CarRespawn>().enabled = true;
     }
     
 
