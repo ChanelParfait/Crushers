@@ -318,7 +318,7 @@ public class PlayerObjectController : NetworkBehaviour
     [ClientRpc]
     private void RpcTest(){
         Debug.Log("Testing RPC");
-        if(this.isLocalPlayer){
+        if(isLocalPlayer){
             Debug.Log("Client is Local: " + PlayerIndex);
         }
     }
@@ -329,7 +329,7 @@ public class PlayerObjectController : NetworkBehaviour
         Debug.Log("Initialise Vehicle on Client: " + PlayerIndex);
         Debug.Log("Player Vehicle ID: " + playerVehicle.GetComponent<NetworkIdentity>().netId);
         playerVehicle.transform.SetParent(playerTransform);
-        this.vehicleReady = true;
+        vehicleReady = true;
         // InitialiseVehicle(playerVehicle);
         // CarController car = playerVehicle.GetComponent<CarController>();
         // InputHandler.SetCarController(car);
