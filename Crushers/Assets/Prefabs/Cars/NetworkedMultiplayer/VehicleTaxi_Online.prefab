@@ -400,7 +400,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
+      propertyPath: syncInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: syncDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
       propertyPath: interpolateScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702720192296149843, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: onlySyncOnChange
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6746124027010312172, guid: 05744578e8ef73841af5a41a5fc606d3,
@@ -475,7 +490,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7536001390613639216, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
+      propertyPath: syncDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536001390613639216, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
       propertyPath: interpolateScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536001390613639216, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      propertyPath: onlySyncOnChange
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546639555313590966, guid: 05744578e8ef73841af5a41a5fc606d3,
@@ -623,11 +648,66 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2807089342232120839}
+    - targetCorrespondingSourceObject: {fileID: 2791748458994167147, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 107994034213465757}
+    - targetCorrespondingSourceObject: {fileID: 8043906445557079628, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6270197927936976981}
+    - targetCorrespondingSourceObject: {fileID: 993801103233314827, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1941428828926661054}
+    - targetCorrespondingSourceObject: {fileID: 7224534262797948846, guid: 05744578e8ef73841af5a41a5fc606d3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3327209074441689814}
     - targetCorrespondingSourceObject: {fileID: 2187362963584247767, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 254973413448849691}
   m_SourcePrefab: {fileID: 100100000, guid: 05744578e8ef73841af5a41a5fc606d3, type: 3}
+--- !u!1 &843747505850377031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2791748458994167147, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &107994034213465757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843747505850377031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 8168786384240264162}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &1206376874646599707 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4446802070528095799, guid: 05744578e8ef73841af5a41a5fc606d3,
@@ -673,6 +753,45 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3245933750965636652}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2360290116240342567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 993801103233314827, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1941428828926661054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360290116240342567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 5521783799228372034}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!4 &3309398424546285356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 64888611619969280, guid: 05744578e8ef73841af5a41a5fc606d3,
@@ -714,6 +833,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &3722448153196812307 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2207631688649463359, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3939178174519983653 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1990901242162720777, guid: 05744578e8ef73841af5a41a5fc606d3,
@@ -756,6 +881,96 @@ MonoBehaviour:
 --- !u!4 &4575737648064396068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1336327370067440904, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4803772655270727776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8043906445557079628, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6270197927936976981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4803772655270727776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 6411913981785627605}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!1 &5280870987178957186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7224534262797948846, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3327209074441689814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280870987178957186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 3722448153196812307}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!4 &5521783799228372034 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7037594118612163182, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6411913981785627605 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8498413748345853433, guid: 05744578e8ef73841af5a41a5fc606d3,
     type: 3}
   m_PrefabInstance: {fileID: 3245933750965636652}
   m_PrefabAsset: {fileID: 0}
@@ -872,6 +1087,12 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!4 &8168786384240264162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6653651063586049486, guid: 05744578e8ef73841af5a41a5fc606d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3245933750965636652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8472612897733328245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6385852509588271961, guid: 05744578e8ef73841af5a41a5fc606d3,
