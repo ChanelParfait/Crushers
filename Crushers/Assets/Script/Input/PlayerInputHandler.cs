@@ -190,38 +190,51 @@ public class PlayerInputHandler : NetworkBehaviour
        }
     }
 
-    public void OnJump(CallbackContext context){
-        if(canJump && carController && IsInputValid()){
-            //Debug.Log("Jump");
 
-            canJump = false;
-            carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
-            StartCoroutine(JumpCooldown(5));
+    public void OnJump(CallbackContext context)
+    {
+        if (carController)
+        {
+            // Tell Server to Move the Client Vehicle Up
+            if (isOnline && isOwned && canJump)
+            {
+                canJump = false;
+                CMD_Jump(carController.gameObject);
+                StartCoroutine(JumpCooldown(5));
+            }
+            else if (!isOnline && canJump)
+            {
+                canJump = false;
+                carController.gameObject.transform.position += carController.gameObject.transform.up * 5;
+                StartCoroutine(JumpCooldown(5));
+            }
         }
     }
 
-    private IEnumerator JumpCooldown(float delay){
-        yield return new WaitForSeconds(delay); 
+    [Command]
+    private void CMD_Jump(GameObject vehicle)
+    {
+        vehicle.transform.position += vehicle.gameObject.transform.up * 5;
+    }
+    
+    
+
+    private IEnumerator JumpCooldown(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         canJump = true;
     }
 
     public void OnForward(CallbackContext context)
     {
-        Debug.Log("Pressing W");
-        Debug.Log("Player: " + transform.gameObject);
-        
-        //Debug.Log("Is Owned: " + IsInputValid());
         if (carController)
         {
-            if (isOnline)
+            if (isOnline && isOwned)
             {
-                if (isOwned)
-                {
-                    Debug.Log("Moving Forward");
-                    Forward_Online(carController.gameObject, context.ReadValueAsButton());
-                }
+                // Tell Server to Move this Client Vehicle Forward
+                CMD_Forward(carController.gameObject, context.ReadValueAsButton());
             }
-            else
+            else if (!isOnline)
             {
                 carController.isMovingForward = context.ReadValueAsButton();
             }
@@ -229,47 +242,76 @@ public class PlayerInputHandler : NetworkBehaviour
     }
     
     [Command]
-    private void Forward_Online(GameObject carController, bool isMovingForward){
+    private void CMD_Forward(GameObject carController, bool isMovingForward){
         carController.GetComponent<CarController>().isMovingForward = isMovingForward;
     }
 
     public void OnReverse(CallbackContext context)
     {
-        if (carController && IsInputValid())
+        if (carController)
         {
-            carController.isReversing = context.ReadValueAsButton();
+            if (isOnline && isOwned)
+            {
+                // Tell Server to Move this Client Vehicle Backwards
+                CMD_Reverse(carController.gameObject, context.ReadValueAsButton());
+            }
+            else if (!isOnline)
+            {
+                carController.isReversing = context.ReadValueAsButton();
+            }
         }
+    }
+    
+    [Command]
+    private void CMD_Reverse(GameObject carController, bool isReversing){
+        carController.GetComponent<CarController>().isReversing = isReversing;
     }
 
     public void OnTurn(CallbackContext context)
     {
         Vector2 turn = context.ReadValue<Vector2>();
-        //Debug.Log("Turn: " + turn);
-        if(carController && IsInputValid())
+        if (carController)
         {
-            carController.SetSteeringAngle(turn);
-        }
-        
-    }
-
-    public void OnBrake(CallbackContext context)
-    {
-
-        if(carController && IsInputValid()){
-            carController.isBraking =  context.ReadValueAsButton();
-            if(context.canceled){
-                //Debug.Log("RecoverTraction");
-                carController.RecoverTraction();
+            if (isOnline && isOwned)
+            {
+                // Tell Server to Set the Steering angle of the Client Vehicle 
+                CMD_Turn(carController.gameObject, turn);
+            }
+            else if (!isOnline)
+            {
+                carController.SetSteeringAngle(turn);
             }
         }
 
     }
+    
+    [Command]
+    private void CMD_Turn(GameObject carController, Vector2 turn){
+        carController.GetComponent<CarController>().SetSteeringAngle(turn);
+    }
+
+    //// Need Updating for Server Authority ////
+    public void OnBrake(CallbackContext context)
+    {
+        if (carController && IsInputValid())
+        {
+            carController.isBraking = context.ReadValueAsButton();
+            if (context.canceled)
+            {
+                //Debug.Log("RecoverTraction");
+                carController.RecoverTraction();
+            }
+        }
+    }
+    
+     //// All BelowNeed Updating for Server Authority ////
 
     public void OnUseItem(CallbackContext context)
     {
-        if(pickUpManager && IsInputValid()){
+        if (pickUpManager && IsInputValid())
+        {
             pickUpManager.useItem = context.ReadValueAsButton();
-        }        
+        }
     }
 
     public void OnUseAbility(CallbackContext context) {
