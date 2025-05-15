@@ -207,19 +207,33 @@ public class PlayerInputHandler : NetworkBehaviour
 
     public void OnForward(CallbackContext context)
     {
-        //Debug.Log("Pressing W");
+        Debug.Log("Pressing W");
         //Debug.Log("Is Owned: " + IsInputValid());
-        if(carController && IsInputValid())
+        if (carController)
         {
-            //Debug.Log("Moving Forward");
-
-            carController.isMovingForward = context.ReadValueAsButton();
+            if (isOnline)
+            {
+                if (isOwned)
+                {
+                    Debug.Log("Moving Forward");
+                    Forward_Online(carController.gameObject, context.ReadValueAsButton());
+                }
+            }
+            else
+            {
+                carController.isMovingForward = context.ReadValueAsButton();
+            }
         }
+    }
+    
+    [Command]
+    private void Forward_Online(GameObject carController, bool isMovingForward){
+        carController.GetComponent<CarController>().isMovingForward = isMovingForward;
     }
 
     public void OnReverse(CallbackContext context)
     {
-        if(carController && IsInputValid())
+        if (carController && IsInputValid())
         {
             carController.isReversing = context.ReadValueAsButton();
         }
