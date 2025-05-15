@@ -334,17 +334,17 @@ public class PlayerObjectController : NetworkBehaviour
         playerVehicle.transform.SetParent(playerTransform);
         
         if(playerTransform.GetComponent<NetworkIdentity>().isOwned){
-            SetupVehicle(playerVehicle);
+            SetupVehicle(playerVehicle, playerTransform.GetComponent<PlayerInputHandler>());
          }
     }
 
 
     // Temporary Basic version of Initialise Vehicle Function 
-    private void SetupVehicle(GameObject playerVehicle){
+    private void SetupVehicle(GameObject playerVehicle, PlayerInputHandler inputHandler){
         Debug.Log("Setup Vehicle For: " + PlayerIndex);
 
         CarController car = playerVehicle.GetComponent<CarController>();
-        InputHandler.SetCarController(car);
+        inputHandler.SetCarController(car);
         car.enabled = true;
         playerVehicle.GetComponentInChildren<CinemachineFreeLook>().enabled = true;
         playerVehicle.GetComponent<CarRespawn>().enabled = true;

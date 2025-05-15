@@ -208,8 +208,8 @@ public class PlayerInputHandler : NetworkBehaviour
     public void OnForward(CallbackContext context)
     {
         Debug.Log("Pressing W");
-        Debug.Log("Car Controller: " + carController);
-        Debug.Log("Pressing W: " + isOwned);
+        Debug.Log("Player: " + transform.gameObject);
+        
         //Debug.Log("Is Owned: " + IsInputValid());
         if (carController)
         {
