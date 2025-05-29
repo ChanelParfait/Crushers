@@ -316,14 +316,14 @@ public class CarController : MonoBehaviour
     void Update()
     {
         GroundChecker();
-        // Temporarily disabled gravity modifier
-        //GravityModifier();
+        GravityModifier();
 
 
     //CAR DATA
 
     // We determine the speed of the car.
-    carSpeed = carRigidbody.velocity.magnitude * 3.6f;
+    // swap out variable
+    carSpeed = GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
         // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
@@ -452,7 +452,7 @@ public class CarController : MonoBehaviour
     // JUMP to get unstuck
     public void Jump(){
       //Debug.Log("Jump");
-      carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
+      GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().transform.forward * 1000); 
     }
 
     //
@@ -637,7 +637,7 @@ public class CarController : MonoBehaviour
         }
       }
 
-      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * activeDecelerationMultiplier)));
+      GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * (1f / (1f + (0.025f * activeDecelerationMultiplier)));
       // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
       frontLeftCollider.motorTorque = 0;
       frontRightCollider.motorTorque = 0;
@@ -646,7 +646,7 @@ public class CarController : MonoBehaviour
       // If the car speed is less than 15f (very slow velocity), then stop the car completely and
       // also cancel the invoke of this method.
       if(carSpeed < 15f){
-        carRigidbody.velocity = Vector3.zero;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         CancelInvoke("DecelerateCar");
       }
     }
@@ -662,7 +662,7 @@ public class CarController : MonoBehaviour
         if (localVelocityZ>1f)
         {
             Vector3 reverseForce = -transform.forward * activeBrakeForce * 100 * Time.deltaTime;
-            carRigidbody.AddForce(reverseForce, ForceMode.Force);
+            GetComponent<Rigidbody>().AddForce(reverseForce, ForceMode.Force);
         }
     }
 
@@ -836,7 +836,7 @@ public class CarController : MonoBehaviour
         if (!isGrounded)
         { 
             float airGravityModifier = (-1 * activeGravityMultiplier) * Time.deltaTime;
-            carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
+            GetComponent<Rigidbody>().AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
             ////Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
@@ -853,6 +853,6 @@ public class CarController : MonoBehaviour
     }
 
     public void SetActiveBodyMassCenterY(Vector3 activeBodyMassCenterY) {
-        carRigidbody.centerOfMass = activeBodyMassCenterY;
+        GetComponent<Rigidbody>().centerOfMass = activeBodyMassCenterY;
     }
 }
