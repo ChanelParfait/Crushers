@@ -316,13 +316,14 @@ public class CarController : MonoBehaviour
     void Update()
     {
         GroundChecker();
-        GravityModifier();
-    
+        // Temporarily disabled gravity modifier
+        //GravityModifier();
 
-        //CAR DATA
 
-        // We determine the speed of the car.
-        carSpeed = carRigidbody.velocity.magnitude * 3.6f;
+    //CAR DATA
+
+    // We determine the speed of the car.
+    carSpeed = carRigidbody.velocity.magnitude * 3.6f;
         // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.

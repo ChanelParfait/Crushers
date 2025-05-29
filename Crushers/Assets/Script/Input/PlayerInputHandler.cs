@@ -231,7 +231,10 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (isOnline && isOwned)
             {
+                // Client Moves 
+                carController.isMovingForward = context.ReadValueAsButton();
                 // Tell Server to Move this Client Vehicle Forward
+                // Server Moves it's version of the client vehicle
                 CMD_Forward(carController.gameObject, context.ReadValueAsButton());
             }
             else if (!isOnline)
@@ -252,6 +255,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (isOnline && isOwned)
             {
+                carController.isReversing = context.ReadValueAsButton();
                 // Tell Server to Move this Client Vehicle Backwards
                 CMD_Reverse(carController.gameObject, context.ReadValueAsButton());
             }
@@ -274,6 +278,7 @@ public class PlayerInputHandler : NetworkBehaviour
         {
             if (isOnline && isOwned)
             {
+                carController.SetSteeringAngle(turn);
                 // Tell Server to Set the Steering angle of the Client Vehicle 
                 CMD_Turn(carController.gameObject, turn);
             }
