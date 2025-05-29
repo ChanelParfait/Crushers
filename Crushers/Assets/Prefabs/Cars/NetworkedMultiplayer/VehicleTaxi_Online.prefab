@@ -646,7 +646,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8196380668202205108, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7311990666379821098}
+      addedObject: {fileID: 7197821654958313276}
     - targetCorrespondingSourceObject: {fileID: 4446802070528095799, guid: 05744578e8ef73841af5a41a5fc606d3,
         type: 3}
       insertIndex: -1
@@ -713,9 +713,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3245933750965636652}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &2770977339345984977 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 828559772023116797, guid: 05744578e8ef73841af5a41a5fc606d3,
+--- !u!4 &3295370471678021958 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 49643463266541418, guid: 05744578e8ef73841af5a41a5fc606d3,
     type: 3}
   m_PrefabInstance: {fileID: 3245933750965636652}
   m_PrefabAsset: {fileID: 0}
@@ -828,7 +828,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &7311990666379821098
+--- !u!114 &7197821654958313276
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -837,34 +837,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 6680170060424688024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d38927cdc6024b9682b5fe9778b9ef99, type: 3}
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
-  predictedRigidbody: {fileID: 2770977339345984977}
-  mode: 0
-  motionSmoothingVelocityThreshold: 0.1
-  motionSmoothingAngularVelocityThreshold: 5
-  motionSmoothingTimeTolerance: 0.5
-  stateHistoryLimit: 32
-  recordInterval: 0.05
-  onlyRecordChanges: 1
-  compareLastFirst: 1
-  positionCorrectionThreshold: 0.1
-  rotationCorrectionThreshold: 5
-  oneFrameAhead: 1
-  snapThreshold: 2
-  showGhost: 1
-  ghostVelocityThreshold: 0.1
-  localGhostMaterial: {fileID: 2100000, guid: 411a48b4a197d4924bec3e3809bc9320, type: 2}
-  remoteGhostMaterial: {fileID: 2100000, guid: 04f0b2088c857414393bab3b80356776, type: 2}
-  checkGhostsEveryNthFrame: 4
-  positionInterpolationSpeed: 15
-  rotationInterpolationSpeed: 10
-  teleportDistanceMultiplier: 10
-  reduceSendsWhileIdle: 1
+  target: {fileID: 3295370471678021958}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!114 &7803392039017619444 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4702013352652804568, guid: 05744578e8ef73841af5a41a5fc606d3,

@@ -202,7 +202,7 @@ public class CarController : MonoBehaviour
       //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
       //gameObject. Also, we define the center of mass of the car with the Vector3 given
       //in the inspector.
-      carRigidbody = gameObject.GetComponent<PredictedRigidbody>().predictedRigidbody;
+      carRigidbody = gameObject.GetComponent<Rigidbody>();
       carRigidbody.centerOfMass = activeBodyMassCenter;
       carRigidbody.mass = activeBodyMass;
       isGrounded = true;
@@ -324,11 +324,11 @@ public class CarController : MonoBehaviour
 
     // We determine the speed of the car.
     // swap out variable
-    carSpeed = GetComponent<PredictedRigidbody>().predictedRigidbody.velocity.magnitude * 3.6f;
+    carSpeed = carRigidbody.velocity.magnitude * 3.6f;
         // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
-        localVelocityX = transform.InverseTransformDirection(GetComponent<PredictedRigidbody>().predictedRigidbody.velocity).x;
+        localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
-        localVelocityZ = transform.InverseTransformDirection(GetComponent<PredictedRigidbody>().predictedRigidbody.velocity).z;
+        localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
         //CAR PHYSICS
 
@@ -453,7 +453,7 @@ public class CarController : MonoBehaviour
     // JUMP to get unstuck
     public void Jump(){
       //Debug.Log("Jump");
-      GetComponent<PredictedRigidbody>().predictedRigidbody.AddForce(GetComponent<PredictedRigidbody>().predictedRigidbody.transform.forward * 1000); 
+      carRigidbody.AddForce(carRigidbody.transform.forward * 1000); 
     }
 
     //
@@ -638,7 +638,7 @@ public class CarController : MonoBehaviour
         }
       }
 
-      GetComponent<PredictedRigidbody>().predictedRigidbody.velocity = GetComponent<PredictedRigidbody>().predictedRigidbody.velocity * (1f / (1f + (0.025f * activeDecelerationMultiplier)));
+      carRigidbody.velocity = carRigidbody.velocity * (1f / (1f + (0.025f * activeDecelerationMultiplier)));
       // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
       frontLeftCollider.motorTorque = 0;
       frontRightCollider.motorTorque = 0;
@@ -647,7 +647,7 @@ public class CarController : MonoBehaviour
       // If the car speed is less than 15f (very slow velocity), then stop the car completely and
       // also cancel the invoke of this method.
       if(carSpeed < 15f){
-        GetComponent<PredictedRigidbody>().predictedRigidbody.velocity = Vector3.zero;
+        carRigidbody.velocity = Vector3.zero;
         CancelInvoke("DecelerateCar");
       }
     }
@@ -663,7 +663,7 @@ public class CarController : MonoBehaviour
         if (localVelocityZ>1f)
         {
             Vector3 reverseForce = -transform.forward * activeBrakeForce * 100 * Time.deltaTime;
-            GetComponent<PredictedRigidbody>().predictedRigidbody.AddForce(reverseForce, ForceMode.Force);
+            carRigidbody.AddForce(reverseForce, ForceMode.Force);
         }
     }
 
@@ -837,7 +837,7 @@ public class CarController : MonoBehaviour
         if (!isGrounded)
         { 
             float airGravityModifier = (-1 * activeGravityMultiplier) * Time.deltaTime;
-            GetComponent<PredictedRigidbody>().predictedRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
+            carRigidbody.AddForce(0, airGravityModifier, 0, ForceMode.Acceleration);
             ////Debug.Log("Current Gravity Applied: " + airGravityModifier);
         }
     }
@@ -854,6 +854,6 @@ public class CarController : MonoBehaviour
     }
 
     public void SetActiveBodyMassCenterY(Vector3 activeBodyMassCenterY) {
-        GetComponent<PredictedRigidbody>().predictedRigidbody.centerOfMass = activeBodyMassCenterY;
+        carRigidbody.centerOfMass = activeBodyMassCenterY;
     }
 }
