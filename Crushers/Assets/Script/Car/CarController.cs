@@ -326,9 +326,9 @@ public class CarController : MonoBehaviour
     // swap out variable
     carSpeed = GetComponent<PredictedRigidbody>().predictedRigidbody.velocity.magnitude * 3.6f;
         // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
-        localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
+        localVelocityX = transform.InverseTransformDirection(GetComponent<PredictedRigidbody>().predictedRigidbody.velocity).x;
         // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
-        localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
+        localVelocityZ = transform.InverseTransformDirection(GetComponent<PredictedRigidbody>().predictedRigidbody.velocity).z;
 
         //CAR PHYSICS
 
